@@ -4,6 +4,7 @@
 namespace EasySwoole\Consul;
 
 
+use EasySwoole\Consul\Request\Catalog\Deregister;
 use EasySwoole\Consul\Request\Catalog\Register;
 
 class Catalog extends BaseFunc
@@ -13,8 +14,8 @@ class Catalog extends BaseFunc
         $this->putJSON($register);
     }
 
-    function deregister()
+    function deregister(Deregister $deregister)
     {
-
+        $this->putJSON($deregister);
     }
 }
