@@ -1,7 +1,7 @@
 <?php
 
 
-namespace EasySwoole\Consul\ParamBeans\Catalog;
+namespace EasySwoole\Consul\Request\Catalog;
 
 
 use EasySwoole\Spl\SplBean;

@@ -4,7 +4,7 @@
 namespace EasySwoole\Consul;
 
 
-use EasySwoole\Consul\ParamBeans\Catalog\Register;
+use EasySwoole\Consul\Request\Catalog\Register;
 
 class Catalog extends BaseFunc
 {
