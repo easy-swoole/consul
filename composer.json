@@ -10,6 +10,7 @@
     },
     "require": {
         "easyswoole/spl": "^1.1",
-        "easyswoole/http-client": "^1.2.5"
+        "easyswoole/http-client": "^1.2.5",
+        "easyswoole/easyswoole": "3.x-dev"
     }
 }
