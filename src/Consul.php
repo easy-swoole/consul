@@ -10,6 +10,7 @@ class Consul
 
     protected $kvStore;
     protected $health;
+    protected $catalog;
 
 
     function __construct(Config $config)
@@ -32,6 +33,14 @@ class Consul
             $this->health = new Health($this->config);
         }
         return $this->health;
+    }
+
+    function catalog():Catalog
+    {
+        if(empty($this->catalog)){
+            $this->catalog = new Catalog($this->config);
+        }
+        return $this->catalog;
     }
 
 
