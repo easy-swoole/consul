@@ -1,5 +1,7 @@
 <?php
+
 namespace EasySwoole\Consul\Request\Catalog;
+
 
 use EasySwoole\Spl\SplBean;
 use EasySwoole\Utility\Random;

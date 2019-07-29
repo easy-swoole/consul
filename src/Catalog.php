@@ -6,6 +6,7 @@ use EasySwoole\Consul\Request\Catalog\Datacenters;
 use EasySwoole\Consul\Request\Catalog\Deregister;
 use EasySwoole\Consul\Request\Catalog\Node;
 use EasySwoole\Consul\Request\Catalog\Nodes;
+
 use EasySwoole\Consul\Request\Catalog\Register;
 use EasySwoole\Consul\Request\Catalog\Service;
 use EasySwoole\Consul\Request\Catalog\Services;
@@ -38,7 +39,6 @@ class Catalog extends BaseFunc
         $this->route .= strtolower($this->class) . '/' . strtolower(__FUNCTION__ );
         $this->putJSON($register);
     }
-
     /**
      * Deregister Entity
      * @param Deregister $deregister
