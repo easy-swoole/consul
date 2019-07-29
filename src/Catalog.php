@@ -13,40 +13,26 @@ use EasySwoole\Consul\Request\Catalog\Services;
 
 class Catalog extends BaseFunc
 {
-    /**
-     * @var bool|string
-     */
-    private $class;
-
-    /**
-     * Catalog constructor.
-     * @param Config $config
-     */
-    public function __construct(Config $config)
-    {
-        parent::__construct($config);
-        $this->route = $config->__toString();
-        $this->class = substr(self::class, strripos(self::class,'\\') + 1);
-    }
 
     /**
      * Register Entity
      * @param Register $register
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
+     * @throws \ReflectionException
      */
     public function register(Register $register)
     {
-        $this->route .= strtolower($this->class) . '/' . strtolower(__FUNCTION__ );
         $this->putJSON($register);
     }
+
     /**
      * Deregister Entity
      * @param Deregister $deregister
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
+     * @throws \ReflectionException
      */
     public function deRegister(Deregister $deregister)
     {
-        $this->route .= strtolower($this->class) . '/' . strtolower(__FUNCTION__ );
         $this->putJSON($deregister);
     }
 
@@ -54,10 +40,10 @@ class Catalog extends BaseFunc
      * List Datacenters
      * @param Datacenters $datacenters
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
+     * @throws \ReflectionException
      */
     public function dataCenters(Datacenters $datacenters)
     {
-        $this->route .= strtolower($this->class) . '/' . strtolower(__FUNCTION__ );
         $this->getJson($datacenters);
     }
 
@@ -65,10 +51,10 @@ class Catalog extends BaseFunc
      * List Nodes
      * @param Nodes $nodes
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
+     * @throws \ReflectionException
      */
     public function nodes(Nodes $nodes)
     {
-        $this->route .= strtolower($this->class) . '/' . strtolower(__FUNCTION__);
         $this->getJson($nodes);
     }
 
@@ -76,10 +62,10 @@ class Catalog extends BaseFunc
      * List Services
      * @param Services $services
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
+     * @throws \ReflectionException
      */
     public function services(Services $services)
     {
-        $this->route .= strtolower($this->class) . '/' . strtolower(__FUNCTION__);
         $this->getJson($services);
     }
 
@@ -88,18 +74,18 @@ class Catalog extends BaseFunc
      * @param Service $service
      * @return bool
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
+     * @throws \ReflectionException
      */
     public function service(Service $service)
     {
-        $this->route .= strtolower($this->class) . '/' . strtolower(__FUNCTION__);
         if (!empty($service->getService())) {
-            $this->route .= '/' . $service->getService();
+            $action = $service->getService();
             $service->setService('');
         } else {
             echo "Lack of parameters: service";
             return false;
         }
-        $this->getJson($service);
+        $this->getJson($service, $action);
     }
 
     /**
@@ -108,18 +94,18 @@ class Catalog extends BaseFunc
      * @param Connect $connect
      * @return bool
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
+     * @throws \ReflectionException
      */
     public function connect(Connect $connect)
     {
-        $this->route .= strtolower($this->class) . '/' . strtolower(__FUNCTION__);
         if (!empty($connect->getService())) {
-            $this->route .= '/' . $connect->getService();
+            $action = $connect->getService();
             $connect->setService('');
         } else {
             echo "Lack of parameters: service";
             return false;
         }
-        $this->getJson($connect);
+        $this->getJson($connect, $action);
     }
 
     /**
@@ -127,17 +113,17 @@ class Catalog extends BaseFunc
      * @param Node $node
      * @return bool
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
+     * @throws \ReflectionException
      */
     public function node(Node $node)
     {
-        $this->route .= strtolower($this->class) . '/' . strtolower(__FUNCTION__);
         if (!empty($node->getNode())) {
-            $this->route .= '/' . $node->getNode();
+            $action = $node->getNode();
             $node->setNode('');
         } else {
             echo "Lack of parameters: node";
             return false;
         }
-        $this->getJson($node);
+        $this->getJson($node, $action);
     }
 }

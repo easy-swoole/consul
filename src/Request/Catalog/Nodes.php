@@ -91,4 +91,12 @@ class Nodes extends SplBean
     {
         $this->filter = $filter;
     }
+
+    /**
+     * @return array
+     */
+    protected function setKeyMapping(): array
+    {
+        return ['node_meta' => 'node-meta'];
+    }
 }

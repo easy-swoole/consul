@@ -13,22 +13,6 @@ use EasySwoole\Consul\Request\Health\State;
 class Health extends BaseFunc
 {
     /**
-     * @var bool|string
-     */
-    private $class;
-
-    /**
-     * Health constructor.
-     * @param Config $config
-     */
-    public function __construct(Config $config)
-    {
-        parent::__construct($config);
-        $this->route = $config->__toString();
-        $this->class = substr(self::class, strripos(self::class,'\\') + 1);
-    }
-
-    /**
      * List Checks for Node
      * @param Node $node
      * @return bool
@@ -36,15 +20,14 @@ class Health extends BaseFunc
      */
     public function node(Node $node)
     {
-        $this->route .= strtolower($this->class) . '/' . strtolower(__FUNCTION__);
         if (!empty($node->getNode())) {
-            $this->route .= '/' . $node->getNode();
+            $action = $node->getNode();
             $node->setNode('');
         } else {
             echo "Lack of parameters: node";
             return false;
         }
-        $this->getJson($node);
+        $this->getJson($node, $action);
     }
 
     /**
@@ -52,18 +35,18 @@ class Health extends BaseFunc
      * @param Checks $checks
      * @return bool
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
+     * @throws \ReflectionException
      */
     public function checks(Checks $checks)
     {
-        $this->route .= strtolower($this->class) . '/' . strtolower(__FUNCTION__);
         if (!empty($checks->getService())) {
-            $this->route .= '/' . $checks->getService();
+            $action = $checks->getService();
             $checks->setService('');
         } else {
             echo "Lack of parameters: service";
             return false;
         }
-        $this->getJson($checks);
+        $this->getJson($checks, $action);
     }
 
     /**
@@ -71,18 +54,18 @@ class Health extends BaseFunc
      * @param Service $service
      * @return bool
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
+     * @throws \ReflectionException
      */
     public function service(Service $service)
     {
-        $this->route .= strtolower($this->class) . '/' . strtolower(__FUNCTION__);
         if (!empty($service->getService())) {
-            $this->route .= '/' . $service->getService();
+            $action = $service->getService();
             $service->setService('');
         } else {
             echo "Lack of parameters: service";
             return false;
         }
-        $this->getJson($service);
+        $this->getJson($service, $action);
     }
 
     /**
@@ -91,18 +74,18 @@ class Health extends BaseFunc
      * @param Connect $connect
      * @return bool
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
+     * @throws \ReflectionException
      */
     public function connect(Connect $connect)
     {
-        $this->route .= strtolower($this->class) . '/' . strtolower(__FUNCTION__);
         if (!empty($connect->getService())) {
-            $this->route .= '/' . $connect->getService();
+            $action = $connect->getService();
             $connect->setService('');
         } else {
             echo "Lack of parameters: service";
             return false;
         }
-        $this->getJson($connect);
+        $this->getJson($connect, $action);
     }
 
     /**
@@ -110,17 +93,17 @@ class Health extends BaseFunc
      * @param State $state
      * @return bool
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
+     * @throws \ReflectionException
      */
     public function state(State $state)
     {
-        $this->route .= strtolower($this->class) . '/' . strtolower(__FUNCTION__);
         if (!empty($state->getState())) {
-            $this->route .= '/' . $state->getState();
+            $action = $state->getState();
             $state->setState('any'); // Default 'any', if not state.
         } else {
             echo "Lack of parameters: state";
             return false;
         }
-        $this->getJson($state);
+        $this->getJson($state, $action);
     }
 }
