@@ -11,6 +11,7 @@ class Consul
     protected $kvStore;
     protected $health;
     protected $catalog;
+    protected $agent;
 
 
     function __construct(Config $config)
@@ -43,5 +44,12 @@ class Consul
         return $this->catalog;
     }
 
+    function agent():Agent
+    {
+        if (empty($this->agent)){
+            $this->agent = new Agent($this->config);
+        }
+        return $this->agent;
+    }
 
 }
