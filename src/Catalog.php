@@ -4,6 +4,7 @@ namespace EasySwoole\Consul;
 use EasySwoole\Consul\Request\Catalog\Datacenters;
 use EasySwoole\Consul\Request\Catalog\Deregister;
 use EasySwoole\Consul\Request\Catalog\Nodes;
+
 use EasySwoole\Consul\Request\Catalog\Register;
 
 class Catalog extends BaseFunc
@@ -33,7 +34,6 @@ class Catalog extends BaseFunc
         $this->route .= strtolower($this->class) . '/' . strtolower(__FUNCTION__ );
         $this->putJSON($register);
     }
-
     /**
      * @param Deregister $deregister
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
