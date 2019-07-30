@@ -106,6 +106,53 @@ class BaseFunc
 
     /**
      * @param SplBean $bean
+     * @param string $action
+     * @return bool|null
+     * @throws InvalidUrl
+     * @throws \ReflectionException
+     */
+    protected function postJson(SplBean $bean, $action="", array $headers=[])
+    {
+        $url = $this->getRoute($bean);
+        if (isset($action) && !empty($action)) {
+            $url .= '/' . $action;
+        }
+        $param = $bean->__toString();
+
+        $http = new HttpClient($url);
+        if ($http) {
+            var_dump($url);
+            var_dump($param);
+            try{
+                if (isset($headers) && !empty($headers)) {
+                    foreach ($headers as $headerKey => $headerVal) {
+                        $http->setHeader($headerKey, $headerVal);
+                    }
+                }
+                $ret = $http->postJson($param)->getBody();
+                var_dump($ret);
+                if (isset($ret) && !empty($ret)) {
+                    $json = json_decode($ret,true);
+                    if ($json) {
+                        if (is_array($json)) {
+                            // 存bean。基本上config，也可能是单独方法的params
+                            return true;
+                        }
+                        return true; // 返回字符串或者boolean
+                    } else {
+                        return null;
+                    }
+                }
+            } catch (\Exception $exception) {
+                throw new \Exception($exception->getMessage());
+            }
+        } else {
+            throw new InvalidUrl('url is invalid');
+        }
+    }
+
+    /**
+     * @param SplBean $bean
      * @return string
      * @throws \ReflectionException
      */
