@@ -15,9 +15,11 @@ require_once 'vendor/autoload.php';
 go(function (){
 
     $consul = new Consul(new Config());
-    $consul->catalog()->nodes(new Nodes([
+    $nodes = new Nodes([
         'dc' => 'dc1',
         'near' => 'e17bfe614614', // node name,排序用。命中的返回的节点信息会靠前
-    ]));
-
+//        'node_meta' => 'aa',
+//        'filter' => 'a',
+    ]);
+    $consul->catalog()->nodes($nodes);
 });

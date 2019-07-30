@@ -1,20 +1,22 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Manlin
- * Date: 2019/7/28
- * Time: 下午8:34
- */
 namespace EasySwoole\Consul\Request\Catalog;
 
 use EasySwoole\Spl\SplBean;
 
-class Nodes extends SplBean
+class Connect extends SplBean
 {
     /**
      * @var
      */
+    protected $service;
+    /**
+     * @var
+     */
     protected $dc;
+    /**
+     * @var
+     */
+    protected $tag;
     /**
      * @var
      */
@@ -29,7 +31,23 @@ class Nodes extends SplBean
     protected $filter;
 
     /**
-     * @return null|string
+     * @return string|null
+     */
+    public function getService(): ?string
+    {
+        return $this->service;
+    }
+
+    /**
+     * @param string $service
+     */
+    public function setService(string $service): void
+    {
+        $this->service = $service;
+    }
+
+    /**
+     * @return string|null
      */
     public function getDc(): ?string
     {
@@ -43,13 +61,25 @@ class Nodes extends SplBean
     {
         $this->dc = $dc;
     }
+    public function getTag(): ?string
+    {
+        return $this->tag;
+    }
 
     /**
-     * @return null|string
+     * @param string $tag
+     */
+    public function setTag(string $tag): void
+    {
+        $this->tag = $tag;
+    }
+
+    /**
+     * @return string|null
      */
     public function getNear(): ?string
     {
-
+        return $this->near;
     }
 
     /**
@@ -61,7 +91,7 @@ class Nodes extends SplBean
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getNodeMeta(): ?string
     {
@@ -69,15 +99,15 @@ class Nodes extends SplBean
     }
 
     /**
-     * @param string $node_meta
+     * @param string $nodeMeta
      */
-    public function setNodeMeta(string $node_meta): void
+    public function setNodeMeat(string $nodeMeta): void
     {
-        $this->node_meta = json_encode($node_meta);
+        $this->node_meta = $nodeMeta;
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getFilter(): ?string
     {
@@ -93,9 +123,10 @@ class Nodes extends SplBean
     }
 
     /**
+     * convert node_meta to node-meta
      * @return array
      */
-    protected function setKeyMapping(): array
+    public function setKeyMapping(): array
     {
         return ['node_meta' => 'node-meta'];
     }
