@@ -12,6 +12,7 @@ class Consul
     protected $health;
     protected $catalog;
     protected $agent;
+    protected $acl;
 
 
     function __construct(Config $config)
@@ -52,4 +53,11 @@ class Consul
         return $this->agent;
     }
 
+    function acl():Acl
+    {
+        if (empty($this->acl)) {
+            $this->acl = new Acl($this->config);
+        }
+        return $this->acl;
+    }
 }
