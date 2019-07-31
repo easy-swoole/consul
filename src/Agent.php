@@ -8,7 +8,13 @@ use EasySwoole\Consul\Request\Agent\Check\Register;
 use EasySwoole\Consul\Request\Agent\Check\Update;
 use EasySwoole\Consul\Request\Agent\Check\Warn;
 use EasySwoole\Consul\Request\Agent\Checks;
+use EasySwoole\Consul\Request\Agent\Connect\Authorize;
+use EasySwoole\Consul\Request\Agent\Connect\Ca\Leaf;
+use EasySwoole\Consul\Request\Agent\Connect\Ca\Roots;
+use EasySwoole\Consul\Request\Agent\Connect\Proxy;
 use EasySwoole\Consul\Request\Agent\ForceLeave;
+use EasySwoole\Consul\Request\Agent\Health\Service\ID;
+use EasySwoole\Consul\Request\Agent\Health\Service\Name;
 use EasySwoole\Consul\Request\Agent\Join;
 use EasySwoole\Consul\Request\Agent\Leave;
 use EasySwoole\Consul\Request\Agent\Maintenance;
@@ -299,6 +305,7 @@ class Agent extends BaseFunc
     }
 
     /**
+     * List Services
      * @param Services $services
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      * @throws \ReflectionException
@@ -309,6 +316,7 @@ class Agent extends BaseFunc
     }
 
     /**
+     * Get Service Configuration
      * @param Service $service
      * @return bool
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
@@ -324,5 +332,137 @@ class Agent extends BaseFunc
             return false;
         }
         $this->getJson($service, $action);
+    }
+
+    /**
+     * Get local service health by its name
+     * @param Name $name
+     * @return bool
+     * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
+     * @throws \ReflectionException
+     */
+    public function name(Name $name)
+    {
+        if (!empty($name->getServiceName())) {
+            $action = $name->getServiceName();
+            $name->setServiceName('');
+        } else {
+            echo "Lack of parameters: service_id";
+            return false;
+        }
+        $this->getJson($name, $action);
+    }
+
+    /**
+     * Get local service health by its ID
+     * @param ID $ID
+     * @return bool
+     * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
+     * @throws \ReflectionException
+     */
+    public function id(ID $ID)
+    {
+        if (!empty($ID->getServiceName())) {
+            $action = $ID->getServiceName();
+            $ID->setServiceName('');
+        } else {
+            echo "Lack of parameters: service_id";
+            return false;
+        }
+        $this->getJson($ID, $action);
+    }
+
+    /**
+     * Register Service
+     * @param Register $register
+     * @return bool
+     * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
+     * @throws \ReflectionException
+     */
+    public function serviceRegister(Register $register)
+    {
+        $this->putJSON($register);
+    }
+
+    /**
+     * Deregister Service
+     * @param Deregister $deregister
+     * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
+     * @throws \ReflectionException
+     */
+    public function serviceDeregister(Deregister $deregister)
+    {
+        $this->putJSON($deregister);
+    }
+
+    /**
+     * Enable Maintenance Mode
+     * @param Maintenance $maintenance
+     * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
+     * @throws \ReflectionException
+     */
+    public function serviceMaintenance(Maintenance $maintenance)
+    {
+        $this->putJSON($maintenance);
+    }
+
+    /**
+     * Authorize
+     * @param Authorize $authorize
+     * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
+     * @throws \ReflectionException
+     */
+    public function authorize(Authorize $authorize)
+    {
+        $this->putJSON($authorize);
+    }
+
+    /**
+     * Certificate Authority (CA) Roots
+     * @param Roots $roots
+     * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
+     * @throws \ReflectionException
+     */
+    public function roots(Roots $roots)
+    {
+        $this->getJson($roots);
+    }
+
+    /**
+     * Service Leaf Certificate
+     * @param Leaf $leaf
+     * @return bool
+     * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
+     * @throws \ReflectionException
+     */
+    public function leaf(Leaf $leaf)
+    {
+        if (!empty($leaf->getService())) {
+            $action = $leaf->getService();
+            $leaf->setService('');
+        } else {
+            echo "Lack of parameters: service_id";
+            return false;
+        }
+        $this->getJson($leaf, $action);
+    }
+
+    /**
+     * Managed Proxy Configuration (Deprecated)
+     * @param Proxy $proxy
+     * @return bool
+     * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
+     * @throws \ReflectionException
+     */
+    public function proxy(Proxy $proxy)
+    {
+        if (!empty($proxy->getID())) {
+            $action = $proxy->getID();
+            $proxy->setID('');
+        } else {
+            echo "Lack of parameters: ID";
+            return false;
+        }
+        $this->getJson($proxy, $action);
     }
 }
