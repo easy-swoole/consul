@@ -13,7 +13,11 @@ class Consul
     protected $catalog;
     protected $agent;
     protected $acl;
-
+    protected $consulConfig;
+    protected $connect;
+    protected $coordinates;
+    protected $event;
+    protected $query;
 
     function __construct(Config $config)
     {
@@ -59,5 +63,45 @@ class Consul
             $this->acl = new Acl($this->config);
         }
         return $this->acl;
+    }
+
+    function config():ConsulConfig
+    {
+        if (empty($this->consulConfig)) {
+            $this->consulConfig = new ConsulConfig($this->config);
+        }
+        return $this->consulConfig;
+    }
+
+    function connect():Connect
+    {
+        if (empty($this->connect)) {
+            $this->connect = new Connect($this->config);
+        }
+        return $this->connect;
+    }
+
+    function coordinates():Coordinates
+    {
+        if (empty($this->coordinates)) {
+            $this->coordinates = new Coordinates($this->config);
+        }
+        return $this->coordinates;
+    }
+
+    function event():Event
+    {
+        if (empty($this->event)) {
+            $this->event = new Event($this->config);
+        }
+        return $this->event;
+    }
+
+    function query():Query
+    {
+        if (empty($this->query)) {
+            $this->query = new Query($this->config);
+        }
+        return $this->query;
     }
 }
