@@ -4,6 +4,8 @@
 namespace EasySwoole\Consul;
 
 
+use EasySwoole\Consul\Request\Txn;
+
 class Consul
 {
     protected $config;
@@ -18,6 +20,11 @@ class Consul
     protected $coordinates;
     protected $event;
     protected $query;
+    protected $session;
+    protected $snapshot;
+    protected $status;
+    protected $txn;
+    protected $operator;
 
     function __construct(Config $config)
     {
@@ -103,5 +110,45 @@ class Consul
             $this->query = new Query($this->config);
         }
         return $this->query;
+    }
+
+    function session():Session
+    {
+        if (empty($this->session)) {
+            $this->session = new Session($this->config);
+        }
+        return $this->session;
+    }
+
+    function snapshot():Snapshot
+    {
+        if (empty($this->snapshot)) {
+            $this->snapshot = new Snapshot($this->config);
+        }
+        return $this->snapshot;
+    }
+
+    function status():Status
+    {
+        if (empty($this->status)) {
+            $this->status = new Status($this->config);
+        }
+        return $this->status;
+    }
+
+    function transaction():Transaction
+    {
+        if (empty($this->txn)) {
+            $this->txn = new Transaction($this->config);
+        }
+        return $this->txn;
+    }
+
+    function operator():Operator
+    {
+        if (empty($this->operator)) {
+            $this->operator = new Operator($this->config);
+        }
+        return $this->operator;
     }
 }
