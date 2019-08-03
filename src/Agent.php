@@ -1,6 +1,7 @@
 <?php
 namespace EasySwoole\Consul;
 
+use EasySwoole\Consul\Exception\Exception;
 use EasySwoole\Consul\Request\Agent\Check\Deregister;
 use EasySwoole\Consul\Request\Agent\Check\Fail;
 use EasySwoole\Consul\Request\Agent\Check\Pass;
@@ -141,16 +142,15 @@ class Agent extends BaseFunc
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      * @throws \ReflectionException
      */
-    public function force_leave(ForceLeave $forceLeave)
+    public function force_leave(ForceLeave $forceLeave):?bool
     {
         if (!empty($forceLeave->getNode())) {
             $action = $forceLeave->getNode();
             $forceLeave->setNode('');
         } else {
-            echo "Lack of parameters: node";
-            return false;
+            throw new Exception("Lack of parameters: node");
         }
-        $this->putJSON($forceLeave, $action);
+        return $this->putJSON($forceLeave, $action);
     }
 
     /**
