@@ -30,6 +30,7 @@ class ConsulConfig extends BaseFunc
      */
     public function getConfig(Config $config)
     {
+        $action = '';
         if (!empty($config->getName()) || !empty($config->getKind())) {
             $action = $config->getKind() . '/' . $config->getName();
             $config->setName('');
@@ -46,6 +47,7 @@ class ConsulConfig extends BaseFunc
      */
     public function listConfig(Config $config)
     {
+        $action = '';
         if (!empty($config->getKind())) {
             $action = $config->getKind();
             $config->setKind('');
@@ -61,6 +63,7 @@ class ConsulConfig extends BaseFunc
      */
     public function deleteConfig(Config $config)
     {
+        $action = '';
         if (!empty($config->getName()) || !empty($config->getKind())) {
             $action = $config->getKind() . '/' . $config->getName();
             $config->setName('');

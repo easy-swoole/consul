@@ -14,7 +14,6 @@ class Config extends SplBean
     public function __construct(array $data = null, $autoCreateProperty = false)
     {
         parent::__construct($data, $autoCreateProperty);
-        echo 5;
     }
 
     /**
@@ -29,11 +28,16 @@ class Config extends SplBean
      * Config Entry Kind ： ['service-defaults', 'proxy-defaults']
      * @var string
      */
-    protected $kind;
+    protected $Kind;
     /**
      * @var string
      */
-    protected $name;
+    protected $Name;
+    /**
+     * @var string
+     */
+    protected $Protocol;
+
     /**
      * @return null|string
      */
@@ -71,7 +75,7 @@ class Config extends SplBean
      */
     public function getKind(): ?string
     {
-        return $this->kind;
+        return $this->Kind;
     }
 
     /**
@@ -79,7 +83,7 @@ class Config extends SplBean
      */
     public function setKind(string $kind): void
     {
-        $this->kind = $kind;
+        $this->Kind = $kind;
     }
 
     /**
@@ -87,7 +91,7 @@ class Config extends SplBean
      */
     public function getName(): ?string
     {
-        return $this->name;
+        return $this->Name;
     }
 
     /**
@@ -95,6 +99,30 @@ class Config extends SplBean
      */
     public function setName(string $name): void
     {
-        $this->name = $name;
+        $this->Name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProtocol(): ?string
+    {
+        return $this->Protocol;
+    }
+
+    /**
+     * @param mixed $Protocol
+     */
+    public function setProtocol($Protocol): void
+    {
+        $this->Protocol = $Protocol;
+    }
+
+    public function setKeyMapping(): array
+    {
+        return [
+            'kind' => 'Kind',
+            'name' => 'Name'
+        ];
     }
 }

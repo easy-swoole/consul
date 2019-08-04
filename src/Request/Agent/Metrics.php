@@ -14,7 +14,7 @@ class Metrics extends SplBean
     /**
      * @return string
      */
-    public function getFormat(): string
+    public function getFormat(): ?string
     {
         return $this->format;
     }

@@ -8,7 +8,7 @@ class ID extends SplBean
     /**
      * @var string
      */
-    protected $service_name;
+    protected $service_id;
     /**
      * @var string
      */
@@ -16,17 +16,17 @@ class ID extends SplBean
     /**
      * @return string|null
      */
-    public function getServiceName(): ?string
+    public function getServiceID(): ?string
     {
-        return $this->service_name;
+        return $this->service_id;
     }
 
     /**
      * @param string $serviceName
      */
-    public function setServiceName(string $serviceName): void
+    public function setServiceID(string $service_id): void
     {
-        $this->service_name = $serviceName;
+        $this->service_id = $service_id;
     }
 
     /**

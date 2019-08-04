@@ -692,7 +692,7 @@ class Acl extends BaseFunc
             $this->route .= '/' . $bindingRule->getid();
             $bindingRule->setid('');
         }
-        $this->deleteJson($bindingRule, '',true,$useRef);
+        $this->deleteJson($bindingRule, '', [],true,$useRef);
     }
 
     /**
