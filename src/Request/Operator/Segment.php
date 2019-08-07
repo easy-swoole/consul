@@ -2,14 +2,14 @@
 /**
  * Created by PhpStorm.
  * User: Manlin
- * Date: 2019/8/2
- * Time: 下午10:31
+ * Date: 2019/8/3
+ * Time: 下午3:10
  */
-namespace EasySwoole\Consul\Request\Status;
+namespace EasySwoole\Consul\Request\Operator;
 
 use EasySwoole\Spl\SplBean;
 
-class Peers extends SplBean
+class Segment extends SplBean
 {
     /**
      * @var string
@@ -25,9 +25,9 @@ class Peers extends SplBean
     }
 
     /**
-     * @param string $dc
+     * @param mixed $dc
      */
-    public function setDc(string $dc): void
+    public function setDc($dc)
     {
         $this->dc = $dc;
     }

@@ -30,24 +30,29 @@ class BaseFunc
      * @throws InvalidUrl
      * @throws \ReflectionException
      */
-    protected function putJSON(SplBean $bean, $action = "", $defaultRoot = true, array $useReflection = [])
+    protected function putJSON(SplBean $bean, $action = "", $defaultRoot = true, array $useReflection = [], $urlEncode = false)
     {
 
-        if (!$useReflection['reflection']) {
+        if (!isset($useReflection['reflection'])) {
             $url = $this->getRoute($bean, $action, $defaultRoot);
         } else {
             $url = $useReflection['url'];
         }
 
-        $param = $bean->__toString();
-
-        $http = new HttpClient($url);
+        if ($urlEncode) {
+            $url .= '?' . http_build_query($bean->toArrayWithMapping());
+            $http = new HttpClient($url);
+        } else {
+            $param = $bean->__toString();
+            $http = new HttpClient($url);
+        }
         if ($http) {
-            var_dump($url);
-            var_dump($param);
             try{
-                $ret = $http->put($param)->getBody();
-                var_dump($ret);
+                if ($urlEncode) {
+                    $ret = $http->put()->getBody();
+                } else {
+                    $ret = $http->put($param)->getBody();
+                }
                 if (isset($ret) && !empty($ret)) {
                     $json = json_decode($ret,true);
                     if ($json) {
@@ -78,26 +83,25 @@ class BaseFunc
      * @throws InvalidUrl
      * @throws \ReflectionException
      */
-    protected function getJson(SplBean $bean, $action="", $defaultRoot = true, array $useReflection = [])
+    protected function getJson(SplBean $bean, $action="", $defaultRoot = true, array $useReflection = [], array $headers=[])
     {
-        if (!$useReflection['reflection']) {
+        if (!isset($useReflection['reflection'])) {
             $url = $this->getRoute($bean, $action, $defaultRoot);
         } else {
             $url = $useReflection['url'];
         }
 
-//        if (isset($action) && !empty($action)) {
-//            $url .= '/' . $action;
-//        }
         $param = http_build_query($bean->toArrayWithMapping());
-
+        $url .= '?' . $param;
         $http = new HttpClient($url);
         if ($http) {
-            var_dump($url);
-            var_dump($param);
             try{
+                if (isset($headers) && !empty($headers)) {
+                    foreach ($headers as $headerKey => $headerVal) {
+                        $http->setHeader($headerKey, $headerVal);
+                    }
+                }
                 $ret = $http->get()->getBody();
-                var_dump($ret);
                 if (isset($ret) && !empty($ret)) {
                     $json = json_decode($ret,true);
                     if ($json) {
@@ -129,17 +133,15 @@ class BaseFunc
      */
     protected function postJson(SplBean $bean, $action="", array $headers=[], $defaultRoot = true, array $useReflection = [])
     {
-        if (!$useReflection['reflection']) {
+        if (!isset($useReflection['reflection'])) {
             $url = $this->getRoute($bean, $action, $defaultRoot);
         } else {
             $url = $useReflection['url'];
         }
-        $param = $bean->__toString();
+        $param = json_encode($bean->toArrayWithMapping(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
         $http = new HttpClient($url);
         if ($http) {
-            var_dump($url);
-            var_dump($param);
             try{
                 if (isset($headers) && !empty($headers)) {
                     foreach ($headers as $headerKey => $headerVal) {
@@ -147,7 +149,6 @@ class BaseFunc
                     }
                 }
                 $ret = $http->postJson($param)->getBody();
-                var_dump($ret);
                 if (isset($ret) && !empty($ret)) {
                     $json = json_decode($ret,true);
                     if ($json) {
@@ -179,17 +180,16 @@ class BaseFunc
      */
     protected function deleteJson(SplBean $bean, $action="", array $headers=[], $defaultRoot = true, array $useReflection = [])
     {
-        if (!$useReflection['reflection']) {
+        if (!isset($useReflection['reflection'])) {
             $url = $this->getRoute($bean, $action, $defaultRoot);
         } else {
             $url = $useReflection['url'];
         }
-        $param = $bean->__toString();
+
+        $param = json_encode($bean->toArrayWithMapping(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
         $http = new HttpClient($url);
         if ($http) {
-            var_dump($url);
-            var_dump($param);
             try{
                 if (isset($headers) && !empty($headers)) {
                     foreach ($headers as $headerKey => $headerVal) {
@@ -197,7 +197,6 @@ class BaseFunc
                     }
                 }
                 $ret = $http->delete()->getBody();
-                var_dump($ret);
                 if (isset($ret) && !empty($ret)) {
                     $json = json_decode($ret,true);
                     if ($json) {

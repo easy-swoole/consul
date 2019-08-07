@@ -23,7 +23,7 @@ use EasySwoole\Consul\Request\Agent\Members;
 use EasySwoole\Consul\Request\Agent\Metrics;
 use EasySwoole\Consul\Request\Agent\Monitor;
 use EasySwoole\Consul\Request\Agent\Reload;
-use EasySwoole\Consul\Request\Agent\SelfAction;
+use EasySwoole\Consul\Request\Agent\SelfParams;
 use EasySwoole\Consul\Request\Agent\Service;
 use EasySwoole\Consul\Request\Agent\Services;
 use EasySwoole\Consul\Request\Agent\Token;
@@ -44,13 +44,27 @@ class Agent extends BaseFunc
     /**
      * Read Configuration
      * returns the configuration and member information of the local agent
-     * @param SelfAction $selfAction
+     * @param SelfParams $selfParams
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      * @throws \ReflectionException
      */
-    public function self(SelfAction $selfAction)
+    public function self(SelfParams $selfParams)
     {
-        $this->getJson($selfAction);
+        $beanRoute = new \ReflectionClass($selfParams);
+        if (empty($beanRoute)) {
+            throw new \ReflectionException(static::class);
+        }
+        $route = substr($beanRoute->name, strpos($beanRoute->name,'\\') + 1);
+        $route = substr($route, strpos($route,'\\') + 1);
+        $route = substr($route, strpos($route,'\\') + 1);
+        $route = substr($route, 0, strripos($route,'\\') + 1);
+        $route .= 'self';
+        $route = strtolower(str_replace('\\','/',$route));
+        $useRef = [
+            'reflection' => true,
+            'url' => $this->route.$route,
+        ];
+        $this->getJson($selfParams,'',true, $useRef);
     }
 
     /**
@@ -73,7 +87,7 @@ class Agent extends BaseFunc
      */
     public function maintenance(Maintenance $maintenance)
     {
-        $this->putJSON($maintenance);
+        $this->putJSON($maintenance,'',true,[],true);
     }
 
     /**
@@ -114,12 +128,10 @@ class Agent extends BaseFunc
      */
     public function join(Join $join)
     {
+        $action = '';
         if (!empty($join->getAddress())) {
             $action = $join->getAddress();
             $join->setAddress('');
-        } else {
-            echo "Lack of parameters: address";
-            return false;
         }
         $this->putJSON($join, $action);
     }
@@ -142,13 +154,14 @@ class Agent extends BaseFunc
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      * @throws \ReflectionException
      */
-    public function force_leave(ForceLeave $forceLeave):?bool
+    public function forceLeave(ForceLeave $forceLeave)
+
     {
         if (!empty($forceLeave->getNode())) {
             $action = $forceLeave->getNode();
             $forceLeave->setNode('');
-        } else {
-            throw new Exception("Lack of parameters: node");
+        } else{
+            $action = '';
         }
         return $this->putJSON($forceLeave, $action);
     }
@@ -218,12 +231,10 @@ class Agent extends BaseFunc
      */
     public function deRegister(Deregister $deregister)
     {
+        $action = '';
         if (!empty($deregister->getCheckId())) {
             $action = $deregister->getCheckId();
             $deregister->setCheckId('');
-        } else {
-            echo "Lack of parameters: check_id";
-            return false;
         }
         $this->putJSON($deregister, $action);
     }
@@ -237,12 +248,10 @@ class Agent extends BaseFunc
      */
     public function pass(Pass $pass)
     {
+        $action = '';
         if (!empty($pass->getCheckId())) {
             $action = $pass->getCheckId();
             $pass->setCheckId('');
-        } else {
-            echo "Lack of parameters: check_id";
-            return false;
         }
         $this->putJSON($pass, $action);
     }
@@ -256,12 +265,10 @@ class Agent extends BaseFunc
      */
     public function warn(Warn $warn)
     {
+        $action = '';
         if (!empty($warn->getCheckId())) {
             $action = $warn->getCheckId();
             $warn->setCheckId('');
-        } else {
-            echo "Lack of parameters: check_id";
-            return false;
         }
         $this->putJSON($warn, $action);
     }
@@ -275,12 +282,10 @@ class Agent extends BaseFunc
      */
     public function fail(Fail $fail)
     {
+        $action = '';
         if (!empty($fail->getCheckId())) {
             $action = $fail->getCheckId();
             $fail->setCheckId('');
-        } else {
-            echo "Lack of parameters: check_id";
-            return false;
         }
         $this->putJSON($fail, $action);
     }
@@ -298,8 +303,7 @@ class Agent extends BaseFunc
             $action = $update->getCheckId();
             $update->setCheckId('');
         } else {
-            echo "Lack of parameters: check_id";
-            return false;
+            $action = '';
         }
         $this->putJSON($update, $action);
     }
@@ -328,8 +332,7 @@ class Agent extends BaseFunc
             $action = $service->getServiceId();
             $service->setServiceId('');
         } else {
-            echo "Lack of parameters: service_id";
-            return false;
+            $action = '';
         }
         $this->getJson($service, $action);
     }
@@ -347,8 +350,7 @@ class Agent extends BaseFunc
             $action = $name->getServiceName();
             $name->setServiceName('');
         } else {
-            echo "Lack of parameters: service_id";
-            return false;
+            $action = '';
         }
         $this->getJson($name, $action);
     }
@@ -356,18 +358,16 @@ class Agent extends BaseFunc
     /**
      * Get local service health by its ID
      * @param ID $ID
-     * @return bool
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      * @throws \ReflectionException
      */
     public function id(ID $ID)
     {
-        if (!empty($ID->getServiceName())) {
-            $action = $ID->getServiceName();
-            $ID->setServiceName('');
+        if (!empty($ID->getServiceID())) {
+            $action = $ID->getServiceID();
+            $ID->setServiceID('');
         } else {
-            echo "Lack of parameters: service_id";
-            return false;
+            $action = '';
         }
         $this->getJson($ID, $action);
     }
@@ -379,7 +379,7 @@ class Agent extends BaseFunc
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      * @throws \ReflectionException
      */
-    public function serviceRegister(Register $register)
+    public function serviceRegister(Service\Register $register)
     {
         $this->putJSON($register);
     }
@@ -390,7 +390,7 @@ class Agent extends BaseFunc
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      * @throws \ReflectionException
      */
-    public function serviceDeregister(Deregister $deregister)
+    public function serviceDeregister(Service\Deregister $deregister)
     {
         $this->putJSON($deregister);
     }
@@ -414,7 +414,7 @@ class Agent extends BaseFunc
      */
     public function authorize(Authorize $authorize)
     {
-        $this->putJSON($authorize);
+        $this->postJson($authorize);
     }
 
     /**
@@ -441,8 +441,7 @@ class Agent extends BaseFunc
             $action = $leaf->getService();
             $leaf->setService('');
         } else {
-            echo "Lack of parameters: service_id";
-            return false;
+            $action = '';
         }
         $this->getJson($leaf, $action);
     }
@@ -460,8 +459,7 @@ class Agent extends BaseFunc
             $action = $proxy->getID();
             $proxy->setID('');
         } else {
-            echo "Lack of parameters: ID";
-            return false;
+            $action = '';
         }
         $this->getJson($proxy, $action);
     }

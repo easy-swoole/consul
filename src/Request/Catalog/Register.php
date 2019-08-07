@@ -170,15 +170,4 @@ class Register extends SplBean
     {
         $this->SkipNodeUpdate = $SkipNodeUpdate;
     }
-
-    /**
-     * initialize ID
-     * TODO:uuid的格式还未确定.
-     */
-    protected function initialize(): void
-    {
-        if(strlen($this->ID) != 36){
-            Random::character(36);
-        }
-    }
 }

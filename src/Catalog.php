@@ -6,7 +6,6 @@ use EasySwoole\Consul\Request\Catalog\Datacenters;
 use EasySwoole\Consul\Request\Catalog\Deregister;
 use EasySwoole\Consul\Request\Catalog\Node;
 use EasySwoole\Consul\Request\Catalog\Nodes;
-
 use EasySwoole\Consul\Request\Catalog\Register;
 use EasySwoole\Consul\Request\Catalog\Service;
 use EasySwoole\Consul\Request\Catalog\Services;
@@ -78,12 +77,10 @@ class Catalog extends BaseFunc
      */
     public function service(Service $service)
     {
+        $action = '';
         if (!empty($service->getService())) {
             $action = $service->getService();
             $service->setService('');
-        } else {
-            echo "Lack of parameters: service";
-            return false;
         }
         $this->getJson($service, $action);
     }
@@ -98,12 +95,10 @@ class Catalog extends BaseFunc
      */
     public function connect(Connect $connect)
     {
+        $action = '';
         if (!empty($connect->getService())) {
             $action = $connect->getService();
             $connect->setService('');
-        } else {
-            echo "Lack of parameters: service";
-            return false;
         }
         $this->getJson($connect, $action);
     }
@@ -117,12 +112,10 @@ class Catalog extends BaseFunc
      */
     public function node(Node $node)
     {
+        $action = '';
         if (!empty($node->getNode())) {
             $action = $node->getNode();
             $node->setNode('');
-        } else {
-            echo "Lack of parameters: node";
-            return false;
         }
         $this->getJson($node, $action);
     }

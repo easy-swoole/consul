@@ -3,22 +3,18 @@
  * Created by PhpStorm.
  * User: Manlin
  * Date: 2019/8/3
- * Time: 上午1:15
+ * Time: 下午1:42
  */
 namespace EasySwoole\Consul\Request\Operator\Autopilot;
 
 use EasySwoole\Spl\SplBean;
 
-class Configuration extends SplBean
+class Health extends SplBean
 {
     /**
      * @var string
      */
     protected $dc;
-    /**
-     * @var bool
-     */
-    protected $stale;
 
     /**
      * @return null|string
@@ -30,25 +26,10 @@ class Configuration extends SplBean
 
     /**
      * @param string $dc
+     * @return null|void
      */
-    public function setDc(string $dc): void
+    public function setDc(string $dc): ?string
     {
         $this->dc = $dc;
-    }
-
-    /**
-     * @return bool|null
-     */
-    public function getStale(): ?bool
-    {
-        return $this->stale;
-    }
-
-    /**
-     * @param bool $stale
-     */
-    public function setStale(bool $stale): void
-    {
-        $this->stale = $stale;
     }
 }

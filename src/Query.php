@@ -47,6 +47,7 @@ class Query extends BaseFunc
      */
     public function updateQuery(\EasySwoole\Consul\Request\Query $query)
     {
+        $action = '';
         if (!empty($query->getUuid())) {
             $action = $query->getUuid();
             $query->setUuid('');
@@ -62,6 +63,7 @@ class Query extends BaseFunc
      */
     public function deleteQuery(\EasySwoole\Consul\Request\Query $query)
     {
+        $action = '';
         if (!empty($query->getUuid())) {
             $action = $query->getUuid();
             $query->setUuid('');
@@ -77,11 +79,12 @@ class Query extends BaseFunc
      */
     public function execute(Execute $execute)
     {
+        $action = '';
         if (!empty($execute->getUuid())) {
             $action = $execute->getUuid();
             $execute->setUuid('');
         }
-        $this->getJson($execute, $action,[],false);
+        $this->getJson($execute, $action,false);
     }
 
     /**
@@ -92,6 +95,7 @@ class Query extends BaseFunc
      */
     public function explain(Explain $explain)
     {
+        $action = '';
         if (!empty($execute->getUuid())) {
             $action = $execute->getUuid();
             $execute->setUuid('');

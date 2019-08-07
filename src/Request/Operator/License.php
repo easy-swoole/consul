@@ -2,14 +2,14 @@
 /**
  * Created by PhpStorm.
  * User: Manlin
- * Date: 2019/8/2
- * Time: 下午10:31
+ * Date: 2019/8/3
+ * Time: 下午1:50
  */
-namespace EasySwoole\Consul\Request\Status;
+namespace EasySwoole\Consul\Request\Operator;
 
 use EasySwoole\Spl\SplBean;
 
-class Peers extends SplBean
+class License extends SplBean
 {
     /**
      * @var string

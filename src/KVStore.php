@@ -16,6 +16,7 @@ class KVStore extends BaseFunc
      */
     public function kv(Kv $kv)
     {
+        $action = '';
         if (!empty($kv->getKey())) {
             $action = $kv->getKey();
             $kv->setKey('');
@@ -31,6 +32,7 @@ class KVStore extends BaseFunc
      */
     public function create(Kv $kv)
     {
+        $action = '';
         if (!empty($kv->getKey())) {
             $action = $kv->getKey();
             $kv->setKey('');
@@ -46,6 +48,7 @@ class KVStore extends BaseFunc
      */
     public function update(Kv $kv)
     {
+        $action = '';
         if (!empty($kv->getKey())) {
             $action = $kv->getKey();
             $kv->setKey('');
@@ -61,6 +64,7 @@ class KVStore extends BaseFunc
      */
     public function delete(Kv $kv)
     {
+        $action = '';
         if (!empty($kv->getKey())) {
             $action = $kv->getKey();
             $kv->setKey('');

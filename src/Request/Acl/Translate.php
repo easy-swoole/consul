@@ -11,5 +11,21 @@ use EasySwoole\Spl\SplBean;
 
 class Translate extends SplBean
 {
+    protected $accessor_id;
 
+    /**
+     * @return mixed
+     */
+    public function getAccessorId ()
+    {
+        return $this->accessor_id;
+    }
+
+    /**
+     * @param mixed $accessor_id
+     */
+    public function setAccessorId ($accessor_id)
+    {
+        $this->accessor_id = $accessor_id;
+    }
 }

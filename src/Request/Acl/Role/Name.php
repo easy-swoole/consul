@@ -21,7 +21,7 @@ class Name extends SplBean
      */
     public function getname(): ?string
     {
-        return $this->namel;
+        return $this->name;
     }
 
     /**
