@@ -416,5 +416,4 @@ class AclTest extends TestCase
         $this->consul->acl()->bindingRules($bindingRules);
         $this->assertEquals('x','x');
     }
-
 }

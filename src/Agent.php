@@ -1,6 +1,7 @@
 <?php
 namespace EasySwoole\Consul;
 
+use EasySwoole\Consul\Exception\Exception;
 use EasySwoole\Consul\Request\Agent\Check\Deregister;
 use EasySwoole\Consul\Request\Agent\Check\Fail;
 use EasySwoole\Consul\Request\Agent\Check\Pass;
@@ -154,6 +155,7 @@ class Agent extends BaseFunc
      * @throws \ReflectionException
      */
     public function forceLeave(ForceLeave $forceLeave)
+
     {
         if (!empty($forceLeave->getNode())) {
             $action = $forceLeave->getNode();
@@ -161,7 +163,7 @@ class Agent extends BaseFunc
         } else{
             $action = '';
         }
-        $this->putJSON($forceLeave, $action);
+        return $this->putJSON($forceLeave, $action);
     }
 
     /**
