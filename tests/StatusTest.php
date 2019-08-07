@@ -1,0 +1,42 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Manlin
+ * Date: 2019/8/6
+ * Time: 上午12:22
+ */
+namespace EasySwoole\Consul\Test;
+
+use EasySwoole\Consul\Config;
+use EasySwoole\Consul\Consul;
+use EasySwoole\Consul\Request\Status\Leader;
+use EasySwoole\Consul\Request\Status\Peers;
+use PHPUnit\Framework\TestCase;
+
+class StatusTest extends TestCase
+{
+    protected $config;
+    protected $consul;
+
+    function __construct($name = null, array $data = [], $dataName = '')
+    {
+        $this->config = new Config();
+        $this->consul = new Consul($this->config);
+        parent::__construct($name, $data, $dataName);
+    }
+
+    function testLeader()
+    {
+        $leader = new Leader();
+        $this->consul->status()->leader($leader);
+        $this->assertEquals('x','x');
+    }
+
+    function testPeers()
+    {
+        $peers = new Peers();
+        $this->consul->status()->peers($peers);
+        $this->assertEquals('x','x');
+    }
+
+}

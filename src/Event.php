@@ -20,6 +20,7 @@ class Event extends BaseFunc
      */
     public function fire(Fire $fire)
     {
+        $action = '';
         if (!empty($fire->getName())) {
             $action = $fire->getName();
             $fire->setName('');

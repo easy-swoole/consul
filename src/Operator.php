@@ -54,6 +54,7 @@ class Operator extends BaseFunc
      */
     public function updateArea(Area $area)
     {
+        $action = '';
         if (!empty($area->getUuid())) {
             $action = $area->getUuid();
             $area->setUuid('');
@@ -69,6 +70,7 @@ class Operator extends BaseFunc
      */
     public function deleteArea(Area $area)
     {
+        $action = '';
         if (!empty($area->getUuid())) {
             $action = $area->getUuid();
             $area->setUuid('');
@@ -84,11 +86,28 @@ class Operator extends BaseFunc
      */
     public function joinArea(Area $area)
     {
+        $action = '';
         if (!empty($area->getUuid())) {
             $action = $area->getUuid();
             $area->setUuid('');
         }
-        $this->putJSON($area, $action,false);
+        $beanRoute = new \ReflectionClass($area);
+        if (empty($beanRoute)) {
+            throw new \ReflectionException(static::class);
+        }
+        $route = substr($beanRoute->name, strpos($beanRoute->name,'\\') + 1);
+        $route = substr($route, strpos($route,'\\') + 1);
+        $route = substr($route, strpos($route,'\\') + 1);
+        if (isset($action) && !empty($action)) {
+            $route .= '/' . $action;
+        }
+        $route .= '/join';
+        $route = strtolower(str_replace('\\','/',$route));
+        $useRef = [
+            'reflection' => true,
+            'url' => $this->route.$route,
+        ];
+        $this->getJson($area, $action,true, $useRef);
     }
 
     /**
@@ -99,11 +118,28 @@ class Operator extends BaseFunc
      */
     public function membersArea(Area $area)
     {
+        $action = '';
         if (!empty($area->getUuid())) {
             $action = $area->getUuid();
             $area->setUuid('');
         }
-        $this->getJson($area, $action,false);
+        $beanRoute = new \ReflectionClass($area);
+        if (empty($beanRoute)) {
+            throw new \ReflectionException(static::class);
+        }
+        $route = substr($beanRoute->name, strpos($beanRoute->name,'\\') + 1);
+        $route = substr($route, strpos($route,'\\') + 1);
+        $route = substr($route, strpos($route,'\\') + 1);
+        if (isset($action) && !empty($action)) {
+            $route .= '/' . $action;
+        }
+        $route .= '/members';
+        $route = strtolower(str_replace('\\','/',$route));
+        $useRef = [
+            'reflection' => true,
+            'url' => $this->route.$route,
+        ];
+        $this->getJson($area, $action,true, $useRef);
     }
 
     /**
@@ -235,7 +271,13 @@ class Operator extends BaseFunc
      */
     public function peer(Peer $peer)
     {
-        $this->deleteJson($peer);
+        $action = '';
+        if (!empty($peer->getAddress()) || !empty($peer->getId())) {
+            $action = $peer->getAddress() ?? $peer->getId();
+            $peer->setAddress('');
+            $peer->setId('');
+        }
+        $this->deleteJson($peer, $action);
     }
 
     /**

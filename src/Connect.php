@@ -68,6 +68,7 @@ class Connect extends BaseFunc
      */
     public function readIntention(Intentions $intentions)
     {
+        $action = '';
         if (!empty($intentions->getuuid())) {
             $action = $intentions->getuuid();
             $intentions->setuuid('');
@@ -94,6 +95,7 @@ class Connect extends BaseFunc
      */
     public function updateIntention(Intentions $intentions)
     {
+        $action = '';
         if (!empty($intentions->getuuid())) {
             $action = $intentions->getuuid();
             $intentions->setuuid('');
@@ -109,6 +111,7 @@ class Connect extends BaseFunc
      */
     public function deleteIntention(Intentions $intentions)
     {
+        $action = '';
         if (!empty($intentions->getuuid())) {
             $action = $intentions->getuuid();
             $intentions->setuuid('');

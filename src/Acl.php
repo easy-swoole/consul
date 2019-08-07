@@ -19,6 +19,7 @@ use EasySwoole\Consul\Request\Acl\Info;
 use EasySwoole\Consul\Request\Acl\Lists;
 use EasySwoole\Consul\Request\Acl\Login;
 use EasySwoole\Consul\Request\Acl\Logout;
+use EasySwoole\Consul\Request\Acl\Policies;
 use EasySwoole\Consul\Request\Acl\Policy;
 use EasySwoole\Consul\Request\Acl\Replication;
 use EasySwoole\Consul\Request\Acl\Role;
@@ -27,6 +28,7 @@ use EasySwoole\Consul\Request\Acl\Token;
 use EasySwoole\Consul\Request\Acl\Token\GetSelf;
 use EasySwoole\Consul\Request\Acl\Token\CloneToken;
 use EasySwoole\Consul\Request\Acl\Tokens;
+use EasySwoole\Consul\Request\Acl\Translate;
 use EasySwoole\Consul\Request\Acl\Update;
 
 class Acl extends BaseFunc
@@ -54,9 +56,22 @@ class Acl extends BaseFunc
     }
 
     /**
-     * Lack
      * Translate Rules
+     * @param Translate $translate
+     * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
+     * @throws \ReflectionException
      */
+    public function translate (Translate $translate)
+    {
+        if (!empty($translate->getAccessorId())) {
+            $action = $translate->getAccessorId();
+            $translate->setAccessorId('');
+            $this->getJson($translate, $action);
+        } else {
+            $this->postJson($translate);
+        }
+    }
+
 
     /**
      * Lack
@@ -83,7 +98,7 @@ class Acl extends BaseFunc
     public function logout(Logout $logout)
     {
         $header = array(
-            'X-Consul-Token' => 'b78d37c7-0ca7-5f4d-99ee-6d9975ce4586',
+            'X-Consul-Token' => $logout->getToken(),
         );
         $this->postJson($logout, '', $header);
     }
@@ -107,6 +122,7 @@ class Acl extends BaseFunc
      */
     public function readToken(Token $token)
     {
+        $action = '';
         if (!empty($token->getAccessorID())) {
             $action = $token->getAccessorID();
             $token->setAccessorID('');
@@ -137,9 +153,9 @@ class Acl extends BaseFunc
             'url' => $this->route.$route,
         ];
         $header = array(
-            'X-Consul-Token' => '6a1253d2-1785-24fd-91c2-f8e78c745511',
+            'X-Consul-Token' => $getSelf->getToken(),
         );
-        $this->postJson($getSelf, '', $header, $useRef);
+        $this->getJson($getSelf, '', true, $useRef, $header);
     }
 
     /**
@@ -150,6 +166,11 @@ class Acl extends BaseFunc
      */
     public function cloneToken(CloneToken $cloneToken)
     {
+        $action = '';
+        if (!empty($cloneToken->getAccessorID())) {
+            $action = $cloneToken->getAccessorID();
+            $cloneToken->setAccessorID('');
+        }
         $beanRoute = new \ReflectionClass($cloneToken);
         if (empty($beanRoute)) {
             throw new \ReflectionException(static::class);
@@ -158,7 +179,8 @@ class Acl extends BaseFunc
         $route = substr($route, strpos($route,'\\') + 1);
         $route = substr($route, strpos($route,'\\') + 1);
         $route = substr($route, 0, strripos($route,'\\') + 1);
-        $route .= 'clone';
+        $route .= '/' . $action;
+        $route .= '/clone';
         $route = strtolower(str_replace('\\','/',$route));
         $useRef = [
             'reflection' => true,
@@ -179,6 +201,7 @@ class Acl extends BaseFunc
      */
     public function delete(Token $token)
     {
+        $action = '';
         if (!empty($token->getAccessorID())) {
             $action = $token->getAccessorID();
             $token->setAccessorID('');
@@ -227,6 +250,7 @@ class Acl extends BaseFunc
      */
     public function destroy(Destroy $destroy)
     {
+        $action = '';
         if (!empty($destroy->getUuid())) {
             $action = $destroy->getUuid();
             $destroy->setUuid('');
@@ -242,11 +266,12 @@ class Acl extends BaseFunc
      */
     public function info(Info $info)
     {
+        $action = '';
         if (!empty($info->getUuid())) {
             $action = $info->getUuid();
             $info->setUuid('');
         }
-        $this->putJSON($info, $action);
+        $this->getJson($info, $action);
     }
 
     /**
@@ -267,14 +292,15 @@ class Acl extends BaseFunc
         $route = substr($route, 0, strripos($route,'\\') + 1);
         $route .= 'clone';
         $route = strtolower(str_replace('\\','/',$route));
-        $useRef = [
-            'reflection' => true,
-            'url' => $this->route.$route,
-        ];
+        $this->route .= $route;
         if (!empty($cloneACLToken->getUuid())) {
             $this->route .= '/' . $cloneACLToken->getUuid();
             $cloneACLToken->setUuid('');
         }
+        $useRef = [
+            'reflection' => true,
+            'url' => $this->route,
+        ];
         $this->putJSON($cloneACLToken, '',true,$useRef);
     }
 
@@ -310,13 +336,7 @@ class Acl extends BaseFunc
      */
     public function policy(Policy $policy)
     {
-        if (!empty($policy->getId())) {
-            $action = $policy->getId();
-            $policy->setId('');
-            $this->putJSON($policy, $action);
-        } else {
-            $this->putJSON($policy);
-        }
+        $this->putJSON($policy);
     }
 
     /**
@@ -327,6 +347,7 @@ class Acl extends BaseFunc
      */
     public function updatePolicy(Policy $policy)
     {
+        $action = '';
         if (!empty($policy->getId())) {
             $action = $policy->getId();
             $policy->setId('');
@@ -342,6 +363,7 @@ class Acl extends BaseFunc
      */
     public function readPolicy(Policy $policy)
     {
+        $action = '';
         if (!empty($policy->getId())) {
             $action = $policy->getId();
             $policy->setId('');
@@ -357,11 +379,23 @@ class Acl extends BaseFunc
      */
     public function deletePolicy(Policy $policy)
     {
+        $action = '';
         if (!empty($policy->getId())) {
             $action = $policy->getId();
             $policy->setId('');
         }
         $this->deleteJson($policy, $action);
+    }
+
+    /**
+     * List Policies
+     * @param Policy $policy
+     * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
+     * @throws \ReflectionException
+     */
+    public function policies (Policies $policies)
+    {
+        $this->getJson($policies);
     }
 
     /**
@@ -383,6 +417,7 @@ class Acl extends BaseFunc
      */
     public function readRole(Role $role)
     {
+        $action = '';
         if (!empty($role->getId())) {
             $action = $role->getId();
             $role->setId('');
@@ -398,6 +433,7 @@ class Acl extends BaseFunc
      */
     public function updateRole(Role $role)
     {
+        $action = '';
         if (!empty($role->getId())) {
             $action = $role->getId();
             $role->setId('');
@@ -413,6 +449,7 @@ class Acl extends BaseFunc
      */
     public function deleteRole(Role $role)
     {
+        $action = '';
         if (!empty($role->getId())) {
             $action = $role->getId();
             $role->setId('');
@@ -428,6 +465,7 @@ class Acl extends BaseFunc
      */
     public function name(Role\Name $name)
     {
+        $action = '';
         if (!empty($name->getname())) {
             $action = $name->getname();
             $name->setname('');
@@ -489,14 +527,14 @@ class Acl extends BaseFunc
         $route = substr($route, 0, strripos($route,'\\') + 1);
         $route .= 'auth-method';
         $route = strtolower(str_replace('\\','/',$route));
-        $useRef = [
-            'reflection' => true,
-            'url' => $this->route.$route,
-        ];
-        if (!empty($authMethod->g())) {
-            $this->route .= '/' . $authMethod->getName();
+        if (!empty($authMethod->getName())) {
+            $route .= '/' . $authMethod->getName();
             $authMethod->setName('');
         }
+        $useRef = [
+            'reflection' => true,
+            'url' => $this->route . $route,
+        ];
         $this->getJson($authMethod, '',true,$useRef);
     }
 
@@ -518,14 +556,14 @@ class Acl extends BaseFunc
         $route = substr($route, 0, strripos($route,'\\') + 1);
         $route .= 'auth-method';
         $route = strtolower(str_replace('\\','/',$route));
+        if (!empty($authMethod->getName())) {
+            $route .= '/' . $authMethod->getName();
+            $authMethod->setName('');
+        }
         $useRef = [
             'reflection' => true,
             'url' => $this->route.$route,
         ];
-        if (!empty($authMethod->g())) {
-            $this->route .= '/' . $authMethod->getName();
-            $authMethod->setName('');
-        }
         $this->putJSON($authMethod, '',true,$useRef);
     }
 
@@ -547,15 +585,15 @@ class Acl extends BaseFunc
         $route = substr($route, 0, strripos($route,'\\') + 1);
         $route .= 'auth-method';
         $route = strtolower(str_replace('\\','/',$route));
+        if (!empty($authMethod->getName())) {
+            $route .= '/' . $authMethod->getName();
+            $authMethod->setName('');
+        }
         $useRef = [
             'reflection' => true,
             'url' => $this->route.$route,
         ];
-        if (!empty($authMethod->g())) {
-            $this->route .= '/' . $authMethod->getName();
-            $authMethod->setName('');
-        }
-        $this->deleteJson($authMethod, '',true,$useRef);
+        $this->deleteJson($authMethod, '',[],true, $useRef);
     }
 
     /**
@@ -574,7 +612,7 @@ class Acl extends BaseFunc
         $route = substr($route, strpos($route,'\\') + 1);
         $route = substr($route, strpos($route,'\\') + 1);
         $route = substr($route, 0, strripos($route,'\\') + 1);
-        $route .= 'auth-method';
+        $route .= 'auth-methods';
         $route = strtolower(str_replace('\\','/',$route));
         $useRef = [
             'reflection' => true,
@@ -626,14 +664,14 @@ class Acl extends BaseFunc
         $route = substr($route, 0, strripos($route,'\\') + 1);
         $route .= 'binding-rule';
         $route = strtolower(str_replace('\\','/',$route));
+        if (!empty($bindingRule->getid())) {
+            $route .= '/' . $bindingRule->getid();
+            $bindingRule->setid('');
+        }
         $useRef = [
             'reflection' => true,
             'url' => $this->route.$route,
         ];
-        if (!empty($bindingRule->getid())) {
-            $this->route .= '/' . $bindingRule->getid();
-            $bindingRule->setid('');
-        }
         $this->getJson($bindingRule, '',true,$useRef);
     }
 
@@ -655,14 +693,14 @@ class Acl extends BaseFunc
         $route = substr($route, 0, strripos($route,'\\') + 1);
         $route .= 'binding-rule';
         $route = strtolower(str_replace('\\','/',$route));
+        if (!empty($bindingRule->getid())) {
+            $route .= '/' . $bindingRule->getid();
+            $bindingRule->setid('');
+        }
         $useRef = [
             'reflection' => true,
             'url' => $this->route.$route,
         ];
-        if (!empty($bindingRule->getid())) {
-            $this->route .= '/' . $bindingRule->getid();
-            $bindingRule->setid('');
-        }
         $this->putJSON($bindingRule, '',true,$useRef);
     }
 
@@ -684,14 +722,14 @@ class Acl extends BaseFunc
         $route = substr($route, 0, strripos($route,'\\') + 1);
         $route .= 'binding-rule';
         $route = strtolower(str_replace('\\','/',$route));
+        if (!empty($bindingRule->getid())) {
+            $route .= '/' . $bindingRule->getid();
+            $bindingRule->setid('');
+        }
         $useRef = [
             'reflection' => true,
             'url' => $this->route.$route,
         ];
-        if (!empty($bindingRule->getid())) {
-            $this->route .= '/' . $bindingRule->getid();
-            $bindingRule->setid('');
-        }
         $this->deleteJson($bindingRule, '', [],true,$useRef);
     }
 
@@ -711,7 +749,7 @@ class Acl extends BaseFunc
         $route = substr($route, strpos($route,'\\') + 1);
         $route = substr($route, strpos($route,'\\') + 1);
         $route = substr($route, 0, strripos($route,'\\') + 1);
-        $route .= 'binding-rule';
+        $route .= 'binding-rules';
         $route = strtolower(str_replace('\\','/',$route));
         $useRef = [
             'reflection' => true,

@@ -29,41 +29,22 @@ class Update extends SplBean
     /**
      * @var string
      */
-    protected $dc;
-    /**
-     * @var string
-     */
-    protected $segment;
+    protected $Segment;
     /**
      * @var array
      */
-    protected $node;
+    protected $Node;
     /**
      * @var array
      */
     protected $Coord;
-    /**
-     * @return null|strings
-     */
-    public function getDc(): ?string
-    {
-        return $this->dc;
-    }
-
-    /**
-     * @param string $dc
-     */
-    public function setDc(string $dc): void
-    {
-        $this->dc = $dc;
-    }
 
     /**
      * @return null|string
      */
     public function getSegment(): ?string
     {
-        return $this->segment;
+        return $this->Segment;
     }
 
     /**
@@ -71,7 +52,7 @@ class Update extends SplBean
      */
     public function setSegment(string $segment): void
     {
-        $this->segment = $segment;
+        $this->Segment = $segment;
     }
 
     /**
@@ -79,7 +60,7 @@ class Update extends SplBean
      */
     public function getNode(): ?string
     {
-        return $this->node;
+        return $this->Node;
     }
 
     /**
@@ -87,7 +68,7 @@ class Update extends SplBean
      */
     public function setNode(string $node): void
     {
-        $this->node = $node;
+        $this->Node = $node;
     }
 
     /**

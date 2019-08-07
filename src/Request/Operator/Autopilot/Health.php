@@ -28,7 +28,7 @@ class Health extends SplBean
      * @param string $dc
      * @return null|void
      */
-    public function setDc(string $dc): ?void
+    public function setDc(string $dc): ?string
     {
         $this->dc = $dc;
     }

@@ -7,9 +7,9 @@
  */
 namespace EasySwoole\Consul\Request\Status;
 
-use EasySwoole\Consul\Status;
+use EasySwoole\Spl\SplBean;
 
-class Peers extends Status
+class Peers extends SplBean
 {
     /**
      * @var string

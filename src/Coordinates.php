@@ -44,6 +44,7 @@ class Coordinates extends BaseFunc
      */
     public function node(Node $node)
     {
+        $action = '';
         if (!empty($node->getNode())) {
             $action = $node->getNode();
             $node->setNode('');

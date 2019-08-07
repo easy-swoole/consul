@@ -11,5 +11,21 @@ use EasySwoole\Spl\SplBean;
 
 class Logout extends SplBean
 {
+    protected $token;
 
+    /**
+     * @return mixed
+     */
+    public function getToken ()
+    {
+        return $this->token;
+    }
+
+    /**
+     * @param mixed $token
+     */
+    public function setToken ($token)
+    {
+        $this->token = $token;
+    }
 }

@@ -102,7 +102,7 @@ class  Policy extends SplBean
      * @param string $Rules
      * @return null|void
      */
-    public function setRules(string $Rules): ?void
+    public function setRules(string $Rules): void
     {
         $this->Rules = $Rules;
     }

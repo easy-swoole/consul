@@ -35,6 +35,7 @@ class Session extends BaseFunc
      */
     public function destroy(Destroy $destroy)
     {
+        $action = '';
         if (!empty($destroy->getUuid())) {
             $action = $destroy->getUuid();
             $destroy->setUuid('');
@@ -50,6 +51,7 @@ class Session extends BaseFunc
      */
     public function info(Info $info)
     {
+        $action = '';
         if (!empty($info->getUuid())) {
             $action = $info->getUuid();
             $info->setUuid('');
@@ -65,6 +67,7 @@ class Session extends BaseFunc
      */
     public function node(Node $node)
     {
+        $action = '';
         if (!empty($node->getNode())) {
             $action = $node->getNode();
             $node->setNode('');
@@ -105,6 +108,7 @@ class Session extends BaseFunc
      */
     public function renew(Renew $renew)
     {
+        $action = '';
         if (!empty($renew->getUuid())) {
             $action = $renew->getUuid();
             $renew->setUuid('');

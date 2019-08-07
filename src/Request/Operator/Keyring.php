@@ -56,6 +56,6 @@ class Keyring extends SplBean
      */
     public function setKeyMapping(): array
     {
-        return ['relayFactor' => 'relay-factor'];
+        return ['relay-factor' => 'relayFactor'];
     }
 }

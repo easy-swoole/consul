@@ -20,12 +20,10 @@ class Health extends BaseFunc
      */
     public function node(Node $node)
     {
+        $action = '';
         if (!empty($node->getNode())) {
             $action = $node->getNode();
             $node->setNode('');
-        } else {
-            echo "Lack of parameters: node";
-            return false;
         }
         $this->getJson($node, $action);
     }
@@ -39,12 +37,10 @@ class Health extends BaseFunc
      */
     public function checks(Checks $checks)
     {
+        $action = '';
         if (!empty($checks->getService())) {
             $action = $checks->getService();
             $checks->setService('');
-        } else {
-            echo "Lack of parameters: service";
-            return false;
         }
         $this->getJson($checks, $action);
     }
@@ -58,12 +54,10 @@ class Health extends BaseFunc
      */
     public function service(Service $service)
     {
+        $action = '';
         if (!empty($service->getService())) {
             $action = $service->getService();
             $service->setService('');
-        } else {
-            echo "Lack of parameters: service";
-            return false;
         }
         $this->getJson($service, $action);
     }
@@ -78,12 +72,10 @@ class Health extends BaseFunc
      */
     public function connect(Connect $connect)
     {
+        $action = '';
         if (!empty($connect->getService())) {
             $action = $connect->getService();
             $connect->setService('');
-        } else {
-            echo "Lack of parameters: service";
-            return false;
         }
         $this->getJson($connect, $action);
     }
@@ -97,12 +89,10 @@ class Health extends BaseFunc
      */
     public function state(State $state)
     {
+        $action = '';
         if (!empty($state->getState())) {
             $action = $state->getState();
             $state->setState('any'); // Default 'any', if not state.
-        } else {
-            echo "Lack of parameters: state";
-            return false;
         }
         $this->getJson($state, $action);
     }
