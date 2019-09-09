@@ -1,10 +1,15 @@
 # consul
 
 #### 构造请求参数
-各参数的除固定用法，例如TTL，HTTP等以外，
-其他参数首字母都是小写（通过对象set/get的方式不需要遵循该原则）。
+* 各参数的除固定用法，例如TTL，HTTP等以外，
+* 其他参数首字母都是小写（通过对象set/get的方式不需要遵循该原则）。
 
-#### 初始化consul
+## Test
+ ./vendor/bin/co-phpunit tests/xx.php
+ 
+## 使用方式
+* 使用下面的接口方式，都需要先给Consul注入Config配置。
+* 接口只展示用法，具体的命名空间需要开发者自己引入
 ```php
 // config默认  127.0.0.1:8500/v1
 $config = new Config([
@@ -23,7 +28,6 @@ $config->setVersion('v1');
 $consul = new Consul($config);
 ```
 
-## 使用方式
 ## ACLs
 ```php
 // Bootstrap ACLs
@@ -1150,6 +1154,3 @@ $node = new Node([
 $consul->catalog()->node($node);
 
 ```
-
-## Test
- ./vendor/bin/co-phpunit tests
