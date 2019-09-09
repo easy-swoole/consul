@@ -1,10 +1,12 @@
 <?php
 namespace EasySwoole\Consul\Request\Agent\Check;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Register extends SplBean
+class Register extends BaseCommand
 {
+    protected $url = 'agent/check/register';
+
     /**
      * Sample
      * {
@@ -28,7 +30,7 @@ class Register extends SplBean
     /**
      * @var string
      */
-    protected $Name;
+    protected $name;
     /**
      * @var string
      */
@@ -36,31 +38,31 @@ class Register extends SplBean
     /**
      * @var string
      */
-    protected $Interval;
+    protected $interval;
     /**
      * @var string
      */
-    protected $Notes;
+    protected $notes;
     /**
      * @var string
      */
-    protected $DeregisterCriticalServiceAfter;
+    protected $deregisterCriticalServiceAfter;
     /**
      * @var array<string>
      */
-    protected $Args;
+    protected $args;
     /**
      * @var string
      */
-    protected $AliasNode;
+    protected $aliasNode;
     /**
      * @var string
      */
-    protected $AliasService;
+    protected $aliasService;
     /**
      * @var string
      */
-    protected $DockerContainerID;
+    protected $dockerContainerID;
     /**
      * @var string
      */
@@ -76,19 +78,19 @@ class Register extends SplBean
     /**
      * @var string
      */
-    protected $Method;
+    protected $method;
     /**
      * @var map[string][]string: {}
      */
-    protected $Header;
+    protected $header;
     /**
      * @var string duration such as 10s,5m
      */
-    protected $Timeout;
+    protected $timeout;
     /**
      * @var int positive int: 4096
      */
-    protected $OutputMaxSize;
+    protected $outputMaxSize;
     /**
      * @var bool
      */
@@ -104,32 +106,32 @@ class Register extends SplBean
     /**
      * @var string
      */
-    protected $ServiceID;
+    protected $serviceID;
     /**
      * @var string
      */
-    protected $Status;
+    protected $status;
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getName(): ?string
+    public function getName ()
     {
-        return $this->Name;
+        return $this->name;
     }
 
     /**
-     * @param string $Name
+     * @param string $name
      */
-    public function setName(string $Name): void
+    public function setName ($name)
     {
-        $this->Name = $Name;
+        $this->name = $name;
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getID(): ?string
+    public function getID ()
     {
         return $this->ID;
     }
@@ -137,125 +139,127 @@ class Register extends SplBean
     /**
      * @param string $ID
      */
-    public function setId(string $ID): void
+    public function setID ($ID)
     {
         $this->ID = $ID;
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getInterval(): ?string
+    public function getInterval ()
     {
-        return $this->Interval;
+        return $this->interval;
     }
 
     /**
-     * @param string $Interval
+     * @param string $interval
      */
-    public function setInterval(string $Interval): void
+    public function setInterval ($interval)
     {
-        $this->Interval = $Interval;
+        $this->interval = $interval;
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getNotes(): ?string
+    public function getNotes ()
     {
-        return $this->Notes;
+        return $this->notes;
     }
 
     /**
-     * @param string $Notes
+     * @param string $notes
      */
-    public function setNotes(string $Notes): void
+    public function setNotes ($notes)
     {
-        $this->Notes = $Notes;
+        $this->notes = $notes;
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getDeregisterCriticalServiceAfter(): ?string
+    public function getDeregisterCriticalServiceAfter ()
     {
-        return $this->DeregisterCriticalServiceAfter;
+        return $this->deregisterCriticalServiceAfter;
     }
 
     /**
-     * @param string $DeregisterCriticalServiceAfter
+     * @param string $deregisterCriticalServiceAfter
      */
-    public function setDeregisterCriticalServiceAfter(string $DeregisterCriticalServiceAfter): void
+    public function setDeregisterCriticalServiceAfter ($deregisterCriticalServiceAfter)
     {
-        $this->DeregisterCriticalServiceAfter = $DeregisterCriticalServiceAfter;
+        $this->deregisterCriticalServiceAfter = $deregisterCriticalServiceAfter;
     }
 
     /**
-     * @return array|null
+     * @return array
      */
-    public function getArgs(): ?array {
-        return $this->Args;
-    }
-
-    /**
-     * @param string $Args
-     */
-    public function setArgs(string $Args): void
+    public function getArgs ()
     {
-        $this->Args = $Args;
+        return $this->args;
     }
 
     /**
-     * @return string|null
+     * @param array $args
      */
-    public function getAliasNode(): ?string
+    public function setArgs ($args)
     {
-        return $this->AliasNode;
+        $this->args = $args;
     }
 
     /**
-     * @param string $AliasNode
+     * @return string
      */
-    public function setAliasNode(string $AliasNode): void
+    public function getAliasNode ()
     {
-        $this->AliasNode = $AliasNode;
+        return $this->aliasNode;
     }
 
     /**
-     * @return string|null
+     * @param string $aliasNode
      */
-    public function getAliasService(): ?string
+    public function setAliasNode ($aliasNode)
     {
-        return $this->AliasService;
+        $this->aliasNode = $aliasNode;
     }
 
     /**
-     * @param string $AliasService
+     * @return string
      */
-    public function setAliasService(string $AliasService): void {
-        $this->AliasService = $AliasService;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getDockerContainerID(): ?string
+    public function getAliasService ()
     {
-        return $this->DockerContainerID;
+        return $this->aliasService;
     }
 
     /**
-     * @param string $DockerContainerID
+     * @param string $aliasService
      */
-    public function setDockerContainerID(string $DockerContainerID): void
+    public function setAliasService ($aliasService)
     {
-        $this->DockerContainerID = $DockerContainerID;
+        $this->aliasService = $aliasService;
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getGRPC(): ?string
+    public function getDockerContainerID ()
+    {
+        return $this->dockerContainerID;
+    }
+
+    /**
+     * @param string $dockerContainerID
+     */
+    public function setDockerContainerID ($dockerContainerID)
+    {
+        $this->dockerContainerID = $dockerContainerID;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGRPC ()
     {
         return $this->GRPC;
     }
@@ -263,111 +267,111 @@ class Register extends SplBean
     /**
      * @param string $GRPC
      */
-    public function setGRPC(string $GRPC): void
+    public function setGRPC ($GRPC)
     {
         $this->GRPC = $GRPC;
     }
 
     /**
-     * @return bool|null
+     * @return bool
      */
-    public function getGRPCUseTLS(): ?bool
+    public function isGRPCUseTLS ()
     {
         return $this->GRPCUseTLS;
     }
 
     /**
-     * @param string $GRPCUseTLS
+     * @param bool $GRPCUseTLS
      */
-    public function setGRPCUseTLS(string $GRPCUseTLS): void
+    public function setGRPCUseTLS ($GRPCUseTLS)
     {
         $this->GRPCUseTLS = $GRPCUseTLS;
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getHTTP(): ?string
+    public function getHTTP ()
     {
-        $this->HTTP;
+        return $this->HTTP;
     }
 
     /**
      * @param string $HTTP
      */
-    public function setHTTP(string $HTTP): void
+    public function setHTTP ($HTTP)
     {
         $this->HTTP = $HTTP;
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getMethod(): ?string
+    public function getMethod ()
     {
-        return $this->Method;
+        return $this->method;
     }
 
     /**
-     * @param string $Method
+     * @param string $method
      */
-    public function setMethod(string $Method): void
+    public function setMethod ($method)
     {
-        $this->Method = $Method;
+        $this->method = $method;
     }
 
     /**
-     * @return string|null
+     * @return map
      */
-    public function getHeader(): ?string
+    public function getHeader ()
     {
-        return $this->Header;
+        return $this->header;
     }
 
     /**
-     * @param string $Header
+     * @param map $header
      */
-    public function setHeader(string $Header): void
+    public function setHeader ($header)
     {
-        $this->Header = $Header;
+        $this->header = json_encode($header);
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getTimeout(): ?string
+    public function getTimeout ()
     {
-        return $this->Timeout;
+        return $this->timeout;
     }
 
     /**
-     * @param string $Timeout
+     * @param string $timeout
      */
-    public function setTimeout(string $Timeout): void
+    public function setTimeout ($timeout)
     {
-        $this->Timeout = $Timeout;
+        $this->timeout = $timeout;
     }
 
     /**
-     * @return string|null
+     * @return int
      */
-    public function getOutputMaxSize(): ?string
+    public function getOutputMaxSize ()
     {
-        return $this->OutputMaxSize;
+        return $this->outputMaxSize;
     }
 
     /**
-     * @param string $OutputMaxSize
+     * @param int $outputMaxSize
      */
-    public function setOutputMaxSize(string  $OutputMaxSize): void
+    public function setOutputMaxSize ($outputMaxSize)
     {
-        $this->OutputMaxSize = $OutputMaxSize;
+        $this->outputMaxSize = $outputMaxSize;
     }
 
     /**
-     * @return bool|null
+     * @return bool
      */
-    public function getTLSSkipVerify(): ?bool
+    public function isTLSSkipVerify ()
     {
         return $this->TLSSkipVerify;
     }
@@ -375,15 +379,15 @@ class Register extends SplBean
     /**
      * @param bool $TLSSkipVerify
      */
-    public function setTLSSkipVerify(bool $TLSSkipVerify): void
+    public function setTLSSkipVerify ($TLSSkipVerify)
     {
         $this->TLSSkipVerify = $TLSSkipVerify;
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getTCP(): ?string
+    public function getTCP ()
     {
         return $this->TCP;
     }
@@ -391,15 +395,15 @@ class Register extends SplBean
     /**
      * @param string $TCP
      */
-    public function setTCP(string $TCP): void
+    public function setTCP ($TCP)
     {
         $this->TCP = $TCP;
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getTTL(): ?string
+    public function getTTL ()
     {
         return $this->TTL;
     }
@@ -407,40 +411,61 @@ class Register extends SplBean
     /**
      * @param string $TTL
      */
-    public function setTTL(string $TTL): void
+    public function setTTL ($TTL)
     {
         $this->TTL = $TTL;
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getServiceID(): ?string
+    public function getServiceID ()
     {
-        return $this->ServiceID;
+        return $this->serviceID;
     }
 
     /**
-     * @param string $ServiceID
+     * @param string $serviceID
      */
-    public function setServiceID(string $ServiceID): void
+    public function setServiceID ($serviceID)
     {
-        $this->ServiceID = $ServiceID;
+        $this->serviceID = $serviceID;
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getStatus(): ?string
+    public function getStatus ()
     {
-        return $this->Status;
+        return $this->status;
     }
 
     /**
-     * @param string $Status
+     * @param string $status
      */
-    public function setStatus(string $Status): void
+    public function setStatus ($status)
     {
-        $this->Status = $Status;
+        $this->status = $status;
+    }
+
+    protected function setKeyMapping (): array
+    {
+        return [
+            'Name'          => 'name',
+            'ID'            => 'id',
+            'Interval'      => 'interval',
+            'Notes'         => 'notes',
+            'DeregisterCriticalServiceAfter'    => 'deregisterCriticalServiceAfter',
+            'Args'          => 'args',
+            'AliasNode'     => 'aliasNode',
+            'AliasService'  => 'aliasService',
+            'DockerContainerID'                 => 'dockerContainerID',
+            'Method'        => 'method',
+            'Header'        => 'header',
+            'Timeout'       => 'timeout',
+            'OutputMaxSize' => 'outputMaxSize',
+            'ServiceID'     => 'serviceID',
+            'Status'        => 'status',
+        ];
     }
 }

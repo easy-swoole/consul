@@ -1,10 +1,12 @@
 <?php
 namespace EasySwoole\Consul\Request\Agent;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Checks extends SplBean
+class Checks extends BaseCommand
 {
+    protected $url = 'agent/checks';
+
     /**
      * @var string
      */

@@ -27,7 +27,8 @@ class KvStoreTest extends TestCase
     function testKv()
     {
         $kv = new Kv([
-            'key' => 'my-key'
+            'key' => 'my-key',
+            'dc' => 'dc1',
         ]);
         $this->consul->kvStore()->kv($kv);
         $this->assertEquals('x','x');
@@ -36,7 +37,8 @@ class KvStoreTest extends TestCase
     function testCreate()
     {
         $create = new kv([
-            'key' => 'my-key'
+            'key' => 'my-key',
+            'dc' => 'dc1',
         ]);
         $this->consul->kvStore()->create($create);
         $this->assertEquals('x','x');
@@ -45,7 +47,8 @@ class KvStoreTest extends TestCase
     function testUpdate()
     {
         $update = new kv([
-            'key' => 'my-key'
+            'key' => 'my-key',
+            'dc' => 'dc1',
         ]);
         $this->consul->kvStore()->update($update);
         $this->assertEquals('x','x');
@@ -54,7 +57,8 @@ class KvStoreTest extends TestCase
     function testDelete()
     {
         $delete = new Kv([
-            'key' => 'my-key'
+            'key' => 'my-key',
+            'recurse' => false,
         ]);
         $this->consul->kvStore()->delete($delete);
         $this->assertEquals('x','x');

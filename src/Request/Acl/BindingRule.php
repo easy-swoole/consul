@@ -7,7 +7,7 @@
  */
 namespace EasySwoole\Consul\Request\Acl;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
 /**
  * Sample
@@ -21,8 +21,10 @@ use EasySwoole\Spl\SplBean;
  * Class BindingRule
  * @package EasySwoole\Consul\Request\Acl
  */
-class BindingRule extends SplBean
+class BindingRule extends BaseCommand
 {
+    protected $url = 'acl/binding-rule/%s';
+
     /**
      * @var string
      */
@@ -30,28 +32,28 @@ class BindingRule extends SplBean
     /**
      * @var string
      */
-    protected $Description;
+    protected $description;
     /**
      * @var string
      */
-    protected $AuthMethod;
+    protected $authMethod;
     /**
      * @var string
      */
-    protected $Selector;
+    protected $selector;
     /**
      * @var string
      */
-    protected $BindType;
+    protected $bindType;
     /**
      * @var string
      */
-    protected $BindName;
+    protected $bindName;
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getid(): ?string 
+    public function getId ()
     {
         return $this->id;
     }
@@ -59,88 +61,100 @@ class BindingRule extends SplBean
     /**
      * @param string $id
      */
-    public function setid(string $id): void 
+    public function setId ($id)
     {
         $this->id = $id;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getDescription(): ?string 
+    public function getDescription ()
     {
-        return $this->Description;
+        return $this->description;
     }
 
     /**
-     * @param string $Description
+     * @param string $description
      */
-    public function setDescription(string $Description): void 
+    public function setDescription ($description)
     {
-        $this->Description = $Description;
+        $this->description = $description;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getAuthMethod(): ?string 
+    public function getAuthMethod ()
     {
-        return $this->AuthMethod;
+        return $this->authMethod;
     }
 
     /**
-     * @param string $AuthMethod
+     * @param string $authMethod
      */
-    public function setAuthMethod(string $AuthMethod): void 
+    public function setAuthMethod ($authMethod)
     {
-        $this->AuthMethod = $AuthMethod;
+        $this->authMethod = $authMethod;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getSelector(): ?string
+    public function getSelector ()
     {
-        return $this->Selector;
+        return $this->selector;
     }
 
     /**
-     * @param string $Selector
+     * @param string $selector
      */
-    public function setSelector(string $Selector): void
+    public function setSelector ($selector)
     {
-        $this->Selector = $Selector;
+        $this->selector = $selector;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getBindType(): ?string
+    public function getBindType ()
     {
-        return $this->BindType;
+        return $this->bindType;
     }
 
     /**
-     * @param string $BindType
+     * @param string $bindType
      */
-    public function setBindType(string $BindType): void
+    public function setBindType ($bindType)
     {
-        $this->BindType = $BindType;
+        $this->bindType = $bindType;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getBindName(): ?string
+    public function getBindName ()
     {
-        return $this->BindName;
+        return $this->bindName;
     }
 
     /**
-     * @param string $BindName
+     * @param string $bindName
      */
-    public function setBindName(string $BindName): void
+    public function setBindName ($bindName)
     {
-        $this->BindName = $BindName;
+        $this->bindName = $bindName;
+    }
+
+    protected function setKeyMapping (): array
+    {
+        return [
+            'ID' => 'id',
+            'Description' => 'description',
+            'AuthMethod' => 'authMethod',
+            'Selector' => 'selector',
+            'BindType' => 'bindType',
+            'BindName' => 'bindName',
+        ];
     }
 }

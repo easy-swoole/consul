@@ -7,10 +7,12 @@
  */
 namespace EasySwoole\Consul\Request\Agent\Check;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Deregister extends SplBean
+class DeRegister extends BaseCommand
 {
+    protected $url = 'agent/check/deregister/%s';
+
     /**
      * @var string
      */

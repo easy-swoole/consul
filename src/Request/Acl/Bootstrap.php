@@ -7,9 +7,9 @@
  */
 namespace EasySwoole\Consul\Request\Acl;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Bootstrap extends SplBean
+class Bootstrap extends BaseCommand
 {
-
+    protected $url = 'acl/bootstrap';
 }

@@ -33,8 +33,10 @@ use EasySwoole\Spl\SplBean;
  * Class Query
  * @package EasySwoole\Consul\Request
  */
-class Query extends SplBean
+class Query extends BaseCommand
 {
+    protected $url = 'query/%s';
+
     /**
      * @var string
      */
@@ -42,19 +44,19 @@ class Query extends SplBean
     /**
      * @var string
      */
-    protected $Name;
+    protected $name;
     /**
      * @var string
      */
-    protected $Session;
+    protected $session;
     /**
      * @var string
      */
-    protected $Token;
+    protected $token;
     /**
      * @var array
      */
-    protected $Service;
+    protected $service;
     /**
      * @var string
      */
@@ -65,9 +67,9 @@ class Query extends SplBean
     protected $uuid;
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getDc(): ?string
+    public function getDc ()
     {
         return $this->dc;
     }
@@ -75,63 +77,79 @@ class Query extends SplBean
     /**
      * @param string $dc
      */
-    public function setDc(string $dc): void
+    public function setDc ($dc)
     {
         $this->dc = $dc;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getName(): ?string
+    public function getName ()
     {
-        return $this->Name;
+        return $this->name;
     }
 
     /**
      * @param string $name
      */
-    public function setName(string $name): void
+    public function setName ($name)
     {
-        $this->Name = $name;
+        $this->name = $name;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getSession(): ?string
+    public function getSession ()
     {
-        return $this->Session;
+        return $this->session;
     }
 
     /**
      * @param string $session
      */
-    public function setSession(string $session): void
+    public function setSession ($session)
     {
-        $this->Session = $session;
+        $this->session = $session;
     }
 
     /**
-     * @return array|null
+     * @return string
      */
-    public function getService(): ?array
+    public function getToken ()
     {
-        return $this->Service;
+        return $this->token;
+    }
+
+    /**
+     * @param string $token
+     */
+    public function setToken ($token)
+    {
+        $this->token = $token;
+    }
+
+    /**
+     * @return array
+     */
+    public function getService ()
+    {
+        return $this->service;
     }
 
     /**
      * @param array $service
      */
-    public function setService(array $service): void
+    public function setService ($service)
     {
-        $this->Service = $service;
+        $this->service = json_encode($service);
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getDNS(): ?string
+    public function getDNS ()
     {
         return $this->DNS;
     }
@@ -139,15 +157,15 @@ class Query extends SplBean
     /**
      * @param string $DNS
      */
-    public function setDNS(string $DNS): void
+    public function setDNS ($DNS)
     {
-        $this->DNS = $DNS;
+        $this->DNS = json_encode($DNS);
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getUuid(): ?string
+    public function getUuid ()
     {
         return $this->uuid;
     }
@@ -155,8 +173,20 @@ class Query extends SplBean
     /**
      * @param string $uuid
      */
-    public function setUuid(string $uuid): void
+    public function setUuid ($uuid)
     {
         $this->uuid = $uuid;
+    }
+
+
+
+    protected function setKeyMapping (): array
+    {
+        return [
+            'Name' => 'name',
+            'Session' => 'session',
+            'Token' => 'token',
+            'Service' => 'service',
+        ];
     }
 }

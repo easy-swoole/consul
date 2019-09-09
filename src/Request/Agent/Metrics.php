@@ -1,10 +1,12 @@
 <?php
 namespace EasySwoole\Consul\Request\Agent;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Metrics extends SplBean
+class Metrics extends BaseCommand
 {
+    protected $url = 'agent/metrics';
+
     /**
      * only can set prometheus
      * @var string

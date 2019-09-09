@@ -31,33 +31,44 @@ class SessionTest extends TestCase
 
     function testCreate()
     {
-        $create = new Create();
-        $this->consul->session()->create($create);
-        $this->assertEquals('x','x');
-    }
-
-    function testInfo()
-    {
-        $info = new Info([
-            'uuid' => 'f32a15b3-1baa-c047-bde9-bec3015ea013'
+        $create = new Create([
+            'dc' => 'dc1',
+            "LockDelay" => "15s",
+            "Name" => "my-service-lock",
+            "Node" => "foobar",
+            "Checks" => ["a", "b", "c"],
+            "Behavior" => "release",
+            "TTL" => "30s",
         ]);
-        $this->consul->session()->info($info);
+        $this->consul->session()->create($create);
         $this->assertEquals('x','x');
     }
 
     function testDelete()
     {
         $destroy = new Destroy([
-            'uuid' => 'f32a15b3-1baa-c047-bde9-bec3015ea013'
+            'uuid' => 'f32a15b3-1baa-c047-bde9-bec3015ea013',
+            'dc' => 'dc1',
         ]);
         $this->consul->session()->destroy($destroy);
+        $this->assertEquals('x','x');
+    }
+
+    function testInfo()
+    {
+        $info = new Info([
+            'uuid' => 'f32a15b3-1baa-c047-bde9-bec3015ea013',
+            'dc' => 'dc1',
+        ]);
+        $this->consul->session()->info($info);
         $this->assertEquals('x','x');
     }
 
     function testNode()
     {
         $node = new Node([
-            'node' => '2456c2850382'
+            'node' => '2456c2850382',
+            'dc' => 'dc1',
         ]);
         $this->consul->session()->node($node);
         $this->assertEquals('x','x');
@@ -65,7 +76,9 @@ class SessionTest extends TestCase
 
     function testSessionList()
     {
-        $sessionList = new SessionList();
+        $sessionList = new SessionList([
+            'dc' => 'dc1'
+        ]);
         $this->consul->session()->sessionList($sessionList);
         $this->assertEquals('x','x');
     }
@@ -73,7 +86,8 @@ class SessionTest extends TestCase
     function testRenew()
     {
         $renew = new Renew([
-            'uuid' => '4f6d1cf6-b60a-c929-eeb8-12f4d7eaff62'
+            'uuid' => '4f6d1cf6-b60a-c929-eeb8-12f4d7eaff62',
+            'dc' => 'dc1'
         ]);
         $this->consul->session()->renew($renew);
         $this->assertEquals('x','x');

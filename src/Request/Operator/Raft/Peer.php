@@ -7,10 +7,12 @@
  */
 namespace EasySwoole\Consul\Request\Operator\Raft;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Peer extends SplBean
+class Peer extends BaseCommand
 {
+    protected $url = 'operator/raft/peer';
+
     /**
      * @var string
      */

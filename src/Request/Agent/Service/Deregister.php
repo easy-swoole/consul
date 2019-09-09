@@ -1,10 +1,12 @@
 <?php
 namespace EasySwoole\Consul\Request\Agent\Service;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Deregister extends SplBean
+class DeRegister extends BaseCommand
 {
+    protected $url = 'agent/service/deregister/%s';
+
     /**
      * @var string
      */

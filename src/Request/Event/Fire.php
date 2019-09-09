@@ -7,10 +7,12 @@
  */
 namespace EasySwoole\Consul\Request\Event;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Fire extends SplBean
+class Fire extends BaseCommand
 {
+    protected $url = 'event/fire/%s';
+
     /**
      * @var string
      */
@@ -43,7 +45,7 @@ class Fire extends SplBean
      * @param string $name
      * @return null|void
      */
-    public function setName(string $name): ?void
+    public function setName(string $name): void
     {
         $this->name = $name;
     }

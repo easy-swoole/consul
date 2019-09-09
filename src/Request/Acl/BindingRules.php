@@ -7,10 +7,12 @@
  */
 namespace EasySwoole\Consul\Request\Acl;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class BindingRules extends SplBean
+class BindingRules extends BaseCommand
 {
+    protected $url = 'acl/binding-rules';
+
     /**
      * @var string
      */

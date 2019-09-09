@@ -7,10 +7,12 @@
  */
 namespace EasySwoole\Consul\Request\Agent\Check;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Warn extends SplBean
+class Warn extends BaseCommand
 {
+    protected $url = 'agent/check/warn/%s';
+
     /**
      * @var string
      */

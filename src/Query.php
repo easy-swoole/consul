@@ -7,99 +7,100 @@
  */
 namespace EasySwoole\Consul;
 
+use EasySwoole\Consul\Exception\MissingRequiredParamsException;
 use EasySwoole\Consul\Request\Query\Execute;
 use EasySwoole\Consul\Request\Query\Explain;
 
 class Query extends BaseFunc
 {
     /**
-     * @param Query $query
+     * Create Prepared Query
+     * @param Request\Query $query
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function query(\EasySwoole\Consul\Request\Query $query)
     {
+        $query->setUrl(substr($query->getUrl(), 0, strlen($query->getUrl()) -3));
         $this->postJson($query);
     }
 
     /**
      * Read Prepared Query
-     * @param Query $query
+     * @param Request\Query $query
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function readQuery(\EasySwoole\Consul\Request\Query $query)
     {
-        if (!empty($query->getUuid())) {
-            $action = $query->getUuid();
-            $query->setUuid('');
-            $this->getJson($query, $action);
+        if (empty($query->getUuid())) {
+            $query->setUrl(substr($query->getUrl(), 0, strlen($query->getUrl()) - 3));
         } else {
-            $this->getJson($query);
+            $query->setUrl(sprintf($query->getUrl(), $query->getUuid()));
+            $query->setUuid('');
         }
+        $this->getJson($query);
     }
 
     /**
      * Update Prepared Query
      * @param Request\Query $query
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function updateQuery(\EasySwoole\Consul\Request\Query $query)
     {
-        $action = '';
-        if (!empty($query->getUuid())) {
-            $action = $query->getUuid();
-            $query->setUuid('');
+        if (empty($query->getUuid())) {
+            throw new MissingRequiredParamsException('Missing the required param: uuid.');
         }
-        $this->putJSON($query, $action);
+        $query->setUrl(sprintf($query->getUrl(), $query->getUuid()));
+        $query->setUuid('');
+        $this->putJSON($query);
     }
 
     /**
      * Delete Prepared Query
      * @param Request\Query $query
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function deleteQuery(\EasySwoole\Consul\Request\Query $query)
     {
-        $action = '';
-        if (!empty($query->getUuid())) {
-            $action = $query->getUuid();
-            $query->setUuid('');
+        if (empty($query->getUuid())) {
+            throw new MissingRequiredParamsException('Missing the required param: uuid.');
         }
-        $this->deleteJson($query, $action);
+        $query->setUrl(sprintf($query->getUrl(), $query->getUuid()));
+        $query->setUuid('');
+        $this->deleteJson($query);
     }
 
     /**
      * Execute Prepared Query
      * @param Execute $execute
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function execute(Execute $execute)
     {
-        $action = '';
-        if (!empty($execute->getUuid())) {
-            $action = $execute->getUuid();
-            $execute->setUuid('');
+        if (empty($execute->getUuid())) {
+            throw new MissingRequiredParamsException('Missing the required param: uuid.');
         }
-        $this->getJson($execute, $action,false);
+        $execute->setUrl(sprintf($execute->getUrl(), $execute->getUuid()));
+        $execute->setUuid('');
+        $this->getJson($execute);
     }
 
     /**
      * Explain Prepared Query
      * @param Explain $explain
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function explain(Explain $explain)
     {
-        $action = '';
-        if (!empty($execute->getUuid())) {
-            $action = $execute->getUuid();
-            $execute->setUuid('');
+        if (empty($explain->getUuid())) {
+            throw new MissingRequiredParamsException('Missing the required param: uuid.');
         }
-        $this->getJson($execute, $action,[],false);
+        $explain->setUrl(sprintf($explain->getUrl(), $explain->getUuid()));
+        $explain->setUuid('');
+        $this->getJson($explain);
     }
 }

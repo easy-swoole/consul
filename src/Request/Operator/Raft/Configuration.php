@@ -7,10 +7,12 @@
  */
 namespace EasySwoole\Consul\Request\Operator\Raft;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Configuration extends SplBean
+class Configuration extends BaseCommand
 {
+    protected $url = 'operator/raft/configuration';
+
     /**
      * @var string
      */

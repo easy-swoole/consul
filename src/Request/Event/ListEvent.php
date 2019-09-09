@@ -7,10 +7,12 @@
  */
 namespace EasySwoole\Consul\Request\Event;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class ListEvent extends SplBean
+class ListEvent extends BaseCommand
 {
+    protected $url = 'event/list';
+
     /**
      * @var string
      */
@@ -39,7 +41,7 @@ class ListEvent extends SplBean
      * @param string $name
      * @return null|void
      */
-    public function setName(string $name): ?void
+    public function setName(string $name): void
     {
         $this->name = $name;
     }

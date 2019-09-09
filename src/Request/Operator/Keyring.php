@@ -7,10 +7,12 @@
  */
 namespace EasySwoole\Consul\Request\Operator;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Keyring extends SplBean
+class Keyring extends BaseCommand
 {
+    protected $url = 'operator/keyring';
+
     /**
      * @var int
      */
@@ -20,6 +22,11 @@ class Keyring extends SplBean
      * @var string
      */
     protected $Key;
+
+    /**
+     * @var bool
+     */
+    protected $localOnly;
     /**
      * @return int|null
      */
@@ -51,11 +58,31 @@ class Keyring extends SplBean
     {
         $this->Key = $Key;
     }
+
+    /**
+     * @return bool
+     */
+    public function isLocalOnly ()
+    {
+        return $this->localOnly;
+    }
+
+    /**
+     * @param bool $localOnly
+     */
+    public function setLocalOnly ($localOnly)
+    {
+        $this->localOnly = $localOnly;
+    }
+
     /**
      * @return array
      */
     public function setKeyMapping(): array
     {
-        return ['relay-factor' => 'relayFactor'];
+        return [
+            'relay-factor' => 'relayFactor',
+            'local-only' => 'localOnly',
+        ];
     }
 }

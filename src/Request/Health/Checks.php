@@ -1,10 +1,12 @@
 <?php
 namespace EasySwoole\Consul\Request\Health;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Checks extends SplBean
+class Checks extends BaseCommand
 {
+    protected $url = 'health/checks/%s';
+
     /**
      * @var
      */
@@ -112,6 +114,6 @@ class Checks extends SplBean
      */
     public function setKeyMapping(): array
     {
-        return ['node_meta' => 'node-meta'];
+        return ['node-meta' => 'node_meta'];
     }
 }

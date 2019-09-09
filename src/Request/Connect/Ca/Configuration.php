@@ -7,7 +7,7 @@
  */
 namespace EasySwoole\Consul\Request\Connect\Ca;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
 /**
  * Sample
@@ -24,46 +24,55 @@ use EasySwoole\Spl\SplBean;
  * Class Configuration
  * @package EasySwoole\Consul\Request\Connect\Ca
  */
-class Configuration extends SplBean
+class Configuration extends BaseCommand
 {
+    protected $url = 'connect/ca/configuration';
     /**
      * @var string
      */
-    protected $Provider;
+    protected $provider;
     /**
      * @var array
      */
-    protected $Config;
+    protected $config;
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getProvider(): ?string
+    public function getProvider ()
     {
-        return $this->Provider;
+        return $this->provider;
     }
 
     /**
-     * @param string $Provider
+     * @param string $provider
      */
-    public function setProvider(string $Provider): void
+    public function setProvider ($provider)
     {
-        $this->Provider = $Provider;
+        $this->provider = $provider;
     }
 
     /**
-     * @return array|null
+     * @return array
      */
-    public function getConfig(): ?array
+    public function getConfig ()
     {
-        return $this->Config;
+        return $this->config;
     }
 
     /**
-     * @param array $Config
+     * @param array $config
      */
-    public function setConfig(array $Config): void
+    public function setConfig ($config)
     {
-        $this->Config = $Config;
+        $this->config = $config;
+    }
+
+    protected function setKeyMapping (): array
+    {
+        return [
+            'Provider' => 'provider',
+            'Config' => 'config',
+        ];
     }
 }

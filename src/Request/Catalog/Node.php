@@ -1,10 +1,12 @@
 <?php
 namespace EasySwoole\Consul\Request\Catalog;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Node extends SplBean
+class Node extends BaseCommand
 {
+    public $url='catalog/node/%s';
+
     /**
      * @var
      */

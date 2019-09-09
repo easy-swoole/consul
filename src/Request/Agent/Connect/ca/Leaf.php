@@ -1,28 +1,37 @@
 <?php
 namespace EasySwoole\Consul\Request\Agent\Connect\Ca;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Leaf extends SplBean
+class Leaf extends BaseCommand
 {
+    protected $url = 'agent/connect/ca/leaf/%s';
+
     /**
      * @var string
      */
-    protected $Service;
+    protected $service;
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getService(): ?string
+    public function getService ()
     {
-        return $this->Service;
+        return $this->service;
     }
 
     /**
-     * @param string $Service
+     * @param string $service
      */
-    public function setService(string $Service): void
+    public function setService ($service)
     {
-        $this->Service = $Service;
+        $this->service = $service;
+    }
+
+    protected function setKeyMapping (): array
+    {
+        return [
+            'Service' => 'service',
+        ];
     }
 }

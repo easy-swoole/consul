@@ -14,62 +14,62 @@ class Config extends SplBean
     /**
      * @var string
      */
-    protected $Ip = '127.0.0.01';
+    protected $IP = '127.0.0.1';
     /**
      * @var string
      */
-    protected $Port = '8500';
+    protected $port = '8500';
     /**
      * @var string
      */
-    protected $Controller = 'v1';
+    protected $version = 'v1';
 
     /**
-     * @return null|String
+     * @return string
      */
-    public function getIp(): ?String
+    public function getIP ()
     {
-        return $this->Ip;
+        return $this->IP;
     }
 
     /**
-     * @param $ip
+     * @param string $IP
      */
-    public function setIp($ip) :void
+    public function setIP ($IP)
     {
-        $this->Ip = $ip;
+        $this->IP = $IP;
     }
 
     /**
-     * @return null|String
+     * @return string
      */
-    public function getPort(): ?String
+    public function getPort ()
     {
-        return $this->Port;
+        return $this->port;
     }
 
     /**
-     * @param $port
+     * @param string $port
      */
-    public function setPort($port): void
+    public function setPort ($port)
     {
-        $this->Port = $port;
+        $this->port = $port;
     }
 
     /**
-     * @return null|String
+     * @return string
      */
-    public function getController(): ?String
+    public function getVersion ()
     {
-        return $this->Controller;
+        return $this->version;
     }
 
     /**
-     * @param $controller
+     * @param string $version
      */
-    public function setController($controller): void
+    public function setVersion ($version)
     {
-        $this->Controller = $controller;
+        $this->version = $version;
     }
 
     /**
@@ -78,6 +78,7 @@ class Config extends SplBean
      */
     public function __toString()
     {
-        return $this->Ip . ':' . $this->Port . '/' . $this->Controller . '/';
+        return $this->IP . ':' . $this->port . '/' . $this->version . '/';
     }
+
 }

@@ -7,10 +7,13 @@
  */
 namespace EasySwoole\Consul\Request\Acl;
 
+use EasySwoole\Consul\Request\BaseCommand;
 use EasySwoole\Spl\SplBean;
 
-class Destroy extends SplBean
+class Destroy extends BaseCommand
 {
+    protected $url = 'acl/destroy/%s';
+
     /**
      * @var string
      */

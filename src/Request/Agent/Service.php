@@ -7,10 +7,12 @@
  */
 namespace EasySwoole\Consul\Request\Agent;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Service extends SplBean
+class Service extends BaseCommand
 {
+    protected $url = 'agent/service/%s';
+
     /**
      * @var string
      */

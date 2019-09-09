@@ -3,171 +3,205 @@
 namespace EasySwoole\Consul\Request\Catalog;
 
 
-use EasySwoole\Spl\SplBean;
-use EasySwoole\Utility\Random;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Register extends SplBean
+class Register extends BaseCommand
 {
+    public $url='catalog/register';
+
     /**
      * @var string
      */
-    protected $ID;
+    protected $id;
     /**
      * @var string
      */
-    protected $Node;
+    protected $node;
     /**
      * @var string
      */
-    protected $Address;
+    protected $address;
     /**
      * @var string
      */
-    protected $Datacenter;
+    protected $datacenter;
     /**
      * @var array
      */
-    protected $TaggedAddresses;
+    protected $taggedAddresses;
     /**
      * @var array
      */
-    protected $NodeMeta;
+    protected $nodeMeta;
     /**
      * @var array
      */
-    protected $Service;
+    protected $service;
     /**
      * @var array
      */
-    protected $Check;
+    protected $check;
     /**
      * @var boolean
      */
-    protected $SkipNodeUpdate;
+    protected $skipNodeUpdate;
+
     /**
-     * @return null|string
+     * @return string
      */
-    public function getID(): ?string
+    public function getId ()
     {
-        return $this->ID;
+        return $this->id;
     }
+
     /**
-     * @param string $ID
+     * @param string $id
      */
-    public function setID(string $ID): void
+    public function setId ($id)
     {
-        $this->ID = $ID;
+        $this->id = $id;
     }
+
     /**
-     * @return null|String
+     * @return string
      */
-    public function getNode(): ?String
+    public function getNode ()
     {
-        return $this->Node;
+        return $this->node;
     }
+
     /**
-     * @param string $Node
+     * @param string $node
      */
-    public function setNode(string $Node): void
+    public function setNode ($node)
     {
-        $this->Node = $Node;
+        $this->node = $node;
     }
+
     /**
-     * @return null|String
+     * @return string
      */
-    public function getAddress(): ?String
+    public function getAddress ()
     {
-        return $this->Address;
+        return $this->address;
     }
+
     /**
-     * @param string $Address
+     * @param string $address
      */
-    public function setAddress(string $Address): void
+    public function setAddress ($address)
     {
-        $this->Address = $Address;
+        $this->address = $address;
     }
+
     /**
-     * @return null|string
+     * @return string
      */
-    public function getDatacenter(): ?string
+    public function getDatacenter ()
     {
-        return $this->Datacenter;
+        return $this->datacenter;
     }
+
     /**
-     * @param string $DataCenter
+     * @param string $datacenter
      */
-    public function setDatacenter(string $Datacenter): void
+    public function setDatacenter ($datacenter)
     {
-        $this->DataCenter = $Datacenter;
+        $this->datacenter = $datacenter;
     }
+
     /**
-     * @return array|null
+     * @return array
      */
-    public function getTaggedAddresses(): ?array
+    public function getTaggedAddresses ()
     {
-        return $this->TaggedAddresses;
+        return $this->taggedAddresses;
     }
+
     /**
-     * @param array $TaggedAddresses
+     * @param array $taggedAddresses
      */
-    public function setTaggedAddresses(array $TaggedAddresses): void
+    public function setTaggedAddresses ($taggedAddresses)
     {
-        $this->TaggedAddresses = $TaggedAddresses;
+        $this->taggedAddresses = json_encode($taggedAddresses);
     }
+
     /**
-     * @return array|null
+     * @return array
      */
-    public function getNodeMeta(): ?array
+    public function getNodeMeta ()
     {
-        return $this->NodeMeta;
+        return $this->nodeMeta;
     }
+
     /**
-     * @param array $NodeMeta
+     * @param array $nodeMeta
      */
-    public function setNodeMeta(array $NodeMeta): void
+    public function setNodeMeta ($nodeMeta)
     {
-        $this->NodeMeta = $NodeMeta;
+        $this->nodeMeta = json_encode($nodeMeta);
     }
+
     /**
-     * @return array|null
+     * @return array
      */
-    public function getService(): ?array
+    public function getService ()
     {
-        return $this->Service;
+        return $this->service;
     }
+
     /**
-     * @param array $Service
+     * @param array $service
      */
-    public function setService(array $Service): void
+    public function setService ($service)
     {
-        $this->Service = $Service;
+        $this->service = json_encode($service);
     }
+
     /**
-     * @return array|null
+     * @return array
      */
-    public function getCheck(): ?array
+    public function getCheck ()
     {
-        return $this->Check;
+        return $this->check;
     }
+
     /**
-     * @param array $Check
+     * @param array $check
      */
-    public function setCheck(array $Check): void
+    public function setCheck ($check)
     {
-        $this->Check = $Check;
+        $this->check = json_encode($check);
     }
+
     /**
-     * @return bool|null
+     * @return bool
      */
-    public function getSkipNodeUpdate(): ?bool
+    public function isSkipNodeUpdate ()
     {
-        return $this->SkipNodeUpdate;
+        return $this->skipNodeUpdate;
     }
+
     /**
-     * @param bool $SkipNodeUpdate
+     * @param bool $skipNodeUpdate
      */
-    public function setSkipNodeUpdate(bool $SkipNodeUpdate): void
+    public function setSkipNodeUpdate ($skipNodeUpdate)
     {
-        $this->SkipNodeUpdate = $SkipNodeUpdate;
+        $this->skipNodeUpdate = $skipNodeUpdate;
+    }
+
+    protected function setKeyMapping (): array
+    {
+        return [
+            'ID' => 'id',
+            'Node' => 'node',
+            'Address' => 'address',
+            'Datacenter' => 'datacenter',
+            'TaggedAddresses' => 'taggedAddresses',
+            'NodeMeta' => 'nodeMeta',
+            'Service' => 'service',
+            'Check' => 'check',
+            'SkipNodeUpdate' => 'skipNodeUpdate',
+        ];
     }
 }

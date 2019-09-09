@@ -7,10 +7,12 @@
  */
 namespace EasySwoole\Consul\Request\Status;
 
-use EasySwoole\Consul\Request\Snapshot;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Leader extends Snapshot
+class Leader extends BaseCommand
 {
+    protected $url = 'status/leader';
+
     /**
      * @var string
      */

@@ -53,8 +53,15 @@ class CoordinateTest extends TestCase
     function testUpdate()
     {
         $update = new Update([
-            'Node' => '2456c2850382',
-            'Segment' => 'update'
+            'dc' => 'dc1',
+            'node' => '2456c2850382',
+            'Segment' => 'update',
+            "Coord" => [
+                "Adjustment" => 0,
+                "Error" => 1.5,
+                "Height" => 0,
+                "Vec" => [0, 0, 0, 0, 0, 0, 0, 0]
+            ]
         ]);
         $this->consul->coordinates()->update($update);
         $this->assertEquals('x','x');

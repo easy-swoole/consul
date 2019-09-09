@@ -7,53 +7,56 @@
  */
 namespace EasySwoole\Consul\Request\Connect;
 
+use EasySwoole\Consul\Request\BaseCommand;
 use EasySwoole\Spl\SplBean;
 
 /**
  * Class Intentions
 {
-    "SourceName": "web",
+  "SourceName": "web",
   "DestinationName": "db",
   "SourceType": "consul",
   "Action": "allow"
 }
  * @package EasySwoole\Consul\Request\Connect
  */
-class Intentions extends SplBean
+class Intentions extends BaseCommand
 {
+    protected $url = 'connect/intentions/%s';
+
     /**
-     * @var s
+     * @var string
      */
     protected $uuid;
     /**
      * @var string
      */
-    protected $SourceName;
+    protected $sourceName;
     /**
      * @var string
      */
-    protected $DestinationName;
+    protected $destinationName;
     /**
      * @var string
      */
-    protected $SourceType;
+    protected $sourceType;
     /**
      * @var string
      */
-    protected $Action;
+    protected $action;
     /**
      * @var string
      */
-    protected $Description;
+    protected $description;
     /**
      * @var string
      */
-    protected $Meta;
+    protected $meta;
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getuuid (): ?string
+    public function getUuid ()
     {
         return $this->uuid;
     }
@@ -61,103 +64,116 @@ class Intentions extends SplBean
     /**
      * @param string $uuid
      */
-    public function setuuid (string $uuid): void
+    public function setUuid ($uuid)
     {
         $this->uuid = $uuid;
     }
+
     /**
-     * @return null|strings
+     * @return string
      */
-    public function getSourceName(): ?string
+    public function getSourceName ()
     {
-        return $this->SourceName;
+        return $this->sourceName;
     }
 
     /**
-     * @param string $SourceName
+     * @param string $sourceName
      */
-    public function setSourceName(string $SourceName): void
+    public function setSourceName ($sourceName)
     {
-        $this->SourceName = $SourceName;
+        $this->sourceName = $sourceName;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getDestinationName(): ?string
+    public function getDestinationName ()
     {
-        return $this->DestinationName;
+        return $this->destinationName;
     }
 
     /**
-     * @param string $DestinationName
+     * @param string $destinationName
      */
-    public function setDestinationName(string $DestinationName): void
+    public function setDestinationName ($destinationName)
     {
-        $this->DestinationName = $DestinationName;
+        $this->destinationName = $destinationName;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getSourceType(): ?string
+    public function getSourceType ()
     {
-        return $this->SourceType;
+        return $this->sourceType;
     }
 
     /**
-     * @param string $SourceType
+     * @param string $sourceType
      */
-    public function setSourceType(string $SourceType): void
+    public function setSourceType ($sourceType)
     {
-        $this->SourceType = $SourceType;
+        $this->sourceType = $sourceType;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getAction(): ?string
+    public function getAction ()
     {
-        return $this->Action;
+        return $this->action;
     }
 
     /**
-     * @param string $Action
+     * @param string $action
      */
-    public function setAction(string $Action): void
+    public function setAction ($action)
     {
-        $this->Action = $Action;
+        $this->action = $action;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getDescription(): ?string
+    public function getDescription ()
     {
-        return $this->Description;
+        return $this->description;
     }
 
     /**
-     * @param string $Description
+     * @param string $description
      */
-    public function setDescription(string $Description): void
+    public function setDescription ($description)
     {
-        $this->Description = $Description;
+        $this->description = $description;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getMeta(): ?string
+    public function getMeta ()
     {
-        return $this->Meta;
+        return $this->meta;
     }
 
     /**
-     * @param string $Meta
+     * @param string $meta
      */
-    public function setMeta(string $Meta): void
+    public function setMeta ($meta)
     {
-        $this->Meta = $Meta;
+        $this->meta = $meta;
+    }
+
+    protected function setKeyMapping (): array
+    {
+        return [
+            'SourceName' => 'sourceName',
+            'DestinationName' => 'destinationName',
+            'SourceType' => 'sourceType',
+            'Action' => 'action',
+            'Description' => 'description',
+            'Meta' => 'meta',
+        ];
     }
 }

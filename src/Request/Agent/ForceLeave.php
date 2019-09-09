@@ -1,10 +1,12 @@
 <?php
 namespace EasySwoole\Consul\Request\Agent;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class ForceLeave extends SplBean
+class ForceLeave extends BaseCommand
 {
+    protected $url = 'agent/force-leave/%s';
+
     /**
      * @var string
      */

@@ -16,7 +16,6 @@ class Status extends BaseFunc
      * Get Raft Leader
      * @param Leader $leader
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function leader(Leader $leader)
     {
@@ -27,7 +26,6 @@ class Status extends BaseFunc
      * List Raft Peers
      * @param Peers $peers
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function peers(Peers $peers)
     {

@@ -27,7 +27,24 @@ class QueryTest extends TestCase
     function testQuery()
     {
         $query = new Query([
-            "Name" => "consul"
+            "name" => "my-query",
+            "Session" => "adf4238a-882b-9ddc-4a9d-5b6758e4159e",
+            "Token" => "11",
+            "Service" => [
+                "Service" => "redis",
+                "Failover" => [
+                    "NearestN" => 3,
+                    "Datacenters" => ["dc1", "dc2"]
+                 ],
+                "Near" => "node1",
+                "OnlyPassing" => false,
+                "Tags" => ["primary", "!experimental"],
+                "NodeMeta" => ["instance_type" => "m3.large"],
+                "ServiceMeta" => ["environment" => "production"]
+            ],
+            "DNS" => [
+                "TTL" => "10s"
+            ],
         ]);
         $this->consul->query()->query($query);
         $this->assertEquals('x','x');
@@ -45,7 +62,8 @@ class QueryTest extends TestCase
     function testUpdateQuery()
     {
         $query = new Query([
-            'uuid' => '90dce5ca-5697-ae2f-09ae-51e9542ea58c'
+            'uuid' => '90dce5ca-5697-ae2f-09ae-51e9542ea58c',
+            'dc' => 'dc1',
         ]);
         $this->consul->query()->updateQuery($query);;
         $this->assertEquals('x','x');
@@ -63,9 +81,20 @@ class QueryTest extends TestCase
     function testExecuteQuery()
     {
         $execute = new Query\Execute([
-            'uuid' => '90dce5ca-5697-ae2f-09ae-51e9542ea58c'
+            'uuid' => '90dce5ca-5697-ae2f-09ae-51e9542ea58c',
+            'dc' => 'dc1',
         ]);
         $this->consul->query()->execute($execute);;
+        $this->assertEquals('x','x');
+    }
+
+    function testExplainQuery()
+    {
+        $execute = new Query\Explain([
+            'uuid' => '90dce5ca-5697-ae2f-09ae-51e9542ea58c',
+            'dc' => 'dc1',
+        ]);
+        $this->consul->query()->explain($execute);;
         $this->assertEquals('x','x');
     }
 }

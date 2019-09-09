@@ -7,50 +7,59 @@
  */
 namespace EasySwoole\Consul\Request\Acl\Token;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class CloneToken extends SplBean
+class CloneToken extends BaseCommand
 {
+    protected $url = 'acl/token/%s/clone';
+
     /**
      * @var string
      */
-    protected $AccessorID;
+    protected $accessorID;
     /**
      * @var string
      */
-    protected $Description;
+    protected $description;
 
-    protected $clone;
     /**
-     * @return null|string
+     * @return string
      */
-    public function getAccessorID(): ?string
+    public function getAccessorID ()
     {
-        return $this->AccessorID;
+        return $this->accessorID;
     }
 
     /**
-     * @param string $AccessorID
+     * @param string $accessorID
      */
-    public function setAccessorID(string $AccessorID): void
+    public function setAccessorID ($accessorID)
     {
-        $this->AccessorID = $AccessorID;
+        $this->accessorID = $accessorID;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getDescription(): ?string
+    public function getDescription ()
     {
-        return $this->Description;
+        return $this->description;
     }
 
     /**
-     * @param string $Description
+     * @param string $description
      */
-    public function setDescription(string $Description): void
+    public function setDescription ($description)
     {
-        $this->Description = $Description;
+        $this->description = $description;
     }
+
+   protected function setKeyMapping (): array
+   {
+       return [
+            'AccessorID' => 'accessorID',
+            'Description' => 'description',
+       ];
+   }
 
 }

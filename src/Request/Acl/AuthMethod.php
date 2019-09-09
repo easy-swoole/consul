@@ -7,87 +7,100 @@
  */
 namespace EasySwoole\Consul\Request\Acl;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class AuthMethod extends SplBean
+class AuthMethod extends BaseCommand
 {
+    protected $url = 'acl/auth-method/%s';
+
     /**
      * @var string
      */
-    protected $Name;
+    protected $name;
     /**
      * @var string
      */
-    protected $Type;
+    protected $type;
     /**
      * @var string
      */
-    protected $Description;
+    protected $description;
     /**
      * @var string
      */
-    protected $Config;
+    protected $config;
+
     /**
-     * @return null|string
+     * @return string
      */
-    public function getName(): ?string
+    public function getName ()
     {
-        return $this->Name;
+        return $this->name;
     }
 
     /**
-     * @param string $Name
+     * @param string $name
      */
-    public function setName(string $Name): void
+    public function setName ($name)
     {
-        $this->Name = $Name;
+        $this->name = $name;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getType(): ?string
+    public function getType ()
     {
-        return $this->Type;
+        return $this->type;
     }
 
     /**
-     * @param string $Type
+     * @param string $type
      */
-    public function setType(string $Type): void
+    public function setType ($type)
     {
-        $this->Type = $Type;
+        $this->type = $type;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getDescription(): ?string
+    public function getDescription ()
     {
-        return $this->Description;
+        return $this->description;
     }
 
     /**
-     * @param string $Description
+     * @param string $description
      */
-    public function setDescription(string $Description): void
+    public function setDescription ($description)
     {
-        $this->Description = $Description;
+        $this->description = $description;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getConfig(): ?string
+    public function getConfig ()
     {
-        return $this->Config;
+        return $this->config;
     }
 
     /**
-     * @param string $Config
+     * @param string $config
      */
-    public function setConfig(string $Config): void
+    public function setConfig ($config)
     {
-        $this->Config = $Config;
+        $this->config = json_encode($config);
+    }
+
+    protected function setKeyMapping (): array
+    {
+        return [
+            'Name' => 'name',
+            'Type' => 'type',
+            'Description' => 'description',
+            'Config' => 'config',
+        ];
     }
 }

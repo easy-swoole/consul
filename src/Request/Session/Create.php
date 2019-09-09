@@ -7,6 +7,7 @@
  */
 namespace EasySwoole\Consul\Request\Session;
 
+use EasySwoole\Consul\Request\BaseCommand;
 use EasySwoole\Spl\SplBean;
 
 /**
@@ -23,8 +24,10 @@ use EasySwoole\Spl\SplBean;
  * Class Create
  * @package EasySwoole\Consul\Request\Session
  */
-class Create extends SplBean
+class Create extends BaseCommand
 {
+    protected $url = 'session/create';
+
     /**
      * @var string
      */
@@ -32,32 +35,32 @@ class Create extends SplBean
     /**
      * @var string
      */
-    protected $LockDelay;
+    protected $lockDelay;
     /**
      * @var string
      */
-    protected $Node;
+    protected $node;
     /**
      * @var string
      */
-    protected $Name;
+    protected $name;
     /**
      * @var array
      */
-    protected $Checks;
+    protected $checks;
     /**
      * @var string
      */
-    protected $Behavior;
+    protected $behavior;
     /**
      * @var string
      */
     protected $TTL;
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getDc(): ?string
+    public function getDc ()
     {
         return $this->dc;
     }
@@ -65,95 +68,95 @@ class Create extends SplBean
     /**
      * @param string $dc
      */
-    public function setDc(string $dc): void
+    public function setDc ($dc)
     {
         $this->dc = $dc;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getLockDelay(): ?string
+    public function getLockDelay ()
     {
-        return $this->LockDelay;
+        return $this->lockDelay;
     }
 
     /**
-     * @param string $LockDelay
+     * @param string $lockDelay
      */
-    public function setLockDelay(string $LockDelay): void
+    public function setLockDelay ($lockDelay)
     {
-        $this->LockDelay = $LockDelay;
+        $this->lockDelay = $lockDelay;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getNode(): ?string
+    public function getNode ()
     {
-        return $this->Node;
+        return $this->node;
     }
 
     /**
-     * @param string $Node
+     * @param string $node
      */
-    public function setNode(string $Node): void
+    public function setNode ($node)
     {
-        $this->Node = $Node;
+        $this->node = $node;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getName(): ?string 
+    public function getName ()
     {
-        return $this->Name;
+        return $this->name;
     }
 
     /**
-     * @param string $Name
+     * @param string $name
      */
-    public function setName(string $Name): void 
+    public function setName ($name)
     {
-        $this->Name = $Name;
+        $this->name = $name;
     }
 
     /**
-     * @return array|null
+     * @return array
      */
-    public function getChecks(): ?array 
+    public function getChecks ()
     {
-        return $this->Checks;
+        return $this->checks;
     }
 
     /**
-     * @param array $Checks
+     * @param array $checks
      */
-    public function setChecks(array $Checks): void
+    public function setChecks ($checks)
     {
-        $this->Checks = $Checks;
+        $this->checks = $checks;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getBehavior(): ?string
+    public function getBehavior ()
     {
-        return $this->Behavior;
+        return $this->behavior;
     }
 
     /**
-     * @param string $Behavior
+     * @param string $behavior
      */
-    public function setBehavior(string $Behavior): void
+    public function setBehavior ($behavior)
     {
-        $this->Behavior = $Behavior;
+        $this->behavior = $behavior;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getTTL(): ?string
+    public function getTTL ()
     {
         return $this->TTL;
     }
@@ -161,8 +164,19 @@ class Create extends SplBean
     /**
      * @param string $TTL
      */
-    public function setTTL (string $TTL ): void
+    public function setTTL ($TTL)
     {
         $this->TTL = $TTL;
+    }
+
+    protected function setKeyMapping (): array
+    {
+        return [
+            'LockDelay' => 'LockDelay',
+            'Node' => 'node',
+            'Name' => 'name',
+            'Checks' => 'checks',
+            'Behavior' => 'behavior',
+        ];
     }
 }

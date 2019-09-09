@@ -7,6 +7,7 @@
  */
 namespace EasySwoole\Consul;
 
+use EasySwoole\Consul\Exception\MissingRequiredParamsException;
 use EasySwoole\Consul\Request\Acl\AuthMethod;
 use EasySwoole\Consul\Request\Acl\AuthMethods;
 use EasySwoole\Consul\Request\Acl\BindingRule;
@@ -37,7 +38,6 @@ class Acl extends BaseFunc
      * Bootstrap ACLs
      * @param Bootstrap $bootstrap
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function bootstrap(Bootstrap $bootstrap)
     {
@@ -48,7 +48,6 @@ class Acl extends BaseFunc
      * Check ACL Replication
      * @param Replication $replication
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function replication(Replication $replication)
     {
@@ -59,33 +58,33 @@ class Acl extends BaseFunc
      * Translate Rules
      * @param Translate $translate
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function translate (Translate $translate)
     {
-        if (!empty($translate->getAccessorId())) {
-            $action = $translate->getAccessorId();
+        if ($translate->getAccessorId()) {
+            $translate->setUrl(sprintf($translate->getUrl(), $translate->getAccessorId()));
             $translate->setAccessorId('');
-            $this->getJson($translate, $action);
+            $this->getJson($translate);
         } else {
+            $translate->setUrl(substr($translate->getUrl(), 0, strlen($translate->getUrl()) -3));
             $this->postJson($translate);
         }
     }
 
-
-    /**
-     * Lack
-     * Translate a Legacy Token's Rules
-     */
-
     /**
      * Login to Auth Method
      * @param Login $login
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function login(Login $login)
     {
+        if (empty($login->getAuthMethod())) {
+            throw new MissingRequiredParamsException('Missing the required param: AuthMethod.');
+        }
+        if (empty($login->getBearerToken())) {
+            throw new MissingRequiredParamsException('Missing the required param: BearerToken.');
+        }
         $this->postJson($login);
     }
 
@@ -93,127 +92,109 @@ class Acl extends BaseFunc
      * Logout from Auth Method
      * @param Logout $logout
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function logout(Logout $logout)
     {
         $header = array(
             'X-Consul-Token' => $logout->getToken(),
         );
-        $this->postJson($logout, '', $header);
+        $logout->setToken('');
+        $this->postJson($logout, $header);
     }
 
     /**
      * Create a Token  OR Read a Token OR Update a Token
      * @param Token $token
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function token(Token $token)
     {
+        $token->setUrl(substr($token->getUrl(), 0, strlen($token->getUrl()) -3));
         $this->putJSON($token);
     }
 
     /**
      * Read a Token
      * @param Token $token
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function readToken(Token $token)
     {
-        $action = '';
-        if (!empty($token->getAccessorID())) {
-            $action = $token->getAccessorID();
-            $token->setAccessorID('');
+        if (empty($token->getAccessorID())) {
+            throw new MissingRequiredParamsException('Missing the required param: AccessorID.');
         }
-        $this->getJson($token, $action);
+        $token->setUrl(sprintf($token->getUrl(), $token->getAccessorId()));
+        $token->setAccessorId('');
+        $this->getJson($token);
     }
 
     /**
      * Read Self Token
      * @param GetSelf $getSelf
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function self(GetSelf $getSelf)
     {
-        $beanRoute = new \ReflectionClass($getSelf);
-        if (empty($beanRoute)) {
-            throw new \ReflectionException(static::class);
-        }
-        $route = substr($beanRoute->name, strpos($beanRoute->name,'\\') + 1);
-        $route = substr($route, strpos($route,'\\') + 1);
-        $route = substr($route, strpos($route,'\\') + 1);
-        $route = substr($route, 0, strripos($route,'\\') + 1);
-        $route .= 'self';
-        $route = strtolower(str_replace('\\','/',$route));
-        $useRef = [
-            'reflection' => true,
-            'url' => $this->route.$route,
-        ];
         $header = array(
             'X-Consul-Token' => $getSelf->getToken(),
         );
-        $this->getJson($getSelf, '', true, $useRef, $header);
+        $getSelf->setToken('');
+        $this->getJson($getSelf, $header);
+    }
+
+    /**
+     * Update a Token
+     * @param Token $token
+     * @throws MissingRequiredParamsException
+     * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
+     */
+    public function updateToken (Token $token)
+    {
+        if (empty($token->getAccessorID())) {
+            throw new MissingRequiredParamsException('Missing the required param: AccessorID.');
+        }
+        $token->setUrl(sprintf($token->getUrl(), $token->getAccessorId()));
+        $token->setAccessorId('');
+        $this->putJSON($token);
     }
 
     /**
      * Clone a Token
      * @param CloneToken $cloneToken
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function cloneToken(CloneToken $cloneToken)
     {
-        $action = '';
-        if (!empty($cloneToken->getAccessorID())) {
-            $action = $cloneToken->getAccessorID();
-            $cloneToken->setAccessorID('');
+        if (empty($cloneToken->getAccessorID())) {
+            throw new MissingRequiredParamsException('Missing the required param: AccessorID.');
         }
-        $beanRoute = new \ReflectionClass($cloneToken);
-        if (empty($beanRoute)) {
-            throw new \ReflectionException(static::class);
-        }
-        $route = substr($beanRoute->name, strpos($beanRoute->name,'\\') + 1);
-        $route = substr($route, strpos($route,'\\') + 1);
-        $route = substr($route, strpos($route,'\\') + 1);
-        $route = substr($route, 0, strripos($route,'\\') + 1);
-        $route .= '/' . $action;
-        $route .= '/clone';
-        $route = strtolower(str_replace('\\','/',$route));
-        $useRef = [
-            'reflection' => true,
-            'url' => $this->route.$route,
-        ];
-        if (!empty($cloneToken->getAccessorID())) {
-            $this->route .= '/' . $cloneToken->getAccessorID();
-            $cloneToken->setAccessorID('');
-        }
-        $this->putJSON($cloneToken, '', false, $useRef);
+        $cloneToken->setUrl(sprintf($cloneToken->getUrl(), $cloneToken->getAccessorId()));
+        $cloneToken->setAccessorId('');
+        $this->putJSON($cloneToken);
     }
 
     /**
      * Delete a Token
      * @param Token $token
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function delete(Token $token)
     {
-        $action = '';
-        if (!empty($token->getAccessorID())) {
-            $action = $token->getAccessorID();
-            $token->setAccessorID('');
+        if (empty($token->getAccessorID())) {
+            throw new MissingRequiredParamsException('Missing the required param: AccessorID.');
         }
-        $this->deleteJson($token, $action);
+        $token->setUrl(sprintf($token->getUrl(), $token->getAccessorId()));
+        $token->setAccessorId('');
+        $this->deleteJson($token);
     }
 
     /**
      * List Tokens
      * @param Tokens $tokens
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function tokens(Tokens $tokens)
     {
@@ -224,7 +205,6 @@ class Acl extends BaseFunc
      * Create ACL Token
      * @param Create $create
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function create(Create $create)
     {
@@ -234,164 +214,145 @@ class Acl extends BaseFunc
     /**
      * Update ACL Token
      * @param Update $update
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function update(Update $update)
     {
+        if (empty($update->getId())) {
+            throw new MissingRequiredParamsException('Missing the required param: ID.');
+        }
         $this->putJSON($update);
     }
 
     /**
      * Delete ACL Token
      * @param Destroy $destroy
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function destroy(Destroy $destroy)
     {
-        $action = '';
-        if (!empty($destroy->getUuid())) {
-            $action = $destroy->getUuid();
-            $destroy->setUuid('');
+        if (empty($destroy->getUuid())) {
+            throw new MissingRequiredParamsException('Missing the required param: uuid.');
         }
-        $this->putJSON($destroy, $action);
+        $destroy->setUrl(sprintf($destroy->getUrl(), $destroy->getUuid()));
+        $destroy->setUuid('');
+        $this->putJSON($destroy);
     }
 
     /**
      * Read ACL Token
      * @param Info $info
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function info(Info $info)
     {
-        $action = '';
-        if (!empty($info->getUuid())) {
-            $action = $info->getUuid();
-            $info->setUuid('');
+        if (empty($info->getUuid())) {
+            throw new MissingRequiredParamsException('Missing the required param: uuid.');
         }
-        $this->getJson($info, $action);
+        $info->setUrl(sprintf($info->getUrl(), $info->getUuid()));
+        $info->setUuid('');
+        $this->getJson($info);
     }
 
     /**
      * Clone ACL Token
      * @param CloneACLToken $cloneACLToken
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function cloneAclToken(CloneACLToken $cloneACLToken)
     {
-        $beanRoute = new \ReflectionClass($cloneACLToken);
-        if (empty($beanRoute)) {
-            throw new \ReflectionException(static::class);
+        if (empty($cloneACLToken->getUuid())) {
+            throw new MissingRequiredParamsException('Missing the required param: uuid.');
         }
-        $route = substr($beanRoute->name, strpos($beanRoute->name,'\\') + 1);
-        $route = substr($route, strpos($route,'\\') + 1);
-        $route = substr($route, strpos($route,'\\') + 1);
-        $route = substr($route, 0, strripos($route,'\\') + 1);
-        $route .= 'clone';
-        $route = strtolower(str_replace('\\','/',$route));
-        $this->route .= $route;
-        if (!empty($cloneACLToken->getUuid())) {
-            $this->route .= '/' . $cloneACLToken->getUuid();
-            $cloneACLToken->setUuid('');
-        }
-        $useRef = [
-            'reflection' => true,
-            'url' => $this->route,
-        ];
-        $this->putJSON($cloneACLToken, '',true,$useRef);
+        $cloneACLToken->setUrl(sprintf($cloneACLToken->getUrl(), $cloneACLToken->getUuid()));
+        $cloneACLToken->setUuid('');
+        $this->putJSON($cloneACLToken);
     }
 
     /**
+     * List ACLs
      * @param Lists $lists
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function getList(Lists $lists)
     {
-        $beanRoute = new \ReflectionClass($lists);
-        if (empty($beanRoute)) {
-            throw new \ReflectionException(static::class);
-        }
-        $route = substr($beanRoute->name, strpos($beanRoute->name,'\\') + 1);
-        $route = substr($route, strpos($route,'\\') + 1);
-        $route = substr($route, strpos($route,'\\') + 1);
-        $route = substr($route, 0, strripos($route,'\\') + 1);
-        $route .= 'list';
-        $route = strtolower(str_replace('\\','/',$route));
-        $useRef = [
-            'reflection' => true,
-            'url' => $this->route.$route,
-        ];
-        $this->getJson($lists,'',true, $useRef);
+        $this->getJson($lists);
     }
 
     /**
      * Create a Policy
      * @param Policy $policy
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function policy(Policy $policy)
     {
-        $this->putJSON($policy);
-    }
-
-    /**
-     * Update a Policy
-     * @param Policy $policy
-     * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
-     */
-    public function updatePolicy(Policy $policy)
-    {
-        $action = '';
-        if (!empty($policy->getId())) {
-            $action = $policy->getId();
-            $policy->setId('');
+        if (empty($policy->getName())) {
+            throw new MissingRequiredParamsException('Missing the required param: Name.');
         }
-        $this->putJSON($policy, $action);
+        $policy->setUrl(substr($policy->getUrl(), 0, strlen($policy->getUrl()) -3));
+        $this->putJSON($policy);
     }
 
     /**
      * Read a Policy
      * @param Policy $policy
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function readPolicy(Policy $policy)
     {
-        $action = '';
-        if (!empty($policy->getId())) {
-            $action = $policy->getId();
-            $policy->setId('');
+        if (empty($policy->getId())) {
+            throw new MissingRequiredParamsException('Missing the required param: id.');
         }
-        $this->getJson($policy, $action);
+        $policy->setUrl(sprintf($policy->getUrl(), $policy->getId()));
+        $policy->setId('');
+        $this->getJson($policy);
     }
+
+    /**
+     * Update a Policy
+     * @param Policy $policy
+     * @throws MissingRequiredParamsException
+     * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
+     */
+    public function updatePolicy(Policy $policy)
+    {
+        if (empty($policy->getId())) {
+            throw new MissingRequiredParamsException('Missing the required param: id.');
+        }
+        if (empty($policy->getName())) {
+            throw new MissingRequiredParamsException('Missing the required param: Name.');
+        }
+        $policy->setUrl(substr($policy->getUrl(), 0, strlen($policy->getUrl()) -3));
+        $this->putJSON($policy);
+    }
+
 
     /**
      * Delete a Policy
      * @param Policy $policy
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function deletePolicy(Policy $policy)
     {
-        $action = '';
-        if (!empty($policy->getId())) {
-            $action = $policy->getId();
-            $policy->setId('');
+        if (empty($policy->getId())) {
+            throw new MissingRequiredParamsException('Missing the required param: id.');
         }
-        $this->deleteJson($policy, $action);
+        $policy->setUrl(sprintf($policy->getUrl(), $policy->getId()));
+        $policy->setId('');
+        $this->deleteJson($policy);
     }
 
     /**
      * List Policies
-     * @param Policy $policy
+     * @param Policies $policies
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function policies (Policies $policies)
     {
@@ -401,83 +362,88 @@ class Acl extends BaseFunc
     /**
      * Create a Role
      * @param Role $role
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function role(Role $role)
     {
+        if (empty($role->getName())) {
+            throw new MissingRequiredParamsException('Missing the required param: Name.');
+        }
+        $role->setUrl(substr($role->getUrl(), 0, strlen($role->getUrl()) -3));
         $this->putJSON($role);
     }
 
     /**
      * Read a Role
      * @param Role $role
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function readRole(Role $role)
     {
-        $action = '';
-        if (!empty($role->getId())) {
-            $action = $role->getId();
-            $role->setId('');
+        if (empty($role->getId())) {
+            throw new MissingRequiredParamsException('Missing the required param: id.');
         }
-        $this->getJson($role, $action);
+        $role->setUrl(sprintf($role->getUrl(), $role->getId()));
+        $role->setId('');
+        $this->getJson($role);
+    }
+
+    /**
+     * Read a Role by Name
+     * @param Role $role
+     * @throws MissingRequiredParamsException
+     * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
+     */
+    public function readRoleByName(Role $role)
+    {
+        if (empty($role->getName())) {
+            throw new MissingRequiredParamsException('Missing the required param: Name.');
+        }
+        $role->setUrl(sprintf($role->getUrl(), 'name/' . $role->getName()));
+        $role->setName('');
+        $this->getJson($role);
     }
 
     /**
      * Update a Role
      * @param Role $role
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function updateRole(Role $role)
     {
-        $action = '';
-        if (!empty($role->getId())) {
-            $action = $role->getId();
-            $role->setId('');
+        if (empty($role->getId())) {
+            throw new MissingRequiredParamsException('Missing the required param: id.');
         }
-        $this->putJSON($role, $action);
+        if (empty($role->getName())) {
+            throw new MissingRequiredParamsException('Missing the required param: Name.');
+        }
+        $role->setUrl(sprintf($role->getUrl(), $role->getId()));
+        $this->putJSON($role);
     }
 
     /**
      * Delete a Role
      * @param Role $role
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function deleteRole(Role $role)
     {
-        $action = '';
-        if (!empty($role->getId())) {
-            $action = $role->getId();
-            $role->setId('');
+        if (empty($role->getId())) {
+            throw new MissingRequiredParamsException('Missing the required param: id.');
         }
-        $this->deleteJson($role, $action);
-    }
-
-    /**
-     * Read a Role by Name
-     * @param Role\Name $name
-     * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
-     */
-    public function name(Role\Name $name)
-    {
-        $action = '';
-        if (!empty($name->getname())) {
-            $action = $name->getname();
-            $name->setname('');
-        }
-        $this->getJson($name, $action);
+        $role->setUrl(sprintf($role->getUrl(), $role->getId()));
+        $role->setId('');
+        $this->deleteJson($role);
     }
 
     /**
      * List Roles
      * @param Roles $roles
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function roles(Roles $roles)
     {
@@ -487,274 +453,167 @@ class Acl extends BaseFunc
     /**
      * Create an Auth Method
      * @param AuthMethod $authMethod
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function authMethod(AuthMethod $authMethod)
     {
-        $beanRoute = new \ReflectionClass($authMethod);
-        if (empty($beanRoute)) {
-            throw new \ReflectionException(static::class);
+        if (empty($authMethod->getName())) {
+            throw new MissingRequiredParamsException('Missing the required param: Name.');
         }
-        $route = substr($beanRoute->name, strpos($beanRoute->name,'\\') + 1);
-        $route = substr($route, strpos($route,'\\') + 1);
-        $route = substr($route, strpos($route,'\\') + 1);
-        $route = substr($route, 0, strripos($route,'\\') + 1);
-        $route .= 'auth-method';
-        $route = strtolower(str_replace('\\','/',$route));
-        $useRef = [
-            'reflection' => true,
-            'url' => $this->route.$route,
-        ];
-        $this->putJSON($authMethod, '',true,$useRef);
+        if (empty($authMethod->getType())) {
+            throw new MissingRequiredParamsException('Missing the required param: Type.');
+        }
+        $authMethod->setUrl(substr($authMethod->getUrl(), 0, strlen($authMethod->getUrl()) -3));
+        $this->putJSON($authMethod);
     }
 
     /**
      * Read an Auth Method
      * @param AuthMethod $authMethod
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function readAuthMethod(AuthMethod $authMethod)
     {
-        $beanRoute = new \ReflectionClass($authMethod);
-        if (empty($beanRoute)) {
-            throw new \ReflectionException(static::class);
+        if (empty($authMethod->getName())) {
+            throw new MissingRequiredParamsException('Missing the required param: Name.');
         }
-        $route = substr($beanRoute->name, strpos($beanRoute->name,'\\') + 1);
-        $route = substr($route, strpos($route,'\\') + 1);
-        $route = substr($route, strpos($route,'\\') + 1);
-        $route = substr($route, 0, strripos($route,'\\') + 1);
-        $route .= 'auth-method';
-        $route = strtolower(str_replace('\\','/',$route));
-        if (!empty($authMethod->getName())) {
-            $route .= '/' . $authMethod->getName();
-            $authMethod->setName('');
-        }
-        $useRef = [
-            'reflection' => true,
-            'url' => $this->route . $route,
-        ];
-        $this->getJson($authMethod, '',true,$useRef);
+        $authMethod->setUrl(sprintf($authMethod->getUrl(), $authMethod->getName()));
+        $authMethod->setName('');
+        $this->getJson($authMethod);
     }
 
     /**
      * Update an Auth Method
      * @param AuthMethod $authMethod
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function updateAuthMethod(AuthMethod $authMethod)
     {
-        $beanRoute = new \ReflectionClass($authMethod);
-        if (empty($beanRoute)) {
-            throw new \ReflectionException(static::class);
+        if (empty($authMethod->getName())) {
+            throw new MissingRequiredParamsException('Missing the required param: Name.');
         }
-        $route = substr($beanRoute->name, strpos($beanRoute->name,'\\') + 1);
-        $route = substr($route, strpos($route,'\\') + 1);
-        $route = substr($route, strpos($route,'\\') + 1);
-        $route = substr($route, 0, strripos($route,'\\') + 1);
-        $route .= 'auth-method';
-        $route = strtolower(str_replace('\\','/',$route));
-        if (!empty($authMethod->getName())) {
-            $route .= '/' . $authMethod->getName();
-            $authMethod->setName('');
+        if (empty($authMethod->getType())) {
+            throw new MissingRequiredParamsException('Missing the required param: Type.');
         }
-        $useRef = [
-            'reflection' => true,
-            'url' => $this->route.$route,
-        ];
-        $this->putJSON($authMethod, '',true,$useRef);
+        $authMethod->setUrl(sprintf($authMethod->getUrl(), $authMethod->getName()));
+        $this->putJSON($authMethod);
     }
 
     /**
      * Delete an Auth Method
      * @param AuthMethod $authMethod
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function deleteAuthMethod(AuthMethod $authMethod)
     {
-        $beanRoute = new \ReflectionClass($authMethod);
-        if (empty($beanRoute)) {
-            throw new \ReflectionException(static::class);
+        if (empty($authMethod->getName())) {
+            throw new MissingRequiredParamsException('Missing the required param: Name.');
         }
-        $route = substr($beanRoute->name, strpos($beanRoute->name,'\\') + 1);
-        $route = substr($route, strpos($route,'\\') + 1);
-        $route = substr($route, strpos($route,'\\') + 1);
-        $route = substr($route, 0, strripos($route,'\\') + 1);
-        $route .= 'auth-method';
-        $route = strtolower(str_replace('\\','/',$route));
-        if (!empty($authMethod->getName())) {
-            $route .= '/' . $authMethod->getName();
-            $authMethod->setName('');
-        }
-        $useRef = [
-            'reflection' => true,
-            'url' => $this->route.$route,
-        ];
-        $this->deleteJson($authMethod, '',[],true, $useRef);
+        $authMethod->setUrl(sprintf($authMethod->getUrl(), $authMethod->getName()));
+        $authMethod->setName('');
+        $this->deleteJson($authMethod);
     }
 
     /**
      * List Auth Methods
      * @param AuthMethods $authMethods
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function authMethods(AuthMethods $authMethods)
     {
-        $beanRoute = new \ReflectionClass($authMethods);
-        if (empty($beanRoute)) {
-            throw new \ReflectionException(static::class);
-        }
-        $route = substr($beanRoute->name, strpos($beanRoute->name,'\\') + 1);
-        $route = substr($route, strpos($route,'\\') + 1);
-        $route = substr($route, strpos($route,'\\') + 1);
-        $route = substr($route, 0, strripos($route,'\\') + 1);
-        $route .= 'auth-methods';
-        $route = strtolower(str_replace('\\','/',$route));
-        $useRef = [
-            'reflection' => true,
-            'url' => $this->route.$route,
-        ];
-        $this->getJson($authMethods, '',true,$useRef);
+        $this->getJson($authMethods);
     }
 
     /**
      * Create a Binding Rule
      * @param BindingRule $bindingRule
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function bindingRule(BindingRule $bindingRule)
     {
-        $beanRoute = new \ReflectionClass($bindingRule);
-        if (empty($beanRoute)) {
-            throw new \ReflectionException(static::class);
+        if (empty($bindingRule->getAuthMethod())) {
+            throw new MissingRequiredParamsException('Missing the required param: AuthMethod.');
         }
-        $route = substr($beanRoute->name, strpos($beanRoute->name,'\\') + 1);
-        $route = substr($route, strpos($route,'\\') + 1);
-        $route = substr($route, strpos($route,'\\') + 1);
-        $route = substr($route, 0, strripos($route,'\\') + 1);
-        $route .= 'binding-rule';
-        $route = strtolower(str_replace('\\','/',$route));
-        $useRef = [
-            'reflection' => true,
-            'url' => $this->route.$route,
-        ];
-        $this->putJSON($bindingRule, '',true,$useRef);
+        if (empty($bindingRule->getBindType())) {
+            throw new MissingRequiredParamsException('Missing the required param: BindType.');
+        }
+        if (empty($bindingRule->getBindName())) {
+            throw new MissingRequiredParamsException('Missing the required param: BindName.');
+        }
+        $bindingRule->setUrl(substr($bindingRule->getUrl(), 0, strlen($bindingRule->getUrl()) -3));
+
+        $this->putJSON($bindingRule);
     }
 
     /**
      * Read a Binding Rule
      * @param BindingRule $bindingRule
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function readBindingRule(BindingRule $bindingRule)
     {
-        $beanRoute = new \ReflectionClass($bindingRule);
-        if (empty($beanRoute)) {
-            throw new \ReflectionException(static::class);
+        if (empty($bindingRule->getId())) {
+            throw new MissingRequiredParamsException('Missing the required param: ID.');
         }
-        $route = substr($beanRoute->name, strpos($beanRoute->name,'\\') + 1);
-        $route = substr($route, strpos($route,'\\') + 1);
-        $route = substr($route, strpos($route,'\\') + 1);
-        $route = substr($route, 0, strripos($route,'\\') + 1);
-        $route .= 'binding-rule';
-        $route = strtolower(str_replace('\\','/',$route));
-        if (!empty($bindingRule->getid())) {
-            $route .= '/' . $bindingRule->getid();
-            $bindingRule->setid('');
-        }
-        $useRef = [
-            'reflection' => true,
-            'url' => $this->route.$route,
-        ];
-        $this->getJson($bindingRule, '',true,$useRef);
+        $bindingRule->setUrl(sprintf($bindingRule->getUrl(), $bindingRule->getId()));
+        $bindingRule->setId('');
+        $this->getJson($bindingRule);
     }
 
     /**
      * Update a Binding Rule
      * @param BindingRule $bindingRule
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function updateBindingRule(BindingRule $bindingRule)
     {
-        $beanRoute = new \ReflectionClass($bindingRule);
-        if (empty($beanRoute)) {
-            throw new \ReflectionException(static::class);
+        if (empty($bindingRule->getId())) {
+            throw new MissingRequiredParamsException('Missing the required param: ID.');
         }
-        $route = substr($beanRoute->name, strpos($beanRoute->name,'\\') + 1);
-        $route = substr($route, strpos($route,'\\') + 1);
-        $route = substr($route, strpos($route,'\\') + 1);
-        $route = substr($route, 0, strripos($route,'\\') + 1);
-        $route .= 'binding-rule';
-        $route = strtolower(str_replace('\\','/',$route));
-        if (!empty($bindingRule->getid())) {
-            $route .= '/' . $bindingRule->getid();
-            $bindingRule->setid('');
+        if (empty($bindingRule->getAuthMethod())) {
+            throw new MissingRequiredParamsException('Missing the required param: AuthMethod.');
         }
-        $useRef = [
-            'reflection' => true,
-            'url' => $this->route.$route,
-        ];
-        $this->putJSON($bindingRule, '',true,$useRef);
+        if (empty($bindingRule->getBindType())) {
+            throw new MissingRequiredParamsException('Missing the required param: BindType.');
+        }
+        if (empty($bindingRule->getBindName())) {
+            throw new MissingRequiredParamsException('Missing the required param: BindName.');
+        }
+        $bindingRule->setUrl(sprintf($bindingRule->getUrl(), $bindingRule->getId()));
+        $bindingRule->setId('');
+        $this->putJSON($bindingRule);
     }
 
     /**
      * Delete a Binding Rule
      * @param BindingRule $bindingRule
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function deleteBindingRule(BindingRule $bindingRule)
     {
-        $beanRoute = new \ReflectionClass($bindingRule);
-        if (empty($beanRoute)) {
-            throw new \ReflectionException(static::class);
+        if (empty($bindingRule->getId())) {
+            throw new MissingRequiredParamsException('Missing the required param: ID.');
         }
-        $route = substr($beanRoute->name, strpos($beanRoute->name,'\\') + 1);
-        $route = substr($route, strpos($route,'\\') + 1);
-        $route = substr($route, strpos($route,'\\') + 1);
-        $route = substr($route, 0, strripos($route,'\\') + 1);
-        $route .= 'binding-rule';
-        $route = strtolower(str_replace('\\','/',$route));
-        if (!empty($bindingRule->getid())) {
-            $route .= '/' . $bindingRule->getid();
-            $bindingRule->setid('');
-        }
-        $useRef = [
-            'reflection' => true,
-            'url' => $this->route.$route,
-        ];
-        $this->deleteJson($bindingRule, '', [],true,$useRef);
+        $bindingRule->setUrl(sprintf($bindingRule->getUrl(), $bindingRule->getId()));
+        $bindingRule->setId('');
+        $this->deleteJson($bindingRule);
     }
 
     /**
      * List Binding Rules
      * @param BindingRules $bindingRules
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function bindingRules(BindingRules $bindingRules)
     {
-        $beanRoute = new \ReflectionClass($bindingRules);
-        if (empty($beanRoute)) {
-            throw new \ReflectionException(static::class);
-        }
-        $route = substr($beanRoute->name, strpos($beanRoute->name,'\\') + 1);
-        $route = substr($route, strpos($route,'\\') + 1);
-        $route = substr($route, strpos($route,'\\') + 1);
-        $route = substr($route, 0, strripos($route,'\\') + 1);
-        $route .= 'binding-rules';
-        $route = strtolower(str_replace('\\','/',$route));
-        $useRef = [
-            'reflection' => true,
-            'url' => $this->route.$route,
-        ];
-        $this->getJson($bindingRules, '',true,$useRef);
+        $this->getJson($bindingRules);
     }
 }

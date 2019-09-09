@@ -1,10 +1,12 @@
 <?php
 namespace EasySwoole\Consul\Request\Agent\Service;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Maintenance extends SplBean
+class Maintenance extends BaseCommand
 {
+    protected $url = 'agent/service/maintenance/%s';
+
     /**
      * @var string
      */

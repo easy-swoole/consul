@@ -7,10 +7,10 @@
  */
 namespace EasySwoole\Consul\Request;
 
-use EasySwoole\Spl\SplBean;
-
-class Kv extends SplBean
+class Kv extends BaseCommand
 {
+    protected $url = 'kv/%s';
+
     /**
      * @var string
      */

@@ -1,10 +1,12 @@
 <?php
 namespace EasySwoole\Consul\Request\Catalog;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Connect extends SplBean
+class Connect extends BaseCommand
 {
+    public $url='catalog/connect/%s';
+
     /**
      * @var
      */
@@ -128,6 +130,6 @@ class Connect extends SplBean
      */
     public function setKeyMapping(): array
     {
-        return ['node_meta' => 'node-meta'];
+        return ['node-meta' => 'node_meta'];
     }
 }

@@ -1,9 +1,9 @@
 <?php
 namespace EasySwoole\Consul\Request\Agent;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Leave extends SplBean
+class Leave extends BaseCommand
 {
-
+    protected $url = 'agent/leave';
 }

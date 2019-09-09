@@ -1,13 +1,10 @@
 <?php
 namespace EasySwoole\Consul\Request\Agent\Service;
 
-use EasySwoole\Spl\SplBean;
-
-class Register extends SplBean
-{
-    /**
-     * Sample
-     * {
+use EasySwoole\Consul\Request\BaseCommand;
+/**
+ * Sample
+ * {
         "ID": "redis1",
         "Name": "redis",
         "Tags": [
@@ -32,305 +29,331 @@ class Register extends SplBean
         "Warning": 1
         }
     }
-     */
+ * Class Register
+ * @package EasySwoole\Consul\Request\Agent\Service
+ */
+class Register extends BaseCommand
+{
+    protected $url = 'agent/service/register';
+
     /**
      * @var string
      */
-    protected $Name;
+    protected $name;
     /**
      * @var string
      */
-    protected $ID;
+    protected $id;
     /**
      * @var string
      */
-    protected $Tags;
+    protected $tags;
     /**
      * @var string
      */
-    protected $Address;
+    protected $address;
     /**
      * @var array
      */
-    protected $TaggedAddresses;
+    protected $taggedAddresses;
     /**
      * @var array
      */
-    protected $Meta;
+    protected $meta;
     /**
      * @var int
      */
-    protected $Port;
+    protected $port;
     /**
      * @var string
      */
-    protected $Kind;
+    protected $kind;
     /**
      * @var string
      */
-    protected $ProxyDestination;
+    protected $proxyDestination;
     /**
      * @var string
      */
-    protected $Proxy;
+    protected $proxy;
     /**
      * @var string
      */
-    protected $Connect;
+    protected $connect;
     /**
      * @var string
      */
-    protected $Check;
+    protected $check;
     /**
      * @var array<$Check>
      */
-    protected $Checks;
+    protected $checks;
     /**
      * @var bool
      */
-    protected $EnableTagOverride;
+    protected $enableTagOverride;
     /**
      * @var string
      */
-    protected $Weights;
+    protected $weights;
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getName(): ?string
+    public function getName ()
     {
-        return $this->Name;
+        return $this->name;
     }
 
     /**
-     * @param string $Name
+     * @param string $name
      */
-    public function setName(string $Name): void
+    public function setName ($name)
     {
-        $this->Name = $Name;
+        $this->name = $name;
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getID(): ?string
+    public function getId ()
     {
-        return $this->ID;
+        return $this->id;
     }
 
     /**
-     * @param string $ID
+     * @param string $id
      */
-    public function setID(string $ID): void
+    public function setId ($id)
     {
-        $this->ID = $ID;
+        $this->id = $id;
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getTags(): ?string
+    public function getTags ()
     {
-        return $this->Tags;
+        return $this->tags;
     }
 
     /**
-     * @param string $Tags
+     * @param string $tags
      */
-    public function setTags(string $Tags): void
+    public function setTags ($tags)
     {
-        $this->Tags = $Tags;
+        $this->tags = $tags;
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getAddress(): ?string
+    public function getAddress ()
     {
-        return $this->Address;
+        return $this->address;
     }
 
     /**
-     * @param string $Address
+     * @param string $address
      */
-    public function setAddress(string $Address): void
+    public function setAddress ($address)
     {
-        $this->Address = $Address;
+        $this->address = $address;
     }
 
     /**
-     * @return array|null
+     * @return array
      */
-    public function getTaggedAddresses(): ?array
+    public function getTaggedAddresses ()
     {
-        return $this->TaggedAddresses;
+        return $this->taggedAddresses;
     }
 
     /**
-     * @param array $TaggedAddresses
+     * @param array $taggedAddresses
      */
-    public function setTaggedAddresses(array $TaggedAddresses): void
+    public function setTaggedAddresses ($taggedAddresses)
     {
-        $this->TaggedAddresses = $TaggedAddresses;
+        $this->taggedAddresses = $taggedAddresses;
     }
 
     /**
-     * @return array|null
+     * @return array
      */
-    public function getMeta(): ?array
+    public function getMeta ()
     {
-        return $this->Meta;
+        return $this->meta;
     }
 
     /**
-     * @param array $Meta
+     * @param array $meta
      */
-    public function setMeta(array $Meta): void
+    public function setMeta ($meta)
     {
-        $this->Meta = $Meta;
+        $this->meta = json_encode($meta);
     }
 
     /**
-     * @return int|null
+     * @return int
      */
-    public function getPort(): ?int
+    public function getPort ()
     {
-        return $this->Port;
+        return $this->port;
     }
 
     /**
-     * @param int $Port
+     * @param int $port
      */
-    public function setPort(int $Port): void
+    public function setPort ($port)
     {
-        $this->Port = $Port;
+        $this->port = $port;
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getKind(): ?string
+    public function getKind ()
     {
-        return $this->Kind;
+        return $this->kind;
     }
 
     /**
-     * @param string $Kind
+     * @param string $kind
      */
-    public function setKind(string $Kind): void
+    public function setKind ($kind)
     {
-        $this->Kind = $Kind;
+        $this->kind = $kind;
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getProxyDestination(): ?string
+    public function getProxyDestination ()
     {
-        return $this->ProxyDestination;
+        return $this->proxyDestination;
     }
 
     /**
-     * @param string $ProxyDestination
+     * @param string $proxyDestination
      */
-    public function setProxyDestination(string $ProxyDestination): void
+    public function setProxyDestination ($proxyDestination)
     {
-        $this->ProxyDestination  =$ProxyDestination;
+        $this->proxyDestination = $proxyDestination;
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getProxy(): ?string
+    public function getProxy ()
     {
-        return $this->Proxy;
+        return $this->proxy;
     }
 
     /**
-     * @param string $Proxy
+     * @param string $proxy
      */
-    public function setProxy(string $Proxy): void
+    public function setProxy ($proxy)
     {
-        $this->Proxy = $Proxy;
+        $this->proxy = $proxy;
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getConnect(): ?string
+    public function getConnect ()
     {
-        return $this->Connect;
+        return $this->connect;
     }
 
     /**
-     * @param string $Connect
+     * @param string $connect
      */
-    public function setConnect(string $Connect): void
+    public function setConnect ($connect)
     {
-        $this->Connect = $Connect;
+        $this->connect = $connect;
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getCheck(): ?string
+    public function getCheck ()
     {
-        return $this->Check;
+        return $this->check;
     }
 
     /**
-     * @param string $Check
+     * @param string $check
      */
-    public function setCheck(string $Check): void
+    public function setCheck ($check)
     {
-        $this->Check = $Check;
+        $this->check = json_encode($check);
     }
 
     /**
-     * @return array|null
+     * @return array
      */
-    public function getChecks(): ?array
+    public function getChecks ()
     {
-        return $this->Checks;
+        return $this->checks;
     }
 
     /**
-     * @param array $Checks
+     * @param array $checks
      */
-    public function setChecks(array $Checks): void
+    public function setChecks ($checks)
     {
-        $this->Checks = $Checks;
+        $this->checks = $checks;
     }
 
     /**
-     * @return bool|null
+     * @return bool
      */
-    public function getEnableTagOverride(): ?bool
+    public function isEnableTagOverride ()
     {
-        return $this->EnableTagOverride;
+        return $this->enableTagOverride;
     }
 
     /**
-     * @param bool $EnableTagOverride
+     * @param bool $enableTagOverride
      */
-    public function setEnableTagOverride(bool $EnableTagOverride): void
+    public function setEnableTagOverride ($enableTagOverride)
     {
-        $this->EnableTagOverride = $EnableTagOverride;
+        $this->enableTagOverride = $enableTagOverride;
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getWeights(): ?string
+    public function getWeights ()
     {
-        return $this->Weights;
+        return $this->weights;
     }
 
     /**
-     * @param string $Weights
+     * @param string $weights
      */
-    public function setWeights(string $Weights): void
+    public function setWeights ($weights)
     {
-        $this->Weights = $Weights;
+        $this->weights = json_encode($weights);
+    }
+
+    protected function setKeyMapping (): array
+    {
+        return [
+            'Name' => 'name',
+            'Id' => 'id',
+            'Tags' => 'tags',
+            'Address' => 'address',
+            'TaggedAddresses' => 'taggedAddresses',
+            'Meta' => 'meta',
+            'Port' => 'port',
+            'Kind' => 'kind',
+            'Proxy' => 'proxy',
+            'Connect' => 'connect',
+            'Check' => 'check',
+            'Checks' => 'checks',
+            'EnableTagOverride' => 'enableTagOverride',
+            'Weights' => 'weights'
+        ];
     }
 }

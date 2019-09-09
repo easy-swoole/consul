@@ -7,6 +7,7 @@
  */
 namespace EasySwoole\Consul;
 
+use EasySwoole\Consul\Exception\MissingRequiredParamsException;
 use EasySwoole\Consul\Request\Coordinate\Datacenters;
 use EasySwoole\Consul\Request\Coordinate\Nodes;
 use EasySwoole\Consul\Request\Coordinate\Node;
@@ -18,7 +19,6 @@ class Coordinates extends BaseFunc
      * Read WAN Coordinates
      * @param Datacenters $datacenters
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function datacenters(Datacenters $datacenters)
     {
@@ -29,7 +29,6 @@ class Coordinates extends BaseFunc
      * Read LAN Coordinates for all nodes
      * @param Nodes $nodes
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function nodes(Nodes $nodes)
     {
@@ -39,17 +38,17 @@ class Coordinates extends BaseFunc
     /**
      * Read LAN Coordinates for a node
      * @param Node $node
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function node(Node $node)
     {
-        $action = '';
-        if (!empty($node->getNode())) {
-            $action = $node->getNode();
-            $node->setNode('');
+        if (empty($node->getNode())) {
+            throw new MissingRequiredParamsException('Missing the required param: uuid.');
         }
-        $this->getJson($node, $action);
+        $node->setUrl(sprintf($node->getUrl(), $node->getNode()));
+        $node->setNode('');
+        $this->getJson($node);
     }
 
     /**
@@ -60,6 +59,14 @@ class Coordinates extends BaseFunc
      */
     public function update(Update $update)
     {
-        $this->putJSON($update);
+        if (empty($update->getDc())) {
+            $update->setUrl(substr($update->getUrl(), 0, strlen($update->getUrl()) -3));
+            $this->putJSON($update);
+        } else {
+            $update->setUrl(sprintf($update->getUrl(), $update->getDc()));
+            $update->setDc('');
+            $this->putJSON($update);
+        }
+
     }
 }

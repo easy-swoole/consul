@@ -7,10 +7,12 @@
  */
 namespace EasySwoole\Consul\Request\Operator\Autopilot;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Configuration extends SplBean
+class Configuration extends BaseCommand
 {
+    protected $url = 'operator/autopilot/configuration';
+
     /**
      * @var string
      */
@@ -26,32 +28,32 @@ class Configuration extends SplBean
     /**
      * @var bool
      */
-    protected $CleanupDeadServers;
+    protected $cleanupDeadServers;
 
     /**
      * @var string
      */
-    protected $LastContactThreshold;
+    protected $lastContactThreshold;
     /**
      * @var int
      */
-    protected $MaxTrailingLogs;
+    protected $maxTrailingLogs;
     /**
      * @var string
      */
-    protected $ServerStabilizationTime;
+    protected $serverStabilizationTime;
     /**
      * @var string
      */
-    protected $RedundancyZoneTag;
+    protected $redundancyZoneTag;
     /**
      * @var bool
      */
-    protected $DisableUpgradeMigration;
+    protected $disableUpgradeMigration;
     /**
      * @var string
      */
-    protected $UpgradeVersionTag;
+    protected $upgradeVersionTag;
     /**
      * @return null|string
      */
@@ -101,114 +103,127 @@ class Configuration extends SplBean
     }
 
     /**
-     * @return bool|null
+     * @return bool
      */
-    public function getCleanupDeadServers(): ?bool 
+    public function isCleanupDeadServers ()
     {
-        return $this->CleanupDeadServers;
+        return $this->cleanupDeadServers;
     }
 
     /**
-     * @param bool $CleanupDeadServers
+     * @param bool $cleanupDeadServers
      */
-    public function setCleanupDeadServers(bool $CleanupDeadServers): void 
+    public function setCleanupDeadServers ($cleanupDeadServers)
     {
-        $this->CleanupDeadServers = $CleanupDeadServers;
+        $this->cleanupDeadServers = $cleanupDeadServers;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getLastContactThreshold(): ?string 
+    public function getLastContactThreshold ()
     {
-        return $this->LastContactThreshold;
+        return $this->lastContactThreshold;
     }
 
     /**
-     * @param string $LastContactThreshold
+     * @param string $lastContactThreshold
      */
-    public function setLastContactThreshold(string $LastContactThreshold): void 
+    public function setLastContactThreshold ($lastContactThreshold)
     {
-        $this->LastContactThreshold = $LastContactThreshold;
+        $this->lastContactThreshold = $lastContactThreshold;
     }
 
     /**
-     * @return int|null
+     * @return int
      */
-    public function getMaxTrailingLogs(): ?int
+    public function getMaxTrailingLogs ()
     {
-        return $this->MaxTrailingLogs;
+        return $this->maxTrailingLogs;
     }
 
     /**
-     * @param int $MaxTrailingLogs
+     * @param int $maxTrailingLogs
      */
-    public function setMaxTrailingLogs(int $MaxTrailingLogs): void 
+    public function setMaxTrailingLogs ($maxTrailingLogs)
     {
-        $this->MaxTrailingLogs = $MaxTrailingLogs;
+        $this->maxTrailingLogs = $maxTrailingLogs;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getServerStabilizationTime(): ?string 
+    public function getServerStabilizationTime ()
     {
-        return $this->ServerStabilizationTime;
+        return $this->serverStabilizationTime;
     }
 
     /**
-     * @param string $ServerStabilizationTime
+     * @param string $serverStabilizationTime
      */
-    public function setServerStabilizationTime(string $ServerStabilizationTime): void 
+    public function setServerStabilizationTime ($serverStabilizationTime)
     {
-        $this->ServerStabilizationTime = $ServerStabilizationTime;
+        $this->serverStabilizationTime = $serverStabilizationTime;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getRedundancyZoneTag(): ?string 
+    public function getRedundancyZoneTag ()
     {
-        return $this->RedundancyZoneTag;
+        return $this->redundancyZoneTag;
     }
 
     /**
-     * @param string $RedundancyZoneTag
+     * @param string $redundancyZoneTag
      */
-    public function setRedundancyZoneTag(string $RedundancyZoneTag): void 
+    public function setRedundancyZoneTag ($redundancyZoneTag)
     {
-        $this->RedundancyZoneTag = $RedundancyZoneTag;
+        $this->redundancyZoneTag = $redundancyZoneTag;
     }
 
     /**
-     * @return bool|null
+     * @return bool
      */
-    public function getDisableUpgradeMigration(): ?bool 
+    public function isDisableUpgradeMigration ()
     {
-        return $this->DisableUpgradeMigration;
+        return $this->disableUpgradeMigration;
     }
 
     /**
-     * @param bool $DisableUpgradeMigration
+     * @param bool $disableUpgradeMigration
      */
-    public function setDisableUpgradeMigration(bool $DisableUpgradeMigration): void 
+    public function setDisableUpgradeMigration ($disableUpgradeMigration)
     {
-        $this->DisableUpgradeMigration = $DisableUpgradeMigration;
+        $this->disableUpgradeMigration = $disableUpgradeMigration;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getUpgradeVersionTag(): ?string
+    public function getUpgradeVersionTag ()
     {
-        return $this->UpgradeVersionTag;
+        return $this->upgradeVersionTag;
     }
 
     /**
-     * @param string $UpgradeVersionTag
+     * @param string $upgradeVersionTag
      */
-    public function setUpgradeVersionTag(string $UpgradeVersionTag): void
+    public function setUpgradeVersionTag ($upgradeVersionTag)
     {
-        $this->UpgradeVersionTag = $UpgradeVersionTag;
+        $this->upgradeVersionTag = $upgradeVersionTag;
+    }
+
+    protected function setKeyMapping (): array
+    {
+        return [
+            'CleanupDeadServers' => 'cleanupDeadServers',
+            'LastContactThreshold' => 'lastContactThreshold',
+            'MaxTrailingLogs' => 'maxTrailingLogs',
+            'ServerStabilizationTime' => 'serverStabilizationTime',
+            'RedundancyZoneTag' => 'redundancyZoneTag',
+            'DisableUpgradeMigration' => 'disableUpgradeMigration',
+            'UpgradeVersionTag' => 'upgradeVersionTag',
+        ];
     }
 }

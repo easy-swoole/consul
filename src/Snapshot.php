@@ -15,7 +15,6 @@ class Snapshot extends BaseFunc
      * Generate Snapshot
      * @param snap $snapshot
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function generate(snap $snapshot) {
         $this->getJson($snapshot);
@@ -25,7 +24,6 @@ class Snapshot extends BaseFunc
      * Restore Snapshot
      * @param snap $snapshot
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function restore(snap $snapshot)
     {

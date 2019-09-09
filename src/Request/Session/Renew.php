@@ -7,10 +7,12 @@
  */
 namespace EasySwoole\Consul\Request\Session;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Renew extends SplBean
+class Renew extends BaseCommand
 {
+    protected $url = 'session/renew/%s';
+
     /**
      * @var string
      */

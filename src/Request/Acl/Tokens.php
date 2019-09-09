@@ -7,10 +7,12 @@
  */
 namespace EasySwoole\Consul\Request\Acl;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Tokens extends SplBean
+class Tokens extends BaseCommand
 {
+    protected $url = 'acl/tokens';
+
     /**
      * @var string
      */

@@ -26,39 +26,39 @@ class ConnectTest extends TestCase
         parent::__construct($name, $data, $dataName);
     }
 
-    function testRoots()
-    {
-        $roots = new Roots();
-        $this->consul->connect()->roots($roots);
-        $this->assertEquals('x','x');
-    }
-
-    function testConfiguration()
-    {
-        $configuration = new Configuration();
-        $this->consul->connect()->configuration($configuration);
-        $this->assertEquals('x','x');
-    }
-
-    function testUpdateConfiguration()
-    {
-        $configuration = new Configuration([
-            'Provider' => 'consul',
-            'Config' => [
-                'LeafCertTTL' => '72h'
-            ]
-        ]);
-        $this->consul->connect()->updateConfiguration($configuration);
-        $this->assertEquals('x','x');
-    }
-
+//    function testRoots()
+//    {
+//        $roots = new Roots();
+//        $this->consul->connect()->roots($roots);
+//        $this->assertEquals('x','x');
+//    }
+//
+//    function testConfiguration()
+//    {
+//        $configuration = new Configuration();
+//        $this->consul->connect()->configuration($configuration);
+//        $this->assertEquals('x','x');
+//    }
+//
+//    function testUpdateConfiguration()
+//    {
+//        $configuration = new Configuration([
+//            'Provider' => 'consul',
+//            'Config' => [
+//                'LeafCertTTL' => '72h'
+//            ]
+//        ]);
+//        $this->consul->connect()->updateConfiguration($configuration);
+//        $this->assertEquals('x','x');
+//    }
+//
     function testIntentions()
     {
         $intentions = new Intentions([
             'SourceName' => 'web',
             'DestinationName' => 'db',
             'SourceType' => 'consul',
-            'Action' => 'allow'
+            'action' => 'allow'
         ]);
         $this->consul->connect()->intentions($intentions);
         $this->assertEquals('x','x');
@@ -67,7 +67,7 @@ class ConnectTest extends TestCase
     function testReadIntentions()
     {
         $intentions = new Intentions([
-            'uuid' => '',
+            'uuid' => 'e9ebc19f-d481-42b1-4871-4d298d3acd5c',
         ]);
         $this->consul->connect()->readIntention($intentions);
         $this->assertEquals('x','x');
@@ -84,7 +84,7 @@ class ConnectTest extends TestCase
     {
         $intentions = new Intentions([
             'uuid' => 'b40faaf3-34aa-349f-3cf2-f5d720240662',
-            'Description' => 'just a test description',
+            'description' => 'just a test description',
             'SourceName' => 'aa',
             'DestinationName' => 'bb',
             'Action' => 'allow'
@@ -109,6 +109,17 @@ class ConnectTest extends TestCase
             'destination' => 'db',
         ]);
         $this->consul->connect()->check($intentions);
+        $this->assertEquals('x','x');
+    }
+
+
+    function testMatch()
+    {
+        $intentions = new Intentions\Match([
+            'by' => 'source',
+            'name' => 'web',
+        ]);
+        $this->consul->connect()->match($intentions);
         $this->assertEquals('x','x');
     }
 }

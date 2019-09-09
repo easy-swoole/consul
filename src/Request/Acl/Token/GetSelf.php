@@ -7,10 +7,12 @@
  */
 namespace EasySwoole\Consul\Request\Acl\Token;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class GetSelf extends SplBean
+class GetSelf extends BaseCommand
 {
+    protected $url = 'acl/token/self';
+
     protected $token;
 
     /**

@@ -31,7 +31,8 @@ class HealthTest extends TestCase
     function testNode()
     {
         $node = new Node([
-            'node' => '2456c2850382'
+            'node' => '2456c2850382',
+            'dc' => 'dc1',
         ]);
         $this->consul->health()->node($node);
         $this->assertEquals('x','x');
@@ -40,7 +41,8 @@ class HealthTest extends TestCase
     function testChecks()
     {
         $checks = new Checks([
-            'service' => 'consul'
+            'service' => 'consul',
+            'node_meta' => 'node-meta',
         ]);
         $this->consul->health()->checks($checks);
         $this->assertEquals('x','x');
@@ -49,7 +51,8 @@ class HealthTest extends TestCase
     function testService()
     {
         $service = new Service([
-            'service' => 'consul'
+            'service' => 'consul',
+            'dc' => 'dc1',
         ]);
         $this->consul->health()->service($service);
         $this->assertEquals('x','x');

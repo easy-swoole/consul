@@ -7,10 +7,12 @@
  */
 namespace EasySwoole\Consul\Request\Operator\Autopilot;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Health extends SplBean
+class Health extends BaseCommand
 {
+    protected $url = 'operator/autopilot/health';
+
     /**
      * @var string
      */
