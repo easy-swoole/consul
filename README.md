@@ -11,6 +11,9 @@
 * 使用下面的接口方式，都需要先给Consul注入Config配置。
 * 接口只展示用法，具体的命名空间需要开发者自己引入
 ```php
+use EasySwoole\Consul\Config;
+use EasySwoole\Consul\Consul;
+
 // config默认  127.0.0.1:8500/v1
 $config = new Config([
     'IP'       => '127.0.0.1',
