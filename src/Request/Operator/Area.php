@@ -7,7 +7,7 @@
  */
 namespace EasySwoole\Consul\Request\Operator;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
 /**
  * Sample
@@ -20,8 +20,10 @@ use EasySwoole\Spl\SplBean;
  * Class Area
  * @package EasySwoole\Consul\Request\Operator
  */
-class Area extends SplBean
+class Area extends BaseCommand
 {
+    protected $url = 'operator/area/%s';
+
     /**
      * @var string
      */
@@ -29,23 +31,24 @@ class Area extends SplBean
     /**
      * @var string
      */
-    protected $PeerDatacenter;
+    protected $peerDatacenter;
     /**
      * @var array
      */
-    protected $RetryJoin;
+    protected $retryJoin;
     /**
      * @var bool
      */
-    protected $UseTLS;
+    protected $useTLS;
     /**
      * @var string
      */
     protected $uuid;
+
     /**
-     * @return null|string
+     * @return string
      */
-    public function getDc(): ?string
+    public function getDc ()
     {
         return $this->dc;
     }
@@ -53,63 +56,63 @@ class Area extends SplBean
     /**
      * @param string $dc
      */
-    public function setDc(string $dc): void
+    public function setDc ($dc)
     {
         $this->dc = $dc;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getPeerDatacenter(): ?string
+    public function getPeerDatacenter ()
     {
-        return $this->PeerDatacenter;
+        return $this->peerDatacenter;
     }
 
     /**
-     * @param string $PeerDatacenter
+     * @param string $peerDatacenter
      */
-    public function setPeerDatacenter(string $PeerDatacenter): void
+    public function setPeerDatacenter ($peerDatacenter)
     {
-        $this->PeerDatacenter = $PeerDatacenter;
+        $this->peerDatacenter = $peerDatacenter;
     }
 
     /**
-     * @return array|null
+     * @return array
      */
-    public function getRetryJoin(): ?array
+    public function getRetryJoin ()
     {
-        return $this->RetryJoin;
+        return $this->retryJoin;
     }
 
     /**
-     * @param array $RetryJoin
+     * @param array $retryJoin
      */
-    public function setRetryJoin(array $RetryJoin): void
+    public function setRetryJoin ($retryJoin)
     {
-        $this->RetryJoin = $RetryJoin;
+        $this->retryJoin = $retryJoin;
     }
 
     /**
-     * @return bool|null
+     * @return bool
      */
-    public function getUseTLS(): ?bool
+    public function isUseTLS ()
     {
-        return $this->UseTLS;
+        return $this->useTLS;
     }
 
     /**
-     * @param bool $UseTLS
+     * @param bool $useTLS
      */
-    public function setUseTLS(bool $UseTLS): void
+    public function setUseTLS ($useTLS)
     {
-        $this->UseTLS = $UseTLS;
+        $this->useTLS = $useTLS;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getUuid(): ?string
+    public function getUuid ()
     {
         return $this->uuid;
     }
@@ -117,8 +120,16 @@ class Area extends SplBean
     /**
      * @param string $uuid
      */
-    public function setUuid(string $uuid): void
+    public function setUuid ($uuid)
     {
         $this->uuid = $uuid;
+    }
+    protected function setKeyMapping (): array
+    {
+        return [
+            'PeerDatacenter' => 'peerDatacenter',
+            'RetryJoin' => 'retryJoin',
+            'UseTLS' => 'useTLS',
+        ];
     }
 }

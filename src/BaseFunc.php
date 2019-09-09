@@ -1,6 +1,7 @@
 <?php
 namespace EasySwoole\Consul;
 
+use EasySwoole\Consul\Request\BaseCommand;
 use EasySwoole\HttpClient\Exception\InvalidUrl;
 use EasySwoole\HttpClient\HttpClient;
 use EasySwoole\Spl\SplBean;
@@ -23,48 +24,21 @@ class BaseFunc
     }
 
     /**
-     * @param SplBean $bean
-     * @param string $action
-     * @param bool $defaultRoot
-     * @return bool|null
+     * @param BaseCommand $bean
+     * @return mixed|null
      * @throws InvalidUrl
-     * @throws \ReflectionException
+     * @throws \Exception
      */
-    protected function putJSON(SplBean $bean, $action = "", $defaultRoot = true, array $useReflection = [], $urlEncode = false)
+    protected function putJSON(BaseCommand $bean)
     {
+        $url = $this->getUrl($bean);
+        $data = $this->toRequestJson($bean);
+        $http = new HttpClient($url);
 
-        if (!isset($useReflection['reflection'])) {
-            $url = $this->getRoute($bean, $action, $defaultRoot);
-        } else {
-            $url = $useReflection['url'];
-        }
-
-        if ($urlEncode) {
-            $url .= '?' . http_build_query($bean->toArrayWithMapping());
-            $http = new HttpClient($url);
-        } else {
-            $param = $bean->__toString();
-            $http = new HttpClient($url);
-        }
         if ($http) {
             try{
-                if ($urlEncode) {
-                    $ret = $http->put()->getBody();
-                } else {
-                    $ret = $http->put($param)->getBody();
-                }
-                if (isset($ret) && !empty($ret)) {
-                    $json = json_decode($ret,true);
-                    if ($json) {
-                        if (is_array($json)) {
-                            // 存bean。基本上config，也可能是单独方法的params
-                            return true;
-                        }
-                        return true; // 返回字符串或者boolean
-                    } else {
-                        return null;
-                    }
-                }
+                $ret = $http->put($data)->getBody();
+                return !empty($ret) ? json_decode($ret, true): null;
             } catch (\Exception $exception) {
                 throw new \Exception($exception->getMessage());
             }
@@ -74,26 +48,19 @@ class BaseFunc
     }
 
     /**
-     * @param SplBean $bean
-     * @param string $action
-     * @param bool $defaultRoot
-     * @param array $useReflection $useRef = ['reflection' => true,'url' => 'url']
-    ];
-     * @return bool|null
+     * @param BaseCommand $bean
+     * @param array       $headers
+     * @return mixed|null
      * @throws InvalidUrl
-     * @throws \ReflectionException
+     * @throws \Exception
      */
-    protected function getJson(SplBean $bean, $action="", $defaultRoot = true, array $useReflection = [], array $headers=[])
+    protected function getJson(BaseCommand $bean, array $headers = [])
     {
-        if (!isset($useReflection['reflection'])) {
-            $url = $this->getRoute($bean, $action, $defaultRoot);
-        } else {
-            $url = $useReflection['url'];
-        }
-
-        $param = http_build_query($bean->toArrayWithMapping());
-        $url .= '?' . $param;
+        $url = $this->getUrl($bean);
+        $data = $this->toRequestParam($bean);
+        $url = $data ? $url . '?' . $data : $url;
         $http = new HttpClient($url);
+
         if ($http) {
             try{
                 if (isset($headers) && !empty($headers)) {
@@ -102,18 +69,7 @@ class BaseFunc
                     }
                 }
                 $ret = $http->get()->getBody();
-                if (isset($ret) && !empty($ret)) {
-                    $json = json_decode($ret,true);
-                    if ($json) {
-                        if (is_array($json)) {
-                            // 存bean。基本上config，也可能是单独方法的params
-                            return true;
-                        }
-                        return true; // 返回字符串或者boolean
-                    } else {
-                        return null;
-                    }
-                }
+                return !empty($ret) ? json_decode($ret, true): null;
             } catch (\Exception $exception) {
                 throw new \Exception($exception->getMessage());
             }
@@ -123,24 +79,18 @@ class BaseFunc
     }
 
     /**
-     * @param SplBean $bean
-     * @param string $action
-     * @param array $headers
-     * @param bool $defaultRoot
-     * @return bool|null
+     * @param BaseCommand $bean
+     * @param array   $headers
+     * @return mixed|null
      * @throws InvalidUrl
-     * @throws \ReflectionException
+     * @throws \Exception
      */
-    protected function postJson(SplBean $bean, $action="", array $headers=[], $defaultRoot = true, array $useReflection = [])
+    protected function postJson(BaseCommand $bean, array $headers = [])
     {
-        if (!isset($useReflection['reflection'])) {
-            $url = $this->getRoute($bean, $action, $defaultRoot);
-        } else {
-            $url = $useReflection['url'];
-        }
-        $param = json_encode($bean->toArrayWithMapping(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-
+        $url = $this->getUrl($bean);
+        $data = $this->toRequestJson($bean);
         $http = new HttpClient($url);
+
         if ($http) {
             try{
                 if (isset($headers) && !empty($headers)) {
@@ -148,19 +98,8 @@ class BaseFunc
                         $http->setHeader($headerKey, $headerVal);
                     }
                 }
-                $ret = $http->postJson($param)->getBody();
-                if (isset($ret) && !empty($ret)) {
-                    $json = json_decode($ret,true);
-                    if ($json) {
-                        if (is_array($json)) {
-                            // 存bean。基本上config，也可能是单独方法的params
-                            return true;
-                        }
-                        return true; // 返回字符串或者boolean
-                    } else {
-                        return null;
-                    }
-                }
+                $ret = $http->postJson($data)->getBody();
+                return !empty($ret) ? json_decode($ret, true): null;
             } catch (\Exception $exception) {
                 throw new \Exception($exception->getMessage());
             }
@@ -170,25 +109,18 @@ class BaseFunc
     }
 
     /**
-     * @param SplBean $bean
-     * @param string $action
-     * @param array $headers
-     * @param bool $defaultRoot
-     * @return bool|null
+     * @param BaseCommand $bean
+     * @param array   $headers
+     * @return mixed|null
      * @throws InvalidUrl
-     * @throws \ReflectionException
+     * @throws \Exception
      */
-    protected function deleteJson(SplBean $bean, $action="", array $headers=[], $defaultRoot = true, array $useReflection = [])
+    protected function deleteJson(BaseCommand $bean, array $headers=[])
     {
-        if (!isset($useReflection['reflection'])) {
-            $url = $this->getRoute($bean, $action, $defaultRoot);
-        } else {
-            $url = $useReflection['url'];
-        }
-
-        $param = json_encode($bean->toArrayWithMapping(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-
+        $url = $this->getUrl($bean);
+        $data = $this->toRequestJson($bean);
         $http = new HttpClient($url);
+
         if ($http) {
             try{
                 if (isset($headers) && !empty($headers)) {
@@ -197,18 +129,7 @@ class BaseFunc
                     }
                 }
                 $ret = $http->delete()->getBody();
-                if (isset($ret) && !empty($ret)) {
-                    $json = json_decode($ret,true);
-                    if ($json) {
-                        if (is_array($json)) {
-                            // 存bean。基本上config，也可能是单独方法的params
-                            return true;
-                        }
-                        return true; // 返回字符串或者boolean
-                    } else {
-                        return null;
-                    }
-                }
+                return !empty($ret) ? json_decode($ret, true): null;
             } catch (\Exception $exception) {
                 throw new \Exception($exception->getMessage());
             }
@@ -217,39 +138,40 @@ class BaseFunc
         }
     }
 
-    /**
-     * @param SplBean $bean
-     * @return string
-     * @throws \ReflectionException
-     */
-    private function getRoute(SplBean $bean, $action = "", $defaultRoot = true)
+    private function getUrl(BaseCommand $bean): string
     {
-        $beanRoute = new \ReflectionClass($bean);
-        if (empty($beanRoute)) {
-            throw new \ReflectionException(static::class);
-        }
-        if ($defaultRoot) {
-            $route = substr($beanRoute->name, strpos($beanRoute->name,'\\') + 1);
-            $route = substr($route, strpos($route,'\\') + 1);
-            $route = substr($route, strpos($route,'\\') + 1);
-            $route = strtolower(str_replace('\\','/',$route));
-            $this->route .= $route;
-            if (isset($action) && !empty($action)) {
-                $this->route .= '/' . $action;
+        return $this->route . $bean->getUrl();
+    }
+
+    /**
+     * 处理请求Request，过滤null值
+     * @param SplBean $request
+     * @return string
+     */
+    private function toRequestParam(BaseCommand $request): string
+    {
+        $data = array_filter($request->toArrayWithMapping(), function ($item) {
+            // 只过滤null和空值
+            if ($item === '' || $item === null) {
+                return false;
             }
-        } else {
-            $lastRoute = substr($beanRoute->name, strripos($beanRoute->name,'\\') + 1);
-            $route = substr($beanRoute->name, strpos($beanRoute->name,'\\') + 1);
-            $route = substr($route, strpos($route,'\\') + 1);
-            $route = substr($route, strpos($route,'\\') + 1);
-            $route = substr($route, 0, strripos($route,'\\') + 1);
-            if (isset($action) && !empty($action)) {
-                $route .= $action;
+            return true;
+        });
+        unset($data['url']);
+        return $data ? http_build_query($data) : '';
+    }
+
+    private function toRequestJson(BaseCommand $request): ?string
+    {
+        $data = array_filter($request->toArrayWithMapping(), function ($item) {
+            // 只过滤null和空值
+            if ($item === '' || $item === null) {
+                return false;
             }
-            $route .= '/' . $lastRoute;
-            $route = strtolower(str_replace('\\','/',$route));
-            $this->route .= $route;
-        }
-        return $this->route;
+            return true;
+        });
+        unset($data['url']);
+
+        return $data ? json_encode($data) : null;
     }
 }

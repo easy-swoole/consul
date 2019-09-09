@@ -7,10 +7,12 @@
  */
 namespace EasySwoole\Consul\Request\Operator;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Segment extends SplBean
+class Segment extends BaseCommand
 {
+    protected $url = 'operator/segment';
+
     /**
      * @var string
      */

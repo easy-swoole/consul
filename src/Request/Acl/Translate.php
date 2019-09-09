@@ -7,10 +7,12 @@
  */
 namespace EasySwoole\Consul\Request\Acl;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Translate extends SplBean
+class Translate extends BaseCommand
 {
+    protected $url = 'acl/rules/translate/%s';
+
     protected $accessor_id;
 
     /**

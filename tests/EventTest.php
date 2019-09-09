@@ -29,6 +29,7 @@ class EventTest extends TestCase
     {
         $fire = new Fire([
             'name' => 'consul',
+            'dc' => 'dc1',
         ]);
         $this->consul->event()->fire($fire);
         $this->assertEquals('x','x');

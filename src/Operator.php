@@ -7,6 +7,7 @@
  */
 namespace EasySwoole\Consul;
 
+use EasySwoole\Consul\Exception\MissingRequiredParamsException;
 use EasySwoole\Consul\Request\Acl\Logout;
 use EasySwoole\Consul\Request\Operator\Area;
 use EasySwoole\Consul\Request\Operator\Autopilot\Configuration;
@@ -23,10 +24,10 @@ class Operator extends BaseFunc
      * Create Network Area
      * @param Area $area
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function area(Area $area)
     {
+        $area->setUrl(substr($area->getUrl(), 0, strlen($area->getUrl()) -3));
         $this->postJson($area);
     }
 
@@ -34,119 +35,87 @@ class Operator extends BaseFunc
      * List Network Areas OR List Specific Network Area
      * @param Area $area
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
-    public function getArea(Area $area)
+    public function areaList(Area $area)
     {
-        $action = '';
-        if (!empty($area->getUuid())) {
-            $action = $area->getUuid();
+        if (empty($area->getUuid())) {
+            $area->setUrl(substr($area->getUrl(), 0, strlen($area->getUrl()) -3));
+        } else {
+            $area->setUrl(sprintf($area->getUrl(), $area->getUuid()));
             $area->setUuid('');
         }
-        $this->getJson($area, $action);
+
+        $this->getJson($area);
     }
 
     /**
      * Update Network Area
      * @param Area $area
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function updateArea(Area $area)
     {
-        $action = '';
-        if (!empty($area->getUuid())) {
-            $action = $area->getUuid();
-            $area->setUuid('');
+        if (empty($area->getUuid())) {
+            throw new MissingRequiredParamsException('Missing the required param: uuid.');
         }
-        $this->putJSON($area, $action);
+        $area->setUrl(sprintf($area->getUrl(), $area->getUuid()));
+        $area->setUuid('');
+        $this->putJSON($area);
     }
 
     /**
      * Delete Network Area
      * @param Area $area
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function deleteArea(Area $area)
     {
-        $action = '';
-        if (!empty($area->getUuid())) {
-            $action = $area->getUuid();
-            $area->setUuid('');
+        if (empty($area->getUuid())) {
+            throw new MissingRequiredParamsException('Missing the required param: uuid.');
         }
-        $this->deleteJson($area, $action);
+        $area->setUrl(sprintf($area->getUrl(), $area->getUuid()));
+        $area->setUuid('');
+        $this->deleteJson($area);
     }
 
     /**
      * Join Network Area
      * @param Area $area
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function joinArea(Area $area)
     {
-        $action = '';
-        if (!empty($area->getUuid())) {
-            $action = $area->getUuid();
-            $area->setUuid('');
+        if (empty($area->getUuid())) {
+            throw new MissingRequiredParamsException('Missing the required param: uuid.');
         }
-        $beanRoute = new \ReflectionClass($area);
-        if (empty($beanRoute)) {
-            throw new \ReflectionException(static::class);
-        }
-        $route = substr($beanRoute->name, strpos($beanRoute->name,'\\') + 1);
-        $route = substr($route, strpos($route,'\\') + 1);
-        $route = substr($route, strpos($route,'\\') + 1);
-        if (isset($action) && !empty($action)) {
-            $route .= '/' . $action;
-        }
-        $route .= '/join';
-        $route = strtolower(str_replace('\\','/',$route));
-        $useRef = [
-            'reflection' => true,
-            'url' => $this->route.$route,
-        ];
-        $this->getJson($area, $action,true, $useRef);
+        $area->setUrl(sprintf($area->getUrl(), $area->getUuid() . '/join'));
+        $area->setUuid('');
+        $this->getJson($area);
     }
 
     /**
      * List Network Area Members
      * @param Area $area
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function membersArea(Area $area)
     {
-        $action = '';
-        if (!empty($area->getUuid())) {
-            $action = $area->getUuid();
-            $area->setUuid('');
+        if (empty($area->getUuid())) {
+            throw new MissingRequiredParamsException('Missing the required param: uuid.');
         }
-        $beanRoute = new \ReflectionClass($area);
-        if (empty($beanRoute)) {
-            throw new \ReflectionException(static::class);
-        }
-        $route = substr($beanRoute->name, strpos($beanRoute->name,'\\') + 1);
-        $route = substr($route, strpos($route,'\\') + 1);
-        $route = substr($route, strpos($route,'\\') + 1);
-        if (isset($action) && !empty($action)) {
-            $route .= '/' . $action;
-        }
-        $route .= '/members';
-        $route = strtolower(str_replace('\\','/',$route));
-        $useRef = [
-            'reflection' => true,
-            'url' => $this->route.$route,
-        ];
-        $this->getJson($area, $action,true, $useRef);
+        $area->setUrl(sprintf($area->getUrl(), $area->getUuid() . '/members'));
+        $area->setUuid('');
+        $this->getJson($area);
     }
 
     /**
      * Read Configuration
      * @param Configuration $configuration
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function getConfiguration(Configuration $configuration)
     {
@@ -157,7 +126,6 @@ class Operator extends BaseFunc
      * Update Configuration
      * @param Configuration $configuration
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function updateConfiguration(Configuration $configuration)
     {
@@ -168,7 +136,6 @@ class Operator extends BaseFunc
      * Read Health
      * @param Health $health
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function health(Health $health)
     {
@@ -179,7 +146,6 @@ class Operator extends BaseFunc
      * List Gossip Encryption Keys
      * @param Keyring $keyring
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function getKeyring(Keyring $keyring)
     {
@@ -189,33 +155,42 @@ class Operator extends BaseFunc
     /**
      * Add New Gossip Encryption Key
      * @param Keyring $keyring
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function addKeyring(Keyring $keyring)
     {
+        if (empty($keyring->getKey())) {
+            throw new MissingRequiredParamsException('Missing the required param: key.');
+        }
         $this->postJson($keyring);
     }
 
     /**
      * Change Primary Gossip Encryption Key
      * @param Keyring $keyring
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function changeKeyring(Keyring $keyring)
     {
+        if (empty($keyring->getKey())) {
+            throw new MissingRequiredParamsException('Missing the required param: key.');
+        }
         $this->putJSON($keyring);
     }
 
     /**
      * Delete Gossip Encryption Key
      * @param Keyring $keyring
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function deleteKeyring(Keyring $keyring)
     {
+        if (empty($keyring->getKey())) {
+            throw new MissingRequiredParamsException('Missing the required param: key.');
+        }
         $this->deleteJson($keyring);
     }
 
@@ -223,7 +198,6 @@ class Operator extends BaseFunc
      * Getting the Consul License
      * @param License $license
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function getLicense(License $license)
     {
@@ -234,7 +208,6 @@ class Operator extends BaseFunc
      * Updating the Consul License
      * @param License $license
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function updateLicense(License $license)
     {
@@ -245,7 +218,6 @@ class Operator extends BaseFunc
      * Resetting the Consul License
      * @param License $license
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function resetLicense(License $license)
     {
@@ -256,7 +228,6 @@ class Operator extends BaseFunc
      * Read Configuration
      * @param raftConfig $configuration
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function getRaftConfiguration(raftConfig $configuration)
     {
@@ -266,25 +237,22 @@ class Operator extends BaseFunc
     /**
      * Delete Raft Peer
      * @param Peer $peer
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function peer(Peer $peer)
     {
-        $action = '';
-        if (!empty($peer->getAddress()) || !empty($peer->getId())) {
-            $action = $peer->getAddress() ?? $peer->getId();
-            $peer->setAddress('');
-            $peer->setId('');
+        if (! empty($peer->getId()) || ! empty($peer->getAddress())) {
+            $this->deleteJson($peer);
+        } else {
+            throw new MissingRequiredParamsException('Missing the required param: id or address.');
         }
-        $this->deleteJson($peer, $action);
     }
 
     /**
      * List Network Segments
      * @param Segment $segment
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function segment(Segment $segment)
     {

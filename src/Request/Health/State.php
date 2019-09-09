@@ -1,10 +1,12 @@
 <?php
 namespace EasySwoole\Consul\Request\Health;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class State extends SplBean
+class State extends BaseCommand
 {
+    protected $url = 'health/state/%s';
+
     /**
      * allowance params: any,passing,warning,critical
      * @var

@@ -1,10 +1,12 @@
 <?php
 namespace EasySwoole\Consul\Request\Agent\Health\Service;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Name extends SplBean
+class Name extends BaseCommand
 {
+    protected $url = 'agent/health/service/name/%s';
+
     /**
      * @var string
      */

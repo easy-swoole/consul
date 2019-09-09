@@ -7,10 +7,13 @@
  */
 namespace EasySwoole\Consul\Request\Connect\Intentions;
 
+use EasySwoole\Consul\Request\BaseCommand;
 use EasySwoole\Spl\SplBean;
 
-class Check extends SplBean
+class Check extends BaseCommand
 {
+    protected $url = 'connect/intentions/check';
+
     /**
      * @var string
      */

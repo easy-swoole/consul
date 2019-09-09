@@ -1,10 +1,12 @@
 <?php
 namespace EasySwoole\Consul\Request\Health;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Connect extends SplBean
+class Connect extends BaseCommand
 {
+    protected $url = 'health/connect/%s';
+
     /**
      * @var
      */

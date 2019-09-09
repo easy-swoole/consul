@@ -1,28 +1,37 @@
 <?php
 namespace EasySwoole\Consul\Request\Agent\Connect;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Proxy extends SplBean
+class Proxy extends BaseCommand
 {
+    protected $url = 'agent/connect/proxy/%s';
+
     /**
      * @var string
      */
-    protected $ID;
+    protected $id;
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getID(): ?string
+    public function getId ()
     {
-        return $this->ID;
+        return $this->id;
     }
 
     /**
-     * @param string $ID
+     * @param string $id
      */
-    public function setID(string $ID): void
+    public function setId ($id)
     {
-        $this->ID = $ID;
+        $this->id = $id;
+    }
+
+    protected function setKeyMapping (): array
+    {
+        return [
+            'ID' => 'id',
+        ];
     }
 }

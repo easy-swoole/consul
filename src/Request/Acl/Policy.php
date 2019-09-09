@@ -7,7 +7,7 @@
  */
 namespace EasySwoole\Consul\Request\Acl;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
 /**
  * Sample
@@ -20,8 +20,10 @@ use EasySwoole\Spl\SplBean;
  * Class Policy
  * @package EasySwoole\Consul\Request\Acl
  */
-class  Policy extends SplBean
+class  Policy extends BaseCommand
 {
+    protected $url = 'acl/policy/%s';
+
     /**
      * @var string
      */
@@ -29,24 +31,24 @@ class  Policy extends SplBean
     /**
      * @var string
      */
-    protected $Name ;
+    protected $name ;
     /**
      * @var string
      */
-    protected $Description;
+    protected $description;
     /**
      * @var string
      */
-    protected $Rules;
+    protected $rules;
     /**
      * @var string
      */
-    protected $Datacenters;
+    protected $datacenters;
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getId(): ?string
+    public function getId ()
     {
         return $this->id;
     }
@@ -54,72 +56,84 @@ class  Policy extends SplBean
     /**
      * @param string $id
      */
-    public function setId(string $id): void
+    public function setId ($id)
     {
         $this->id = $id;
     }
+
     /**
-     * @return null|string
+     * @return string
      */
-    public function getName(): ?string
+    public function getName ()
     {
-        return $this->Name;
+        return $this->name;
     }
 
     /**
-     * @param string $Name
+     * @param string $name
      */
-    public function setName(string $Name): void
+    public function setName ($name)
     {
-        $this->Name = $Name;
+        $this->name = $name;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getDescription(): ?string
+    public function getDescription ()
     {
-        return $this->Description;
+        return $this->description;
     }
 
     /**
-     * @param string $Description
+     * @param string $description
      */
-    public function setDescription(string $Description): void
+    public function setDescription ($description)
     {
-        $this->Description = $Description;
+        $this->description = $description;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getRules(): ?string
+    public function getRules ()
     {
-        return $this->Rules;
+        return $this->rules;
     }
 
     /**
-     * @param string $Rules
-     * @return null|void
+     * @param string $rules
      */
-    public function setRules(string $Rules): void
+    public function setRules ($rules)
     {
-        $this->Rules = $Rules;
+        $this->rules = $rules;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getDatacenters(): ?string
+    public function getDatacenters ()
     {
-        return $this->Datacenters;
+        return $this->datacenters;
     }
 
     /**
-     * @param string $Datacenters
+     * @param string $datacenters
      */
-    public function setDatacenters(string $Datacenters): void
+    public function setDatacenters ($datacenters)
     {
-        $this->Datacenters = $Datacenters;
+        $this->datacenters = $datacenters;
     }
+
+    protected function setKeyMapping (): array
+    {
+        return [
+            'ID' => 'id',
+            'Name' => 'name',
+            'Description' => 'description',
+            'Rules' => 'rules',
+            'Datacenters' => 'datacenters',
+        ];
+    }
+
 }

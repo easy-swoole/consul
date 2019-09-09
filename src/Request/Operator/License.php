@@ -7,10 +7,12 @@
  */
 namespace EasySwoole\Consul\Request\Operator;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class License extends SplBean
+class License extends BaseCommand
 {
+    protected $url = 'operator/license';
+
     /**
      * @var string
      */

@@ -7,68 +7,79 @@
  */
 namespace EasySwoole\Consul\Request\Acl;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Login extends SplBean
+class Login extends BaseCommand
 {
+    protected $url = 'acl/login';
+
     /**
      * @var string
      */
-    protected $AuthMethod;
+    protected $authMethod;
     /**
      * @var string
      */
-    protected $BearerToken;
+    protected $bearerToken;
     /**
      * @var array
      */
-    protected $Meta;
+    protected $meta;
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getAuthMethod(): ?string
+    public function getAuthMethod ()
     {
-        return $this->AuthMethod;
+        return $this->authMethod;
     }
 
     /**
-     * @param string $AuthMethod
+     * @param string $authMethod
      */
-    public function setAuthMethod(string $AuthMethod): void
+    public function setAuthMethod ($authMethod)
     {
-        $this->AuthMethod = $AuthMethod;
+        $this->authMethod = $authMethod;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getBearerToken(): ?string
+    public function getBearerToken ()
     {
-        return $this->BearerToken;
+        return $this->bearerToken;
     }
 
     /**
-     * @param string $BearerToken
+     * @param string $bearerToken
      */
-    public function setBearerToken(string $BearerToken): void
+    public function setBearerToken ($bearerToken)
     {
-        $this->BearerToken = $BearerToken;
+        $this->bearerToken = $bearerToken;
     }
 
     /**
-     * @return array|null
+     * @return array
      */
-    public function getMeta(): ?array
+    public function getMeta ()
     {
-        return $this->Meta;
+        return $this->meta;
     }
 
     /**
-     * @param array $Meta
+     * @param array $meta
      */
-    public function setMeta(array $Meta): void
+    public function setMeta ($meta)
     {
-        $this->Meta = $Meta;
+        $this->meta = $meta;
+    }
+
+    protected function setKeyMapping (): array
+    {
+        return [
+            'AuthMethod' => 'authMethod',
+            'BearerToken' => 'bearerToken',
+            'Meta' => 'meta',
+        ];
     }
 }

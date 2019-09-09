@@ -7,9 +7,9 @@
  */
 namespace EasySwoole\Consul\Request\Acl;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Lists extends SplBean
+class Lists extends BaseCommand
 {
-
+    protected $url = 'acl/list';
 }

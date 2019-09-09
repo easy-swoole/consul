@@ -1,10 +1,12 @@
 <?php
 namespace EasySwoole\Consul\Request\Agent;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Token extends SplBean
+class Token extends BaseCommand
 {
+    protected $url = 'agent/token/%s';
+
     /**
      * Token format is 'adf4238a-882b-9ddc-4a9d-5b6758e4159e'
      * @var string
@@ -45,5 +47,10 @@ class Token extends SplBean
     public function setAction(string $action): void
     {
         $this->action = $action;
+    }
+
+    protected function setKeyMapping (): array
+    {
+        return ['Token' => 'token'];
     }
 }

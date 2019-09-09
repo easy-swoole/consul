@@ -7,10 +7,12 @@
  */
 namespace EasySwoole\Consul\Request\Connect\Intentions;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Match extends SplBean
+class Match extends BaseCommand
 {
+    protected $url = 'connect/intentions/match';
+
     /**
      * @var string
      */

@@ -7,6 +7,7 @@
  */
 namespace EasySwoole\Consul;
 
+use EasySwoole\Consul\Exception\MissingRequiredParamsException;
 use EasySwoole\Consul\Request\Config;
 
 class ConsulConfig extends BaseFunc
@@ -15,60 +16,66 @@ class ConsulConfig extends BaseFunc
      * Apply Configuration
      * @param Config $config
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function config(Config $config)
     {
+        $config->setUrl(substr($config->getUrl(), 0, strlen($config->getUrl()) -3));
         $this->putJSON($config);
     }
 
     /**
      * Get Configuration
      * @param Config $config
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function getConfig(Config $config)
     {
-        $action = '';
-        if (!empty($config->getName()) || !empty($config->getKind())) {
-            $action = $config->getKind() . '/' . $config->getName();
-            $config->setName('');
-            $config->setKind('');
+        if (empty($config->getKind())) {
+            throw new MissingRequiredParamsException('Missing the required param: Kind.');
         }
-        $this->getJson($config, $action);
+        if (empty($config->getName())) {
+            throw new MissingRequiredParamsException('Missing the required param: Name.');
+        }
+        $config->setUrl(sprintf($config->getUrl(), $config->getKind() . '/' . $config->getName()));
+        $config->setKind('');
+        $config->setName('');
+        $this->getJson($config);
     }
 
     /**
      * List Configurations
      * @param Config $config
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function listConfig(Config $config)
     {
-        $action = '';
-        if (!empty($config->getKind())) {
-            $action = $config->getKind();
-            $config->setKind('');
+        if (empty($config->getKind())) {
+            throw new MissingRequiredParamsException('Missing the required param: Kind.');
         }
-        $this->getJson($config, $action);
+        $config->setUrl(sprintf($config->getUrl(), $config->getKind()));
+        $config->setKind('');
+        $this->getJson($config);
     }
 
     /**
      * Delete Configuration
      * @param Config $config
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function deleteConfig(Config $config)
     {
-        $action = '';
-        if (!empty($config->getName()) || !empty($config->getKind())) {
-            $action = $config->getKind() . '/' . $config->getName();
-            $config->setName('');
-            $config->setKind('');
+        if (empty($config->getKind())) {
+            throw new MissingRequiredParamsException('Missing the required param: Kind.');
         }
-        $this->deleteJson($config, $action);
+        if (empty($config->getName())) {
+            throw new MissingRequiredParamsException('Missing the required param: Name.');
+        }
+        $config->setUrl(sprintf($config->getUrl(), $config->getKind() . '/' . $config->getName()));
+        $config->setKind('');
+        $config->setName('');
+        $this->deleteJson($config);
     }
 }

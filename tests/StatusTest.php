@@ -34,7 +34,9 @@ class StatusTest extends TestCase
 
     function testPeers()
     {
-        $peers = new Peers();
+        $peers = new Peers([
+            'dc' => 'dc1',
+        ]);
         $this->consul->status()->peers($peers);
         $this->assertEquals('x','x');
     }

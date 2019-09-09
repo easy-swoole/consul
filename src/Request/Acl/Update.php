@@ -7,88 +7,100 @@
  */
 namespace EasySwoole\Consul\Request\Acl;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Update extends SplBean
+class Update extends BaseCommand
 {
+    protected $url = 'acl/update';
+
     /**
      * @var string
      */
-    protected $ID;
+    protected $id;
     /**
      * @var string
      */
-    protected $Name;
+    protected $name;
     /**
      * @var string
      */
-    protected $Type;
+    protected $type;
     /**
      * @var string
      */
-    protected $Rules;
+    protected $rules;
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getID(): ?string
+    public function getId ()
     {
-        return $this->ID;
+        return $this->id;
     }
 
     /**
-     * @param string $ID
+     * @param string $id
      */
-    public function setID(string $ID): void
+    public function setId ($id)
     {
-        $this->ID = $ID;
+        $this->id = $id;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getName(): ?string
+    public function getName ()
     {
-        return $this->Name;
+        return $this->name;
     }
 
     /**
-     * @param string $Name
+     * @param string $name
      */
-    public function setName(string $Name): void
+    public function setName ($name)
     {
-        $this->Name = $Name;
+        $this->name = $name;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getType(): ?string
+    public function getType ()
     {
-        return $this->Type;
+        return $this->type;
     }
 
     /**
-     * @param string $Type
+     * @param string $type
      */
-    public function setType(string $Type): void
+    public function setType ($type)
     {
-        $this->Type = $Type;
+        $this->type = $type;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getRules(): ?string
+    public function getRules ()
     {
-        return $this->Rules;
+        return $this->rules;
     }
 
     /**
-     * @param string $Rules
+     * @param string $rules
      */
-    public function setRules(string $Rules): void
+    public function setRules ($rules)
     {
-        $this->Rules = $Rules;
+        $this->rules = $rules;
+    }
+
+    protected function setKeyMapping (): array
+    {
+        return [
+            'ID' => 'id',
+            'Name' => 'name',
+            'Type' => 'type',
+            'Rules' => 'rules',
+        ];
     }
 }

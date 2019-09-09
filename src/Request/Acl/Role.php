@@ -7,6 +7,7 @@
  */
 namespace EasySwoole\Consul\Request\Acl;
 
+use EasySwoole\Consul\Request\BaseCommand;
 use EasySwoole\Spl\SplBean;
 
 /**
@@ -38,8 +39,10 @@ use EasySwoole\Spl\SplBean;
  * Class Role
  * @package EasySwoole\Consul\Request\Acl
  */
-class Role extends SplBean
+class Role extends BaseCommand
 {
+    protected $url = 'acl/role/%s';
+
     /**
      * @var string
      */
@@ -47,24 +50,24 @@ class Role extends SplBean
     /**
      * @var string
      */
-    protected $Name;
+    protected $name;
     /**
      * @var string
      */
-    protected $Description;
+    protected $description;
     /**
      * @var array
      */
-    protected $Policies;
+    protected $policies;
     /**
      * @var array
      */
-    protected $ServiceIdentities;
+    protected $serviceIdentities;
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getid(): ?string
+    public function getId ()
     {
         return $this->id;
     }
@@ -72,71 +75,83 @@ class Role extends SplBean
     /**
      * @param string $id
      */
-    public function setid(string $id): void
+    public function setId ($id)
     {
         $this->id = $id;
     }
+
     /**
-     * @return null|string
+     * @return string
      */
-    public function getName(): ?string
+    public function getName ()
     {
-        return $this->Name;
+        return $this->name;
     }
 
     /**
-     * @param string $Name
+     * @param string $name
      */
-    public function setName(string $Name): void
+    public function setName ($name)
     {
-        $this->Name = $Name;
+        $this->name = $name;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getDescription(): ?string
+    public function getDescription ()
     {
-        return $this->Description;
+        return $this->description;
     }
 
     /**
-     * @param string $Description
+     * @param string $description
      */
-    public function setDescription(string $Description): void
+    public function setDescription ($description)
     {
-        $this->Description = $Description;
+        $this->description = $description;
     }
 
     /**
-     * @return array|null
+     * @return array
      */
-    public function getPolicies(): ?array
+    public function getPolicies ()
     {
-        return $this->Policies;
+        return $this->policies;
     }
 
     /**
-     * @param array $Policies
+     * @param array $policies
      */
-    public function setPolicies(array $Policies): void
+    public function setPolicies ($policies)
     {
-        $this->Policies = $Policies;
+        $this->policies = $policies;
     }
 
     /**
-     * @return array|null
+     * @return array
      */
-    public function getServiceIdentities(): ?array
+    public function getServiceIdentities ()
     {
-        return $this->ServiceIdentities;
+        return $this->serviceIdentities;
     }
 
     /**
-     * @param array $ServiceIdentities
+     * @param array $serviceIdentities
      */
-    public function setServiceIdentities(array $ServiceIdentities): void
+    public function setServiceIdentities ($serviceIdentities)
     {
-        $this->ServiceIdentities = $ServiceIdentities;
+        $this->serviceIdentities = $serviceIdentities;
+    }
+
+    protected function setKeyMapping (): array
+    {
+        return [
+            'ID' => 'id',
+            'Name' => 'name',
+            'Description' => 'description',
+            'Policies' => 'policies',
+            'ServiceIdentities' => 'serviceIdentities',
+        ];
     }
 }

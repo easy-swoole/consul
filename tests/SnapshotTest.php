@@ -26,7 +26,10 @@ class SnapshotTest extends TestCase
 
     function testGenerate()
     {
-        $generate = new Snapshot();
+        $generate = new Snapshot([
+            'dc' => 'dc1',
+            'stale' => 'true',
+        ]);
         $this->consul->snapshot()->generate($generate);;
         $this->assertEquals('x','x');
     }

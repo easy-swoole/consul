@@ -7,10 +7,12 @@
  */
 namespace EasySwoole\Consul\Request\Acl;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class CloneACLToken extends SplBean
+class CloneACLToken extends BaseCommand
 {
+    protected $url = 'acl/clone/%s';
+
     /**
      * @var string
      */

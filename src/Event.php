@@ -7,6 +7,7 @@
  */
 namespace EasySwoole\Consul;
 
+use EasySwoole\Consul\Exception\MissingRequiredParamsException;
 use EasySwoole\Consul\Request\Event\Fire;
 use EasySwoole\Consul\Request\Event\ListEvent;
 
@@ -15,41 +16,30 @@ class Event extends BaseFunc
     /**
      * Fire Event
      * @param Fire $fire
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function fire(Fire $fire)
     {
-        $action = '';
-        if (!empty($fire->getName())) {
-            $action = $fire->getName();
-            $fire->setName('');
+        if (empty($fire->getName())) {
+            throw new MissingRequiredParamsException('Missing the required param: Name.');
         }
-        $this->putJSON($fire, $action);
+        $fire->setUrl(sprintf($fire->getUrl(), $fire->getName()));
+        $fire->setName('');
+        $this->putJSON($fire);
     }
 
     /**
      * List Events
      * @param ListEvent $listEvent
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function listEvent(ListEvent $listEvent)
     {
-        $beanRoute = new \ReflectionClass($listEvent);
-        if (empty($beanRoute)) {
-            throw new \ReflectionException(static::class);
+        if (empty($listEvent->getName())) {
+            throw new MissingRequiredParamsException('Missing the required param: Name.');
         }
-        $route = substr($beanRoute->name, strpos($beanRoute->name,'\\') + 1);
-        $route = substr($route, strpos($route,'\\') + 1);
-        $route = substr($route, strpos($route,'\\') + 1);
-        $route = substr($route, 0, strripos($route,'\\') + 1);
-        $route .= 'list';
-        $route = strtolower(str_replace('\\','/',$route));
-        $useRef = [
-            'reflection' => true,
-            'url' => $this->route.$route,
-        ];
-        $this->getJson($listEvent, '',true,$useRef);
+        $this->getJson($listEvent);
     }
 }

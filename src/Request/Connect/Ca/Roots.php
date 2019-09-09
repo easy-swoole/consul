@@ -7,9 +7,9 @@
  */
 namespace EasySwoole\Consul\Request\Connect\Ca;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Roots extends SplBean
+class Roots extends BaseCommand
 {
-
+    protected $url = 'connect/ca/roots';
 }

@@ -1,9 +1,7 @@
 <?php
-
-
 namespace EasySwoole\Consul;
 
-
+use EasySwoole\Consul\Exception\MissingRequiredParamsException;
 use EasySwoole\Consul\Request\Health\Checks;
 use EasySwoole\Consul\Request\Health\Connect;
 use EasySwoole\Consul\Request\Health\Node;
@@ -15,85 +13,81 @@ class Health extends BaseFunc
     /**
      * List Checks for Node
      * @param Node $node
-     * @return bool
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function node(Node $node)
     {
-        $action = '';
-        if (!empty($node->getNode())) {
-            $action = $node->getNode();
-            $node->setNode('');
+        if (empty($node->getNode())) {
+            throw new MissingRequiredParamsException('Missing the required param: node.');
         }
-        $this->getJson($node, $action);
+        $node->setUrl(sprintf($node->getUrl(), $node->getNode()));
+        $node->setNode('');
+        $this->getJson($node);
     }
 
     /**
      * List Checks for Service
      * @param Checks $checks
-     * @return bool
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function checks(Checks $checks)
     {
-        $action = '';
-        if (!empty($checks->getService())) {
-            $action = $checks->getService();
-            $checks->setService('');
+        if (empty($checks->getService())) {
+            throw new MissingRequiredParamsException('Missing the required param: service.');
         }
-        $this->getJson($checks, $action);
+        $checks->setUrl(sprintf($checks->getUrl(), $checks->getService()));
+        $checks->setService('');
+        $this->getJson($checks);
     }
 
     /**
      * List Nodes for Service
      * @param Service $service
-     * @return bool
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function service(Service $service)
     {
-        $action = '';
-        if (!empty($service->getService())) {
-            $action = $service->getService();
-            $service->setService('');
+        if (empty($service->getService())) {
+            throw new MissingRequiredParamsException('Missing the required param: service.');
         }
-        $this->getJson($service, $action);
+        $service->setUrl(sprintf($service->getUrl(), $service->getService()));
+        $service->setService('');
+        $this->getJson($service);
     }
 
     /**
      * List Nodes for Connect-capable Service
      * Parameters and response format are the same as Health/service
      * @param Connect $connect
-     * @return bool
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function connect(Connect $connect)
     {
-        $action = '';
-        if (!empty($connect->getService())) {
-            $action = $connect->getService();
-            $connect->setService('');
+        if (empty($connect->getService())) {
+            throw new MissingRequiredParamsException('Missing the required param: service.');
         }
-        $this->getJson($connect, $action);
+        $connect->setUrl(sprintf($connect->getUrl(), $connect->getService()));
+        $connect->setService('');
+        $this->getJson($connect);
     }
 
     /**
      * List Checks in State
      * @param State $state
-     * @return bool
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function state(State $state)
     {
-        $action = '';
-        if (!empty($state->getState())) {
-            $action = $state->getState();
-            $state->setState('any'); // Default 'any', if not state.
+        if (empty($state->getState())) {
+            throw new MissingRequiredParamsException('Missing the required param: state.');
         }
-        $this->getJson($state, $action);
+        $state->setUrl(sprintf($state->getUrl(), $state->getState()));
+        $state->setState('');
+        $this->getJson($state);
     }
 }

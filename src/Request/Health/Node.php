@@ -1,10 +1,13 @@
 <?php
 namespace EasySwoole\Consul\Request\Health;
 
+use EasySwoole\Consul\Request\BaseCommand;
 use EasySwoole\Spl\SplBean;
 
-class Node extends SplBean
+class Node extends BaseCommand
 {
+    protected $url = 'health/node/%s';
+
     /**
      * @var
      */

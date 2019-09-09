@@ -7,8 +7,6 @@
  */
 namespace EasySwoole\Consul\Request;
 
-use EasySwoole\Spl\SplBean;
-
 /**
  * Sample
 [
@@ -69,8 +67,10 @@ use EasySwoole\Spl\SplBean;
  * Class Txn
  * @package EasySwoole\Consul\Request
  */
-class Txn extends SplBean
+class Txn extends BaseCommand
 {
+    protected $url = 'txn';
+
     /**
      * @var string
      */
@@ -78,24 +78,24 @@ class Txn extends SplBean
     /**
      * @var array
      */
-    protected $KV;
+    protected $kv;
     /**
      * @var array
      */
-    protected $Node;
+    protected $node;
     /**
      * @var array
      */
-    protected $Service;
+    protected $service;
     /**
      * @var array
      */
-    protected $Check;
+    protected $check;
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getDc(): ?string
+    public function getDc ()
     {
         return $this->dc;
     }
@@ -103,72 +103,82 @@ class Txn extends SplBean
     /**
      * @param string $dc
      */
-    public function setDc(string $dc): void
+    public function setDc ($dc)
     {
         $this->dc = $dc;
     }
 
     /**
-     * @return array|null
+     * @return array
      */
-    public function getKV(): ?array
+    public function getKv ()
     {
-        return $this->KV;
+        return $this->kv;
     }
 
     /**
-     * @param array $KV
+     * @param array $kv
      */
-    public function setKV(array $KV): void
+    public function setKv ($kv)
     {
-        $this->KV = $KV;
+        $this->kv = $kv;
     }
 
     /**
-     * @return array|null
+     * @return array
      */
-    public function getNode(): ?array
+    public function getNode ()
     {
-        return $this->Node;
+        return $this->node;
     }
 
     /**
-     * @param array $Node
+     * @param array $node
      */
-    public function setNode(array $Node): void
+    public function setNode ($node)
     {
-        $this->Node = $Node;
+        $this->node = $node;
     }
 
     /**
-     * @return array|null
+     * @return array
      */
-    public function getService(): ?array
+    public function getService ()
     {
-        return $this->Service;
+        return $this->service;
     }
 
     /**
-     * @param array $Service
+     * @param array $service
      */
-    public function setService(array $Service): void
+    public function setService ($service)
     {
-        $this->Service = $Service;
+        $this->service = $service;
     }
 
     /**
-     * @return array|null
+     * @return array
      */
-    public function getCheck(): ?array
+    public function getCheck ()
     {
-        return $this->Check;
+        return $this->check;
     }
 
     /**
-     * @param array $Check
+     * @param array $check
      */
-    public function setCheck(array $Check): void
+    public function setCheck ($check)
     {
-        $this->Check = $Check;
+        $this->check = $check;
+    }
+
+    protected function setKeyMapping (): array
+    {
+        return [
+            'KV' => 'kv',
+            'Node' => 'node',
+            'Service' => 'service',
+            'Check' => 'check',
+        ];
     }
 }

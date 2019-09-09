@@ -7,10 +7,12 @@
  */
 namespace EasySwoole\Consul\Request\Acl;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Logout extends SplBean
+class Logout extends BaseCommand
 {
+    protected $url = 'acl/logout';
+
     protected $token;
 
     /**

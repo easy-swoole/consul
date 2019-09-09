@@ -1,88 +1,100 @@
 <?php
 namespace EasySwoole\Consul\Request\Catalog;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Deregister extends SplBean
+class Deregister extends BaseCommand
 {
+    public $url='catalog/deregister';
+
     /**
      * @var string
      */
-    protected $Datacenter;
+    protected $datacenter;
     /**
      * @var string
      */
-    protected $Node;
+    protected $node;
     /**
      * @var string
      */
-    protected $CheckID;
+    protected $checkID;
     /**
      * @var string
      */
-    protected $ServiceID;
+    protected $serviceID;
 
     /**
      * @return string
      */
-    public function getDatacenter(): ?string
+    public function getDatacenter ()
     {
-        return $this->Datacenter;
+        return $this->datacenter;
     }
 
     /**
-     * @param string $Datacenter
+     * @param string $datacenter
      */
-    public function setDatacenter(string $Datacenter): void
+    public function setDatacenter ($datacenter)
     {
-        $this->Datacenter = $Datacenter;
-    }
-
-    /**
-     * @return string
-     */
-    public function getNode(): ?string
-    {
-        return $this->Node;
-    }
-
-    /**
-     * @param string $Node
-     */
-    public function setNode(string $Node): void
-    {
-        $this->Node = $Node;
+        $this->datacenter = $datacenter;
     }
 
     /**
      * @return string
      */
-    public function getCheckID(): ?string
+    public function getNode ()
     {
-        return $this->CheckID;
+        return $this->node;
     }
 
     /**
-     * @param string $CheckID
+     * @param string $node
      */
-    public function setCheckID(string $CheckID): void
+    public function setNode ($node)
     {
-        $this->CheckID = $CheckID;
+        $this->node = $node;
     }
 
     /**
      * @return string
      */
-    public function getServiceID(): ?string
+    public function getCheckID ()
     {
-        return $this->ServiceID;
+        return $this->checkID;
     }
 
     /**
-     * @param string $ServiceID
+     * @param string $checkID
      */
-    public function setServiceID(string $ServiceID): void
+    public function setCheckID ($checkID)
     {
-        $this->ServiceID = $ServiceID;
+        $this->checkID = $checkID;
+    }
+
+    /**
+     * @return string
+     */
+    public function getServiceID ()
+    {
+        return $this->serviceID;
+    }
+
+    /**
+     * @param string $serviceID
+     */
+    public function setServiceID ($serviceID)
+    {
+        $this->serviceID = $serviceID;
+    }
+
+    protected function setKeyMapping (): array
+    {
+        return [
+            'Node' => 'node',
+            'Datacenter' => 'datacenter',
+            'CheckID' => 'checkID',
+            'ServiceID' => 'serviceID',
+        ];
     }
 }

@@ -7,9 +7,9 @@
  */
 namespace EasySwoole\Consul\Request\Catalog;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Datacenters extends SplBean
+class Datacenters extends BaseCommand
 {
-
+    public $url='catalog/datacenters';
 }

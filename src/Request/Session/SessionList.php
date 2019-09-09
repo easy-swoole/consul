@@ -7,10 +7,12 @@
  */
 namespace EasySwoole\Consul\Request\Session;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class SessionList extends SplBean
+class SessionList extends BaseCommand
 {
+    protected $url = 'session/list';
+
     /**
      * @var string
      */

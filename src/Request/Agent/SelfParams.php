@@ -1,9 +1,9 @@
 <?php
 namespace EasySwoole\Consul\Request\Agent;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class SelfParams extends SplBean
+class SelfParams extends BaseCommand
 {
-
+    protected $url = 'agent/self';
 }

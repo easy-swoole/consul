@@ -15,7 +15,6 @@ class Transaction extends BaseFunc
      * Create Transaction
      * @param Txn $txn
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function create(Txn $txn)
     {

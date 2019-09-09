@@ -7,9 +7,9 @@
  */
 namespace EasySwoole\Consul\Request\Acl;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class AuthMethods extends SplBean
+class AuthMethods extends BaseCommand
 {
-
+    protected $url = 'acl/auth-methods';
 }

@@ -7,10 +7,12 @@
  */
 namespace EasySwoole\Consul\Request\Acl;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Roles extends SplBean
+class Roles extends BaseCommand
 {
+    protected $url = 'acl/roles';
+
     /**
      * @var string
      */

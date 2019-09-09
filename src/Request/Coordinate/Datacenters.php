@@ -7,9 +7,9 @@
  */
 namespace EasySwoole\Consul\Request\Coordinate;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Datacenters extends SplBean
+class Datacenters extends BaseCommand
 {
-
+    protected $url = 'coordinate/datacenters';
 }

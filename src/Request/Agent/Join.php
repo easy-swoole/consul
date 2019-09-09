@@ -1,10 +1,12 @@
 <?php
 namespace EasySwoole\Consul\Request\Agent;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Join extends SplBean
+class Join extends BaseCommand
 {
+    protected $url = 'agent/join/%s';
+
     /**
      * @var string
      */

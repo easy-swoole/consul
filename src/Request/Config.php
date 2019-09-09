@@ -7,14 +7,9 @@
  */
 namespace EasySwoole\Consul\Request;
 
-use EasySwoole\Spl\SplBean;
-
-class Config extends SplBean
+class Config extends BaseCommand
 {
-    public function __construct(array $data = null, $autoCreateProperty = false)
-    {
-        parent::__construct($data, $autoCreateProperty);
-    }
+    protected $url = 'config/%s';
 
     /**
      * @var string
@@ -28,15 +23,15 @@ class Config extends SplBean
      * Config Entry Kind ： ['service-defaults', 'proxy-defaults']
      * @var string
      */
-    protected $Kind;
+    protected $kind;
     /**
      * @var string
      */
-    protected $Name;
+    protected $name;
     /**
      * @var string
      */
-    protected $Protocol;
+    protected $protocol;
 
     /**
      * @return null|string
@@ -71,58 +66,61 @@ class Config extends SplBean
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getKind(): ?string
+    public function getKind ()
     {
-        return $this->Kind;
+        return $this->kind;
     }
 
     /**
      * @param string $kind
      */
-    public function setKind(string $kind): void
+    public function setKind ($kind)
     {
-        $this->Kind = $kind;
+        $this->kind = $kind;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getName(): ?string
+    public function getName ()
     {
-        return $this->Name;
+        return $this->name;
     }
 
     /**
      * @param string $name
      */
-    public function setName(string $name): void
+    public function setName ($name)
     {
-        $this->Name = $name;
+        $this->name = $name;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getProtocol(): ?string
+    public function getProtocol ()
     {
-        return $this->Protocol;
+        return $this->protocol;
     }
 
     /**
-     * @param mixed $Protocol
+     * @param string $protocol
      */
-    public function setProtocol($Protocol): void
+    public function setProtocol ($protocol)
     {
-        $this->Protocol = $Protocol;
+        $this->protocol = $protocol;
     }
+
+
 
     public function setKeyMapping(): array
     {
         return [
-            'kind' => 'Kind',
-            'name' => 'Name'
+            'Kind' => 'kind',
+            'Name' => 'name',
+            'Protocol' => 'protocol',
         ];
     }
 }

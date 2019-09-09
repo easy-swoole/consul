@@ -7,10 +7,12 @@
  */
 namespace EasySwoole\Consul\Request\Acl;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Replication extends SplBean
+class Replication extends BaseCommand
 {
+    protected $url = 'acl/replication';
+
     /**
      * @var string
      */

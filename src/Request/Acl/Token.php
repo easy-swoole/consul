@@ -7,7 +7,7 @@
  */
 namespace EasySwoole\Consul\Request\Acl;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
 /**
  * sample
@@ -26,186 +26,203 @@ use EasySwoole\Spl\SplBean;
  * Class Token
  * @package EasySwoole\Consul\Request\Acl
  */
-class Token extends SplBean
+class Token extends BaseCommand
 {
+    protected $url = 'acl/token/%s';
+
     /**
      * @var string
      */
-    protected $AccessorID;
+    protected $accessorID;
     /**
      * @var string
      */
-    protected $SecretID;
+    protected $secretID;
     /**
      * @var string
      */
-    protected $Description;
+    protected $description;
     /**
      * @var array
      */
-    protected $Policies;
+    protected $policies;
     /**
      * @var array
      */
-    protected $Roles;
+    protected $roles;
     /**
      * @var array
      */
-    protected $ServiceIdentities;
+    protected $serviceIdentities;
     /**
      * @var bool
      */
-    protected $Local;
+    protected $local;
     /**
      * @var string
      */
-    protected $ExpirationTime;
+    protected $expirationTime;
     /**
      * @var string
      */
-    protected $ExpirationTTL;
+    protected $expirationTTL;
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getAccessorID(): ?string
+    public function getAccessorID ()
     {
-        return $this->AccessorID;
+        return $this->accessorID;
     }
 
     /**
-     * @param string $AccessorID
+     * @param string $accessorID
      */
-    public function setAccessorID(string $AccessorID): void
+    public function setAccessorID ($accessorID)
     {
-        $this->AccessorID = $AccessorID;
+        $this->accessorID = $accessorID;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getSecretID(): ?string
+    public function getSecretID ()
     {
-        return $this->SecretID;
+        return $this->secretID;
     }
 
     /**
-     * @param string $SecretID
+     * @param string $secretID
      */
-    public function setSecretID(string $SecretID): void
+    public function setSecretID ($secretID)
     {
-        $this->SecretID = $SecretID;
+        $this->secretID = $secretID;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getDescription(): ?string
+    public function getDescription ()
     {
-        return $this->Description;
+        return $this->description;
     }
 
     /**
-     * @param string $Description
+     * @param string $description
      */
-    public function setDescription(string $Description): void
+    public function setDescription ($description)
     {
-        $this->Description = $Description;
+        $this->description = $description;
     }
 
     /**
-     * @return array|null
+     * @return array
      */
-    public function getPolicies(): ?array
+    public function getPolicies ()
     {
-        return $this->Policies;
+        return $this->policies;
     }
 
     /**
-     * @param array $Policies
+     * @param array $policies
      */
-    public function setPolicies(array $Policies): void
+    public function setPolicies ($policies)
     {
-        $this->Policies = $Policies;
+        $this->policies = $policies;
     }
 
     /**
-     * @return array|null
+     * @return array
      */
-    public function getRoles(): ?array
+    public function getRoles ()
     {
-        return $this->Roles;
+        return $this->roles;
     }
 
     /**
-     * @param string $Roles
+     * @param array $roles
      */
-    public function setRoles(string $Roles): void
+    public function setRoles ($roles)
     {
-        $this->Roles = $Roles;
+        $this->roles = $roles;
     }
 
     /**
-     * @return array|null
+     * @return array
      */
-    public function getServiceIdentities(): ?array
+    public function getServiceIdentities ()
     {
-        return $this->ServiceIdentities;
+        return $this->serviceIdentities;
     }
 
     /**
-     * @param string $ServiceIdentities
+     * @param array $serviceIdentities
      */
-    public function setServiceIdentities(string $ServiceIdentities): void
+    public function setServiceIdentities ($serviceIdentities)
     {
-        $this->ServiceIdentities = $ServiceIdentities;
+        $this->serviceIdentities = $serviceIdentities;
     }
 
     /**
-     * @return bool|null
+     * @return bool
      */
-    public function getLocal(): ?bool
+    public function isLocal ()
     {
-        return $this->Local;
+        return $this->local;
     }
 
     /**
-     * @param bool $Local
+     * @param bool $local
      */
-    public function setLocal(bool $Local): void
+    public function setLocal ($local)
     {
-        $this->Local = $Local;
+        $this->local = $local;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getExpirationTime(): ?string
+    public function getExpirationTime ()
     {
-        return $this->ExpirationTime;
+        return $this->expirationTime;
     }
 
     /**
-     * @param string $ExpirationTime
+     * @param string $expirationTime
      */
-    public function setExpirationTime(string $ExpirationTime): void
+    public function setExpirationTime ($expirationTime)
     {
-        $this->ExpirationTime = $ExpirationTime;
+        $this->expirationTime = $expirationTime;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getExpirationTTL(): ?string
+    public function getExpirationTTL ()
     {
-        return $this->ExpirationTTL = $ExpirationTTL;
+        return $this->expirationTTL;
     }
 
     /**
-     * @param string $ExpirationTTL
+     * @param string $expirationTTL
      */
-    public function setExpirationTTL(string $ExpirationTTL): void
+    public function setExpirationTTL ($expirationTTL)
     {
-        $this->ExpirationTTL = $ExpirationTTL;
+        $this->expirationTTL = $expirationTTL;
+    }
+
+    protected function setKeyMapping (): array
+    {
+        return [
+            'AccessorID' => 'accessorID',
+            'SecretID' => 'secretID',
+            'Description' => 'description',
+            'Policies' => 'policies',
+            'Roles' => 'roles',
+            'ServiceIdentities' => 'serviceIdentities',
+            'Local' => 'local',
+            'ExpirationTime' => 'expirationTime',
+            'ExpirationTTL' => 'expirationTTL',
+        ];
     }
 }

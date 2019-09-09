@@ -64,8 +64,8 @@ class AclTest extends TestCase
     function testLogin()
     {
         $login = new Login([
-            "AuthMethod" => "minikube",
-            "BearerToken" => "eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9..."
+            "authMethod" => "minikube",
+            "bearerToken" => "eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9..."
         ]);
         $this->consul->acl()->login($login);
         $this->assertEquals('x','x');
@@ -83,7 +83,7 @@ class AclTest extends TestCase
     function testToken()
     {
         $token = new Token([
-            "Description" => "Agent token for 'node1'",
+            "description" => "Agent token for 'node1'",
             "Policies" => [
                 ["ID" => "165d4317-e379-f732-ce70-86278c4558f7"],
                 ["Name" => "node-read"],
@@ -114,19 +114,21 @@ class AclTest extends TestCase
 
     function testUpdate()
     {
-        $update = new Update([
+        $update = new Token([
+            'accessorID' => '6a1253d2-1785-24fd-91c2-f8e78c745511',
             "Description" => "Agent token for 'node1'",
             "Policies" => [],
-            "Local" => false
+            "local" => false
         ]);
-        $this->consul->acl()->update($update);
+        $this->consul->acl()->updateToken($update);
         $this->assertEquals('x','x');
     }
 
     function testClone()
     {
         $clone = new Token\CloneToken([
-            'AccessorID' => '8f246b77-f3e1-ff88-5b48-8ec93abf3e05'
+            'accessorID' => '8f246b77-f3e1-ff88-5b48-8ec93abf3e05',
+            "description" => "Clone of Agent token for 'node1'",
         ]);
         $this->consul->acl()->cloneToken($clone);
         $this->assertEquals('x','x');
@@ -148,26 +150,13 @@ class AclTest extends TestCase
         $this->assertEquals('x','x');
     }
 
-    function testCreate()
-    {
-        $token = new Token([
-            "Description" => "Agent token for 'node1'",
-            "Policies" => [
-                   ["ID" => "165d4317-e379-f732-ce70-86278c4558f7"],
-                   ["Name" => "node-read"],
-            ],
-            "Local" => false,
-        ]);
-        $this->consul->acl()->token($token);
-        $this->assertEquals('x','x');
-    }
 
     function testCreateToken()
     {
         $create = new Create([
             "Name" => "my-app-token",
             "Type" => "client",
-            "Rules" => ""
+            "rules" => "a"
         ]);
         $this->consul->acl()->create($create);
         $this->assertEquals('x','x');
@@ -176,7 +165,7 @@ class AclTest extends TestCase
     function testUpdateToken()
     {
         $update = new Update([
-            "ID" => "adf4238a-882b-9ddc-4a9d-5b6758e4159e",
+            "id" => "adf4238a-882b-9ddc-4a9d-5b6758e4159e",
             "Name" => "my-app-token-updated",
             "Type" => "client",
             "Rules" => "# New Rules",
@@ -202,6 +191,7 @@ class AclTest extends TestCase
         $this->consul->acl()->info($info);
         $this->assertEquals('x','x');
     }
+
     function testCloneAclToken()
     {
         $cloneAclToken = new CloneACLToken([
@@ -224,7 +214,7 @@ class AclTest extends TestCase
             "Name" => "node-read",
             "Description" => "Grants read access to all node information",
             "Rules" => "node_prefix \"\" { policy = \"read\"}",
-            "Datacenters" => ["dc1"]
+            "datacenters" => ["dc1"]
         ]);
         $this->consul->acl()->policy($policy);
         $this->assertEquals('x','x');
@@ -242,7 +232,6 @@ class AclTest extends TestCase
     function testUpdatePolicy()
     {
         $policy = new Policy([
-            "id" => "c01a1f82-44be-41b0-a686-685fb6e0f485",
             "ID" => "c01a1f82-44be-41b0-a686-685fb6e0f485",
             "Name" => "register-app-service",
             "Description" => "Grants write permissions necessary to register the 'app' service",
@@ -271,8 +260,8 @@ class AclTest extends TestCase
     function testRole()
     {
         $role = new Role([
-            "Name" => "example-role",
-            "Description" => "Showcases all input parameters",
+            "name" => "example-role",
+            "description" => "Showcases all input parameters",
         ]);
         $this->consul->acl()->role($role);
         $this->assertEquals('x','x');
@@ -289,10 +278,10 @@ class AclTest extends TestCase
 
     function testReadRoleName()
     {
-        $name = new Role\Name([
+        $name = new Role([
             'name' => 'example-role'
         ]);
-        $this->consul->acl()->name($name);
+        $this->consul->acl()->readRoleByName($name);
         $this->assertEquals('x','x');
     }
 
@@ -300,7 +289,7 @@ class AclTest extends TestCase
     {
         $role = new Role([
             'id' => 'aa770e5b-8b0b-7fcf-e5a1-8535fcc388b4',
-            "Name" => "example-two",
+            "name" => "example-two",
         ]);
         $this->consul->acl()->updateRole($role);
         $this->assertEquals('x','x');
@@ -328,6 +317,11 @@ class AclTest extends TestCase
             "Name" => "minikube",
             "Type" => "kubernetes",
             "Description" => "dev minikube cluster",
+            "Config" => [
+                "Host" => "https://192.0.2.42:8443",
+                "CACert" => "-----BEGIN CERTIFICATE-----\n...-----END CERTIFICATE-----\n",
+                "ServiceAccountJWT" => "eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9..."
+            ]
         ]);
         $this->consul->acl()->authMethod($method);
         $this->assertEquals('x','x');
@@ -336,7 +330,7 @@ class AclTest extends TestCase
     function testReadAuthMethod()
     {
         $method = new AuthMethod([
-            'Name' => 'minikube',
+            'name' => 'minikube',
         ]);
         $this->consul->acl()->readAuthMethod($method);
         $this->assertEquals('x','x');
@@ -346,7 +340,13 @@ class AclTest extends TestCase
     {
         $method = new AuthMethod([
             "Name" => "minikube",
-            "Description" => "updated name",
+            "Type" => "kubernetes",
+            "Description" => "dev minikube cluster",
+            "Config" => [
+                "Host" => "https://192.0.2.42:8443",
+                "CACert" => "-----BEGIN CERTIFICATE-----\n...-----END CERTIFICATE-----\n",
+                "ServiceAccountJWT" => "eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9..."
+            ]
         ]);
         $this->consul->acl()->updateAuthMethod($method);
         $this->assertEquals('x','x');
@@ -371,10 +371,11 @@ class AclTest extends TestCase
     function testBindingRule()
     {
         $bindingRule = new BindingRule([
-            "Description" => "example rule",
-            "AuthMethod" => "minikube",
+            "description" => "example rule",
+            "authMethod" => "minikube",
             "Selector" => "serviceaccount.namespace==default",
             "BindType" => "service",
+            "BindName" => "{{ serviceaccount.name }}"
         ]);
         $this->consul->acl()->bindingRule($bindingRule);
         $this->assertEquals('x','x');
@@ -394,8 +395,10 @@ class AclTest extends TestCase
         $bindingRule = new BindingRule([
             'id' => '000ed53c-e2d3-e7e6-31a5-c19bc3518a3d',
             "Description" => "updated rule",
+            "authMethod" => "minikube",
             "Selector" => "serviceaccount.namespace=dev",
             "BindType" => "role",
+            "BindName" => "{{ serviceaccount.name }}",
         ]);
         $this->consul->acl()->updateBindingRule($bindingRule);
         $this->assertEquals('x','x');

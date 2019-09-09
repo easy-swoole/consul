@@ -7,10 +7,12 @@
  */
 namespace EasySwoole\Consul\Request\Coordinate;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Nodes extends SplBean
+class Nodes extends BaseCommand
 {
+    protected $url = 'coordinate/nodes';
+
     /**
      * @var string
      */

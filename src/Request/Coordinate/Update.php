@@ -7,6 +7,7 @@
  */
 namespace EasySwoole\Consul\Request\Coordinate;
 
+use EasySwoole\Consul\Request\BaseCommand;
 use EasySwoole\Spl\SplBean;
 
 /**
@@ -24,66 +25,98 @@ use EasySwoole\Spl\SplBean;
  * Class Update
  * @package EasySwoole\Consul\Request\Coordinate
  */
-class Update extends SplBean
+class Update extends BaseCommand
 {
+    protected $url = 'coordinate/update/%s';
+
     /**
      * @var string
      */
-    protected $Segment;
-    /**
-     * @var array
-     */
-    protected $Node;
-    /**
-     * @var array
-     */
-    protected $Coord;
+    protected $dc;
 
     /**
-     * @return null|string
+     * @var string
      */
-    public function getSegment(): ?string
+    protected $segment;
+    /**
+     * @var array
+     */
+    protected $node;
+    /**
+     * @var array
+     */
+    protected $coord;
+
+    /**
+     * @return string
+     */
+    public function getDc ()
     {
-        return $this->Segment;
+        return $this->dc;
+    }
+
+    /**
+     * @param string $dc
+     */
+    public function setDc ($dc)
+    {
+        $this->dc = $dc;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSegment ()
+    {
+        return $this->segment;
     }
 
     /**
      * @param string $segment
      */
-    public function setSegment(string $segment): void
+    public function setSegment ($segment)
     {
-        $this->Segment = $segment;
+        $this->segment = $segment;
     }
 
     /**
-     * @return null|string
+     * @return array
      */
-    public function getNode(): ?string
+    public function getNode ()
     {
-        return $this->Node;
+        return $this->node;
     }
 
     /**
-     * @param string $node
+     * @param array $node
      */
-    public function setNode(string $node): void
+    public function setNode ($node)
     {
-        $this->Node = $node;
+        $this->node = $node;
     }
 
     /**
-     * @return array|null
+     * @return array
      */
-    public function getCoord(): ?array
+    public function getCoord ()
     {
-        return $this->Coord;
+        return $this->coord;
     }
 
     /**
-     * @param array $Coord
+     * @param array $coord
      */
-    public function setCoord(array $Coord): void
+    public function setCoord ($coord)
     {
-        $this->Coord = $Coord;
+        $this->coord = json_encode($coord);
+    }
+
+    protected function setKeyMapping (): array
+    {
+        return [
+            'Node' => 'node',
+            'Segment' => 'segment',
+            'Coord' => 'coord',
+        ];
     }
 }

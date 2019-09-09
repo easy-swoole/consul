@@ -7,10 +7,12 @@
  */
 namespace EasySwoole\Consul\Request\Query;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Explain extends SplBean
+class Explain extends BaseCommand
 {
+    protected $url = 'query/%s/explain';
+
     /**
      * @var string
      */

@@ -1,6 +1,7 @@
 <?php
 namespace EasySwoole\Consul;
 
+use EasySwoole\Consul\Exception\MissingRequiredParamsException;
 use EasySwoole\Consul\Request\Catalog\Connect;
 use EasySwoole\Consul\Request\Catalog\Datacenters;
 use EasySwoole\Consul\Request\Catalog\Deregister;
@@ -16,22 +17,31 @@ class Catalog extends BaseFunc
     /**
      * Register Entity
      * @param Register $register
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function register(Register $register)
     {
+        if (empty($register->getNode())) {
+            throw new MissingRequiredParamsException('Missing the required param: Node.');
+        }
+        if (empty($register->getAddress())) {
+            throw new MissingRequiredParamsException('Missing the required param: Address.');
+        }
         $this->putJSON($register);
     }
 
     /**
      * Deregister Entity
      * @param Deregister $deregister
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function deRegister(Deregister $deregister)
     {
+        if (empty($deregister->getNode())) {
+            throw new MissingRequiredParamsException('Missing the required param: Node.');
+        }
         $this->putJSON($deregister);
     }
 
@@ -39,7 +49,6 @@ class Catalog extends BaseFunc
      * List Datacenters
      * @param Datacenters $datacenters
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function dataCenters(Datacenters $datacenters)
     {
@@ -50,7 +59,6 @@ class Catalog extends BaseFunc
      * List Nodes
      * @param Nodes $nodes
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function nodes(Nodes $nodes)
     {
@@ -61,7 +69,6 @@ class Catalog extends BaseFunc
      * List Services
      * @param Services $services
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function services(Services $services)
     {
@@ -71,52 +78,48 @@ class Catalog extends BaseFunc
     /**
      * List Nodes for service
      * @param Service $service
-     * @return bool
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function service(Service $service)
     {
-        $action = '';
-        if (!empty($service->getService())) {
-            $action = $service->getService();
-            $service->setService('');
+        if (empty($service->getService())) {
+            throw new MissingRequiredParamsException('Missing the required param: service.');
         }
-        $this->getJson($service, $action);
+        $service->url = sprintf($service->url, $service->getService());
+        $service->setService('');
+        $this->getJson($service);
     }
 
     /**
      * List Nodes for Connect-capable Service
-     * Parameters and response format are the same as service
      * @param Connect $connect
-     * @return bool
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function connect(Connect $connect)
     {
-        $action = '';
-        if (!empty($connect->getService())) {
-            $action = $connect->getService();
-            $connect->setService('');
+        if (empty($connect->getService())) {
+            throw new MissingRequiredParamsException('Missing the required param: service.');
         }
-        $this->getJson($connect, $action);
+        $connect->url = sprintf($connect->url, $connect->getService());
+        $connect->setService('');
+        $this->getJson($connect);
     }
 
     /**
      * List Services for Node
      * @param Node $node
-     * @return bool
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function node(Node $node)
     {
-        $action = '';
-        if (!empty($node->getNode())) {
-            $action = $node->getNode();
-            $node->setNode('');
+        if (empty($node->getNode())) {
+            throw new MissingRequiredParamsException('Missing the required param: node.');
         }
-        $this->getJson($node, $action);
+        $node->url = sprintf($node->url, $node->getNode());
+        $node->setNode('');
+        $this->getJson($node);
     }
 }

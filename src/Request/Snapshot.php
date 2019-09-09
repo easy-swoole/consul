@@ -7,10 +7,10 @@
  */
 namespace EasySwoole\Consul\Request;
 
-use EasySwoole\Spl\SplBean;
-
-class Snapshot extends SplBean
+class Snapshot extends BaseCommand
 {
+    protected $url = 'snapshot';
+
     /**
      * @var string
      */

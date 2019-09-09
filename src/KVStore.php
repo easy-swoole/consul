@@ -4,6 +4,7 @@
 namespace EasySwoole\Consul;
 
 
+use EasySwoole\Consul\Exception\MissingRequiredParamsException;
 use EasySwoole\Consul\Request\Kv;
 
 class KVStore extends BaseFunc
@@ -11,64 +12,64 @@ class KVStore extends BaseFunc
     /**
      * Read Key
      * @param Kv $kv
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function kv(Kv $kv)
     {
-        $action = '';
-        if (!empty($kv->getKey())) {
-            $action = $kv->getKey();
-            $kv->setKey('');
+        if (empty($kv->getKey())) {
+            throw new MissingRequiredParamsException('Missing the required param: key.');
         }
-        $this->getJson($kv, $action);
+        $kv->setUrl(sprintf($kv->getUrl(), $kv->getKey()));
+        $kv->setKey('');
+        $this->getJson($kv);
     }
 
     /**
      * Create Key
      * @param Kv $kv
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function create(Kv $kv)
     {
-        $action = '';
-        if (!empty($kv->getKey())) {
-            $action = $kv->getKey();
-            $kv->setKey('');
+        if (empty($kv->getKey())) {
+            throw new MissingRequiredParamsException('Missing the required param: key.');
         }
-        $this->putJSON($kv, $action);
+        $kv->setUrl(sprintf($kv->getUrl(), $kv->getKey()));
+        $kv->setKey('');
+        $this->putJSON($kv);
     }
 
     /**
      * Update Key
      * @param Kv $kv
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function update(Kv $kv)
     {
-        $action = '';
-        if (!empty($kv->getKey())) {
-            $action = $kv->getKey();
-            $kv->setKey('');
+        if (empty($kv->getKey())) {
+            throw new MissingRequiredParamsException('Missing the required param: key.');
         }
-        $this->putJSON($kv, $action);
+        $kv->setUrl(sprintf($kv->getUrl(), $kv->getKey()));
+        $kv->setKey('');
+        $this->putJSON($kv);
     }
 
     /**
      * Delete Key
      * @param Kv $kv
+     * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function delete(Kv $kv)
     {
-        $action = '';
-        if (!empty($kv->getKey())) {
-            $action = $kv->getKey();
-            $kv->setKey('');
+        if (empty($kv->getKey())) {
+            throw new MissingRequiredParamsException('Missing the required param: key.');
         }
-        $this->deleteJson($kv, $action);
+        $kv->setUrl(sprintf($kv->getUrl(), $kv->getKey()));
+        $kv->setKey('');
+        $this->deleteJson($kv);
     }
 }

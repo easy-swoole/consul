@@ -7,10 +7,12 @@
  */
 namespace EasySwoole\Consul\Request\Agent\Check;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Update extends SplBean
+class Update extends BaseCommand
 {
+    protected $url = 'agent/check/update/%s';
+
     /**
      * @var string
      */
@@ -19,11 +21,11 @@ class Update extends SplBean
      * Valid values are "passing", "warning", and "critical"
      * @var string
      */
-    protected $Status;
+    protected $status;
     /**
      * @var string
      */
-    protected $Output;
+    protected $output;
 
     /**
      * @return null|string
@@ -42,34 +44,43 @@ class Update extends SplBean
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getStatus(): ?string
+    public function getStatus ()
     {
-        return $this->Status;
+        return $this->status;
     }
 
     /**
      * @param string $status
      */
-    public function setStatus(string $status): void
+    public function setStatus ($status)
     {
-        $this->Status = $status;
+        $this->status = $status;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getOutput(): ?string
+    public function getOutput ()
     {
-        return $this->Output;
+        return $this->output;
     }
 
     /**
      * @param string $output
      */
-    public function setOutput(string $output): void
+    public function setOutput ($output)
     {
-        $this->Output = $output;
+        $this->output = $output;
     }
+
+    protected function setKeyMapping (): array
+    {
+        return [
+            'Status' => 'status',
+            'Output' => 'output',
+        ];
+    }
+
 }

@@ -7,10 +7,12 @@
  */
 namespace EasySwoole\Consul\Request\Catalog;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Nodes extends SplBean
+class Nodes extends BaseCommand
 {
+    public $url='catalog/nodes';
+
     /**
      * @var
      */
@@ -97,6 +99,6 @@ class Nodes extends SplBean
      */
     protected function setKeyMapping(): array
     {
-        return ['node_meta' => 'node-meta'];
+        return ['node-meta' => 'node_meta'];
     }
 }

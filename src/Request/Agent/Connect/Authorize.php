@@ -1,74 +1,89 @@
 <?php
 namespace EasySwoole\Consul\Request\Agent\Connect;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Authorize extends SplBean
+/**
+ *sample
+ * {
+    "Target": "db",
+    "ClientCertURI": "spiffe://dc1-7e567ac2-551d-463f-8497-f78972856fc1.consul/ns/default/dc/dc1/svc/web",
+    "ClientCertSerial": "04:00:00:00:00:01:15:4b:5a:c3:94"
+    }
+ * Class Authorize
+ * @package EasySwoole\Consul\Request\Agent\Connect
+ */
+class Authorize extends BaseCommand
 {
-    /**
-     * sample
-     * {
-        "Target": "db",
-        "ClientCertURI": "spiffe://dc1-7e567ac2-551d-463f-8497-f78972856fc1.consul/ns/default/dc/dc1/svc/web",
-        "ClientCertSerial": "04:00:00:00:00:01:15:4b:5a:c3:94"
-        }
-     * @var string
-     */
-    protected $Target;
-    /**
-     * @var string
-     */
-    protected $ClientCertURI;
-    /**
-     * @var string
-     */
-    protected $ClientCertSerial;
+    protected $url = 'agent/connect/authorize';
 
     /**
-     * @return string|null
+     * @var string
      */
-    public function getTarget(): ?string
+    protected $target;
+    /**
+     * @var string
+     */
+    protected $clientCertURI;
+    /**
+     * @var string
+     */
+    protected $clientCertSerial;
+
+    /**
+     * @return string
+     */
+    public function getTarget ()
     {
-        return $this->Target;
+        return $this->target;
     }
 
     /**
      * @param string $target
      */
-    public function setTarget(string $target): void
+    public function setTarget ($target)
     {
-        $this->Target = $target;
+        $this->target = $target;
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getClientCertURI(): ?string
+    public function getClientCertURI ()
     {
-        return $this->ClientCertURI;
+        return $this->clientCertURI;
     }
 
     /**
-     * @param string $ClientCertURI
+     * @param string $clientCertURI
      */
-    public function setClientCertURI(string $ClientCertURI): void
+    public function setClientCertURI ($clientCertURI)
     {
-        $this->ClientCertURI = $ClientCertURI;
+        $this->clientCertURI = $clientCertURI;
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getClientCertSerial(): ?string
+    public function getClientCertSerial ()
     {
-        return $this->ClientCertSerial;
+        return $this->clientCertSerial;
     }
 
     /**
-     * @param string $ClientCertSerial
+     * @param string $clientCertSerial
      */
-    public function setClientCertSerial(string $ClientCertSerial): void
+    public function setClientCertSerial ($clientCertSerial)
     {
-        $this->ClientCertSerial = $ClientCertSerial;
+        $this->clientCertSerial = $clientCertSerial;
+    }
+
+    protected function setKeyMapping (): array
+    {
+        return [
+            'Target' => 'target',
+            'ClientCertURI' => 'clientCertURI',
+            'ClientCertSerial' => 'clientCertSerial',
+        ];
     }
 }

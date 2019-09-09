@@ -7,10 +7,12 @@
  */
 namespace EasySwoole\Consul\Request\Status;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Peers extends SplBean
+class Peers extends BaseCommand
 {
+    protected $url = 'status/peers';
+
     /**
      * @var string
      */

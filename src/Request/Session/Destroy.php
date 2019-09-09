@@ -7,10 +7,12 @@
  */
 namespace EasySwoole\Consul\Request\Session;
 
-use EasySwoole\Spl\SplBean;
+use EasySwoole\Consul\Request\BaseCommand;
 
-class Destroy extends SplBean
+class Destroy extends BaseCommand
 {
+    protected $url = 'session/destroy/%s';
+
     /**
      * @var string
      */
