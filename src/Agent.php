@@ -3,6 +3,7 @@ namespace EasySwoole\Consul;
 
 use EasySwoole\Consul\Exception\MissingRequiredParamsException;
 use EasySwoole\Consul\Exception\WrongRequiredParamsException;
+use EasySwoole\Consul\Exception\Exception;
 use EasySwoole\Consul\Request\Agent\Check\Deregister;
 use EasySwoole\Consul\Request\Agent\Check\Fail;
 use EasySwoole\Consul\Request\Agent\Check\Pass;
@@ -130,6 +131,7 @@ class Agent extends BaseFunc
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function forceLeave(ForceLeave $forceLeave)
+
     {
         if (empty($forceLeave->getNode())) {
             throw new MissingRequiredParamsException('Missing the required param: node.');
