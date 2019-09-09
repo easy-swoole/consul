@@ -16,8 +16,8 @@ $consul = new Consul($config);
 
 $node = new Node([
     'node' => '44e4656a94cd',
-    'dc' => 'a',
-    'filter' => 'b',
+    'dc' => 'dc1',
+    'filter' => '',
 ]);
 $consul->catalog()->node($node);
 
@@ -29,11 +29,9 @@ $config->setVersion('v1');
 
 $consul = new Consul($config);
 
-$node = new Node([
-    'node' => '44e4656a94cd',
-    'dc' => 'a',
-    'filter' => 'b',
-]);
+$node->setNode('44e4656a94cd');
+$node->setDc('dc1');
+$node->setFilter('');
 $consul->catalog()->node($node);
 
 ```
