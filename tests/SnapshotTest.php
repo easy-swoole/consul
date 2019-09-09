@@ -30,14 +30,14 @@ class SnapshotTest extends TestCase
             'dc' => 'dc1',
             'stale' => 'true',
         ]);
-        $this->consul->snapshot()->generate($generate);;
+        $this->consul->snapshot()->generate($generate);
         $this->assertEquals('x','x');
     }
 
     function testRestore()
     {
         $restore = new Snapshot();
-        $this->consul->snapshot()->restore($restore);;
+        $this->consul->snapshot()->restore($restore);
         $this->assertEquals('x','x');
     }
 

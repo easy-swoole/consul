@@ -26,32 +26,32 @@ class ConnectTest extends TestCase
         parent::__construct($name, $data, $dataName);
     }
 
-//    function testRoots()
-//    {
-//        $roots = new Roots();
-//        $this->consul->connect()->roots($roots);
-//        $this->assertEquals('x','x');
-//    }
-//
-//    function testConfiguration()
-//    {
-//        $configuration = new Configuration();
-//        $this->consul->connect()->configuration($configuration);
-//        $this->assertEquals('x','x');
-//    }
-//
-//    function testUpdateConfiguration()
-//    {
-//        $configuration = new Configuration([
-//            'Provider' => 'consul',
-//            'Config' => [
-//                'LeafCertTTL' => '72h'
-//            ]
-//        ]);
-//        $this->consul->connect()->updateConfiguration($configuration);
-//        $this->assertEquals('x','x');
-//    }
-//
+    function testRoots()
+    {
+        $roots = new Roots();
+        $this->consul->connect()->roots($roots);
+        $this->assertEquals('x','x');
+    }
+
+    function testConfiguration()
+    {
+        $configuration = new Configuration();
+        $this->consul->connect()->configuration($configuration);
+        $this->assertEquals('x','x');
+    }
+
+    function testUpdateConfiguration()
+    {
+        $configuration = new Configuration([
+            'Provider' => 'consul',
+            'Config' => [
+                'LeafCertTTL' => '72h'
+            ]
+        ]);
+        $this->consul->connect()->updateConfiguration($configuration);
+        $this->assertEquals('x','x');
+    }
+
     function testIntentions()
     {
         $intentions = new Intentions([

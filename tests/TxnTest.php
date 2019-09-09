@@ -26,9 +26,7 @@ class TxnTest extends TestCase
 
     function testCreate()
     {
-        $transaction = new Txn([
-
-        ]);
+        $transaction = new Txn([]);
         $this->consul->transaction()->create($transaction);
         $this->assertEquals('x','x');
     }
