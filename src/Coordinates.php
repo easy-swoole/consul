@@ -55,7 +55,6 @@ class Coordinates extends BaseFunc
      * Update LAN Coordinates for a node
      * @param Update $update
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     * @throws \ReflectionException
      */
     public function update(Update $update)
     {
@@ -63,10 +62,9 @@ class Coordinates extends BaseFunc
             $update->setUrl(substr($update->getUrl(), 0, strlen($update->getUrl()) -3));
             $this->putJSON($update);
         } else {
-            $update->setUrl(sprintf($update->getUrl(), $update->getDc()));
+            $update->setUrl(sprintf($update->getUrl(), '?dc=' . $update->getDc()));
             $update->setDc('');
             $this->putJSON($update);
         }
-
     }
 }

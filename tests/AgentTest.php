@@ -53,7 +53,7 @@ class AgentTest extends TestCase
     {
         $this->consul->agent()->members(new Members([
             'wan' => 'a',
-            'segment' => 'b',
+            'segment' => '',
         ]));
         $this->assertEquals('x','x');
     }
@@ -75,8 +75,8 @@ class AgentTest extends TestCase
     function testMaintenance()
     {
         $maintenance = new Maintenance([
-            'enable' => 'true',
-            'reason' => 'whatever',
+            'enable' => true,
+            'reason' => '',
         ]);
         $this->consul->agent()->maintenance($maintenance);
         $this->assertEquals('x','x');
@@ -148,7 +148,8 @@ class AgentTest extends TestCase
     function testRegister()
     {
         $register = new Register([
-            'name' => 'Memory_utilization', // 不可以出现空格或者其他url中不允许出现的特殊字符，否则取消注册的check_id会报400 error
+            'name' => 'Memory',
+            "TTL" => "15s",
             "notes" => "Ensure we don't oversubscribe memory",
             "DeregisterCriticalServiceAfter" => "90m",
             "Args" => ["/usr/local/bin/check_mem.py"],
@@ -159,7 +160,6 @@ class AgentTest extends TestCase
             "Header" => ["x-foo" => ["bar", "baz"]],
             "TCP" => "example.com:22",
             "Interval" => "10s",
-            "TTL" => "15s",
             "TLSSkipVerify" => true,
         ]);
         $this->consul->agent()->register($register);
@@ -169,7 +169,7 @@ class AgentTest extends TestCase
     function testDeRegister()
     {
         $deRegister = new DeRegister([
-            'check_id' => 'Memory_utilization'
+            'check_id' => 'Memory'
         ]);
         $this->consul->agent()->deRegister($deRegister);
         $this->assertEquals('x','x');
@@ -178,7 +178,7 @@ class AgentTest extends TestCase
     function testPass()
     {
         $pass = new Pass([
-            'check_id' => 'Memory_utilization',
+            'check_id' => 'Memory',
             'note' => 'aaaaa',
         ]);
         $this->consul->agent()->pass($pass);
@@ -188,7 +188,7 @@ class AgentTest extends TestCase
     function testWarn()
     {
         $warn = new Warn([
-            'check_id' => 'Memory_utilization',
+            'check_id' => 'Memory',
             'note' => 'aaaaa',
         ]);
         $this->consul->agent()->warn($warn);
@@ -198,7 +198,7 @@ class AgentTest extends TestCase
     function testFail()
     {
         $fail = new Fail([
-            'check_id' => 'Memory_utilization',
+            'check_id' => 'Memory',
             'note' => 'aaaaa',
         ]);
         $this->consul->agent()->fail($fail);
@@ -208,7 +208,7 @@ class AgentTest extends TestCase
     function testUpdate()
     {
         $update = new Update([
-            'check_id' => 'Memory_utilization',
+            'check_id' => 'Memory2',
             'Status' => 'passing',
             'Output' => 'update success'
         ]);
@@ -228,7 +228,7 @@ class AgentTest extends TestCase
     function testService()
     {
         $service = new Service([
-            'service_id' => "register_consule"
+            'service_id' => "consul"
         ]);
         $this->consul->agent()->service($service);
         $this->assertEquals('x','x');
@@ -237,7 +237,7 @@ class AgentTest extends TestCase
     function testName()
     {
         $name = new Name([
-            'service_name' => 'register_consule',
+            'service_name' => 'redis',
             'format' => 'text',
         ]);
         $this->consul->agent()->name($name);
@@ -247,7 +247,7 @@ class AgentTest extends TestCase
     function testId()
     {
         $id = new ID([
-            'service_id' => 'register_consule',
+            'service_id' => 'consul',
             'format' => 'text',
         ]);
         $this->consul->agent()->id($id);
@@ -288,7 +288,7 @@ class AgentTest extends TestCase
     function testServiceDeRegister()
     {
         $deregister = new Service\DeRegister([
-            'service_id' => 'aaaaaa',
+            'service_id' => 'redis1',
         ]);
         $this->consul->agent()->serviceDeregister($deregister);
         $this->assertEquals('x','x');
@@ -297,8 +297,8 @@ class AgentTest extends TestCase
       function testServiceMaintenance()
       {
         $maintenance= new Service\Maintenance([
-            'service_id' => 'aaaaaa',
-            'enable' => true,
+            'service_id' => 'redis1',
+            'enable' => false,
             'reason' => 'bbbb'
         ]);
         $this->consul->agent()->serviceMaintenance($maintenance);
@@ -325,18 +325,10 @@ class AgentTest extends TestCase
     function testLeaf()
     {
         $leaf = new Leaf([
-            'service' => 'aaaa'
+            'service' => 'consul'
         ]);
         $this->consul->agent()->leaf($leaf);
         $this->assertEquals('x','x');
     }
 
-    function testProxy()
-    {
-        $proxy = new Proxy([
-            'ID' => 'aaaaa'
-        ]);
-        $this->consul->agent()->proxy($proxy);
-        $this->assertEquals('x','x');
-    }
 }

@@ -49,6 +49,7 @@ class KvStoreTest extends TestCase
         $update = new kv([
             'key' => 'my-key',
             'dc' => 'dc1',
+            'flag' => 'dc1'
         ]);
         $this->consul->kvStore()->update($update);
         $this->assertEquals('x','x');

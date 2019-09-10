@@ -1,10 +1,11 @@
 <?php
 namespace EasySwoole\Consul;
 
+use EasySwoole\Consul\Exception\Exception;
 use EasySwoole\Consul\Request\BaseCommand;
+use EasySwoole\HttpClient\Bean\Response;
 use EasySwoole\HttpClient\Exception\InvalidUrl;
 use EasySwoole\HttpClient\HttpClient;
-use EasySwoole\Spl\SplBean;
 
 class BaseFunc
 {
@@ -25,20 +26,24 @@ class BaseFunc
 
     /**
      * @param BaseCommand $bean
-     * @return mixed|null
+     * @param bool        $isJsonParams
+     * @return mixed
      * @throws InvalidUrl
      * @throws \Exception
      */
-    protected function putJSON(BaseCommand $bean)
+    protected function putJSON(BaseCommand $bean, $isJsonParams = true)
     {
         $url = $this->getUrl($bean);
         $data = $this->toRequestJson($bean);
-        $http = new HttpClient($url);
+        if (! $isJsonParams) {
+            $data = $this->toRequestParam($bean);
+            $url = $data ? $url . '?' . $data : $url;
+        }
 
+        $http = new HttpClient($url);
         if ($http) {
             try{
-                $ret = $http->put($data)->getBody();
-                return !empty($ret) ? json_decode($ret, true): null;
+                return $this->checkResponse($http->put($data));
             } catch (\Exception $exception) {
                 throw new \Exception($exception->getMessage());
             }
@@ -50,7 +55,7 @@ class BaseFunc
     /**
      * @param BaseCommand $bean
      * @param array       $headers
-     * @return mixed|null
+     * @return mixed
      * @throws InvalidUrl
      * @throws \Exception
      */
@@ -68,8 +73,7 @@ class BaseFunc
                         $http->setHeader($headerKey, $headerVal);
                     }
                 }
-                $ret = $http->get()->getBody();
-                return !empty($ret) ? json_decode($ret, true): null;
+                return $this->checkResponse($http->get());
             } catch (\Exception $exception) {
                 throw new \Exception($exception->getMessage());
             }
@@ -80,8 +84,8 @@ class BaseFunc
 
     /**
      * @param BaseCommand $bean
-     * @param array   $headers
-     * @return mixed|null
+     * @param array       $headers
+     * @return mixed
      * @throws InvalidUrl
      * @throws \Exception
      */
@@ -98,8 +102,7 @@ class BaseFunc
                         $http->setHeader($headerKey, $headerVal);
                     }
                 }
-                $ret = $http->postJson($data)->getBody();
-                return !empty($ret) ? json_decode($ret, true): null;
+                return $this->checkResponse($http->postJson($data));
             } catch (\Exception $exception) {
                 throw new \Exception($exception->getMessage());
             }
@@ -110,17 +113,17 @@ class BaseFunc
 
     /**
      * @param BaseCommand $bean
-     * @param array   $headers
-     * @return mixed|null
+     * @param array       $headers
+     * @return mixed
      * @throws InvalidUrl
      * @throws \Exception
      */
     protected function deleteJson(BaseCommand $bean, array $headers=[])
     {
         $url = $this->getUrl($bean);
-        $data = $this->toRequestJson($bean);
+        $data = $this->toRequestParam($bean);
+        $url = $data ? $url . '?' . $data : $url;
         $http = new HttpClient($url);
-
         if ($http) {
             try{
                 if (isset($headers) && !empty($headers)) {
@@ -128,14 +131,42 @@ class BaseFunc
                         $http->setHeader($headerKey, $headerVal);
                     }
                 }
-                $ret = $http->delete()->getBody();
-                return !empty($ret) ? json_decode($ret, true): null;
+                return $this->checkResponse($http->delete());
             } catch (\Exception $exception) {
                 throw new \Exception($exception->getMessage());
             }
         } else {
             throw new InvalidUrl('url is invalid');
         }
+    }
+
+    /**
+     * @param Response $consulResponse
+     * @return mixed
+     * @throws Exception
+     */
+    private function checkResponse(Response $consulResponse) {
+        // 网络响应失败
+        if ($consulResponse->getErrCode()) {
+            throw new Exception('Consul Network Error: ' . $consulResponse->getErrMsg());
+        }
+
+        // 错误请求状态码
+        if ($consulResponse->getStatusCode() >= 400) {
+            $reason = isset($consulResponse->getHeaders()['x-consul-reason']) ?
+                $consulResponse->getHeaders()['x-consul-reason'] : '';
+            $reason = $reason ?: $consulResponse->getBody();
+            throw new Exception(sprintf(
+                'Consul Request Error (Status Code: %d, Reason: %s)',
+                $consulResponse->getStatusCode(),
+                $reason
+            ));
+        };
+        // 解码请求内容
+        $contentJson = $consulResponse->getBody();
+        $contentArr = json_decode($contentJson, true);
+
+        return $contentArr;
     }
 
     private function getUrl(BaseCommand $bean): string
@@ -145,7 +176,7 @@ class BaseFunc
 
     /**
      * 处理请求Request，过滤null值
-     * @param SplBean $request
+     * @param BaseCommand $request
      * @return string
      */
     private function toRequestParam(BaseCommand $request): string

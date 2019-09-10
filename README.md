@@ -329,7 +329,7 @@ $this->consul->agent()->reload($reload);
 
 // Enable Maintenance Mode
 $maintenance = new Maintenance([
-    'enable' => 'true',
+    'enable' => true,
     'reason' => 'whatever',
 ]);
 $this->consul->agent()->maintenance($maintenance);
@@ -359,7 +359,7 @@ $this->consul->agent()->leave($leave);
 
 // Force Leave and Shutdown
 $forceLeave = new ForceLeave([
-    'node' => 'aaaaaaaaa'
+    'node' => 'consul'
 ]);
 $this->consul->agent()->forceLeave($forceLeave);
 
@@ -374,7 +374,7 @@ $this->consul->agent()->token($token);
 ```php
 // List Checks
 $checks = new Checks([
-    'filter' => 'aaaa',
+    'filter' => '',
 ]);
 $this->consul->agent()->checks($checks);
 
@@ -405,21 +405,21 @@ $this->consul->agent()->deRegister($deRegister);
 // TTL Check Pass
 $pass = new Pass([
     'check_id' => 'Memory_utilization',
-    'note' => 'aaaaa',
+    'note' => 'consul',
 ]);
 $this->consul->agent()->pass($pass);
 
 // TTL Check Warn
 $warn = new Warn([
     'check_id' => 'Memory_utilization',
-    'note' => 'aaaaa',
+    'note' => 'consul',
 ]);
 $this->consul->agent()->warn($warn);
 
 // TTL Check Fail
 $fail = new Fail([
     'check_id' => 'Memory_utilization',
-    'note' => 'aaaaa',
+    'note' => 'consul',
 ]);
 $this->consul->agent()->fail($fail);
 
@@ -441,20 +441,20 @@ $this->consul->agent()->services($services);
 
 // Get Service Configuration
  $service = new Service([
-    'service_id' => "register_consule"
+    'service_id' => "consul"
 ]);
 $this->consul->agent()->service($service);
 
 // Get local service health
 $name = new Name([
-    'service_name' => 'register_consule',
+    'service_name' => 'consul',
     'format' => 'text',
 ]);
 $this->consul->agent()->name($name);
 
 // Get local service health by its ID
 $id = new ID([
-    'service_id' => 'register_consule',
+    'service_id' => 'consul',
     'format' => 'text',
 ]);
 $this->consul->agent()->id($id);
@@ -489,15 +489,15 @@ $this->consul->agent()->serviceRegister($register);
 
 // Deregister Service
 $deregister = new Service\DeRegister([
-    'service_id' => 'aaaaaa',
+    'service_id' => 'consul',
 ]);
 $this->consul->agent()->serviceDeregister($deregister);
 
 // Enable Maintenance Mode
 $maintenance= new Service\Maintenance([
-    'service_id' => 'aaaaaa',
+    'service_id' => 'consul',
     'enable' => true,
-    'reason' => 'bbbb'
+    'reason' => ''
 ]);
 $this->consul->agent()->serviceMaintenance($maintenance);
 ```
@@ -517,7 +517,7 @@ $this->consul->agent()->roots($roots);
 
 // Service Leaf Certificate
 $leaf = new Leaf([
-    'service' => 'aaaa'
+    'service' => 'consul'
 ]);
 $this->consul->agent()->leaf($leaf);
 ```
@@ -591,19 +591,20 @@ $this->consul->catalog()->dataCenters($datacenters);
 
 // List Nodes
 $nodes = new Nodes([
-    'node-meta' => 'a',
-    'dc' => 'b',
-    'near' => 'c',
-    'filter' => 'd',
+    'dc' => 'dc1',
+    'node-meta' => '',
+    'near' => '',
+    'filter' => '',
 ]);
 $this->consul->catalog()->nodes($nodes);
 
 // List Services
 $nodes = new Nodes([
-    'node-meta' => 'a',
-    'dc' => 'b',
-    'near' => 'c',
-    'filter' => 'd',
+$services = new Services([
+    'dc' => 'dc1',
+    'node-meta' => '',
+]);
+$this->consul->catalog()->services($services);
 ]);
 $this->consul->catalog()->nodes($nodes);
 
@@ -617,30 +618,30 @@ $this->consul->catalog()->services($services);
 // List Nodes for Connect-capable Service
 $service = new Service([
     'service' => 'consul',
-    'dc' => 'a',
-    'tag' => 'b',
-    'near' => 'c',
-    'node-meta' => 'd',
-    'filter' => 'e',
+    'dc' => 'dc1',
+    'tag' => '',
+    'near' => '',
+    'node-meta' => '',
+    'filter' => '',
 ]);
 $this->consul->catalog()->service($service);
 
 // List Services for Node
 $connect = new Connect([
     'service' => 'consul',
-    'dc' => 'a',
-    'tag' => 'b',
-    'near' => 'c',
-    'node-meta' => 'd',
-    'filter' => 'e',
+    'dc' => 'dc1',
+    'tag' => '',
+    'near' => '',
+    'node-meta' => '',
+    'filter' => '',
 ]);
 $this->consul->catalog()->connect($connect);
 
 // List Services for Node
 $node = new Node([
-    'node' => '44e4656a94cd',
-    'dc' => 'a',
-    'filter' => 'b',
+    'node' => '2eb87046a6fe',
+    'dc' => 'dc1',
+    'filter' => '',
 ]);
 $this->consul->catalog()->node($node);
 ```
@@ -719,8 +720,8 @@ $this->consul->connect()->listIntention($intentions);
 $intentions = new Intentions([
     'uuid' => 'b40faaf3-34aa-349f-3cf2-f5d720240662',
     'description' => 'just a test description',
-    'SourceName' => 'aa',
-    'DestinationName' => 'bb',
+    'SourceName' => '',
+    'DestinationName' => '',
     'Action' => 'allow'
 ]);
 $this->consul->connect()->updateIntention($intentions);
