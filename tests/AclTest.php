@@ -25,6 +25,7 @@ use EasySwoole\Consul\Request\Acl\Translate;
 use EasySwoole\Consul\Request\Acl\Update;
 use EasySwoole\Consul\Request\Agent\Join;
 use PHPUnit\Framework\TestCase;
+
 class AclTest extends TestCase
 {
     protected $config;

@@ -113,10 +113,10 @@ class CatalogTest extends TestCase
     function testNodes()
     {
         $nodes = new Nodes([
-            'node-meta' => 'a',
-            'dc' => 'b',
-            'near' => 'c',
-            'filter' => 'd',
+            'dc' => 'dc1',
+            'node-meta' => '',
+            'near' => '',
+            'filter' => '',
         ]);
         $this->consul->catalog()->nodes($nodes);
         $this->assertEquals('x','x');
@@ -125,8 +125,8 @@ class CatalogTest extends TestCase
     function testServices()
     {
         $services = new Services([
-            'dc' => 'a',
-            'node-meta' => 'b',
+            'dc' => 'dc1',
+            'node-meta' => '',
         ]);
         $this->consul->catalog()->services($services);
         $this->assertEquals('x','x');
@@ -136,11 +136,11 @@ class CatalogTest extends TestCase
     {
         $service = new Service([
             'service' => 'consul',
-            'dc' => 'a',
-            'tag' => 'b',
-            'near' => 'c',
-            'node-meta' => 'd',
-            'filter' => 'e',
+            'dc' => 'dc1',
+            'tag' => '',
+            'near' => '',
+            'node-meta' => '',
+            'filter' => '',
         ]);
         $this->consul->catalog()->service($service);
         $this->assertEquals('x','x');
@@ -150,11 +150,11 @@ class CatalogTest extends TestCase
     {
         $connect = new Connect([
             'service' => 'consul',
-            'dc' => 'a',
-            'tag' => 'b',
-            'near' => 'c',
-            'node-meta' => 'd',
-            'filter' => 'e',
+            'dc' => 'dc1',
+            'tag' => '',
+            'near' => '',
+            'node-meta' => '',
+            'filter' => '',
         ]);
         $this->consul->catalog()->connect($connect);
         $this->assertEquals('x','x');
@@ -163,9 +163,9 @@ class CatalogTest extends TestCase
     function testNode()
     {
         $node = new Node([
-            'node' => '44e4656a94cd',
-            'dc' => 'a',
-            'filter' => 'b',
+            'node' => '2eb87046a6fe',
+            'dc' => 'dc1',
+            'filter' => '',
         ]);
         $this->consul->catalog()->node($node);
         $this->assertEquals('x','x');

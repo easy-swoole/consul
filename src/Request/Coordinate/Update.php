@@ -27,7 +27,7 @@ use EasySwoole\Spl\SplBean;
  */
 class Update extends BaseCommand
 {
-    protected $url = 'coordinate/update/%s';
+    protected $url = 'coordinate/update%s';
 
     /**
      * @var string

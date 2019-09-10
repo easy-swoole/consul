@@ -7,7 +7,7 @@
  */
 namespace EasySwoole\Consul\Exception;
 
-class WrongRequiredParamsException extends Exception
+class InvalidRequiredParamsException extends Exception
 {
 
 }

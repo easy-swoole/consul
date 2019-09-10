@@ -65,7 +65,7 @@ class QueryTest extends TestCase
             'uuid' => '90dce5ca-5697-ae2f-09ae-51e9542ea58c',
             'dc' => 'dc1',
         ]);
-        $this->consul->query()->updateQuery($query);;
+        $this->consul->query()->updateQuery($query);
         $this->assertEquals('x','x');
     }
 
@@ -74,7 +74,7 @@ class QueryTest extends TestCase
         $query = new Query([
             'uuid' => '90dce5ca-5697-ae2f-09ae-51e9542ea58c'
         ]);
-        $this->consul->query()->deleteQuery($query);;
+        $this->consul->query()->deleteQuery($query);
         $this->assertEquals('x','x');
     }
 
@@ -84,7 +84,7 @@ class QueryTest extends TestCase
             'uuid' => '90dce5ca-5697-ae2f-09ae-51e9542ea58c',
             'dc' => 'dc1',
         ]);
-        $this->consul->query()->execute($execute);;
+        $this->consul->query()->execute($execute);
         $this->assertEquals('x','x');
     }
 
@@ -94,7 +94,7 @@ class QueryTest extends TestCase
             'uuid' => '90dce5ca-5697-ae2f-09ae-51e9542ea58c',
             'dc' => 'dc1',
         ]);
-        $this->consul->query()->explain($execute);;
+        $this->consul->query()->explain($execute);
         $this->assertEquals('x','x');
     }
 }
