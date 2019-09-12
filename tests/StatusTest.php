@@ -28,7 +28,7 @@ class StatusTest extends TestCase
     function testLeader()
     {
         $leader = new Leader();
-        $this->consul->status()->leader($leader);
+        var_dump($this->consul->status()->leader($leader));
         $this->assertEquals('x','x');
     }
 
@@ -37,7 +37,7 @@ class StatusTest extends TestCase
         $peers = new Peers([
             'dc' => 'dc1',
         ]);
-        $this->consul->status()->peers($peers);
+        var_dump($this->consul->status()->peers($peers));
         $this->assertEquals('x','x');
     }
 

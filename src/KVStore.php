@@ -4,14 +4,16 @@
 namespace EasySwoole\Consul;
 
 
+use EasySwoole\Consul\ConsulInterface\KVStoreInterface;
 use EasySwoole\Consul\Exception\MissingRequiredParamsException;
 use EasySwoole\Consul\Request\Kv;
 
-class KVStore extends BaseFunc
+class KVStore extends BaseFunc implements KVStoreInterface
 {
     /**
      * Read Key
      * @param Kv $kv
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -22,12 +24,13 @@ class KVStore extends BaseFunc
         }
         $kv->setUrl(sprintf($kv->getUrl(), $kv->getKey()));
         $kv->setKey('');
-        $this->getJson($kv);
+        return $this->getJson($kv);
     }
 
     /**
      * Create Key
      * @param Kv $kv
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -38,12 +41,13 @@ class KVStore extends BaseFunc
         }
         $kv->setUrl(sprintf($kv->getUrl(), $kv->getKey()));
         $kv->setKey('');
-        $this->putJSON($kv);
+        return $this->putJSON($kv);
     }
 
     /**
      * Update Key
      * @param Kv $kv
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -54,12 +58,13 @@ class KVStore extends BaseFunc
         }
         $kv->setUrl(sprintf($kv->getUrl(), $kv->getKey()));
         $kv->setKey('');
-        $this->putJSON($kv);
+        return $this->putJSON($kv);
     }
 
     /**
      * Delete Key
      * @param Kv $kv
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -70,6 +75,6 @@ class KVStore extends BaseFunc
         }
         $kv->setUrl(sprintf($kv->getUrl(), $kv->getKey()));
         $kv->setKey('');
-        $this->deleteJson($kv);
+        return $this->deleteJson($kv);
     }
 }

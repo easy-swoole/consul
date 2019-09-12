@@ -7,26 +7,29 @@
  */
 namespace EasySwoole\Consul;
 
+use EasySwoole\Consul\ConsulInterface\QueryInterface;
 use EasySwoole\Consul\Exception\MissingRequiredParamsException;
 use EasySwoole\Consul\Request\Query\Execute;
 use EasySwoole\Consul\Request\Query\Explain;
 
-class Query extends BaseFunc
+class Query extends BaseFunc implements QueryInterface
 {
     /**
      * Create Prepared Query
      * @param Request\Query $query
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function query(\EasySwoole\Consul\Request\Query $query)
     {
         $query->setUrl(substr($query->getUrl(), 0, strlen($query->getUrl()) -3));
-        $this->postJson($query);
+        return $this->postJson($query);
     }
 
     /**
      * Read Prepared Query
      * @param Request\Query $query
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function readQuery(\EasySwoole\Consul\Request\Query $query)
@@ -37,12 +40,13 @@ class Query extends BaseFunc
             $query->setUrl(sprintf($query->getUrl(), $query->getUuid()));
             $query->setUuid('');
         }
-        $this->getJson($query);
+        return $this->getJson($query);
     }
 
     /**
      * Update Prepared Query
      * @param Request\Query $query
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -53,12 +57,13 @@ class Query extends BaseFunc
         }
         $query->setUrl(sprintf($query->getUrl(), $query->getUuid()));
         $query->setUuid('');
-        $this->putJSON($query);
+        return $this->putJSON($query);
     }
 
     /**
      * Delete Prepared Query
      * @param Request\Query $query
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -69,12 +74,13 @@ class Query extends BaseFunc
         }
         $query->setUrl(sprintf($query->getUrl(), $query->getUuid()));
         $query->setUuid('');
-        $this->deleteJson($query);
+        return $this->deleteJson($query);
     }
 
     /**
      * Execute Prepared Query
      * @param Execute $execute
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -85,12 +91,13 @@ class Query extends BaseFunc
         }
         $execute->setUrl(sprintf($execute->getUrl(), $execute->getUuid()));
         $execute->setUuid('');
-        $this->getJson($execute);
+        return $this->getJson($execute);
     }
 
     /**
      * Explain Prepared Query
      * @param Explain $explain
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -101,6 +108,6 @@ class Query extends BaseFunc
         }
         $explain->setUrl(sprintf($explain->getUrl(), $explain->getUuid()));
         $explain->setUuid('');
-        $this->getJson($explain);
+        return $this->getJson($explain);
     }
 }

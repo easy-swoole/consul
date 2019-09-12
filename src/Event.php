@@ -7,15 +7,17 @@
  */
 namespace EasySwoole\Consul;
 
+use EasySwoole\Consul\ConsulInterface\EventInterface;
 use EasySwoole\Consul\Exception\MissingRequiredParamsException;
 use EasySwoole\Consul\Request\Event\Fire;
 use EasySwoole\Consul\Request\Event\ListEvent;
 
-class Event extends BaseFunc
+class Event extends BaseFunc implements EventInterface
 {
     /**
      * Fire Event
      * @param Fire $fire
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -26,12 +28,13 @@ class Event extends BaseFunc
         }
         $fire->setUrl(sprintf($fire->getUrl(), $fire->getName()));
         $fire->setName('');
-        $this->putJSON($fire);
+        return $this->putJSON($fire);
     }
 
     /**
      * List Events
      * @param ListEvent $listEvent
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -40,6 +43,6 @@ class Event extends BaseFunc
         if (empty($listEvent->getName())) {
             throw new MissingRequiredParamsException('Missing the required param: Name.');
         }
-        $this->getJson($listEvent);
+        return $this->getJson($listEvent);
     }
 }
