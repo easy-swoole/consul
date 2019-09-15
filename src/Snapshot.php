@@ -7,26 +7,29 @@
  */
 namespace EasySwoole\Consul;
 
+use EasySwoole\Consul\ConsulInterface\SnapshotInterface;
 use EasySwoole\Consul\Request\Snapshot as snap;
 
-class Snapshot extends BaseFunc
+class Snapshot extends BaseFunc implements SnapshotInterface
 {
     /**
      * Generate Snapshot
      * @param snap $snapshot
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function generate(snap $snapshot) {
-        $this->getJson($snapshot);
+        return $this->getJson($snapshot);
     }
 
     /**
      * Restore Snapshot
      * @param snap $snapshot
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function restore(snap $snapshot)
     {
-        $this->putJSON($snapshot);
+        return $this->putJSON($snapshot);
     }
 }

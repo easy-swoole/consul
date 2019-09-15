@@ -7,25 +7,28 @@
  */
 namespace EasySwoole\Consul;
 
+use EasySwoole\Consul\ConsulInterface\ConsulConfigInterface;
 use EasySwoole\Consul\Exception\MissingRequiredParamsException;
 use EasySwoole\Consul\Request\Config;
 
-class ConsulConfig extends BaseFunc
+class ConsulConfig extends BaseFunc implements ConsulConfigInterface
 {
     /**
      * Apply Configuration
      * @param Config $config
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function config(Config $config)
     {
         $config->setUrl(substr($config->getUrl(), 0, strlen($config->getUrl()) -3));
-        $this->putJSON($config);
+        return $this->putJSON($config);
     }
 
     /**
      * Get Configuration
      * @param Config $config
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -40,12 +43,13 @@ class ConsulConfig extends BaseFunc
         $config->setUrl(sprintf($config->getUrl(), $config->getKind() . '/' . $config->getName()));
         $config->setKind('');
         $config->setName('');
-        $this->getJson($config);
+        return $this->getJson($config);
     }
 
     /**
      * List Configurations
      * @param Config $config
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -56,12 +60,13 @@ class ConsulConfig extends BaseFunc
         }
         $config->setUrl(sprintf($config->getUrl(), $config->getKind()));
         $config->setKind('');
-        $this->getJson($config);
+        return $this->getJson($config);
     }
 
     /**
      * Delete Configuration
      * @param Config $config
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -76,6 +81,6 @@ class ConsulConfig extends BaseFunc
         $config->setUrl(sprintf($config->getUrl(), $config->getKind() . '/' . $config->getName()));
         $config->setKind('');
         $config->setName('');
-        $this->deleteJson($config);
+        return $this->deleteJson($config);
     }
 }

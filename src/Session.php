@@ -7,6 +7,7 @@
  */
 namespace EasySwoole\Consul;
 
+use EasySwoole\Consul\ConsulInterface\SessionInterface;
 use EasySwoole\Consul\Exception\MissingRequiredParamsException;
 use EasySwoole\Consul\Request\Session\Create;
 use EasySwoole\Consul\Request\Session\Destroy;
@@ -15,21 +16,23 @@ use EasySwoole\Consul\Request\Session\Node;
 use EasySwoole\Consul\Request\Session\Renew;
 use EasySwoole\Consul\Request\Session\SessionList;
 
-class Session extends BaseFunc
+class Session extends BaseFunc implements SessionInterface
 {
     /**
      * Create Session
      * @param Create $create
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function create(Create $create)
     {
-        $this->putJSON($create);
+        return $this->putJSON($create);
     }
 
     /**
      * Delete Session
      * @param Destroy $destroy
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -40,12 +43,13 @@ class Session extends BaseFunc
         }
         $destroy->setUrl(sprintf($destroy->getUrl(), $destroy->getUuid()));
         $destroy->setUuid('');
-        $this->putJSON($destroy);
+        return $this->putJSON($destroy);
     }
 
     /**
      * Read Session
      * @param Info $info
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -56,12 +60,13 @@ class Session extends BaseFunc
         }
         $info->setUrl(sprintf($info->getUrl(), $info->getUuid()));
         $info->setUuid('');
-        $this->getJson($info);
+        return $this->getJson($info);
     }
 
     /**
      * List Sessions for Node
      * @param Node $node
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -72,22 +77,24 @@ class Session extends BaseFunc
         }
         $node->setUrl(sprintf($node->getUrl(), $node->getNode()));
         $node->setNode('');
-        $this->getJson($node);
+        return $this->getJson($node);
     }
 
     /**
      * List Sessions
      * @param SessionList $sessionList
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function sessionList(SessionList $sessionList)
     {
-        $this->getJson($sessionList);
+        return $this->getJson($sessionList);
     }
 
     /**
      * Renew Session
      * @param Renew $renew
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -98,6 +105,6 @@ class Session extends BaseFunc
         }
         $renew->setUrl(sprintf($renew->getUrl(), $renew->getUuid()));
         $renew->setUuid('');
-        $this->putJSON($renew);
+        return $this->putJSON($renew);
     }
 }

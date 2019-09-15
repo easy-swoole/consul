@@ -7,8 +7,8 @@
  */
 namespace EasySwoole\Consul;
 
+use EasySwoole\Consul\ConsulInterface\OperatorInterface;
 use EasySwoole\Consul\Exception\MissingRequiredParamsException;
-use EasySwoole\Consul\Request\Acl\Logout;
 use EasySwoole\Consul\Request\Operator\Area;
 use EasySwoole\Consul\Request\Operator\Autopilot\Configuration;
 use EasySwoole\Consul\Request\Operator\Autopilot\Health;
@@ -18,22 +18,24 @@ use EasySwoole\Consul\Request\Operator\Raft\Configuration as raftConfig;
 use EasySwoole\Consul\Request\Operator\Raft\Peer;
 use EasySwoole\Consul\Request\Operator\Segment;
 
-class Operator extends BaseFunc
+class Operator extends BaseFunc implements OperatorInterface
 {
     /**
      * Create Network Area
      * @param Area $area
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function area(Area $area)
     {
         $area->setUrl(substr($area->getUrl(), 0, strlen($area->getUrl()) -3));
-        $this->postJson($area);
+        return $this->postJson($area);
     }
 
     /**
      * List Network Areas OR List Specific Network Area
      * @param Area $area
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function areaList(Area $area)
@@ -45,12 +47,13 @@ class Operator extends BaseFunc
             $area->setUuid('');
         }
 
-        $this->getJson($area);
+        return $this->getJson($area);
     }
 
     /**
      * Update Network Area
      * @param Area $area
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -61,12 +64,13 @@ class Operator extends BaseFunc
         }
         $area->setUrl(sprintf($area->getUrl(), $area->getUuid()));
         $area->setUuid('');
-        $this->putJSON($area);
+        return $this->putJSON($area);
     }
 
     /**
      * Delete Network Area
      * @param Area $area
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -77,12 +81,13 @@ class Operator extends BaseFunc
         }
         $area->setUrl(sprintf($area->getUrl(), $area->getUuid()));
         $area->setUuid('');
-        $this->deleteJson($area);
+        return $this->deleteJson($area);
     }
 
     /**
      * Join Network Area
      * @param Area $area
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -93,12 +98,13 @@ class Operator extends BaseFunc
         }
         $area->setUrl(sprintf($area->getUrl(), $area->getUuid() . '/join'));
         $area->setUuid('');
-        $this->getJson($area);
+        return $this->getJson($area);
     }
 
     /**
      * List Network Area Members
      * @param Area $area
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -109,52 +115,57 @@ class Operator extends BaseFunc
         }
         $area->setUrl(sprintf($area->getUrl(), $area->getUuid() . '/members'));
         $area->setUuid('');
-        $this->getJson($area);
+        return $this->getJson($area);
     }
 
     /**
      * Read Configuration
      * @param Configuration $configuration
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function getConfiguration(Configuration $configuration)
     {
-        $this->getJson($configuration);
+        return $this->getJson($configuration);
     }
 
     /**
      * Update Configuration
      * @param Configuration $configuration
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function updateConfiguration(Configuration $configuration)
     {
-        $this->putJSON($configuration);
+        return $this->putJSON($configuration);
     }
 
     /**
      * Read Health
      * @param Health $health
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function health(Health $health)
     {
-        $this->getJson($health);
+        return $this->getJson($health);
     }
 
     /**
      * List Gossip Encryption Keys
      * @param Keyring $keyring
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function getKeyring(Keyring $keyring)
     {
-        $this->getJson($keyring);
+        return $this->getJson($keyring);
     }
 
     /**
      * Add New Gossip Encryption Key
      * @param Keyring $keyring
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -163,12 +174,13 @@ class Operator extends BaseFunc
         if (empty($keyring->getKey())) {
             throw new MissingRequiredParamsException('Missing the required param: key.');
         }
-        $this->postJson($keyring);
+        return $this->postJson($keyring);
     }
 
     /**
      * Change Primary Gossip Encryption Key
      * @param Keyring $keyring
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -177,12 +189,13 @@ class Operator extends BaseFunc
         if (empty($keyring->getKey())) {
             throw new MissingRequiredParamsException('Missing the required param: key.');
         }
-        $this->putJSON($keyring);
+        return $this->putJSON($keyring);
     }
 
     /**
      * Delete Gossip Encryption Key
      * @param Keyring $keyring
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -191,59 +204,64 @@ class Operator extends BaseFunc
         if (empty($keyring->getKey())) {
             throw new MissingRequiredParamsException('Missing the required param: key.');
         }
-        $this->deleteJson($keyring);
+        return $this->deleteJson($keyring);
     }
 
     /**
      * Getting the Consul License
      * @param License $license
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function getLicense(License $license)
     {
-        $this->getJson($license);
+        return $this->getJson($license);
     }
 
     /**
      * Updating the Consul License
      * @param License $license
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function updateLicense(License $license)
     {
-        $this->putJSON($license);
+        return $this->putJSON($license);
     }
 
     /**
      * Resetting the Consul License
      * @param License $license
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function resetLicense(License $license)
     {
-        $this->deleteJson($license);
+        return $this->deleteJson($license);
     }
 
     /**
      * Read Configuration
      * @param raftConfig $configuration
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function getRaftConfiguration(raftConfig $configuration)
     {
-        $this->getJson($configuration);
+        return $this->getJson($configuration);
     }
 
     /**
      * Delete Raft Peer
      * @param Peer $peer
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function peer(Peer $peer)
     {
         if (! empty($peer->getId()) || ! empty($peer->getAddress())) {
-            $this->deleteJson($peer);
+            return $this->deleteJson($peer);
         } else {
             throw new MissingRequiredParamsException('Missing the required param: id or address.');
         }
@@ -252,10 +270,11 @@ class Operator extends BaseFunc
     /**
      * List Network Segments
      * @param Segment $segment
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function segment(Segment $segment)
     {
-        $this->getJson($segment);
+        return $this->getJson($segment);
     }
 }

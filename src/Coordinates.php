@@ -7,37 +7,41 @@
  */
 namespace EasySwoole\Consul;
 
+use EasySwoole\Consul\ConsulInterface\CoordinatesInterface;
 use EasySwoole\Consul\Exception\MissingRequiredParamsException;
 use EasySwoole\Consul\Request\Coordinate\Datacenters;
 use EasySwoole\Consul\Request\Coordinate\Nodes;
 use EasySwoole\Consul\Request\Coordinate\Node;
 use EasySwoole\Consul\Request\Coordinate\Update;
 
-class Coordinates extends BaseFunc
+class Coordinates extends BaseFunc implements CoordinatesInterface
 {
     /**
      * Read WAN Coordinates
      * @param Datacenters $datacenters
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function datacenters(Datacenters $datacenters)
     {
-        $this->getJson($datacenters);
+        return $this->getJson($datacenters);
     }
 
     /**
      * Read LAN Coordinates for all nodes
      * @param Nodes $nodes
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function nodes(Nodes $nodes)
     {
-        $this->getJson($nodes);
+        return $this->getJson($nodes);
     }
 
     /**
      * Read LAN Coordinates for a node
      * @param Node $node
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -48,23 +52,24 @@ class Coordinates extends BaseFunc
         }
         $node->setUrl(sprintf($node->getUrl(), $node->getNode()));
         $node->setNode('');
-        $this->getJson($node);
+        return $this->getJson($node);
     }
 
     /**
      * Update LAN Coordinates for a node
      * @param Update $update
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function update(Update $update)
     {
         if (empty($update->getDc())) {
             $update->setUrl(substr($update->getUrl(), 0, strlen($update->getUrl()) -3));
-            $this->putJSON($update);
+            return $this->putJSON($update);
         } else {
             $update->setUrl(sprintf($update->getUrl(), '?dc=' . $update->getDc()));
             $update->setDc('');
-            $this->putJSON($update);
+            return $this->putJSON($update);
         }
     }
 }

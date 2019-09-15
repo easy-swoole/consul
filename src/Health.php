@@ -1,6 +1,7 @@
 <?php
 namespace EasySwoole\Consul;
 
+use EasySwoole\Consul\ConsulInterface\HealthInterface;
 use EasySwoole\Consul\Exception\MissingRequiredParamsException;
 use EasySwoole\Consul\Request\Health\Checks;
 use EasySwoole\Consul\Request\Health\Connect;
@@ -8,11 +9,12 @@ use EasySwoole\Consul\Request\Health\Node;
 use EasySwoole\Consul\Request\Health\Service;
 use EasySwoole\Consul\Request\Health\State;
 
-class Health extends BaseFunc
+class Health extends BaseFunc implements HealthInterface
 {
     /**
      * List Checks for Node
      * @param Node $node
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -23,12 +25,13 @@ class Health extends BaseFunc
         }
         $node->setUrl(sprintf($node->getUrl(), $node->getNode()));
         $node->setNode('');
-        $this->getJson($node);
+        return $this->getJson($node);
     }
 
     /**
      * List Checks for Service
      * @param Checks $checks
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -39,12 +42,13 @@ class Health extends BaseFunc
         }
         $checks->setUrl(sprintf($checks->getUrl(), $checks->getService()));
         $checks->setService('');
-        $this->getJson($checks);
+        return $this->getJson($checks);
     }
 
     /**
      * List Nodes for Service
      * @param Service $service
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -55,13 +59,14 @@ class Health extends BaseFunc
         }
         $service->setUrl(sprintf($service->getUrl(), $service->getService()));
         $service->setService('');
-        $this->getJson($service);
+        return $this->getJson($service);
     }
 
     /**
      * List Nodes for Connect-capable Service
      * Parameters and response format are the same as Health/service
      * @param Connect $connect
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -72,12 +77,13 @@ class Health extends BaseFunc
         }
         $connect->setUrl(sprintf($connect->getUrl(), $connect->getService()));
         $connect->setService('');
-        $this->getJson($connect);
+        return $this->getJson($connect);
     }
 
     /**
      * List Checks in State
      * @param State $state
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -88,6 +94,6 @@ class Health extends BaseFunc
         }
         $state->setUrl(sprintf($state->getUrl(), $state->getState()));
         $state->setState('');
-        $this->getJson($state);
+        return $this->getJson($state);
     }
 }

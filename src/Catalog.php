@@ -1,6 +1,7 @@
 <?php
 namespace EasySwoole\Consul;
 
+use EasySwoole\Consul\ConsulInterface\CatalogInterface;
 use EasySwoole\Consul\Exception\MissingRequiredParamsException;
 use EasySwoole\Consul\Request\Catalog\Connect;
 use EasySwoole\Consul\Request\Catalog\Datacenters;
@@ -11,12 +12,13 @@ use EasySwoole\Consul\Request\Catalog\Register;
 use EasySwoole\Consul\Request\Catalog\Service;
 use EasySwoole\Consul\Request\Catalog\Services;
 
-class Catalog extends BaseFunc
+class Catalog extends BaseFunc implements CatalogInterface
 {
 
     /**
      * Register Entity
      * @param Register $register
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -28,12 +30,13 @@ class Catalog extends BaseFunc
         if (empty($register->getAddress())) {
             throw new MissingRequiredParamsException('Missing the required param: Address.');
         }
-        $this->putJSON($register);
+        return $this->putJSON($register);
     }
 
     /**
      * Deregister Entity
      * @param Deregister $deregister
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -42,42 +45,46 @@ class Catalog extends BaseFunc
         if (empty($deregister->getNode())) {
             throw new MissingRequiredParamsException('Missing the required param: Node.');
         }
-        $this->putJSON($deregister);
+        return $this->putJSON($deregister);
     }
 
     /**
      * List Datacenters
      * @param Datacenters $datacenters
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function dataCenters(Datacenters $datacenters)
     {
-        $this->getJson($datacenters);
+        return $this->getJson($datacenters);
     }
 
     /**
      * List Nodes
      * @param Nodes $nodes
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function nodes(Nodes $nodes)
     {
-        $this->getJson($nodes);
+        return $this->getJson($nodes);
     }
 
     /**
      * List Services
      * @param Services $services
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function services(Services $services)
     {
-        $this->getJson($services);
+        return $this->getJson($services);
     }
 
     /**
      * List Nodes for service
      * @param Service $service
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -88,12 +95,13 @@ class Catalog extends BaseFunc
         }
         $service->url = sprintf($service->url, $service->getService());
         $service->setService('');
-        $this->getJson($service);
+        return $this->getJson($service);
     }
 
     /**
      * List Nodes for Connect-capable Service
      * @param Connect $connect
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -104,12 +112,13 @@ class Catalog extends BaseFunc
         }
         $connect->url = sprintf($connect->url, $connect->getService());
         $connect->setService('');
-        $this->getJson($connect);
+        return $this->getJson($connect);
     }
 
     /**
      * List Services for Node
      * @param Node $node
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -120,6 +129,6 @@ class Catalog extends BaseFunc
         }
         $node->url = sprintf($node->url, $node->getNode());
         $node->setNode('');
-        $this->getJson($node);
+        return $this->getJson($node);
     }
 }

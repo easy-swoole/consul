@@ -7,6 +7,7 @@
  */
 namespace EasySwoole\Consul;
 
+use EasySwoole\Consul\ConsulInterface\AclInterface;
 use EasySwoole\Consul\Exception\MissingRequiredParamsException;
 use EasySwoole\Consul\Request\Acl\AuthMethod;
 use EasySwoole\Consul\Request\Acl\AuthMethods;
@@ -32,48 +33,52 @@ use EasySwoole\Consul\Request\Acl\Tokens;
 use EasySwoole\Consul\Request\Acl\Translate;
 use EasySwoole\Consul\Request\Acl\Update;
 
-class Acl extends BaseFunc
+class Acl extends BaseFunc implements AclInterface
 {
     /**
      * Bootstrap ACLs
      * @param Bootstrap $bootstrap
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function bootstrap(Bootstrap $bootstrap)
     {
-        $this->putJSON($bootstrap);
+        return $this->putJSON($bootstrap);
     }
 
     /**
      * Check ACL Replication
      * @param Replication $replication
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function replication(Replication $replication)
     {
-        $this->getJson($replication);
+        return $this->getJson($replication);
     }
 
     /**
      * Translate Rules
      * @param Translate $translate
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function translate (Translate $translate)
+    public function translate(Translate $translate)
     {
         if ($translate->getAccessorId()) {
             $translate->setUrl(sprintf($translate->getUrl(), $translate->getAccessorId()));
             $translate->setAccessorId('');
-            $this->getJson($translate);
+            return $this->getJson($translate);
         } else {
             $translate->setUrl(substr($translate->getUrl(), 0, strlen($translate->getUrl()) -3));
-            $this->postJson($translate);
+            return $this->postJson($translate);
         }
     }
 
     /**
      * Login to Auth Method
      * @param Login $login
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -85,12 +90,13 @@ class Acl extends BaseFunc
         if (empty($login->getBearerToken())) {
             throw new MissingRequiredParamsException('Missing the required param: BearerToken.');
         }
-        $this->postJson($login);
+        return $this->postJson($login);
     }
 
     /**
      * Logout from Auth Method
      * @param Logout $logout
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function logout(Logout $logout)
@@ -99,23 +105,25 @@ class Acl extends BaseFunc
             'X-Consul-Token' => $logout->getToken(),
         );
         $logout->setToken('');
-        $this->postJson($logout, $header);
+        return $this->postJson($logout, $header);
     }
 
     /**
      * Create a Token  OR Read a Token OR Update a Token
      * @param Token $token
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function token(Token $token)
     {
         $token->setUrl(substr($token->getUrl(), 0, strlen($token->getUrl()) -3));
-        $this->putJSON($token);
+        return $this->putJSON($token);
     }
 
     /**
      * Read a Token
      * @param Token $token
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -126,12 +134,13 @@ class Acl extends BaseFunc
         }
         $token->setUrl(sprintf($token->getUrl(), $token->getAccessorId()));
         $token->setAccessorId('');
-        $this->getJson($token);
+        return $this->getJson($token);
     }
 
     /**
      * Read Self Token
      * @param GetSelf $getSelf
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function self(GetSelf $getSelf)
@@ -140,28 +149,30 @@ class Acl extends BaseFunc
             'X-Consul-Token' => $getSelf->getToken(),
         );
         $getSelf->setToken('');
-        $this->getJson($getSelf, $header);
+        return $this->getJson($getSelf, $header);
     }
 
     /**
      * Update a Token
      * @param Token $token
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function updateToken (Token $token)
+    public function updateToken(Token $token)
     {
         if (empty($token->getAccessorID())) {
             throw new MissingRequiredParamsException('Missing the required param: AccessorID.');
         }
         $token->setUrl(sprintf($token->getUrl(), $token->getAccessorId()));
         $token->setAccessorId('');
-        $this->putJSON($token);
+        return $this->putJSON($token);
     }
 
     /**
      * Clone a Token
      * @param CloneToken $cloneToken
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -172,12 +183,13 @@ class Acl extends BaseFunc
         }
         $cloneToken->setUrl(sprintf($cloneToken->getUrl(), $cloneToken->getAccessorId()));
         $cloneToken->setAccessorId('');
-        $this->putJSON($cloneToken);
+        return $this->putJSON($cloneToken);
     }
 
     /**
      * Delete a Token
      * @param Token $token
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -188,32 +200,35 @@ class Acl extends BaseFunc
         }
         $token->setUrl(sprintf($token->getUrl(), $token->getAccessorId()));
         $token->setAccessorId('');
-        $this->deleteJson($token);
+        return $this->deleteJson($token);
     }
 
     /**
      * List Tokens
      * @param Tokens $tokens
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function tokens(Tokens $tokens)
     {
-        $this->getJson($tokens);
+        return $this->getJson($tokens);
     }
 
     /**
      * Create ACL Token
      * @param Create $create
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function create(Create $create)
     {
-        $this->putJSON($create);
+        return $this->putJSON($create);
     }
 
     /**
      * Update ACL Token
      * @param Update $update
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -222,12 +237,13 @@ class Acl extends BaseFunc
         if (empty($update->getId())) {
             throw new MissingRequiredParamsException('Missing the required param: ID.');
         }
-        $this->putJSON($update);
+        return $this->putJSON($update);
     }
 
     /**
      * Delete ACL Token
      * @param Destroy $destroy
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -238,12 +254,13 @@ class Acl extends BaseFunc
         }
         $destroy->setUrl(sprintf($destroy->getUrl(), $destroy->getUuid()));
         $destroy->setUuid('');
-        $this->putJSON($destroy);
+        return $this->putJSON($destroy);
     }
 
     /**
      * Read ACL Token
      * @param Info $info
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -254,12 +271,13 @@ class Acl extends BaseFunc
         }
         $info->setUrl(sprintf($info->getUrl(), $info->getUuid()));
         $info->setUuid('');
-        $this->getJson($info);
+        return $this->getJson($info);
     }
 
     /**
      * Clone ACL Token
      * @param CloneACLToken $cloneACLToken
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -270,22 +288,24 @@ class Acl extends BaseFunc
         }
         $cloneACLToken->setUrl(sprintf($cloneACLToken->getUrl(), $cloneACLToken->getUuid()));
         $cloneACLToken->setUuid('');
-        $this->putJSON($cloneACLToken);
+        return $this->putJSON($cloneACLToken);
     }
 
     /**
      * List ACLs
      * @param Lists $lists
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function getList(Lists $lists)
     {
-        $this->getJson($lists);
+        return $this->getJson($lists);
     }
 
     /**
      * Create a Policy
      * @param Policy $policy
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -295,12 +315,13 @@ class Acl extends BaseFunc
             throw new MissingRequiredParamsException('Missing the required param: Name.');
         }
         $policy->setUrl(substr($policy->getUrl(), 0, strlen($policy->getUrl()) -3));
-        $this->putJSON($policy);
+        return $this->putJSON($policy);
     }
 
     /**
      * Read a Policy
      * @param Policy $policy
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -311,12 +332,13 @@ class Acl extends BaseFunc
         }
         $policy->setUrl(sprintf($policy->getUrl(), $policy->getId()));
         $policy->setId('');
-        $this->getJson($policy);
+        return $this->getJson($policy);
     }
 
     /**
      * Update a Policy
      * @param Policy $policy
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -329,13 +351,14 @@ class Acl extends BaseFunc
             throw new MissingRequiredParamsException('Missing the required param: Name.');
         }
         $policy->setUrl(substr($policy->getUrl(), 0, strlen($policy->getUrl()) -3));
-        $this->putJSON($policy);
+        return $this->putJSON($policy);
     }
 
 
     /**
      * Delete a Policy
      * @param Policy $policy
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -346,22 +369,24 @@ class Acl extends BaseFunc
         }
         $policy->setUrl(sprintf($policy->getUrl(), $policy->getId()));
         $policy->setId('');
-        $this->deleteJson($policy);
+        return $this->deleteJson($policy);
     }
 
     /**
      * List Policies
      * @param Policies $policies
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function policies (Policies $policies)
     {
-        $this->getJson($policies);
+        return $this->getJson($policies);
     }
 
     /**
      * Create a Role
      * @param Role $role
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -371,12 +396,13 @@ class Acl extends BaseFunc
             throw new MissingRequiredParamsException('Missing the required param: Name.');
         }
         $role->setUrl(substr($role->getUrl(), 0, strlen($role->getUrl()) -3));
-        $this->putJSON($role);
+        return $this->putJSON($role);
     }
 
     /**
      * Read a Role
      * @param Role $role
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -387,12 +413,13 @@ class Acl extends BaseFunc
         }
         $role->setUrl(sprintf($role->getUrl(), $role->getId()));
         $role->setId('');
-        $this->getJson($role);
+        return $this->getJson($role);
     }
 
     /**
      * Read a Role by Name
      * @param Role $role
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -403,12 +430,13 @@ class Acl extends BaseFunc
         }
         $role->setUrl(sprintf($role->getUrl(), 'name/' . $role->getName()));
         $role->setName('');
-        $this->getJson($role);
+        return $this->getJson($role);
     }
 
     /**
      * Update a Role
      * @param Role $role
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -421,12 +449,13 @@ class Acl extends BaseFunc
             throw new MissingRequiredParamsException('Missing the required param: Name.');
         }
         $role->setUrl(sprintf($role->getUrl(), $role->getId()));
-        $this->putJSON($role);
+        return $this->putJSON($role);
     }
 
     /**
      * Delete a Role
      * @param Role $role
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -437,22 +466,24 @@ class Acl extends BaseFunc
         }
         $role->setUrl(sprintf($role->getUrl(), $role->getId()));
         $role->setId('');
-        $this->deleteJson($role);
+        return $this->deleteJson($role);
     }
 
     /**
      * List Roles
      * @param Roles $roles
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function roles(Roles $roles)
     {
-        $this->getJson($roles);
+        return $this->getJson($roles);
     }
 
     /**
      * Create an Auth Method
      * @param AuthMethod $authMethod
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -465,12 +496,13 @@ class Acl extends BaseFunc
             throw new MissingRequiredParamsException('Missing the required param: Type.');
         }
         $authMethod->setUrl(substr($authMethod->getUrl(), 0, strlen($authMethod->getUrl()) -3));
-        $this->putJSON($authMethod);
+        return $this->putJSON($authMethod);
     }
 
     /**
      * Read an Auth Method
      * @param AuthMethod $authMethod
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -481,12 +513,13 @@ class Acl extends BaseFunc
         }
         $authMethod->setUrl(sprintf($authMethod->getUrl(), $authMethod->getName()));
         $authMethod->setName('');
-        $this->getJson($authMethod);
+        return $this->getJson($authMethod);
     }
 
     /**
      * Update an Auth Method
      * @param AuthMethod $authMethod
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -499,12 +532,13 @@ class Acl extends BaseFunc
             throw new MissingRequiredParamsException('Missing the required param: Type.');
         }
         $authMethod->setUrl(sprintf($authMethod->getUrl(), $authMethod->getName()));
-        $this->putJSON($authMethod);
+        return $this->putJSON($authMethod);
     }
 
     /**
      * Delete an Auth Method
      * @param AuthMethod $authMethod
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -515,22 +549,24 @@ class Acl extends BaseFunc
         }
         $authMethod->setUrl(sprintf($authMethod->getUrl(), $authMethod->getName()));
         $authMethod->setName('');
-        $this->deleteJson($authMethod);
+        return $this->deleteJson($authMethod);
     }
 
     /**
      * List Auth Methods
      * @param AuthMethods $authMethods
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function authMethods(AuthMethods $authMethods)
     {
-        $this->getJson($authMethods);
+        return $this->getJson($authMethods);
     }
 
     /**
      * Create a Binding Rule
      * @param BindingRule $bindingRule
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -547,12 +583,13 @@ class Acl extends BaseFunc
         }
         $bindingRule->setUrl(substr($bindingRule->getUrl(), 0, strlen($bindingRule->getUrl()) -3));
 
-        $this->putJSON($bindingRule);
+        return $this->putJSON($bindingRule);
     }
 
     /**
      * Read a Binding Rule
      * @param BindingRule $bindingRule
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -563,12 +600,13 @@ class Acl extends BaseFunc
         }
         $bindingRule->setUrl(sprintf($bindingRule->getUrl(), $bindingRule->getId()));
         $bindingRule->setId('');
-        $this->getJson($bindingRule);
+        return $this->getJson($bindingRule);
     }
 
     /**
      * Update a Binding Rule
      * @param BindingRule $bindingRule
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -588,12 +626,13 @@ class Acl extends BaseFunc
         }
         $bindingRule->setUrl(sprintf($bindingRule->getUrl(), $bindingRule->getId()));
         $bindingRule->setId('');
-        $this->putJSON($bindingRule);
+        return $this->putJSON($bindingRule);
     }
 
     /**
      * Delete a Binding Rule
      * @param BindingRule $bindingRule
+     * @return mixed
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
@@ -604,16 +643,17 @@ class Acl extends BaseFunc
         }
         $bindingRule->setUrl(sprintf($bindingRule->getUrl(), $bindingRule->getId()));
         $bindingRule->setId('');
-        $this->deleteJson($bindingRule);
+        return $this->deleteJson($bindingRule);
     }
 
     /**
      * List Binding Rules
      * @param BindingRules $bindingRules
+     * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function bindingRules(BindingRules $bindingRules)
     {
-        $this->getJson($bindingRules);
+        return $this->getJson($bindingRules);
     }
 }
