@@ -341,7 +341,7 @@ class Register extends BaseCommand
     {
         return [
             'Name' => 'name',
-            'Id' => 'id',
+            'ID' => 'id',
             'Tags' => 'tags',
             'Address' => 'address',
             'TaggedAddresses' => 'taggedAddresses',
