@@ -4,7 +4,7 @@ namespace EasySwoole\Consul;
 use EasySwoole\Consul\ConsulInterface\AgentInterface;
 use EasySwoole\Consul\Exception\MissingRequiredParamsException;
 use EasySwoole\Consul\Exception\InvalidRequiredParamsException;
-use EasySwoole\Consul\Request\Agent\Check\Deregister;
+use EasySwoole\Consul\Request\Agent\Check\DeRegister;
 use EasySwoole\Consul\Request\Agent\Check\Fail;
 use EasySwoole\Consul\Request\Agent\Check\Pass;
 use EasySwoole\Consul\Request\Agent\Check\Register;

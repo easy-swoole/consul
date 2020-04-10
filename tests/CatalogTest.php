@@ -11,7 +11,7 @@ use EasySwoole\Consul\Config;
 use EasySwoole\Consul\Consul;
 use EasySwoole\Consul\Request\Catalog\Connect;
 use EasySwoole\Consul\Request\Catalog\Datacenters;
-use EasySwoole\Consul\Request\Catalog\Deregister;
+use EasySwoole\Consul\Request\Catalog\DeRegister;
 use EasySwoole\Consul\Request\Catalog\Node;
 use EasySwoole\Consul\Request\Catalog\Nodes;
 use EasySwoole\Consul\Request\Catalog\Register;
@@ -94,7 +94,7 @@ class CatalogTest extends TestCase
 
     function testDeregister()
     {
-        $deregister = new Deregister([
+        $deregister = new DeRegister([
             "datacenter" => "dc1",
             "node" => "foobar",
             "CheckID" => "service:redis1",

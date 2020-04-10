@@ -9,7 +9,7 @@ namespace EasySwoole\Consul\ConsulInterface;
 
 use EasySwoole\Consul\Request\Catalog\Connect;
 use EasySwoole\Consul\Request\Catalog\Datacenters;
-use EasySwoole\Consul\Request\Catalog\Deregister;
+use EasySwoole\Consul\Request\Catalog\DeRegister;
 use EasySwoole\Consul\Request\Catalog\Node;
 use EasySwoole\Consul\Request\Catalog\Nodes;
 use EasySwoole\Consul\Request\Catalog\Register;
@@ -20,7 +20,7 @@ interface CatalogInterface
 {
     public function register(Register $register);
 
-    public function deRegister(Deregister $deregister);
+    public function deRegister(DeRegister $deregister);
 
     public function dataCenters(Datacenters $datacenters);
 

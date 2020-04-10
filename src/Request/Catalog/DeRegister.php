@@ -3,7 +3,7 @@ namespace EasySwoole\Consul\Request\Catalog;
 
 use EasySwoole\Consul\Request\BaseCommand;
 
-class Deregister extends BaseCommand
+class DeRegister extends BaseCommand
 {
     public $url='catalog/deregister';
 
