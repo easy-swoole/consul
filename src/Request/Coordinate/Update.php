@@ -50,7 +50,7 @@ class Update extends BaseCommand
     /**
      * @return string
      */
-    public function getDc ()
+    public function getDc()
     {
         return $this->dc;
     }
@@ -58,7 +58,7 @@ class Update extends BaseCommand
     /**
      * @param string $dc
      */
-    public function setDc ($dc)
+    public function setDc($dc)
     {
         $this->dc = $dc;
     }
@@ -66,7 +66,7 @@ class Update extends BaseCommand
     /**
      * @return string
      */
-    public function getSegment ()
+    public function getSegment()
     {
         return $this->segment;
     }
@@ -74,7 +74,7 @@ class Update extends BaseCommand
     /**
      * @param string $segment
      */
-    public function setSegment ($segment)
+    public function setSegment($segment)
     {
         $this->segment = $segment;
     }
@@ -82,7 +82,7 @@ class Update extends BaseCommand
     /**
      * @return array
      */
-    public function getNode ()
+    public function getNode()
     {
         return $this->node;
     }
@@ -90,7 +90,7 @@ class Update extends BaseCommand
     /**
      * @param array $node
      */
-    public function setNode ($node)
+    public function setNode($node)
     {
         $this->node = $node;
     }
@@ -98,7 +98,7 @@ class Update extends BaseCommand
     /**
      * @return array
      */
-    public function getCoord ()
+    public function getCoord()
     {
         return $this->coord;
     }
@@ -106,12 +106,12 @@ class Update extends BaseCommand
     /**
      * @param array $coord
      */
-    public function setCoord ($coord)
+    public function setCoord($coord)
     {
         $this->coord = json_encode($coord);
     }
 
-    protected function setKeyMapping (): array
+    protected function setKeyMapping(): array
     {
         return [
             'Node' => 'node',

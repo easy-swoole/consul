@@ -3,7 +3,7 @@ namespace EasySwoole\Consul\Request\Catalog;
 
 use EasySwoole\Consul\Request\BaseCommand;
 
-class Deregister extends BaseCommand
+class DeRegister extends BaseCommand
 {
     public $url='catalog/deregister';
 
@@ -27,7 +27,7 @@ class Deregister extends BaseCommand
     /**
      * @return string
      */
-    public function getDatacenter ()
+    public function getDatacenter()
     {
         return $this->datacenter;
     }
@@ -35,7 +35,7 @@ class Deregister extends BaseCommand
     /**
      * @param string $datacenter
      */
-    public function setDatacenter ($datacenter)
+    public function setDatacenter($datacenter)
     {
         $this->datacenter = $datacenter;
     }
@@ -43,7 +43,7 @@ class Deregister extends BaseCommand
     /**
      * @return string
      */
-    public function getNode ()
+    public function getNode()
     {
         return $this->node;
     }
@@ -51,7 +51,7 @@ class Deregister extends BaseCommand
     /**
      * @param string $node
      */
-    public function setNode ($node)
+    public function setNode($node)
     {
         $this->node = $node;
     }
@@ -59,7 +59,7 @@ class Deregister extends BaseCommand
     /**
      * @return string
      */
-    public function getCheckID ()
+    public function getCheckID()
     {
         return $this->checkID;
     }
@@ -67,7 +67,7 @@ class Deregister extends BaseCommand
     /**
      * @param string $checkID
      */
-    public function setCheckID ($checkID)
+    public function setCheckID($checkID)
     {
         $this->checkID = $checkID;
     }
@@ -75,7 +75,7 @@ class Deregister extends BaseCommand
     /**
      * @return string
      */
-    public function getServiceID ()
+    public function getServiceID()
     {
         return $this->serviceID;
     }
@@ -83,12 +83,12 @@ class Deregister extends BaseCommand
     /**
      * @param string $serviceID
      */
-    public function setServiceID ($serviceID)
+    public function setServiceID($serviceID)
     {
         $this->serviceID = $serviceID;
     }
 
-    protected function setKeyMapping (): array
+    protected function setKeyMapping(): array
     {
         return [
             'Node' => 'node',

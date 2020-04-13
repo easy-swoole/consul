@@ -56,7 +56,7 @@ class Intentions extends BaseCommand
     /**
      * @return string
      */
-    public function getUuid ()
+    public function getUuid()
     {
         return $this->uuid;
     }
@@ -64,7 +64,7 @@ class Intentions extends BaseCommand
     /**
      * @param string $uuid
      */
-    public function setUuid ($uuid)
+    public function setUuid($uuid)
     {
         $this->uuid = $uuid;
     }
@@ -72,7 +72,7 @@ class Intentions extends BaseCommand
     /**
      * @return string
      */
-    public function getSourceName ()
+    public function getSourceName()
     {
         return $this->sourceName;
     }
@@ -80,7 +80,7 @@ class Intentions extends BaseCommand
     /**
      * @param string $sourceName
      */
-    public function setSourceName ($sourceName)
+    public function setSourceName($sourceName)
     {
         $this->sourceName = $sourceName;
     }
@@ -88,7 +88,7 @@ class Intentions extends BaseCommand
     /**
      * @return string
      */
-    public function getDestinationName ()
+    public function getDestinationName()
     {
         return $this->destinationName;
     }
@@ -96,7 +96,7 @@ class Intentions extends BaseCommand
     /**
      * @param string $destinationName
      */
-    public function setDestinationName ($destinationName)
+    public function setDestinationName($destinationName)
     {
         $this->destinationName = $destinationName;
     }
@@ -104,7 +104,7 @@ class Intentions extends BaseCommand
     /**
      * @return string
      */
-    public function getSourceType ()
+    public function getSourceType()
     {
         return $this->sourceType;
     }
@@ -112,7 +112,7 @@ class Intentions extends BaseCommand
     /**
      * @param string $sourceType
      */
-    public function setSourceType ($sourceType)
+    public function setSourceType($sourceType)
     {
         $this->sourceType = $sourceType;
     }
@@ -120,7 +120,7 @@ class Intentions extends BaseCommand
     /**
      * @return string
      */
-    public function getAction ()
+    public function getAction()
     {
         return $this->action;
     }
@@ -128,7 +128,7 @@ class Intentions extends BaseCommand
     /**
      * @param string $action
      */
-    public function setAction ($action)
+    public function setAction($action)
     {
         $this->action = $action;
     }
@@ -136,7 +136,7 @@ class Intentions extends BaseCommand
     /**
      * @return string
      */
-    public function getDescription ()
+    public function getDescription()
     {
         return $this->description;
     }
@@ -144,7 +144,7 @@ class Intentions extends BaseCommand
     /**
      * @param string $description
      */
-    public function setDescription ($description)
+    public function setDescription($description)
     {
         $this->description = $description;
     }
@@ -152,7 +152,7 @@ class Intentions extends BaseCommand
     /**
      * @return string
      */
-    public function getMeta ()
+    public function getMeta()
     {
         return $this->meta;
     }
@@ -160,12 +160,12 @@ class Intentions extends BaseCommand
     /**
      * @param string $meta
      */
-    public function setMeta ($meta)
+    public function setMeta($meta)
     {
         $this->meta = $meta;
     }
 
-    protected function setKeyMapping (): array
+    protected function setKeyMapping(): array
     {
         return [
             'SourceName' => 'sourceName',

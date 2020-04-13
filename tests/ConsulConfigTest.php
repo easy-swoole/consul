@@ -16,14 +16,14 @@ class ConsulConfigTest extends TestCase
     protected $config;
     protected $consul;
 
-    function __construct($name = null, array $data = [], $dataName = '')
+    public function __construct($name = null, array $data = [], $dataName = '')
     {
         $this->config = new Config();
         $this->consul = new Consul($this->config);
         parent::__construct($name, $data, $dataName);
     }
 
-    function testConfig()
+    public function testConfig()
     {
         $config = new \EasySwoole\Consul\Request\Config([
             'Kind' => 'service-defaults',
@@ -31,35 +31,35 @@ class ConsulConfigTest extends TestCase
             'Protocol' => 'Http'
         ]);
         $this->consul->config()->config($config);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testGetConfig()
+    public function testGetConfig()
     {
         $config = new \EasySwoole\Consul\Request\Config([
             'Kind' => 'service-defaults',
             'name' => 'web',
         ]);
         $this->consul->config()->getConfig($config);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testListConfig()
+    public function testListConfig()
     {
         $config = new \EasySwoole\Consul\Request\Config([
             'Kind' => 'service-defaults'
         ]);
         $this->consul->config()->listConfig($config);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testDeleteConfig()
+    public function testDeleteConfig()
     {
         $config = new \EasySwoole\Consul\Request\Config([
             'Kind' => 'service-defaults',
             'name' => 'web',
         ]);
         $this->consul->config()->deleteConfig($config);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 }

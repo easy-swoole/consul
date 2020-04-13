@@ -12,7 +12,7 @@ use EasySwoole\Consul\Request\Status\Peers;
 
 interface StatusInterface
 {
-    public function leader (Leader $leader);
+    public function leader(Leader $leader);
 
     public function peers(Peers $peers);
 }

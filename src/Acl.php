@@ -378,7 +378,7 @@ class Acl extends BaseFunc implements AclInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function policies (Policies $policies)
+    public function policies(Policies $policies)
     {
         return $this->getJson($policies);
     }

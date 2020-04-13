@@ -2,7 +2,6 @@
 namespace EasySwoole\Consul;
 
 use EasySwoole\Spl\SplBean;
-use PhpParser\Node\Scalar\String_;
 
 /**
  * 初始化 consul接口的ip:port/controller信息。不包含对应的action,param
@@ -27,7 +26,7 @@ class Config extends SplBean
     /**
      * @return string
      */
-    public function getIP ()
+    public function getIP()
     {
         return $this->IP;
     }
@@ -35,7 +34,7 @@ class Config extends SplBean
     /**
      * @param string $IP
      */
-    public function setIP ($IP)
+    public function setIP($IP)
     {
         $this->IP = $IP;
     }
@@ -43,7 +42,7 @@ class Config extends SplBean
     /**
      * @return string
      */
-    public function getPort ()
+    public function getPort()
     {
         return $this->port;
     }
@@ -51,7 +50,7 @@ class Config extends SplBean
     /**
      * @param string $port
      */
-    public function setPort ($port)
+    public function setPort($port)
     {
         $this->port = $port;
     }
@@ -59,7 +58,7 @@ class Config extends SplBean
     /**
      * @return string
      */
-    public function getVersion ()
+    public function getVersion()
     {
         return $this->version;
     }
@@ -67,7 +66,7 @@ class Config extends SplBean
     /**
      * @param string $version
      */
-    public function setVersion ($version)
+    public function setVersion($version)
     {
         $this->version = $version;
     }
@@ -80,5 +79,4 @@ class Config extends SplBean
     {
         return $this->IP . ':' . $this->port . '/' . $this->version . '/';
     }
-
 }

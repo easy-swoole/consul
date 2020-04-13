@@ -49,7 +49,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getId ()
+    public function getId()
     {
         return $this->id;
     }
@@ -57,7 +57,7 @@ class Register extends BaseCommand
     /**
      * @param string $id
      */
-    public function setId ($id)
+    public function setId($id)
     {
         $this->id = $id;
     }
@@ -65,7 +65,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getNode ()
+    public function getNode()
     {
         return $this->node;
     }
@@ -73,7 +73,7 @@ class Register extends BaseCommand
     /**
      * @param string $node
      */
-    public function setNode ($node)
+    public function setNode($node)
     {
         $this->node = $node;
     }
@@ -81,7 +81,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getAddress ()
+    public function getAddress()
     {
         return $this->address;
     }
@@ -89,7 +89,7 @@ class Register extends BaseCommand
     /**
      * @param string $address
      */
-    public function setAddress ($address)
+    public function setAddress($address)
     {
         $this->address = $address;
     }
@@ -97,7 +97,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getDatacenter ()
+    public function getDatacenter()
     {
         return $this->datacenter;
     }
@@ -105,7 +105,7 @@ class Register extends BaseCommand
     /**
      * @param string $datacenter
      */
-    public function setDatacenter ($datacenter)
+    public function setDatacenter($datacenter)
     {
         $this->datacenter = $datacenter;
     }
@@ -113,7 +113,7 @@ class Register extends BaseCommand
     /**
      * @return array
      */
-    public function getTaggedAddresses ()
+    public function getTaggedAddresses()
     {
         return $this->taggedAddresses;
     }
@@ -121,7 +121,7 @@ class Register extends BaseCommand
     /**
      * @param array $taggedAddresses
      */
-    public function setTaggedAddresses ($taggedAddresses)
+    public function setTaggedAddresses($taggedAddresses)
     {
         $this->taggedAddresses = json_encode($taggedAddresses);
     }
@@ -129,7 +129,7 @@ class Register extends BaseCommand
     /**
      * @return array
      */
-    public function getNodeMeta ()
+    public function getNodeMeta()
     {
         return $this->nodeMeta;
     }
@@ -137,7 +137,7 @@ class Register extends BaseCommand
     /**
      * @param array $nodeMeta
      */
-    public function setNodeMeta ($nodeMeta)
+    public function setNodeMeta($nodeMeta)
     {
         $this->nodeMeta = json_encode($nodeMeta);
     }
@@ -145,7 +145,7 @@ class Register extends BaseCommand
     /**
      * @return array
      */
-    public function getService ()
+    public function getService()
     {
         return $this->service;
     }
@@ -153,7 +153,7 @@ class Register extends BaseCommand
     /**
      * @param array $service
      */
-    public function setService ($service)
+    public function setService($service)
     {
         $this->service = json_encode($service);
     }
@@ -161,7 +161,7 @@ class Register extends BaseCommand
     /**
      * @return array
      */
-    public function getCheck ()
+    public function getCheck()
     {
         return $this->check;
     }
@@ -169,7 +169,7 @@ class Register extends BaseCommand
     /**
      * @param array $check
      */
-    public function setCheck ($check)
+    public function setCheck($check)
     {
         $this->check = json_encode($check);
     }
@@ -177,7 +177,7 @@ class Register extends BaseCommand
     /**
      * @return bool
      */
-    public function isSkipNodeUpdate ()
+    public function isSkipNodeUpdate()
     {
         return $this->skipNodeUpdate;
     }
@@ -185,12 +185,12 @@ class Register extends BaseCommand
     /**
      * @param bool $skipNodeUpdate
      */
-    public function setSkipNodeUpdate ($skipNodeUpdate)
+    public function setSkipNodeUpdate($skipNodeUpdate)
     {
         $this->skipNodeUpdate = $skipNodeUpdate;
     }
 
-    protected function setKeyMapping (): array
+    protected function setKeyMapping(): array
     {
         return [
             'ID' => 'id',

@@ -18,11 +18,11 @@ class Coordinates extends BaseFunc implements CoordinatesInterface
 {
     /**
      * Read WAN Coordinates
-     * @param Datacenters $datacenters
+     * @param DataCenters $datacenters
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function datacenters(Datacenters $datacenters)
+    public function dataCenters(DataCenters $datacenters)
     {
         return $this->getJson($datacenters);
     }

@@ -19,7 +19,7 @@ class BaseCommand extends SplBean
     /**
      * @return string
      */
-    public function getUrl ()
+    public function getUrl()
     {
         return $this->url;
     }
@@ -27,9 +27,8 @@ class BaseCommand extends SplBean
     /**
      * @param string $url
      */
-    public function setUrl ($url)
+    public function setUrl($url)
     {
         $this->url = $url;
     }
-
 }

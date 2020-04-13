@@ -48,7 +48,7 @@ class  Policy extends BaseCommand
     /**
      * @return string
      */
-    public function getId ()
+    public function getId()
     {
         return $this->id;
     }
@@ -56,7 +56,7 @@ class  Policy extends BaseCommand
     /**
      * @param string $id
      */
-    public function setId ($id)
+    public function setId($id)
     {
         $this->id = $id;
     }
@@ -64,7 +64,7 @@ class  Policy extends BaseCommand
     /**
      * @return string
      */
-    public function getName ()
+    public function getName()
     {
         return $this->name;
     }
@@ -72,7 +72,7 @@ class  Policy extends BaseCommand
     /**
      * @param string $name
      */
-    public function setName ($name)
+    public function setName($name)
     {
         $this->name = $name;
     }
@@ -80,7 +80,7 @@ class  Policy extends BaseCommand
     /**
      * @return string
      */
-    public function getDescription ()
+    public function getDescription()
     {
         return $this->description;
     }
@@ -88,7 +88,7 @@ class  Policy extends BaseCommand
     /**
      * @param string $description
      */
-    public function setDescription ($description)
+    public function setDescription($description)
     {
         $this->description = $description;
     }
@@ -96,7 +96,7 @@ class  Policy extends BaseCommand
     /**
      * @return string
      */
-    public function getRules ()
+    public function getRules()
     {
         return $this->rules;
     }
@@ -104,7 +104,7 @@ class  Policy extends BaseCommand
     /**
      * @param string $rules
      */
-    public function setRules ($rules)
+    public function setRules($rules)
     {
         $this->rules = $rules;
     }
@@ -112,7 +112,7 @@ class  Policy extends BaseCommand
     /**
      * @return string
      */
-    public function getDatacenters ()
+    public function getDataCenters()
     {
         return $this->datacenters;
     }
@@ -120,12 +120,12 @@ class  Policy extends BaseCommand
     /**
      * @param string $datacenters
      */
-    public function setDatacenters ($datacenters)
+    public function setDataCenters($datacenters)
     {
         $this->datacenters = $datacenters;
     }
 
-    protected function setKeyMapping (): array
+    protected function setKeyMapping(): array
     {
         return [
             'ID' => 'id',
@@ -135,5 +135,4 @@ class  Policy extends BaseCommand
             'Datacenters' => 'datacenters',
         ];
     }
-
 }

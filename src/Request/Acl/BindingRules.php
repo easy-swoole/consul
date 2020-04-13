@@ -16,21 +16,28 @@ class BindingRules extends BaseCommand
     /**
      * @var string
      */
-    protected $authmethod;
+    protected $authMethod;
 
     /**
      * @return null|string
      */
-    public function getauthmethod(): ?string
+    public function getAuthMethod(): ?string
     {
-        return $this->authmethod;
+        return $this->authMethod;
     }
 
     /**
-     * @param string $authmethod
+     * @param string $authMethod
      */
-    public function setauthmethod(string $authmethod): void
+    public function setAuthMethod($authMethod): void
     {
-        $this->authmethod = $authmethod;
+        $this->authMethod = $authMethod;
+    }
+
+    protected function setKeyMapping(): array
+    {
+        return [
+            'AuthMethod' => 'authMethod',
+        ];
     }
 }

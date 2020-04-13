@@ -1,8 +1,5 @@
 <?php
-
-
 namespace EasySwoole\Consul;
-
 
 use EasySwoole\Consul\ConsulInterface\KVStoreInterface;
 use EasySwoole\Consul\Exception\MissingRequiredParamsException;

@@ -48,7 +48,7 @@ class Area extends BaseCommand
     /**
      * @return string
      */
-    public function getDc ()
+    public function getDc()
     {
         return $this->dc;
     }
@@ -56,7 +56,7 @@ class Area extends BaseCommand
     /**
      * @param string $dc
      */
-    public function setDc ($dc)
+    public function setDc($dc)
     {
         $this->dc = $dc;
     }
@@ -64,7 +64,7 @@ class Area extends BaseCommand
     /**
      * @return string
      */
-    public function getPeerDatacenter ()
+    public function getPeerDatacenter()
     {
         return $this->peerDatacenter;
     }
@@ -72,7 +72,7 @@ class Area extends BaseCommand
     /**
      * @param string $peerDatacenter
      */
-    public function setPeerDatacenter ($peerDatacenter)
+    public function setPeerDatacenter($peerDatacenter)
     {
         $this->peerDatacenter = $peerDatacenter;
     }
@@ -80,7 +80,7 @@ class Area extends BaseCommand
     /**
      * @return array
      */
-    public function getRetryJoin ()
+    public function getRetryJoin()
     {
         return $this->retryJoin;
     }
@@ -88,7 +88,7 @@ class Area extends BaseCommand
     /**
      * @param array $retryJoin
      */
-    public function setRetryJoin ($retryJoin)
+    public function setRetryJoin($retryJoin)
     {
         $this->retryJoin = $retryJoin;
     }
@@ -96,7 +96,7 @@ class Area extends BaseCommand
     /**
      * @return bool
      */
-    public function isUseTLS ()
+    public function isUseTLS()
     {
         return $this->useTLS;
     }
@@ -104,7 +104,7 @@ class Area extends BaseCommand
     /**
      * @param bool $useTLS
      */
-    public function setUseTLS ($useTLS)
+    public function setUseTLS($useTLS)
     {
         $this->useTLS = $useTLS;
     }
@@ -112,7 +112,7 @@ class Area extends BaseCommand
     /**
      * @return string
      */
-    public function getUuid ()
+    public function getUuid()
     {
         return $this->uuid;
     }
@@ -120,11 +120,11 @@ class Area extends BaseCommand
     /**
      * @param string $uuid
      */
-    public function setUuid ($uuid)
+    public function setUuid($uuid)
     {
         $this->uuid = $uuid;
     }
-    protected function setKeyMapping (): array
+    protected function setKeyMapping(): array
     {
         return [
             'PeerDatacenter' => 'peerDatacenter',

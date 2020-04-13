@@ -17,18 +17,17 @@ class TxnTest extends TestCase
     protected $config;
     protected $consul;
 
-    function __construct($name = null, array $data = [], $dataName = '')
+    public function __construct($name = null, array $data = [], $dataName = '')
     {
         $this->config = new Config();
         $this->consul = new Consul($this->config);
         parent::__construct($name, $data, $dataName);
     }
 
-    function testCreate()
+    public function testCreate()
     {
         $transaction = new Txn([]);
         $this->consul->transaction()->create($transaction);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
-
 }

@@ -33,7 +33,7 @@ class AuthMethod extends BaseCommand
     /**
      * @return string
      */
-    public function getName ()
+    public function getName()
     {
         return $this->name;
     }
@@ -41,7 +41,7 @@ class AuthMethod extends BaseCommand
     /**
      * @param string $name
      */
-    public function setName ($name)
+    public function setName($name)
     {
         $this->name = $name;
     }
@@ -49,7 +49,7 @@ class AuthMethod extends BaseCommand
     /**
      * @return string
      */
-    public function getType ()
+    public function getType()
     {
         return $this->type;
     }
@@ -57,7 +57,7 @@ class AuthMethod extends BaseCommand
     /**
      * @param string $type
      */
-    public function setType ($type)
+    public function setType($type)
     {
         $this->type = $type;
     }
@@ -65,7 +65,7 @@ class AuthMethod extends BaseCommand
     /**
      * @return string
      */
-    public function getDescription ()
+    public function getDescription()
     {
         return $this->description;
     }
@@ -73,7 +73,7 @@ class AuthMethod extends BaseCommand
     /**
      * @param string $description
      */
-    public function setDescription ($description)
+    public function setDescription($description)
     {
         $this->description = $description;
     }
@@ -81,7 +81,7 @@ class AuthMethod extends BaseCommand
     /**
      * @return string
      */
-    public function getConfig ()
+    public function getConfig()
     {
         return $this->config;
     }
@@ -89,12 +89,12 @@ class AuthMethod extends BaseCommand
     /**
      * @param string $config
      */
-    public function setConfig ($config)
+    public function setConfig($config)
     {
         $this->config = json_encode($config);
     }
 
-    protected function setKeyMapping (): array
+    protected function setKeyMapping(): array
     {
         return [
             'Name' => 'name',

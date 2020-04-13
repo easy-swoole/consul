@@ -56,5 +56,4 @@ class Services extends BaseCommand
     {
         return ['node-meta' => 'node_meta'];
     }
-
 }

@@ -42,7 +42,7 @@ class BaseFunc
 
         $http = new HttpClient($url);
         if ($http) {
-            try{
+            try {
                 return $this->checkResponse($http->put($data));
             } catch (\Exception $exception) {
                 throw new \Exception($exception->getMessage());
@@ -67,7 +67,7 @@ class BaseFunc
         $http = new HttpClient($url);
 
         if ($http) {
-            try{
+            try {
                 if (isset($headers) && !empty($headers)) {
                     foreach ($headers as $headerKey => $headerVal) {
                         $http->setHeader($headerKey, $headerVal);
@@ -96,7 +96,7 @@ class BaseFunc
         $http = new HttpClient($url);
 
         if ($http) {
-            try{
+            try {
                 if (isset($headers) && !empty($headers)) {
                     foreach ($headers as $headerKey => $headerVal) {
                         $http->setHeader($headerKey, $headerVal);
@@ -118,14 +118,14 @@ class BaseFunc
      * @throws InvalidUrl
      * @throws \Exception
      */
-    protected function deleteJson(BaseCommand $bean, array $headers=[])
+    protected function deleteJson(BaseCommand $bean, array $headers = [])
     {
         $url = $this->getUrl($bean);
         $data = $this->toRequestParam($bean);
         $url = $data ? $url . '?' . $data : $url;
         $http = new HttpClient($url);
         if ($http) {
-            try{
+            try {
                 if (isset($headers) && !empty($headers)) {
                     foreach ($headers as $headerKey => $headerVal) {
                         $http->setHeader($headerKey, $headerVal);
@@ -145,7 +145,8 @@ class BaseFunc
      * @return mixed
      * @throws Exception
      */
-    private function checkResponse(Response $consulResponse) {
+    private function checkResponse(Response $consulResponse)
+    {
         // 网络响应失败
         if ($consulResponse->getErrCode()) {
             throw new Exception('Consul Network Error: ' . $consulResponse->getErrMsg());

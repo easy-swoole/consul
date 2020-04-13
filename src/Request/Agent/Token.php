@@ -49,7 +49,7 @@ class Token extends BaseCommand
         $this->action = $action;
     }
 
-    protected function setKeyMapping (): array
+    protected function setKeyMapping(): array
     {
         return ['Token' => 'token'];
     }

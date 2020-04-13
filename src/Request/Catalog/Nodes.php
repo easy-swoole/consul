@@ -51,7 +51,7 @@ class Nodes extends BaseCommand
      */
     public function getNear(): ?string
     {
-
+        return $this->near;
     }
 
     /**

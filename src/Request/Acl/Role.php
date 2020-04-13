@@ -67,7 +67,7 @@ class Role extends BaseCommand
     /**
      * @return string
      */
-    public function getId ()
+    public function getId()
     {
         return $this->id;
     }
@@ -75,7 +75,7 @@ class Role extends BaseCommand
     /**
      * @param string $id
      */
-    public function setId ($id)
+    public function setId($id)
     {
         $this->id = $id;
     }
@@ -83,7 +83,7 @@ class Role extends BaseCommand
     /**
      * @return string
      */
-    public function getName ()
+    public function getName()
     {
         return $this->name;
     }
@@ -91,7 +91,7 @@ class Role extends BaseCommand
     /**
      * @param string $name
      */
-    public function setName ($name)
+    public function setName($name)
     {
         $this->name = $name;
     }
@@ -99,7 +99,7 @@ class Role extends BaseCommand
     /**
      * @return string
      */
-    public function getDescription ()
+    public function getDescription()
     {
         return $this->description;
     }
@@ -107,7 +107,7 @@ class Role extends BaseCommand
     /**
      * @param string $description
      */
-    public function setDescription ($description)
+    public function setDescription($description)
     {
         $this->description = $description;
     }
@@ -115,7 +115,7 @@ class Role extends BaseCommand
     /**
      * @return array
      */
-    public function getPolicies ()
+    public function getPolicies()
     {
         return $this->policies;
     }
@@ -123,7 +123,7 @@ class Role extends BaseCommand
     /**
      * @param array $policies
      */
-    public function setPolicies ($policies)
+    public function setPolicies($policies)
     {
         $this->policies = $policies;
     }
@@ -131,7 +131,7 @@ class Role extends BaseCommand
     /**
      * @return array
      */
-    public function getServiceIdentities ()
+    public function getServiceIdentities()
     {
         return $this->serviceIdentities;
     }
@@ -139,12 +139,12 @@ class Role extends BaseCommand
     /**
      * @param array $serviceIdentities
      */
-    public function setServiceIdentities ($serviceIdentities)
+    public function setServiceIdentities($serviceIdentities)
     {
         $this->serviceIdentities = $serviceIdentities;
     }
 
-    protected function setKeyMapping (): array
+    protected function setKeyMapping(): array
     {
         return [
             'ID' => 'id',

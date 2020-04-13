@@ -9,7 +9,7 @@ namespace EasySwoole\Consul\Request\Catalog;
 
 use EasySwoole\Consul\Request\BaseCommand;
 
-class Datacenters extends BaseCommand
+class DataCenters extends BaseCommand
 {
     public $url='catalog/datacenters';
 }

@@ -9,5 +9,4 @@ namespace EasySwoole\Consul\Exception;
 
 class InvalidRequiredParamsException extends Exception
 {
-
 }

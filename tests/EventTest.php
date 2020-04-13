@@ -18,29 +18,29 @@ class EventTest extends TestCase
     protected $config;
     protected $consul;
 
-    function __construct($name = null, array $data = [], $dataName = '')
+    public function __construct($name = null, array $data = [], $dataName = '')
     {
         $this->config = new Config();
         $this->consul = new Consul($this->config);
         parent::__construct($name, $data, $dataName);
     }
 
-    function testFire()
+    public function testFire()
     {
         $fire = new Fire([
             'name' => 'consul',
             'dc' => 'dc1',
         ]);
         $this->consul->event()->fire($fire);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testListEvent()
+    public function testListEvent()
     {
         $listEvent = new ListEvent([
             'name' => 'consul',
         ]);
         $this->consul->event()->listEvent($listEvent);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 }

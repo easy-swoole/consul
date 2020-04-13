@@ -76,7 +76,7 @@ class Agent extends BaseFunc implements AgentInterface
         if (empty($maintenance->getEnable())) {
             throw new MissingRequiredParamsException('Missing the required param: enable.');
         }
-        return $this->putJSON($maintenance , false);
+        return $this->putJSON($maintenance, false);
     }
 
     /**
@@ -139,7 +139,6 @@ class Agent extends BaseFunc implements AgentInterface
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
     public function forceLeave(ForceLeave $forceLeave)
-
     {
         if (empty($forceLeave->getNode())) {
             throw new MissingRequiredParamsException('Missing the required param: node.');

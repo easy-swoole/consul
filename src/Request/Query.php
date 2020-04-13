@@ -69,7 +69,7 @@ class Query extends BaseCommand
     /**
      * @return string
      */
-    public function getDc ()
+    public function getDc()
     {
         return $this->dc;
     }
@@ -77,7 +77,7 @@ class Query extends BaseCommand
     /**
      * @param string $dc
      */
-    public function setDc ($dc)
+    public function setDc($dc)
     {
         $this->dc = $dc;
     }
@@ -85,7 +85,7 @@ class Query extends BaseCommand
     /**
      * @return string
      */
-    public function getName ()
+    public function getName()
     {
         return $this->name;
     }
@@ -93,7 +93,7 @@ class Query extends BaseCommand
     /**
      * @param string $name
      */
-    public function setName ($name)
+    public function setName($name)
     {
         $this->name = $name;
     }
@@ -101,7 +101,7 @@ class Query extends BaseCommand
     /**
      * @return string
      */
-    public function getSession ()
+    public function getSession()
     {
         return $this->session;
     }
@@ -109,7 +109,7 @@ class Query extends BaseCommand
     /**
      * @param string $session
      */
-    public function setSession ($session)
+    public function setSession($session)
     {
         $this->session = $session;
     }
@@ -117,7 +117,7 @@ class Query extends BaseCommand
     /**
      * @return string
      */
-    public function getToken ()
+    public function getToken()
     {
         return $this->token;
     }
@@ -125,7 +125,7 @@ class Query extends BaseCommand
     /**
      * @param string $token
      */
-    public function setToken ($token)
+    public function setToken($token)
     {
         $this->token = $token;
     }
@@ -133,7 +133,7 @@ class Query extends BaseCommand
     /**
      * @return array
      */
-    public function getService ()
+    public function getService()
     {
         return $this->service;
     }
@@ -141,7 +141,7 @@ class Query extends BaseCommand
     /**
      * @param array $service
      */
-    public function setService ($service)
+    public function setService($service)
     {
         $this->service = json_encode($service);
     }
@@ -149,7 +149,7 @@ class Query extends BaseCommand
     /**
      * @return string
      */
-    public function getDNS ()
+    public function getDNS()
     {
         return $this->DNS;
     }
@@ -157,7 +157,7 @@ class Query extends BaseCommand
     /**
      * @param string $DNS
      */
-    public function setDNS ($DNS)
+    public function setDNS($DNS)
     {
         $this->DNS = json_encode($DNS);
     }
@@ -165,7 +165,7 @@ class Query extends BaseCommand
     /**
      * @return string
      */
-    public function getUuid ()
+    public function getUuid()
     {
         return $this->uuid;
     }
@@ -173,14 +173,14 @@ class Query extends BaseCommand
     /**
      * @param string $uuid
      */
-    public function setUuid ($uuid)
+    public function setUuid($uuid)
     {
         $this->uuid = $uuid;
     }
 
 
 
-    protected function setKeyMapping (): array
+    protected function setKeyMapping(): array
     {
         return [
             'Name' => 'name',

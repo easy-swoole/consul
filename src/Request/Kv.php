@@ -183,7 +183,7 @@ class Kv extends BaseCommand
      * @return null|string
      *
      */
-    public function getAcquire(): ?string 
+    public function getAcquire(): ?string
     {
         return $this->acquire;
     }
@@ -192,7 +192,7 @@ class Kv extends BaseCommand
      * @param string $acquire
      *
      */
-    public function setAcquire(string $acquire): void 
+    public function setAcquire(string $acquire): void
     {
         $this->acquire = $acquire;
     }

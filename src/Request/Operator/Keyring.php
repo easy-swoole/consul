@@ -62,7 +62,7 @@ class Keyring extends BaseCommand
     /**
      * @return bool
      */
-    public function isLocalOnly ()
+    public function isLocalOnly()
     {
         return $this->localOnly;
     }
@@ -70,7 +70,7 @@ class Keyring extends BaseCommand
     /**
      * @param bool $localOnly
      */
-    public function setLocalOnly ($localOnly)
+    public function setLocalOnly($localOnly)
     {
         $this->localOnly = $localOnly;
     }

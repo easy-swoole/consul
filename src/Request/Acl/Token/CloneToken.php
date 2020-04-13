@@ -25,7 +25,7 @@ class CloneToken extends BaseCommand
     /**
      * @return string
      */
-    public function getAccessorID ()
+    public function getAccessorID()
     {
         return $this->accessorID;
     }
@@ -33,7 +33,7 @@ class CloneToken extends BaseCommand
     /**
      * @param string $accessorID
      */
-    public function setAccessorID ($accessorID)
+    public function setAccessorID($accessorID)
     {
         $this->accessorID = $accessorID;
     }
@@ -41,7 +41,7 @@ class CloneToken extends BaseCommand
     /**
      * @return string
      */
-    public function getDescription ()
+    public function getDescription()
     {
         return $this->description;
     }
@@ -49,17 +49,16 @@ class CloneToken extends BaseCommand
     /**
      * @param string $description
      */
-    public function setDescription ($description)
+    public function setDescription($description)
     {
         $this->description = $description;
     }
 
-   protected function setKeyMapping (): array
-   {
-       return [
+    protected function setKeyMapping(): array
+    {
+        return [
             'AccessorID' => 'accessorID',
             'Description' => 'description',
-       ];
-   }
-
+        ];
+    }
 }

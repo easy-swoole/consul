@@ -53,7 +53,7 @@ class BindingRule extends BaseCommand
     /**
      * @return string
      */
-    public function getId ()
+    public function getId()
     {
         return $this->id;
     }
@@ -61,7 +61,7 @@ class BindingRule extends BaseCommand
     /**
      * @param string $id
      */
-    public function setId ($id)
+    public function setId($id)
     {
         $this->id = $id;
     }
@@ -69,7 +69,7 @@ class BindingRule extends BaseCommand
     /**
      * @return string
      */
-    public function getDescription ()
+    public function getDescription()
     {
         return $this->description;
     }
@@ -77,7 +77,7 @@ class BindingRule extends BaseCommand
     /**
      * @param string $description
      */
-    public function setDescription ($description)
+    public function setDescription($description)
     {
         $this->description = $description;
     }
@@ -85,7 +85,7 @@ class BindingRule extends BaseCommand
     /**
      * @return string
      */
-    public function getAuthMethod ()
+    public function getAuthMethod()
     {
         return $this->authMethod;
     }
@@ -93,7 +93,7 @@ class BindingRule extends BaseCommand
     /**
      * @param string $authMethod
      */
-    public function setAuthMethod ($authMethod)
+    public function setAuthMethod($authMethod)
     {
         $this->authMethod = $authMethod;
     }
@@ -101,7 +101,7 @@ class BindingRule extends BaseCommand
     /**
      * @return string
      */
-    public function getSelector ()
+    public function getSelector()
     {
         return $this->selector;
     }
@@ -109,7 +109,7 @@ class BindingRule extends BaseCommand
     /**
      * @param string $selector
      */
-    public function setSelector ($selector)
+    public function setSelector($selector)
     {
         $this->selector = $selector;
     }
@@ -117,7 +117,7 @@ class BindingRule extends BaseCommand
     /**
      * @return string
      */
-    public function getBindType ()
+    public function getBindType()
     {
         return $this->bindType;
     }
@@ -125,7 +125,7 @@ class BindingRule extends BaseCommand
     /**
      * @param string $bindType
      */
-    public function setBindType ($bindType)
+    public function setBindType($bindType)
     {
         $this->bindType = $bindType;
     }
@@ -133,7 +133,7 @@ class BindingRule extends BaseCommand
     /**
      * @return string
      */
-    public function getBindName ()
+    public function getBindName()
     {
         return $this->bindName;
     }
@@ -141,12 +141,12 @@ class BindingRule extends BaseCommand
     /**
      * @param string $bindName
      */
-    public function setBindName ($bindName)
+    public function setBindName($bindName)
     {
         $this->bindName = $bindName;
     }
 
-    protected function setKeyMapping (): array
+    protected function setKeyMapping(): array
     {
         return [
             'ID' => 'id',

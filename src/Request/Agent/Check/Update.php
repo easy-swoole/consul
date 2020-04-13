@@ -46,7 +46,7 @@ class Update extends BaseCommand
     /**
      * @return string
      */
-    public function getStatus ()
+    public function getStatus()
     {
         return $this->status;
     }
@@ -54,7 +54,7 @@ class Update extends BaseCommand
     /**
      * @param string $status
      */
-    public function setStatus ($status)
+    public function setStatus($status)
     {
         $this->status = $status;
     }
@@ -62,7 +62,7 @@ class Update extends BaseCommand
     /**
      * @return string
      */
-    public function getOutput ()
+    public function getOutput()
     {
         return $this->output;
     }
@@ -70,17 +70,16 @@ class Update extends BaseCommand
     /**
      * @param string $output
      */
-    public function setOutput ($output)
+    public function setOutput($output)
     {
         $this->output = $output;
     }
 
-    protected function setKeyMapping (): array
+    protected function setKeyMapping(): array
     {
         return [
             'Status' => 'status',
             'Output' => 'output',
         ];
     }
-
 }

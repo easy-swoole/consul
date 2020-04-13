@@ -5,7 +5,7 @@ use EasySwoole\Consul\ConsulInterface\CatalogInterface;
 use EasySwoole\Consul\Exception\MissingRequiredParamsException;
 use EasySwoole\Consul\Request\Catalog\Connect;
 use EasySwoole\Consul\Request\Catalog\Datacenters;
-use EasySwoole\Consul\Request\Catalog\Deregister;
+use EasySwoole\Consul\Request\Catalog\DeRegister;
 use EasySwoole\Consul\Request\Catalog\Node;
 use EasySwoole\Consul\Request\Catalog\Nodes;
 use EasySwoole\Consul\Request\Catalog\Register;
@@ -40,7 +40,7 @@ class Catalog extends BaseFunc implements CatalogInterface
      * @throws MissingRequiredParamsException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function deRegister(Deregister $deregister)
+    public function deRegister(DeRegister $deregister)
     {
         if (empty($deregister->getNode())) {
             throw new MissingRequiredParamsException('Missing the required param: Node.');
@@ -54,7 +54,7 @@ class Catalog extends BaseFunc implements CatalogInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function dataCenters(Datacenters $datacenters)
+    public function dataCenters(DataCenters $datacenters)
     {
         return $this->getJson($datacenters);
     }

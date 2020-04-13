@@ -17,14 +17,14 @@ class QueryTest extends TestCase
     protected $config;
     protected $consul;
 
-    function __construct($name = null, array $data = [], $dataName = '')
+    public function __construct($name = null, array $data = [], $dataName = '')
     {
         $this->config = new Config();
         $this->consul = new Consul($this->config);
         parent::__construct($name, $data, $dataName);
     }
 
-    function testQuery()
+    public function testQuery()
     {
         $query = new Query([
             "name" => "my-query",
@@ -47,54 +47,54 @@ class QueryTest extends TestCase
             ],
         ]);
         $this->consul->query()->query($query);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testReadQuery()
+    public function testReadQuery()
     {
         $query = new Query([
             'dc' => 'dc1'
         ]);
         $this->consul->query()->readQuery($query);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testUpdateQuery()
+    public function testUpdateQuery()
     {
         $query = new Query([
             'uuid' => '90dce5ca-5697-ae2f-09ae-51e9542ea58c',
             'dc' => 'dc1',
         ]);
         $this->consul->query()->updateQuery($query);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testDeleteQuery()
+    public function testDeleteQuery()
     {
         $query = new Query([
             'uuid' => '90dce5ca-5697-ae2f-09ae-51e9542ea58c'
         ]);
         $this->consul->query()->deleteQuery($query);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testExecuteQuery()
+    public function testExecuteQuery()
     {
         $execute = new Query\Execute([
             'uuid' => '90dce5ca-5697-ae2f-09ae-51e9542ea58c',
             'dc' => 'dc1',
         ]);
         $this->consul->query()->execute($execute);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testExplainQuery()
+    public function testExplainQuery()
     {
         $execute = new Query\Explain([
             'uuid' => '90dce5ca-5697-ae2f-09ae-51e9542ea58c',
             'dc' => 'dc1',
         ]);
         $this->consul->query()->explain($execute);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 }

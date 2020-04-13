@@ -18,7 +18,8 @@ class Snapshot extends BaseFunc implements SnapshotInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function generate(snap $snapshot) {
+    public function generate(snap $snapshot)
+    {
         return $this->getJson($snapshot);
     }
 
