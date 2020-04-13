@@ -39,7 +39,7 @@ class Configuration extends BaseCommand
     /**
      * @return string
      */
-    public function getProvider ()
+    public function getProvider()
     {
         return $this->provider;
     }
@@ -47,7 +47,7 @@ class Configuration extends BaseCommand
     /**
      * @param string $provider
      */
-    public function setProvider ($provider)
+    public function setProvider($provider)
     {
         $this->provider = $provider;
     }
@@ -55,7 +55,7 @@ class Configuration extends BaseCommand
     /**
      * @return array
      */
-    public function getConfig ()
+    public function getConfig()
     {
         return $this->config;
     }
@@ -63,12 +63,12 @@ class Configuration extends BaseCommand
     /**
      * @param array $config
      */
-    public function setConfig ($config)
+    public function setConfig($config)
     {
         $this->config = $config;
     }
 
-    protected function setKeyMapping (): array
+    protected function setKeyMapping(): array
     {
         return [
             'Provider' => 'provider',

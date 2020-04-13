@@ -115,7 +115,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getName ()
+    public function getName()
     {
         return $this->name;
     }
@@ -123,7 +123,7 @@ class Register extends BaseCommand
     /**
      * @param string $name
      */
-    public function setName ($name)
+    public function setName($name)
     {
         $this->name = $name;
     }
@@ -131,7 +131,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getID ()
+    public function getID()
     {
         return $this->ID;
     }
@@ -139,7 +139,7 @@ class Register extends BaseCommand
     /**
      * @param string $ID
      */
-    public function setID ($ID)
+    public function setID($ID)
     {
         $this->ID = $ID;
     }
@@ -147,7 +147,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getInterval ()
+    public function getInterval()
     {
         return $this->interval;
     }
@@ -155,7 +155,7 @@ class Register extends BaseCommand
     /**
      * @param string $interval
      */
-    public function setInterval ($interval)
+    public function setInterval($interval)
     {
         $this->interval = $interval;
     }
@@ -163,7 +163,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getNotes ()
+    public function getNotes()
     {
         return $this->notes;
     }
@@ -171,7 +171,7 @@ class Register extends BaseCommand
     /**
      * @param string $notes
      */
-    public function setNotes ($notes)
+    public function setNotes($notes)
     {
         $this->notes = $notes;
     }
@@ -179,7 +179,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getDeregisterCriticalServiceAfter ()
+    public function getDeregisterCriticalServiceAfter()
     {
         return $this->deregisterCriticalServiceAfter;
     }
@@ -187,7 +187,7 @@ class Register extends BaseCommand
     /**
      * @param string $deregisterCriticalServiceAfter
      */
-    public function setDeregisterCriticalServiceAfter ($deregisterCriticalServiceAfter)
+    public function setDeregisterCriticalServiceAfter($deregisterCriticalServiceAfter)
     {
         $this->deregisterCriticalServiceAfter = $deregisterCriticalServiceAfter;
     }
@@ -195,7 +195,7 @@ class Register extends BaseCommand
     /**
      * @return array
      */
-    public function getArgs ()
+    public function getArgs()
     {
         return $this->args;
     }
@@ -203,7 +203,7 @@ class Register extends BaseCommand
     /**
      * @param array $args
      */
-    public function setArgs ($args)
+    public function setArgs($args)
     {
         $this->args = $args;
     }
@@ -211,7 +211,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getAliasNode ()
+    public function getAliasNode()
     {
         return $this->aliasNode;
     }
@@ -219,7 +219,7 @@ class Register extends BaseCommand
     /**
      * @param string $aliasNode
      */
-    public function setAliasNode ($aliasNode)
+    public function setAliasNode($aliasNode)
     {
         $this->aliasNode = $aliasNode;
     }
@@ -227,7 +227,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getAliasService ()
+    public function getAliasService()
     {
         return $this->aliasService;
     }
@@ -235,7 +235,7 @@ class Register extends BaseCommand
     /**
      * @param string $aliasService
      */
-    public function setAliasService ($aliasService)
+    public function setAliasService($aliasService)
     {
         $this->aliasService = $aliasService;
     }
@@ -243,7 +243,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getDockerContainerID ()
+    public function getDockerContainerID()
     {
         return $this->dockerContainerID;
     }
@@ -251,7 +251,7 @@ class Register extends BaseCommand
     /**
      * @param string $dockerContainerID
      */
-    public function setDockerContainerID ($dockerContainerID)
+    public function setDockerContainerID($dockerContainerID)
     {
         $this->dockerContainerID = $dockerContainerID;
     }
@@ -259,7 +259,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getGRPC ()
+    public function getGRPC()
     {
         return $this->GRPC;
     }
@@ -267,7 +267,7 @@ class Register extends BaseCommand
     /**
      * @param string $GRPC
      */
-    public function setGRPC ($GRPC)
+    public function setGRPC($GRPC)
     {
         $this->GRPC = $GRPC;
     }
@@ -275,7 +275,7 @@ class Register extends BaseCommand
     /**
      * @return bool
      */
-    public function isGRPCUseTLS ()
+    public function isGRPCUseTLS()
     {
         return $this->GRPCUseTLS;
     }
@@ -283,7 +283,7 @@ class Register extends BaseCommand
     /**
      * @param bool $GRPCUseTLS
      */
-    public function setGRPCUseTLS ($GRPCUseTLS)
+    public function setGRPCUseTLS($GRPCUseTLS)
     {
         $this->GRPCUseTLS = $GRPCUseTLS;
     }
@@ -291,7 +291,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getHTTP ()
+    public function getHTTP()
     {
         return $this->HTTP;
     }
@@ -299,7 +299,7 @@ class Register extends BaseCommand
     /**
      * @param string $HTTP
      */
-    public function setHTTP ($HTTP)
+    public function setHTTP($HTTP)
     {
         $this->HTTP = $HTTP;
     }
@@ -307,7 +307,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getMethod ()
+    public function getMethod()
     {
         return $this->method;
     }
@@ -315,7 +315,7 @@ class Register extends BaseCommand
     /**
      * @param string $method
      */
-    public function setMethod ($method)
+    public function setMethod($method)
     {
         $this->method = $method;
     }
@@ -323,7 +323,7 @@ class Register extends BaseCommand
     /**
      * @return map
      */
-    public function getHeader ()
+    public function getHeader()
     {
         return $this->header;
     }
@@ -331,7 +331,7 @@ class Register extends BaseCommand
     /**
      * @param map $header
      */
-    public function setHeader ($header)
+    public function setHeader($header)
     {
         $this->header = json_encode($header);
     }
@@ -339,7 +339,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getTimeout ()
+    public function getTimeout()
     {
         return $this->timeout;
     }
@@ -347,7 +347,7 @@ class Register extends BaseCommand
     /**
      * @param string $timeout
      */
-    public function setTimeout ($timeout)
+    public function setTimeout($timeout)
     {
         $this->timeout = $timeout;
     }
@@ -355,7 +355,7 @@ class Register extends BaseCommand
     /**
      * @return int
      */
-    public function getOutputMaxSize ()
+    public function getOutputMaxSize()
     {
         return $this->outputMaxSize;
     }
@@ -363,7 +363,7 @@ class Register extends BaseCommand
     /**
      * @param int $outputMaxSize
      */
-    public function setOutputMaxSize ($outputMaxSize)
+    public function setOutputMaxSize($outputMaxSize)
     {
         $this->outputMaxSize = $outputMaxSize;
     }
@@ -371,7 +371,7 @@ class Register extends BaseCommand
     /**
      * @return bool
      */
-    public function isTLSSkipVerify ()
+    public function isTLSSkipVerify()
     {
         return $this->TLSSkipVerify;
     }
@@ -379,7 +379,7 @@ class Register extends BaseCommand
     /**
      * @param bool $TLSSkipVerify
      */
-    public function setTLSSkipVerify ($TLSSkipVerify)
+    public function setTLSSkipVerify($TLSSkipVerify)
     {
         $this->TLSSkipVerify = $TLSSkipVerify;
     }
@@ -387,7 +387,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getTCP ()
+    public function getTCP()
     {
         return $this->TCP;
     }
@@ -395,7 +395,7 @@ class Register extends BaseCommand
     /**
      * @param string $TCP
      */
-    public function setTCP ($TCP)
+    public function setTCP($TCP)
     {
         $this->TCP = $TCP;
     }
@@ -403,7 +403,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getTTL ()
+    public function getTTL()
     {
         return $this->TTL;
     }
@@ -411,7 +411,7 @@ class Register extends BaseCommand
     /**
      * @param string $TTL
      */
-    public function setTTL ($TTL)
+    public function setTTL($TTL)
     {
         $this->TTL = $TTL;
     }
@@ -419,7 +419,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getServiceID ()
+    public function getServiceID()
     {
         return $this->serviceID;
     }
@@ -427,7 +427,7 @@ class Register extends BaseCommand
     /**
      * @param string $serviceID
      */
-    public function setServiceID ($serviceID)
+    public function setServiceID($serviceID)
     {
         $this->serviceID = $serviceID;
     }
@@ -435,7 +435,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getStatus ()
+    public function getStatus()
     {
         return $this->status;
     }
@@ -443,12 +443,12 @@ class Register extends BaseCommand
     /**
      * @param string $status
      */
-    public function setStatus ($status)
+    public function setStatus($status)
     {
         $this->status = $status;
     }
 
-    protected function setKeyMapping (): array
+    protected function setKeyMapping(): array
     {
         return [
             'Name'          => 'name',

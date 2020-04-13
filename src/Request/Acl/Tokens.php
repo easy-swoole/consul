@@ -61,7 +61,7 @@ class Tokens extends BaseCommand
     /**
      * @return null|string
      */
-    public function getAuthmethod(): ?string
+    public function getAuthMethod(): ?string
     {
         return $this->authmethod;
     }
@@ -69,7 +69,7 @@ class Tokens extends BaseCommand
     /**
      * @param string $authmethod
      */
-    public function setAuthmethod(string $authmethod): void
+    public function setAuthMethod(string $authmethod): void
     {
         $this->authmethod = $authmethod;
     }

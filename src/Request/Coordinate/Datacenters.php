@@ -9,7 +9,7 @@ namespace EasySwoole\Consul\Request\Coordinate;
 
 use EasySwoole\Consul\Request\BaseCommand;
 
-class Datacenters extends BaseCommand
+class DataCenters extends BaseCommand
 {
     protected $url = 'coordinate/datacenters';
 }

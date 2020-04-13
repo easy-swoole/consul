@@ -18,7 +18,7 @@ class GetSelf extends BaseCommand
     /**
      * @return mixed
      */
-    public function getToken ()
+    public function getToken()
     {
         return $this->token;
     }
@@ -26,7 +26,7 @@ class GetSelf extends BaseCommand
     /**
      * @param mixed $token
      */
-    public function setToken ($token)
+    public function setToken($token)
     {
         $this->token = $token;
     }

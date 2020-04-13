@@ -21,57 +21,58 @@ class HealthTest extends TestCase
     protected $config;
     protected $consul;
 
-    function __construct($name = null, array $data = [], $dataName = '')
+    public function __construct($name = null, array $data = [], $dataName = '')
     {
         $this->config = new Config();
         $this->consul = new Consul($this->config);
         parent::__construct($name, $data, $dataName);
     }
 
-    function testNode()
+    public function testNode()
     {
         $node = new Node([
             'node' => '2456c2850382',
             'dc' => 'dc1',
         ]);
         $this->consul->health()->node($node);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testChecks()
+    public function testChecks()
     {
         $checks = new Checks([
             'service' => 'consul',
             'node_meta' => 'node-meta',
         ]);
         $this->consul->health()->checks($checks);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testService()
+    public function testService()
     {
         $service = new Service([
             'service' => 'consul',
             'dc' => 'dc1',
         ]);
         $this->consul->health()->service($service);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testConnect()
+    public function testConnect()
     {
         $connect = new Connect([
             'service' => 'consul'
         ]);
         $this->consul->health()->connect($connect);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testState() {
+    public function testState()
+    {
         $state = new State([
             'state' => 'passing'
         ]);
         $this->consul->health()->state($state);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 }

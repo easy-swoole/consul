@@ -29,7 +29,7 @@ class Login extends BaseCommand
     /**
      * @return string
      */
-    public function getAuthMethod ()
+    public function getAuthMethod()
     {
         return $this->authMethod;
     }
@@ -37,7 +37,7 @@ class Login extends BaseCommand
     /**
      * @param string $authMethod
      */
-    public function setAuthMethod ($authMethod)
+    public function setAuthMethod($authMethod)
     {
         $this->authMethod = $authMethod;
     }
@@ -45,7 +45,7 @@ class Login extends BaseCommand
     /**
      * @return string
      */
-    public function getBearerToken ()
+    public function getBearerToken()
     {
         return $this->bearerToken;
     }
@@ -53,7 +53,7 @@ class Login extends BaseCommand
     /**
      * @param string $bearerToken
      */
-    public function setBearerToken ($bearerToken)
+    public function setBearerToken($bearerToken)
     {
         $this->bearerToken = $bearerToken;
     }
@@ -61,7 +61,7 @@ class Login extends BaseCommand
     /**
      * @return array
      */
-    public function getMeta ()
+    public function getMeta()
     {
         return $this->meta;
     }
@@ -69,12 +69,12 @@ class Login extends BaseCommand
     /**
      * @param array $meta
      */
-    public function setMeta ($meta)
+    public function setMeta($meta)
     {
         $this->meta = $meta;
     }
 
-    protected function setKeyMapping (): array
+    protected function setKeyMapping(): array
     {
         return [
             'AuthMethod' => 'authMethod',

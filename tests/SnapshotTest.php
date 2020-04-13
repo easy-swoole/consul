@@ -17,28 +17,27 @@ class SnapshotTest extends TestCase
     protected $config;
     protected $consul;
 
-    function __construct($name = null, array $data = [], $dataName = '')
+    public function __construct($name = null, array $data = [], $dataName = '')
     {
         $this->config = new Config();
         $this->consul = new Consul($this->config);
         parent::__construct($name, $data, $dataName);
     }
 
-    function testGenerate()
+    public function testGenerate()
     {
         $generate = new Snapshot([
             'dc' => 'dc1',
             'stale' => 'true',
         ]);
         $this->consul->snapshot()->generate($generate);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testRestore()
+    public function testRestore()
     {
         $restore = new Snapshot();
         $this->consul->snapshot()->restore($restore);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
-
 }

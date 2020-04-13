@@ -97,7 +97,7 @@ class Configuration extends BaseCommand
     /**
      * @param int $cas
      */
-    public function setCas(int $cas): void 
+    public function setCas(int $cas): void
     {
         $this->cas = $cas;
     }
@@ -105,7 +105,7 @@ class Configuration extends BaseCommand
     /**
      * @return bool
      */
-    public function isCleanupDeadServers ()
+    public function isCleanupDeadServers()
     {
         return $this->cleanupDeadServers;
     }
@@ -113,7 +113,7 @@ class Configuration extends BaseCommand
     /**
      * @param bool $cleanupDeadServers
      */
-    public function setCleanupDeadServers ($cleanupDeadServers)
+    public function setCleanupDeadServers($cleanupDeadServers)
     {
         $this->cleanupDeadServers = $cleanupDeadServers;
     }
@@ -121,7 +121,7 @@ class Configuration extends BaseCommand
     /**
      * @return string
      */
-    public function getLastContactThreshold ()
+    public function getLastContactThreshold()
     {
         return $this->lastContactThreshold;
     }
@@ -129,7 +129,7 @@ class Configuration extends BaseCommand
     /**
      * @param string $lastContactThreshold
      */
-    public function setLastContactThreshold ($lastContactThreshold)
+    public function setLastContactThreshold($lastContactThreshold)
     {
         $this->lastContactThreshold = $lastContactThreshold;
     }
@@ -137,7 +137,7 @@ class Configuration extends BaseCommand
     /**
      * @return int
      */
-    public function getMaxTrailingLogs ()
+    public function getMaxTrailingLogs()
     {
         return $this->maxTrailingLogs;
     }
@@ -145,7 +145,7 @@ class Configuration extends BaseCommand
     /**
      * @param int $maxTrailingLogs
      */
-    public function setMaxTrailingLogs ($maxTrailingLogs)
+    public function setMaxTrailingLogs($maxTrailingLogs)
     {
         $this->maxTrailingLogs = $maxTrailingLogs;
     }
@@ -153,7 +153,7 @@ class Configuration extends BaseCommand
     /**
      * @return string
      */
-    public function getServerStabilizationTime ()
+    public function getServerStabilizationTime()
     {
         return $this->serverStabilizationTime;
     }
@@ -161,7 +161,7 @@ class Configuration extends BaseCommand
     /**
      * @param string $serverStabilizationTime
      */
-    public function setServerStabilizationTime ($serverStabilizationTime)
+    public function setServerStabilizationTime($serverStabilizationTime)
     {
         $this->serverStabilizationTime = $serverStabilizationTime;
     }
@@ -169,7 +169,7 @@ class Configuration extends BaseCommand
     /**
      * @return string
      */
-    public function getRedundancyZoneTag ()
+    public function getRedundancyZoneTag()
     {
         return $this->redundancyZoneTag;
     }
@@ -177,7 +177,7 @@ class Configuration extends BaseCommand
     /**
      * @param string $redundancyZoneTag
      */
-    public function setRedundancyZoneTag ($redundancyZoneTag)
+    public function setRedundancyZoneTag($redundancyZoneTag)
     {
         $this->redundancyZoneTag = $redundancyZoneTag;
     }
@@ -185,7 +185,7 @@ class Configuration extends BaseCommand
     /**
      * @return bool
      */
-    public function isDisableUpgradeMigration ()
+    public function isDisableUpgradeMigration()
     {
         return $this->disableUpgradeMigration;
     }
@@ -193,7 +193,7 @@ class Configuration extends BaseCommand
     /**
      * @param bool $disableUpgradeMigration
      */
-    public function setDisableUpgradeMigration ($disableUpgradeMigration)
+    public function setDisableUpgradeMigration($disableUpgradeMigration)
     {
         $this->disableUpgradeMigration = $disableUpgradeMigration;
     }
@@ -201,7 +201,7 @@ class Configuration extends BaseCommand
     /**
      * @return string
      */
-    public function getUpgradeVersionTag ()
+    public function getUpgradeVersionTag()
     {
         return $this->upgradeVersionTag;
     }
@@ -209,12 +209,12 @@ class Configuration extends BaseCommand
     /**
      * @param string $upgradeVersionTag
      */
-    public function setUpgradeVersionTag ($upgradeVersionTag)
+    public function setUpgradeVersionTag($upgradeVersionTag)
     {
         $this->upgradeVersionTag = $upgradeVersionTag;
     }
 
-    protected function setKeyMapping (): array
+    protected function setKeyMapping(): array
     {
         return [
             'CleanupDeadServers' => 'cleanupDeadServers',

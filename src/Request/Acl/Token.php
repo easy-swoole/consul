@@ -70,7 +70,7 @@ class Token extends BaseCommand
     /**
      * @return string
      */
-    public function getAccessorID ()
+    public function getAccessorID()
     {
         return $this->accessorID;
     }
@@ -78,7 +78,7 @@ class Token extends BaseCommand
     /**
      * @param string $accessorID
      */
-    public function setAccessorID ($accessorID)
+    public function setAccessorID($accessorID)
     {
         $this->accessorID = $accessorID;
     }
@@ -86,7 +86,7 @@ class Token extends BaseCommand
     /**
      * @return string
      */
-    public function getSecretID ()
+    public function getSecretID()
     {
         return $this->secretID;
     }
@@ -94,7 +94,7 @@ class Token extends BaseCommand
     /**
      * @param string $secretID
      */
-    public function setSecretID ($secretID)
+    public function setSecretID($secretID)
     {
         $this->secretID = $secretID;
     }
@@ -102,7 +102,7 @@ class Token extends BaseCommand
     /**
      * @return string
      */
-    public function getDescription ()
+    public function getDescription()
     {
         return $this->description;
     }
@@ -110,7 +110,7 @@ class Token extends BaseCommand
     /**
      * @param string $description
      */
-    public function setDescription ($description)
+    public function setDescription($description)
     {
         $this->description = $description;
     }
@@ -118,7 +118,7 @@ class Token extends BaseCommand
     /**
      * @return array
      */
-    public function getPolicies ()
+    public function getPolicies()
     {
         return $this->policies;
     }
@@ -126,7 +126,7 @@ class Token extends BaseCommand
     /**
      * @param array $policies
      */
-    public function setPolicies ($policies)
+    public function setPolicies($policies)
     {
         $this->policies = $policies;
     }
@@ -134,7 +134,7 @@ class Token extends BaseCommand
     /**
      * @return array
      */
-    public function getRoles ()
+    public function getRoles()
     {
         return $this->roles;
     }
@@ -142,7 +142,7 @@ class Token extends BaseCommand
     /**
      * @param array $roles
      */
-    public function setRoles ($roles)
+    public function setRoles($roles)
     {
         $this->roles = $roles;
     }
@@ -150,7 +150,7 @@ class Token extends BaseCommand
     /**
      * @return array
      */
-    public function getServiceIdentities ()
+    public function getServiceIdentities()
     {
         return $this->serviceIdentities;
     }
@@ -158,7 +158,7 @@ class Token extends BaseCommand
     /**
      * @param array $serviceIdentities
      */
-    public function setServiceIdentities ($serviceIdentities)
+    public function setServiceIdentities($serviceIdentities)
     {
         $this->serviceIdentities = $serviceIdentities;
     }
@@ -166,7 +166,7 @@ class Token extends BaseCommand
     /**
      * @return bool
      */
-    public function isLocal ()
+    public function isLocal()
     {
         return $this->local;
     }
@@ -174,7 +174,7 @@ class Token extends BaseCommand
     /**
      * @param bool $local
      */
-    public function setLocal ($local)
+    public function setLocal($local)
     {
         $this->local = $local;
     }
@@ -182,7 +182,7 @@ class Token extends BaseCommand
     /**
      * @return string
      */
-    public function getExpirationTime ()
+    public function getExpirationTime()
     {
         return $this->expirationTime;
     }
@@ -190,7 +190,7 @@ class Token extends BaseCommand
     /**
      * @param string $expirationTime
      */
-    public function setExpirationTime ($expirationTime)
+    public function setExpirationTime($expirationTime)
     {
         $this->expirationTime = $expirationTime;
     }
@@ -198,7 +198,7 @@ class Token extends BaseCommand
     /**
      * @return string
      */
-    public function getExpirationTTL ()
+    public function getExpirationTTL()
     {
         return $this->expirationTTL;
     }
@@ -206,12 +206,12 @@ class Token extends BaseCommand
     /**
      * @param string $expirationTTL
      */
-    public function setExpirationTTL ($expirationTTL)
+    public function setExpirationTTL($expirationTTL)
     {
         $this->expirationTTL = $expirationTTL;
     }
 
-    protected function setKeyMapping (): array
+    protected function setKeyMapping(): array
     {
         return [
             'AccessorID' => 'accessorID',

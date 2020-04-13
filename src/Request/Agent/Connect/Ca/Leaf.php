@@ -15,7 +15,7 @@ class Leaf extends BaseCommand
     /**
      * @return string
      */
-    public function getService ()
+    public function getService()
     {
         return $this->service;
     }
@@ -23,12 +23,12 @@ class Leaf extends BaseCommand
     /**
      * @param string $service
      */
-    public function setService ($service)
+    public function setService($service)
     {
         $this->service = $service;
     }
 
-    protected function setKeyMapping (): array
+    protected function setKeyMapping(): array
     {
         return [
             'Service' => 'service',

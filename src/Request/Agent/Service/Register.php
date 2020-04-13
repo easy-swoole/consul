@@ -100,7 +100,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getName ()
+    public function getName()
     {
         return $this->name;
     }
@@ -108,7 +108,7 @@ class Register extends BaseCommand
     /**
      * @param string $name
      */
-    public function setName ($name)
+    public function setName($name)
     {
         $this->name = $name;
     }
@@ -116,7 +116,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getId ()
+    public function getId()
     {
         return $this->id;
     }
@@ -124,7 +124,7 @@ class Register extends BaseCommand
     /**
      * @param string $id
      */
-    public function setId ($id)
+    public function setId($id)
     {
         $this->id = $id;
     }
@@ -132,7 +132,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getTags ()
+    public function getTags()
     {
         return $this->tags;
     }
@@ -140,7 +140,7 @@ class Register extends BaseCommand
     /**
      * @param string $tags
      */
-    public function setTags ($tags)
+    public function setTags($tags)
     {
         $this->tags = $tags;
     }
@@ -148,7 +148,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getAddress ()
+    public function getAddress()
     {
         return $this->address;
     }
@@ -156,7 +156,7 @@ class Register extends BaseCommand
     /**
      * @param string $address
      */
-    public function setAddress ($address)
+    public function setAddress($address)
     {
         $this->address = $address;
     }
@@ -164,7 +164,7 @@ class Register extends BaseCommand
     /**
      * @return array
      */
-    public function getTaggedAddresses ()
+    public function getTaggedAddresses()
     {
         return $this->taggedAddresses;
     }
@@ -172,7 +172,7 @@ class Register extends BaseCommand
     /**
      * @param array $taggedAddresses
      */
-    public function setTaggedAddresses ($taggedAddresses)
+    public function setTaggedAddresses($taggedAddresses)
     {
         $this->taggedAddresses = $taggedAddresses;
     }
@@ -180,7 +180,7 @@ class Register extends BaseCommand
     /**
      * @return array
      */
-    public function getMeta ()
+    public function getMeta()
     {
         return $this->meta;
     }
@@ -188,7 +188,7 @@ class Register extends BaseCommand
     /**
      * @param array $meta
      */
-    public function setMeta ($meta)
+    public function setMeta($meta)
     {
         $this->meta = json_encode($meta);
     }
@@ -196,7 +196,7 @@ class Register extends BaseCommand
     /**
      * @return int
      */
-    public function getPort ()
+    public function getPort()
     {
         return $this->port;
     }
@@ -204,7 +204,7 @@ class Register extends BaseCommand
     /**
      * @param int $port
      */
-    public function setPort ($port)
+    public function setPort($port)
     {
         $this->port = $port;
     }
@@ -212,7 +212,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getKind ()
+    public function getKind()
     {
         return $this->kind;
     }
@@ -220,7 +220,7 @@ class Register extends BaseCommand
     /**
      * @param string $kind
      */
-    public function setKind ($kind)
+    public function setKind($kind)
     {
         $this->kind = $kind;
     }
@@ -228,7 +228,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getProxyDestination ()
+    public function getProxyDestination()
     {
         return $this->proxyDestination;
     }
@@ -236,7 +236,7 @@ class Register extends BaseCommand
     /**
      * @param string $proxyDestination
      */
-    public function setProxyDestination ($proxyDestination)
+    public function setProxyDestination($proxyDestination)
     {
         $this->proxyDestination = $proxyDestination;
     }
@@ -244,7 +244,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getProxy ()
+    public function getProxy()
     {
         return $this->proxy;
     }
@@ -252,7 +252,7 @@ class Register extends BaseCommand
     /**
      * @param string $proxy
      */
-    public function setProxy ($proxy)
+    public function setProxy($proxy)
     {
         $this->proxy = $proxy;
     }
@@ -260,7 +260,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getConnect ()
+    public function getConnect()
     {
         return $this->connect;
     }
@@ -268,7 +268,7 @@ class Register extends BaseCommand
     /**
      * @param string $connect
      */
-    public function setConnect ($connect)
+    public function setConnect($connect)
     {
         $this->connect = $connect;
     }
@@ -276,7 +276,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getCheck ()
+    public function getCheck()
     {
         return $this->check;
     }
@@ -284,7 +284,7 @@ class Register extends BaseCommand
     /**
      * @param string $check
      */
-    public function setCheck ($check)
+    public function setCheck($check)
     {
         $this->check = json_encode($check);
     }
@@ -292,7 +292,7 @@ class Register extends BaseCommand
     /**
      * @return array
      */
-    public function getChecks ()
+    public function getChecks()
     {
         return $this->checks;
     }
@@ -300,7 +300,7 @@ class Register extends BaseCommand
     /**
      * @param array $checks
      */
-    public function setChecks ($checks)
+    public function setChecks($checks)
     {
         $this->checks = $checks;
     }
@@ -308,7 +308,7 @@ class Register extends BaseCommand
     /**
      * @return bool
      */
-    public function isEnableTagOverride ()
+    public function isEnableTagOverride()
     {
         return $this->enableTagOverride;
     }
@@ -316,7 +316,7 @@ class Register extends BaseCommand
     /**
      * @param bool $enableTagOverride
      */
-    public function setEnableTagOverride ($enableTagOverride)
+    public function setEnableTagOverride($enableTagOverride)
     {
         $this->enableTagOverride = $enableTagOverride;
     }
@@ -324,7 +324,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getWeights ()
+    public function getWeights()
     {
         return $this->weights;
     }
@@ -332,12 +332,12 @@ class Register extends BaseCommand
     /**
      * @param string $weights
      */
-    public function setWeights ($weights)
+    public function setWeights($weights)
     {
         $this->weights = json_encode($weights);
     }
 
-    protected function setKeyMapping (): array
+    protected function setKeyMapping(): array
     {
         return [
             'Name' => 'name',

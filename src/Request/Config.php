@@ -68,7 +68,7 @@ class Config extends BaseCommand
     /**
      * @return string
      */
-    public function getKind ()
+    public function getKind()
     {
         return $this->kind;
     }
@@ -76,7 +76,7 @@ class Config extends BaseCommand
     /**
      * @param string $kind
      */
-    public function setKind ($kind)
+    public function setKind($kind)
     {
         $this->kind = $kind;
     }
@@ -84,7 +84,7 @@ class Config extends BaseCommand
     /**
      * @return string
      */
-    public function getName ()
+    public function getName()
     {
         return $this->name;
     }
@@ -92,7 +92,7 @@ class Config extends BaseCommand
     /**
      * @param string $name
      */
-    public function setName ($name)
+    public function setName($name)
     {
         $this->name = $name;
     }
@@ -100,7 +100,7 @@ class Config extends BaseCommand
     /**
      * @return string
      */
-    public function getProtocol ()
+    public function getProtocol()
     {
         return $this->protocol;
     }
@@ -108,12 +108,10 @@ class Config extends BaseCommand
     /**
      * @param string $protocol
      */
-    public function setProtocol ($protocol)
+    public function setProtocol($protocol)
     {
         $this->protocol = $protocol;
     }
-
-
 
     public function setKeyMapping(): array
     {

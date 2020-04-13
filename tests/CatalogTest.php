@@ -24,7 +24,7 @@ class CatalogTest extends TestCase
     protected $config;
     protected $consul;
 
-    function __construct($name = null, array $data = [], $dataName = '')
+    public function __construct($name = null, array $data = [], $dataName = '')
     {
         $this->config = new Config();
         $this->config->setIP('127.0.0.1');
@@ -32,10 +32,9 @@ class CatalogTest extends TestCase
         $this->config->setVersion('v1');
         $this->consul = new Consul($this->config);
         parent::__construct($name, $data, $dataName);
-
     }
 
-    function testRegister()
+    public function testRegister()
     {
         $register = new Register([
             "datacenter" => "dc1",
@@ -56,21 +55,21 @@ class CatalogTest extends TestCase
                     "primary",
                     "v1"
                 ],
-            "Address" => "127.0.0.1",
-            "TaggedAddresses" => [
-                    "lan" => [
+                "Address" => "127.0.0.1",
+                "TaggedAddresses" => [
+                "lan" => [
                         "address" => "127.0.0.1",
-                "port" => 8000,
-              ],
-              "wan" => [
-                        "address" => "198.18.0.1",
+                    "port" => 8000,
+                  ],
+                "wan" => [
+                    "address" => "198.18.0.1",
                 "port" => 80
-              ]
-            ],
-            "Meta" => [
+                ]
+                ],
+                "Meta" => [
                     "redis_version" => "4.0"
-            ],
-            "Port" => 8000
+                ],
+                "Port" => 8000
             ],
             "Check" => [
                 "Node" => "foobar",
@@ -89,10 +88,10 @@ class CatalogTest extends TestCase
             "SkipNodeUpdate" => false
         ]);
         $this->consul->catalog()->register($register);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testDeregister()
+    public function testDeRegister()
     {
         $deregister = new DeRegister([
             "datacenter" => "dc1",
@@ -100,17 +99,17 @@ class CatalogTest extends TestCase
             "CheckID" => "service:redis1",
         ]);
         $this->consul->catalog()->deRegister($deregister);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testDatacenters()
+    public function testDatacenters()
     {
-        $datacenters = new Datacenters();
+        $datacenters = new DataCenters();
         $this->consul->catalog()->dataCenters($datacenters);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testNodes()
+    public function testNodes()
     {
         $nodes = new Nodes([
             'dc' => 'dc1',
@@ -119,20 +118,20 @@ class CatalogTest extends TestCase
             'filter' => '',
         ]);
         $this->consul->catalog()->nodes($nodes);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testServices()
+    public function testServices()
     {
         $services = new Services([
             'dc' => 'dc1',
             'node-meta' => '',
         ]);
         $this->consul->catalog()->services($services);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testService()
+    public function testService()
     {
         $service = new Service([
             'service' => 'consul',
@@ -143,10 +142,10 @@ class CatalogTest extends TestCase
             'filter' => '',
         ]);
         $this->consul->catalog()->service($service);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testConnect()
+    public function testConnect()
     {
         $connect = new Connect([
             'service' => 'consul',
@@ -157,10 +156,10 @@ class CatalogTest extends TestCase
             'filter' => '',
         ]);
         $this->consul->catalog()->connect($connect);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testNode()
+    public function testNode()
     {
         $node = new Node([
             'node' => '2eb87046a6fe',
@@ -168,6 +167,6 @@ class CatalogTest extends TestCase
             'filter' => '',
         ]);
         $this->consul->catalog()->node($node);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 }

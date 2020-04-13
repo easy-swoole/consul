@@ -1,10 +1,5 @@
 <?php
-
-
 namespace EasySwoole\Consul;
-
-
-use EasySwoole\Consul\Request\Txn;
 
 class Consul
 {
@@ -26,45 +21,44 @@ class Consul
     protected $txn;
     protected $operator;
 
-    function __construct(Config $config)
+    public function __construct(Config $config)
     {
         $this->config = $config;
     }
 
-
-    function kvStore():KVStore
+    public function kvStore():KVStore
     {
-        if(empty($this->kvStore)){
+        if (empty($this->kvStore)) {
             $this->kvStore = new KVStore($this->config);
         }
         return $this->kvStore;
     }
 
-    function health():Health
+    public function health():Health
     {
-        if(empty($this->health)){
+        if (empty($this->health)) {
             $this->health = new Health($this->config);
         }
         return $this->health;
     }
 
-    function catalog():Catalog
+    public function catalog():Catalog
     {
-        if(empty($this->catalog)){
+        if (empty($this->catalog)) {
             $this->catalog = new Catalog($this->config);
         }
         return $this->catalog;
     }
 
-    function agent():Agent
+    public function agent():Agent
     {
-        if (empty($this->agent)){
+        if (empty($this->agent)) {
             $this->agent = new Agent($this->config);
         }
         return $this->agent;
     }
 
-    function acl():Acl
+    public function acl():Acl
     {
         if (empty($this->acl)) {
             $this->acl = new Acl($this->config);
@@ -72,7 +66,7 @@ class Consul
         return $this->acl;
     }
 
-    function config():ConsulConfig
+    public function config():ConsulConfig
     {
         if (empty($this->consulConfig)) {
             $this->consulConfig = new ConsulConfig($this->config);
@@ -80,7 +74,7 @@ class Consul
         return $this->consulConfig;
     }
 
-    function connect():Connect
+    public function connect():Connect
     {
         if (empty($this->connect)) {
             $this->connect = new Connect($this->config);
@@ -88,7 +82,7 @@ class Consul
         return $this->connect;
     }
 
-    function coordinates():Coordinates
+    public function coordinates():Coordinates
     {
         if (empty($this->coordinates)) {
             $this->coordinates = new Coordinates($this->config);
@@ -96,7 +90,7 @@ class Consul
         return $this->coordinates;
     }
 
-    function event():Event
+    public function event():Event
     {
         if (empty($this->event)) {
             $this->event = new Event($this->config);
@@ -104,7 +98,7 @@ class Consul
         return $this->event;
     }
 
-    function query():Query
+    public function query():Query
     {
         if (empty($this->query)) {
             $this->query = new Query($this->config);
@@ -112,7 +106,7 @@ class Consul
         return $this->query;
     }
 
-    function session():Session
+    public function session():Session
     {
         if (empty($this->session)) {
             $this->session = new Session($this->config);
@@ -120,7 +114,7 @@ class Consul
         return $this->session;
     }
 
-    function snapshot():Snapshot
+    public function snapshot():Snapshot
     {
         if (empty($this->snapshot)) {
             $this->snapshot = new Snapshot($this->config);
@@ -128,7 +122,7 @@ class Consul
         return $this->snapshot;
     }
 
-    function status():Status
+    public function status():Status
     {
         if (empty($this->status)) {
             $this->status = new Status($this->config);
@@ -136,7 +130,7 @@ class Consul
         return $this->status;
     }
 
-    function transaction():Transaction
+    public function transaction():Transaction
     {
         if (empty($this->txn)) {
             $this->txn = new Transaction($this->config);
@@ -144,7 +138,7 @@ class Consul
         return $this->txn;
     }
 
-    function operator():Operator
+    public function operator():Operator
     {
         if (empty($this->operator)) {
             $this->operator = new Operator($this->config);

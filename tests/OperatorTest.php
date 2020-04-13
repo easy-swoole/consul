@@ -23,14 +23,14 @@ class OperatorTest extends TestCase
     protected $config;
     protected $consul;
 
-    function __construct($name = null, array $data = [], $dataName = '')
+    public function __construct($name = null, array $data = [], $dataName = '')
     {
         $this->config = new Config();
         $this->consul = new Consul($this->config);
         parent::__construct($name, $data, $dataName);
     }
 
-    function testArea()
+    public function testArea()
     {
         $area = new Area([
             'PeerDatacenter' => 'dc1',
@@ -38,20 +38,20 @@ class OperatorTest extends TestCase
             "UseTLS" => false
         ]);
         $this->consul->operator()->area($area);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testAreaList()
+    public function testAreaList()
     {
         $area = new Area([
             'dc' => 'dc1',
             'uuid' => '10275a2e-aa8f-2cf3-0adf-ff03d8950902',
         ]);
         $this->consul->operator()->areaList($area);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testUpdateArea()
+    public function testUpdateArea()
     {
         $area = new Area([
             'uuid' => '10275a2e-aa8f-2cf3-0adf-ff03d8950902',
@@ -59,47 +59,47 @@ class OperatorTest extends TestCase
             'dc' => 'dc1',
         ]);
         $this->consul->operator()->updateArea($area);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testDeleteArea()
+    public function testDeleteArea()
     {
         $area = new Area([
             'uuid' => '10275a2e-aa8f-2cf3-0adf-ff03d8950902',
         ]);
         $this->consul->operator()->deleteArea($area);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testJoin()
+    public function testJoin()
     {
         $area = new Area([
             'uuid' => '10275a2e-aa8f-2cf3-0adf-ff03d8950902',
         ]);
         $this->consul->operator()->joinArea($area);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testMembers()
+    public function testMembers()
     {
         $area = new Area([
             'uuid' => '10275a2e-aa8f-2cf3-0adf-ff03d8950902'
         ]);
         $this->consul->operator()->membersArea($area);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testGetConfiguration()
+    public function testGetConfiguration()
     {
         $configuration = new Configuration([
             'dc' => 'dc1',
             'stale' => true,
         ]);
         $this->consul->operator()->getConfiguration($configuration);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testUpdateConfiguration()
+    public function testUpdateConfiguration()
     {
         $configuration = new Configuration([
             'dc' => 'dc1',
@@ -114,104 +114,104 @@ class OperatorTest extends TestCase
 
         ]);
         $this->consul->operator()->updateConfiguration($configuration);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testReadHealth()
+    public function testReadHealth()
     {
         $health = new Health([
             'dc' => 'dc1',
         ]);
         $this->consul->operator()->health($health);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testGetKeyring()
+    public function testGetKeyring()
     {
         $keyring = new Keyring();
         $keyring->setRelayFactor(0);
         $keyring->setLocalOnly(false);
         $this->consul->operator()->getKeyring($keyring);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testAddKeyring()
+    public function testAddKeyring()
     {
         $keyring = new Keyring([
             "Key" => "3lg9DxVfKNzI8O+IQ5Ek+Q==",
             'relayFactor' => 1,
         ]);
         $this->consul->operator()->addKeyring($keyring);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testChangeKeyring()
+    public function testChangeKeyring()
     {
         $keyring = new Keyring([
             "Key" => "3lg9DxVfKNzI8O+IQ5Ek+Q==",
         ]);
         $this->consul->operator()->changeKeyring($keyring);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testDeleteKeyring()
+    public function testDeleteKeyring()
     {
         $keyring = new Keyring([
             "Key" => "3lg9DxVfKNzI8O+IQ5Ek+Q==",
             "relayFactor" => 1
         ]);
         $this->consul->operator()->deleteKeyring($keyring);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testGetLicense()
+    public function testGetLicense()
     {
         $license = new License([
             'dc' => 'dc1',
         ]);
         $this->consul->operator()->getLicense($license);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testUpdateLicense()
+    public function testUpdateLicense()
     {
         $license = new License([
             'dc' => 'dc1'
         ]);
         $this->consul->operator()->updateLicense($license);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testResetLicense()
+    public function testResetLicense()
     {
         $license = new License([
             'dc' => 'dc1'
         ]);
         $this->consul->operator()->resetLicense($license);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testGetRaftConfiguration()
+    public function testGetRaftConfiguration()
     {
         $raft = new \EasySwoole\Consul\Request\Operator\Raft\Configuration();
         $this->consul->operator()->getRaftConfiguration($raft);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testDeletePeer()
+    public function testDeletePeer()
     {
         $peer = new Peer([
             'address' => '172.17.0.18:8301',
             'dc' => 'dc1',
         ]);
         $this->consul->operator()->peer($peer);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testSegment()
+    public function testSegment()
     {
         $segment = new Segment();
         $this->consul->operator()->segment($segment);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 }

@@ -95,7 +95,7 @@ class Txn extends BaseCommand
     /**
      * @return string
      */
-    public function getDc ()
+    public function getDc()
     {
         return $this->dc;
     }
@@ -103,7 +103,7 @@ class Txn extends BaseCommand
     /**
      * @param string $dc
      */
-    public function setDc ($dc)
+    public function setDc($dc)
     {
         $this->dc = $dc;
     }
@@ -111,7 +111,7 @@ class Txn extends BaseCommand
     /**
      * @return array
      */
-    public function getKv ()
+    public function getKv()
     {
         return $this->kv;
     }
@@ -119,7 +119,7 @@ class Txn extends BaseCommand
     /**
      * @param array $kv
      */
-    public function setKv ($kv)
+    public function setKv($kv)
     {
         $this->kv = $kv;
     }
@@ -127,7 +127,7 @@ class Txn extends BaseCommand
     /**
      * @return array
      */
-    public function getNode ()
+    public function getNode()
     {
         return $this->node;
     }
@@ -135,7 +135,7 @@ class Txn extends BaseCommand
     /**
      * @param array $node
      */
-    public function setNode ($node)
+    public function setNode($node)
     {
         $this->node = $node;
     }
@@ -143,7 +143,7 @@ class Txn extends BaseCommand
     /**
      * @return array
      */
-    public function getService ()
+    public function getService()
     {
         return $this->service;
     }
@@ -151,7 +151,7 @@ class Txn extends BaseCommand
     /**
      * @param array $service
      */
-    public function setService ($service)
+    public function setService($service)
     {
         $this->service = $service;
     }
@@ -159,7 +159,7 @@ class Txn extends BaseCommand
     /**
      * @return array
      */
-    public function getCheck ()
+    public function getCheck()
     {
         return $this->check;
     }
@@ -167,12 +167,12 @@ class Txn extends BaseCommand
     /**
      * @param array $check
      */
-    public function setCheck ($check)
+    public function setCheck($check)
     {
         $this->check = $check;
     }
 
-    protected function setKeyMapping (): array
+    protected function setKeyMapping(): array
     {
         return [
             'KV' => 'kv',

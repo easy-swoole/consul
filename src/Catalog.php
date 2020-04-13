@@ -54,7 +54,7 @@ class Catalog extends BaseFunc implements CatalogInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function dataCenters(Datacenters $datacenters)
+    public function dataCenters(DataCenters $datacenters)
     {
         return $this->getJson($datacenters);
     }

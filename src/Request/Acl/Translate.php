@@ -18,7 +18,7 @@ class Translate extends BaseCommand
     /**
      * @return mixed
      */
-    public function getAccessorId ()
+    public function getAccessorId()
     {
         return $this->accessor_id;
     }
@@ -26,7 +26,7 @@ class Translate extends BaseCommand
     /**
      * @param mixed $accessor_id
      */
-    public function setAccessorId ($accessor_id)
+    public function setAccessorId($accessor_id)
     {
         $this->accessor_id = $accessor_id;
     }

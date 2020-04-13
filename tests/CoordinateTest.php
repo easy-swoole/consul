@@ -20,37 +20,37 @@ class CoordinateTest extends TestCase
     protected $config;
     protected $consul;
 
-    function __construct($name = null, array $data = [], $dataName = '')
+    public function __construct($name = null, array $data = [], $dataName = '')
     {
         $this->config = new Config();
         $this->consul = new Consul($this->config);
         parent::__construct($name, $data, $dataName);
     }
 
-    function testDatacenters()
+    public function testDatacenters()
     {
-        $datacenters = new Datacenters();
-        $this->consul->coordinates()->datacenters($datacenters);
-        $this->assertEquals('x','x');
+        $datacenters = new DataCenters();
+        $this->consul->coordinates()->dataCenters($datacenters);
+        $this->assertEquals('x', 'x');
     }
 
-    function testNodes()
+    public function testNodes()
     {
         $nodes = new Nodes([]);
         $this->consul->coordinates()->nodes($nodes);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testNode()
+    public function testNode()
     {
         $node = new Node([
             'node' => '2456c2850382',
         ]);
         $this->consul->coordinates()->node($node);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
 
-    function testUpdate()
+    public function testUpdate()
     {
         $update = new Update([
             'dc' => 'dc1',
@@ -64,7 +64,6 @@ class CoordinateTest extends TestCase
             ]
         ]);
         $this->consul->coordinates()->update($update);
-        $this->assertEquals('x','x');
+        $this->assertEquals('x', 'x');
     }
-
 }

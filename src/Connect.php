@@ -7,7 +7,6 @@
  */
 namespace EasySwoole\Consul;
 
-
 use EasySwoole\Consul\ConsulInterface\ConnectInterface;
 use EasySwoole\Consul\Exception\MissingRequiredParamsException;
 use EasySwoole\Consul\Request\Connect\Ca\Configuration;

@@ -60,7 +60,7 @@ class Create extends BaseCommand
     /**
      * @return string
      */
-    public function getDc ()
+    public function getDc()
     {
         return $this->dc;
     }
@@ -68,7 +68,7 @@ class Create extends BaseCommand
     /**
      * @param string $dc
      */
-    public function setDc ($dc)
+    public function setDc($dc)
     {
         $this->dc = $dc;
     }
@@ -76,7 +76,7 @@ class Create extends BaseCommand
     /**
      * @return string
      */
-    public function getLockDelay ()
+    public function getLockDelay()
     {
         return $this->lockDelay;
     }
@@ -84,7 +84,7 @@ class Create extends BaseCommand
     /**
      * @param string $lockDelay
      */
-    public function setLockDelay ($lockDelay)
+    public function setLockDelay($lockDelay)
     {
         $this->lockDelay = $lockDelay;
     }
@@ -92,7 +92,7 @@ class Create extends BaseCommand
     /**
      * @return string
      */
-    public function getNode ()
+    public function getNode()
     {
         return $this->node;
     }
@@ -100,7 +100,7 @@ class Create extends BaseCommand
     /**
      * @param string $node
      */
-    public function setNode ($node)
+    public function setNode($node)
     {
         $this->node = $node;
     }
@@ -108,7 +108,7 @@ class Create extends BaseCommand
     /**
      * @return string
      */
-    public function getName ()
+    public function getName()
     {
         return $this->name;
     }
@@ -116,7 +116,7 @@ class Create extends BaseCommand
     /**
      * @param string $name
      */
-    public function setName ($name)
+    public function setName($name)
     {
         $this->name = $name;
     }
@@ -124,7 +124,7 @@ class Create extends BaseCommand
     /**
      * @return array
      */
-    public function getChecks ()
+    public function getChecks()
     {
         return $this->checks;
     }
@@ -132,7 +132,7 @@ class Create extends BaseCommand
     /**
      * @param array $checks
      */
-    public function setChecks ($checks)
+    public function setChecks($checks)
     {
         $this->checks = $checks;
     }
@@ -140,7 +140,7 @@ class Create extends BaseCommand
     /**
      * @return string
      */
-    public function getBehavior ()
+    public function getBehavior()
     {
         return $this->behavior;
     }
@@ -148,7 +148,7 @@ class Create extends BaseCommand
     /**
      * @param string $behavior
      */
-    public function setBehavior ($behavior)
+    public function setBehavior($behavior)
     {
         $this->behavior = $behavior;
     }
@@ -156,7 +156,7 @@ class Create extends BaseCommand
     /**
      * @return string
      */
-    public function getTTL ()
+    public function getTTL()
     {
         return $this->TTL;
     }
@@ -164,12 +164,12 @@ class Create extends BaseCommand
     /**
      * @param string $TTL
      */
-    public function setTTL ($TTL)
+    public function setTTL($TTL)
     {
         $this->TTL = $TTL;
     }
 
-    protected function setKeyMapping (): array
+    protected function setKeyMapping(): array
     {
         return [
             'LockDelay' => 'LockDelay',

@@ -29,7 +29,8 @@ class Services extends BaseCommand
     /**
      * @param string $filter
      */
-    public function setFilter(string $filter): void {
+    public function setFilter(string $filter): void
+    {
         $this->filter = $filter;
     }
 }

@@ -847,7 +847,8 @@ $update = new kv([
     'key' => 'my-key',
     'dc' => 'dc1',
 ]);
-$this->consul->kvStore()->update($update);
+$this->consul->
+($update);
 
 // Delete Key
 $delete = new Kv([

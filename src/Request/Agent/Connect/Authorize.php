@@ -33,7 +33,7 @@ class Authorize extends BaseCommand
     /**
      * @return string
      */
-    public function getTarget ()
+    public function getTarget()
     {
         return $this->target;
     }
@@ -41,7 +41,7 @@ class Authorize extends BaseCommand
     /**
      * @param string $target
      */
-    public function setTarget ($target)
+    public function setTarget($target)
     {
         $this->target = $target;
     }
@@ -49,7 +49,7 @@ class Authorize extends BaseCommand
     /**
      * @return string
      */
-    public function getClientCertURI ()
+    public function getClientCertURI()
     {
         return $this->clientCertURI;
     }
@@ -57,7 +57,7 @@ class Authorize extends BaseCommand
     /**
      * @param string $clientCertURI
      */
-    public function setClientCertURI ($clientCertURI)
+    public function setClientCertURI($clientCertURI)
     {
         $this->clientCertURI = $clientCertURI;
     }
@@ -65,7 +65,7 @@ class Authorize extends BaseCommand
     /**
      * @return string
      */
-    public function getClientCertSerial ()
+    public function getClientCertSerial()
     {
         return $this->clientCertSerial;
     }
@@ -73,12 +73,12 @@ class Authorize extends BaseCommand
     /**
      * @param string $clientCertSerial
      */
-    public function setClientCertSerial ($clientCertSerial)
+    public function setClientCertSerial($clientCertSerial)
     {
         $this->clientCertSerial = $clientCertSerial;
     }
 
-    protected function setKeyMapping (): array
+    protected function setKeyMapping(): array
     {
         return [
             'Target' => 'target',

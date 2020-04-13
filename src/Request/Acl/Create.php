@@ -43,7 +43,7 @@ class Create extends BaseCommand
     /**
      * @return string
      */
-    public function getId ()
+    public function getId()
     {
         return $this->id;
     }
@@ -51,7 +51,7 @@ class Create extends BaseCommand
     /**
      * @param string $id
      */
-    public function setId ($id)
+    public function setId($id)
     {
         $this->id = $id;
     }
@@ -59,7 +59,7 @@ class Create extends BaseCommand
     /**
      * @return string
      */
-    public function getName ()
+    public function getName()
     {
         return $this->name;
     }
@@ -67,7 +67,7 @@ class Create extends BaseCommand
     /**
      * @param string $name
      */
-    public function setName ($name)
+    public function setName($name)
     {
         $this->name = $name;
     }
@@ -75,7 +75,7 @@ class Create extends BaseCommand
     /**
      * @return string
      */
-    public function getType ()
+    public function getType()
     {
         return $this->type;
     }
@@ -83,7 +83,7 @@ class Create extends BaseCommand
     /**
      * @param string $type
      */
-    public function setType ($type)
+    public function setType($type)
     {
         $this->type = $type;
     }
@@ -91,7 +91,7 @@ class Create extends BaseCommand
     /**
      * @return string
      */
-    public function getRules ()
+    public function getRules()
     {
         return $this->rules;
     }
@@ -99,12 +99,12 @@ class Create extends BaseCommand
     /**
      * @param string $rules
      */
-    public function setRules ($rules)
+    public function setRules($rules)
     {
         $this->rules = $rules;
     }
 
-    protected function setKeyMapping (): array
+    protected function setKeyMapping(): array
     {
         return [
             'ID' => 'id',
