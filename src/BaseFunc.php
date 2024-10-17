@@ -235,5 +235,6 @@ class BaseFunc
     public function setOnceHeaders(array $onceHeaders)
     {
         $this->onceHeaders = $onceHeaders;
+        return $this;
     }
 }
