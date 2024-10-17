@@ -12,6 +12,7 @@ class BaseFunc
     protected $config;
     protected $route;
     protected $keywords;
+    protected $onceHeaders = [];
 
     /**
      * BaseFunc constructor.
@@ -43,6 +44,12 @@ class BaseFunc
         $http = new HttpClient($url);
         if ($http) {
             try {
+                if (!empty($this->onceHeaders)) {
+                    foreach ($this->onceHeaders as $headerKey => $headerVal) {
+                        $http->setHeader($headerKey, $headerVal, false);
+                    }
+                    $this->onceHeaders = [];
+                }
                 return $this->checkResponse($http->put($data));
             } catch (\Exception $exception) {
                 throw new \Exception($exception->getMessage());
@@ -70,8 +77,14 @@ class BaseFunc
             try {
                 if (isset($headers) && !empty($headers)) {
                     foreach ($headers as $headerKey => $headerVal) {
-                        $http->setHeader($headerKey, $headerVal);
+                        $http->setHeader($headerKey, $headerVal, false);
                     }
+                }
+                if (!empty($this->onceHeaders)) {
+                    foreach ($this->onceHeaders as $headerKey => $headerVal) {
+                        $http->setHeader($headerKey, $headerVal, false);
+                    }
+                    $this->onceHeaders = [];
                 }
                 return $this->checkResponse($http->get());
             } catch (\Exception $exception) {
@@ -99,8 +112,14 @@ class BaseFunc
             try {
                 if (isset($headers) && !empty($headers)) {
                     foreach ($headers as $headerKey => $headerVal) {
-                        $http->setHeader($headerKey, $headerVal);
+                        $http->setHeader($headerKey, $headerVal, false);
                     }
+                }
+                if (!empty($this->onceHeaders)) {
+                    foreach ($this->onceHeaders as $headerKey => $headerVal) {
+                        $http->setHeader($headerKey, $headerVal, false);
+                    }
+                    $this->onceHeaders = [];
                 }
                 return $this->checkResponse($http->postJson($data));
             } catch (\Exception $exception) {
@@ -128,8 +147,14 @@ class BaseFunc
             try {
                 if (isset($headers) && !empty($headers)) {
                     foreach ($headers as $headerKey => $headerVal) {
-                        $http->setHeader($headerKey, $headerVal);
+                        $http->setHeader($headerKey, $headerVal, false);
                     }
+                }
+                if (!empty($this->onceHeaders)) {
+                    foreach ($this->onceHeaders as $headerKey => $headerVal) {
+                        $http->setHeader($headerKey, $headerVal, false);
+                    }
+                    $this->onceHeaders = [];
                 }
                 return $this->checkResponse($http->delete());
             } catch (\Exception $exception) {
@@ -205,5 +230,10 @@ class BaseFunc
         unset($data['url']);
 
         return $data ? json_encode($data) : null;
+    }
+
+    public function setOnceHeaders(array $onceHeaders)
+    {
+        $this->onceHeaders = $onceHeaders;
     }
 }
