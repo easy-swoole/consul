@@ -28,49 +28,49 @@ use EasySwoole\Consul\Request\BaseCommand;
  */
 class Token extends BaseCommand
 {
-    protected $url = 'acl/token/%s';
+    protected string $url = 'acl/token/%s';
 
     /**
      * @var string
      */
-    protected $accessorID;
+    protected ?string $accessorID = null;
     /**
      * @var string
      */
-    protected $secretID;
+    protected ?string $secretID = null;
     /**
      * @var string
      */
-    protected $description;
+    protected ?string $description = null;
     /**
      * @var array
      */
-    protected $policies;
+    protected ?array $policies = null;
     /**
      * @var array
      */
-    protected $roles;
+    protected ?array $roles = null;
     /**
      * @var array
      */
-    protected $serviceIdentities;
+    protected ?array $serviceIdentities = null;
     /**
      * @var bool
      */
-    protected $local;
+    protected ?bool $local = null;
     /**
      * @var string
      */
-    protected $expirationTime;
+    protected ?string $expirationTime = null;
     /**
      * @var string
      */
-    protected $expirationTTL;
+    protected ?string $expirationTTL = null;
 
     /**
      * @return string
      */
-    public function getAccessorID()
+    public function getAccessorID(): ?string
     {
         return $this->accessorID;
     }
@@ -78,7 +78,7 @@ class Token extends BaseCommand
     /**
      * @param string $accessorID
      */
-    public function setAccessorID($accessorID)
+    public function setAccessorID($accessorID): void
     {
         $this->accessorID = $accessorID;
     }
@@ -86,7 +86,7 @@ class Token extends BaseCommand
     /**
      * @return string
      */
-    public function getSecretID()
+    public function getSecretID(): ?string
     {
         return $this->secretID;
     }
@@ -94,7 +94,7 @@ class Token extends BaseCommand
     /**
      * @param string $secretID
      */
-    public function setSecretID($secretID)
+    public function setSecretID($secretID): void
     {
         $this->secretID = $secretID;
     }
@@ -102,7 +102,7 @@ class Token extends BaseCommand
     /**
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -110,7 +110,7 @@ class Token extends BaseCommand
     /**
      * @param string $description
      */
-    public function setDescription($description)
+    public function setDescription($description): void
     {
         $this->description = $description;
     }
@@ -118,7 +118,7 @@ class Token extends BaseCommand
     /**
      * @return array
      */
-    public function getPolicies()
+    public function getPolicies(): ?array
     {
         return $this->policies;
     }
@@ -126,7 +126,7 @@ class Token extends BaseCommand
     /**
      * @param array $policies
      */
-    public function setPolicies($policies)
+    public function setPolicies($policies): void
     {
         $this->policies = $policies;
     }
@@ -134,7 +134,7 @@ class Token extends BaseCommand
     /**
      * @return array
      */
-    public function getRoles()
+    public function getRoles(): ?array
     {
         return $this->roles;
     }
@@ -142,7 +142,7 @@ class Token extends BaseCommand
     /**
      * @param array $roles
      */
-    public function setRoles($roles)
+    public function setRoles($roles): void
     {
         $this->roles = $roles;
     }
@@ -150,7 +150,7 @@ class Token extends BaseCommand
     /**
      * @return array
      */
-    public function getServiceIdentities()
+    public function getServiceIdentities(): ?array
     {
         return $this->serviceIdentities;
     }
@@ -158,7 +158,7 @@ class Token extends BaseCommand
     /**
      * @param array $serviceIdentities
      */
-    public function setServiceIdentities($serviceIdentities)
+    public function setServiceIdentities($serviceIdentities): void
     {
         $this->serviceIdentities = $serviceIdentities;
     }
@@ -166,7 +166,7 @@ class Token extends BaseCommand
     /**
      * @return bool
      */
-    public function isLocal()
+    public function isLocal(): ?bool
     {
         return $this->local;
     }
@@ -174,7 +174,7 @@ class Token extends BaseCommand
     /**
      * @param bool $local
      */
-    public function setLocal($local)
+    public function setLocal($local): void
     {
         $this->local = $local;
     }
@@ -182,7 +182,7 @@ class Token extends BaseCommand
     /**
      * @return string
      */
-    public function getExpirationTime()
+    public function getExpirationTime(): ?string
     {
         return $this->expirationTime;
     }
@@ -190,7 +190,7 @@ class Token extends BaseCommand
     /**
      * @param string $expirationTime
      */
-    public function setExpirationTime($expirationTime)
+    public function setExpirationTime($expirationTime): void
     {
         $this->expirationTime = $expirationTime;
     }
@@ -198,7 +198,7 @@ class Token extends BaseCommand
     /**
      * @return string
      */
-    public function getExpirationTTL()
+    public function getExpirationTTL(): ?string
     {
         return $this->expirationTTL;
     }
@@ -206,7 +206,7 @@ class Token extends BaseCommand
     /**
      * @param string $expirationTTL
      */
-    public function setExpirationTTL($expirationTTL)
+    public function setExpirationTTL($expirationTTL): void
     {
         $this->expirationTTL = $expirationTTL;
     }

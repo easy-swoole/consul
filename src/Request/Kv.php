@@ -9,48 +9,48 @@ namespace EasySwoole\Consul\Request;
 
 class Kv extends BaseCommand
 {
-    protected $url = 'kv/%s';
+    protected string $url = 'kv/%s';
 
     /**
      * @var string
      */
-    protected $key;
+    protected ?string $key = null;
     /**
      * @var string
      */
-    protected $dc;
+    protected ?string $dc = null;
     /**
      * @var bool
      */
-    protected $recurse;
+    protected ?bool $recurse = null;
     /**
      * @var bool
      */
-    protected $raw;
+    protected ?bool $raw = null;
     /**
      * @var bool
      */
-    protected $keys;
+    protected ?bool $keys = null;
     /**
      * @var string
      */
-    protected $separator;
+    protected ?string $separator = null;
     /**
      * @var int
      */
-    protected $flags;
+    protected ?int $flags = null;
     /**
      * @var int
      */
-    protected $cas;
+    protected ?int $cas = null;
     /**
      * @var string
      */
-    protected $acquire;
+    protected ?string $acquire = null;
     /**
      * @var string
      */
-    protected $release;
+    protected ?string $release = null;
     /**
      * @return null|string
      */

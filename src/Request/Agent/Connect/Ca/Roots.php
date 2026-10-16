@@ -5,5 +5,5 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Roots extends BaseCommand
 {
-    protected $url = 'agent/connect/ca/roots';
+    protected string $url = 'agent/connect/ca/roots';
 }

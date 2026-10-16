@@ -2,8 +2,8 @@
 namespace EasySwoole\Consul;
 
 use EasySwoole\Consul\ConsulInterface\AgentInterface;
-use EasySwoole\Consul\Exception\MissingRequiredParamsException;
-use EasySwoole\Consul\Exception\InvalidRequiredParamsException;
+use EasySwoole\Consul\Exception\MissingRequiredParameterException;
+use EasySwoole\Consul\Exception\InvalidParameterException;
 use EasySwoole\Consul\Request\Agent\Check\DeRegister;
 use EasySwoole\Consul\Request\Agent\Check\Fail;
 use EasySwoole\Consul\Request\Agent\Check\Pass;
@@ -29,7 +29,7 @@ use EasySwoole\Consul\Request\Agent\Service;
 use EasySwoole\Consul\Request\Agent\Services;
 use EasySwoole\Consul\Request\Agent\Token;
 
-class Agent extends BaseFunc implements AgentInterface
+class Agent extends AbstractEndpoint implements AgentInterface
 {
     /**
      * List Members
@@ -37,7 +37,7 @@ class Agent extends BaseFunc implements AgentInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function members(Members $members)
+    public function members(Members $members): mixed
     {
         return $this->getJson($members);
     }
@@ -48,7 +48,7 @@ class Agent extends BaseFunc implements AgentInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function self(SelfParams $selfParams)
+    public function self(SelfParams $selfParams): mixed
     {
         return $this->getJson($selfParams);
     }
@@ -59,24 +59,24 @@ class Agent extends BaseFunc implements AgentInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function reload(Reload $reload)
+    public function reload(Reload $reload): mixed
     {
-        return $this->putJSON($reload);
+        return $this->putJson($reload);
     }
 
     /**
      * Enable Maintenance Mode
      * @param Maintenance $maintenance
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function maintenance(Maintenance $maintenance)
+    public function maintenance(Maintenance $maintenance): mixed
     {
-        if (empty($maintenance->getEnable())) {
-            throw new MissingRequiredParamsException('Missing the required param: enable.');
+        if ($maintenance->getEnable() === null) {
+            throw new MissingRequiredParameterException('Missing the required param: enable.');
         }
-        return $this->putJSON($maintenance, false);
+        return $this->putQuery($maintenance);
     }
 
     /**
@@ -87,7 +87,7 @@ class Agent extends BaseFunc implements AgentInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function metrics(Metrics $metrics)
+    public function metrics(Metrics $metrics): mixed
     {
         return $this->getJson($metrics);
     }
@@ -98,7 +98,7 @@ class Agent extends BaseFunc implements AgentInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function monitor(Monitor $monitor)
+    public function monitor(Monitor $monitor): mixed
     {
         return $this->getJson($monitor);
     }
@@ -107,17 +107,17 @@ class Agent extends BaseFunc implements AgentInterface
      * Join Agent
      * @param Join $join
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function join(Join $join)
+    public function join(Join $join): mixed
     {
         if (empty($join->getAddress())) {
-            throw new MissingRequiredParamsException('Missing the required param: address.');
+            throw new MissingRequiredParameterException('Missing the required param: address.');
         }
         $join->setUrl(sprintf($join->getUrl(), $join->getAddress()));
         $join->setAddress('');
-        return $this->putJSON($join);
+        return $this->putJson($join);
     }
 
     /**
@@ -126,37 +126,37 @@ class Agent extends BaseFunc implements AgentInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function leave(Leave $leave)
+    public function leave(Leave $leave): mixed
     {
-        return $this->putJSON($leave);
+        return $this->putJson($leave);
     }
 
     /**
      * Force Leave and Shutdown
      * @param ForceLeave $forceLeave
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function forceLeave(ForceLeave $forceLeave)
+    public function forceLeave(ForceLeave $forceLeave): mixed
     {
         if (empty($forceLeave->getNode())) {
-            throw new MissingRequiredParamsException('Missing the required param: node.');
+            throw new MissingRequiredParameterException('Missing the required param: node.');
         }
         $forceLeave->setUrl(sprintf($forceLeave->getUrl(), $forceLeave->getNode()));
         $forceLeave->setNode('');
-        return $this->putJSON($forceLeave);
+        return $this->putJson($forceLeave);
     }
 
     /**
      * Update ACL Tokens
      * @param Token $token
      * @return mixed
-     * @throws MissingRequiredParamsException
-     * @throws InvalidRequiredParamsException
+     * @throws MissingRequiredParameterException
+     * @throws InvalidParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function token(Token $token)
+    public function token(Token $token): mixed
     {
         $actionArr = [
             'default',
@@ -169,14 +169,14 @@ class Agent extends BaseFunc implements AgentInterface
             'acl_replication_token',
         ];
         if (empty($token->getAction())) {
-            throw new MissingRequiredParamsException('Missing the required param: action');
+            throw new MissingRequiredParameterException('Missing the required param: action');
         }
         if (! in_array(strtolower(trim($token->getAction())), $actionArr)) {
-            throw new InvalidRequiredParamsException('Wrong required param: action');
+            throw new InvalidParameterException('Wrong required param: action');
         }
         $token->setUrl(sprintf($token->getUrl(), $token->getAction()));
         $token->setAction('');
-        return $this->putJSON($token);
+        return $this->putJson($token);
     }
 
     /**
@@ -185,7 +185,7 @@ class Agent extends BaseFunc implements AgentInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function checks(Checks $checks)
+    public function checks(Checks $checks): mixed
     {
         return $this->getJson($checks);
     }
@@ -194,103 +194,103 @@ class Agent extends BaseFunc implements AgentInterface
      * Register Check
      * @param Register $register
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function register(Register $register)
+    public function register(Register $register): mixed
     {
         if (empty($register->getName())) {
-            throw new MissingRequiredParamsException('Missing the required param: Name.');
+            throw new MissingRequiredParameterException('Missing the required param: Name.');
         }
         if (empty($register->getTTL())) {
-            throw new MissingRequiredParamsException('Missing the required param: TTL.');
+            throw new MissingRequiredParameterException('Missing the required param: TTL.');
         }
-        return $this->putJSON($register);
+        return $this->putJson($register);
     }
 
     /**
      * Deregister Check
      * @param DeRegister $deregister
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function deRegister(DeRegister $deregister)
+    public function deRegister(DeRegister $deregister): mixed
     {
         if (empty($deregister->getCheckId())) {
-            throw new MissingRequiredParamsException('Missing the required param: check_id.');
+            throw new MissingRequiredParameterException('Missing the required param: check_id.');
         }
         $deregister->setUrl(sprintf($deregister->getUrl(), $deregister->getCheckId()));
         $deregister->setCheckId('');
-        return $this->putJSON($deregister);
+        return $this->putJson($deregister);
     }
 
     /**
      * TTL Check Pass
      * @param Pass $pass
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function pass(Pass $pass)
+    public function pass(Pass $pass): mixed
     {
         if (empty($pass->getCheckId())) {
-            throw new MissingRequiredParamsException('Missing the required param: check_id.');
+            throw new MissingRequiredParameterException('Missing the required param: check_id.');
         }
         $pass->setUrl(sprintf($pass->getUrl(), $pass->getCheckId()));
         $pass->setCheckId('');
-        return $this->putJSON($pass);
+        return $this->putJson($pass);
     }
 
     /**
      * TTL Check Warn
      * @param Warn $warn
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function warn(Warn $warn)
+    public function warn(Warn $warn): mixed
     {
         if (empty($warn->getCheckId())) {
-            throw new MissingRequiredParamsException('Missing the required param: check_id.');
+            throw new MissingRequiredParameterException('Missing the required param: check_id.');
         }
         $warn->setUrl(sprintf($warn->getUrl(), $warn->getCheckId()));
         $warn->setCheckId('');
-        return $this->putJSON($warn);
+        return $this->putJson($warn);
     }
 
     /**
      * TTL Check Fail
      * @param Fail $fail
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function fail(Fail $fail)
+    public function fail(Fail $fail): mixed
     {
         if (empty($fail->getCheckId())) {
-            throw new MissingRequiredParamsException('Missing the required param: check_id.');
+            throw new MissingRequiredParameterException('Missing the required param: check_id.');
         }
         $fail->setUrl(sprintf($fail->getUrl(), $fail->getCheckId()));
         $fail->setCheckId('');
-        return $this->putJSON($fail);
+        return $this->putJson($fail);
     }
 
     /**
      * TTL Check Update
      * @param Update $update
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function update(Update $update)
+    public function update(Update $update): mixed
     {
         if (empty($update->getCheckId())) {
-            throw new MissingRequiredParamsException('Missing the required param: check_id.');
+            throw new MissingRequiredParameterException('Missing the required param: check_id.');
         }
         $update->setUrl(sprintf($update->getUrl(), $update->getCheckId()));
         $update->setCheckId('');
-        return $this->putJSON($update);
+        return $this->putJson($update);
     }
 
     /**
@@ -299,7 +299,7 @@ class Agent extends BaseFunc implements AgentInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function services(Services $services)
+    public function services(Services $services): mixed
     {
         return $this->getJson($services);
     }
@@ -308,13 +308,13 @@ class Agent extends BaseFunc implements AgentInterface
      * Get Service Configuration
      * @param Service $service
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function service(Service $service)
+    public function service(Service $service): mixed
     {
         if (empty($service->getServiceId())) {
-            throw new MissingRequiredParamsException('Missing the required param: service_id.');
+            throw new MissingRequiredParameterException('Missing the required param: service_id.');
         }
         $service->setUrl(sprintf($service->getUrl(), $service->getServiceId()));
         $service->setServiceId('');
@@ -325,13 +325,13 @@ class Agent extends BaseFunc implements AgentInterface
      * Get local service health by its name
      * @param Name $name
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function name(Name $name)
+    public function name(Name $name): mixed
     {
         if (empty($name->getServiceName())) {
-            throw new MissingRequiredParamsException('Missing the required param: service_name.');
+            throw new MissingRequiredParameterException('Missing the required param: service_name.');
         }
         $name->setUrl(sprintf($name->getUrl(), $name->getServiceName()));
         $name->setServiceName('');
@@ -342,13 +342,13 @@ class Agent extends BaseFunc implements AgentInterface
      * Get local service health by its ID
      * @param ID $ID
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function id(ID $ID)
+    public function id(ID $ID): mixed
     {
         if (empty($ID->getServiceID())) {
-            throw new MissingRequiredParamsException('Missing the required param: service_id.');
+            throw new MissingRequiredParameterException('Missing the required param: service_id.');
         }
         $ID->setUrl(sprintf($ID->getUrl(), $ID->getServiceID()));
         $ID->setServiceID('');
@@ -359,71 +359,71 @@ class Agent extends BaseFunc implements AgentInterface
      * Register Service
      * @param Service\Register $register
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function serviceRegister(Service\Register $register)
+    public function serviceRegister(Service\Register $register): mixed
     {
         if (empty($register->getName())) {
-            throw new MissingRequiredParamsException('Missing the required param: Name.');
+            throw new MissingRequiredParameterException('Missing the required param: Name.');
         }
-        return $this->putJSON($register);
+        return $this->putJson($register);
     }
 
     /**
      * Deregister Service
      * @param Service\DeRegister $deregister
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function serviceDeregister(Service\DeRegister $deregister)
+    public function serviceDeregister(Service\DeRegister $deregister): mixed
     {
         if (empty($deregister->getServiceID())) {
-            throw new MissingRequiredParamsException('Missing the required param: service_id.');
+            throw new MissingRequiredParameterException('Missing the required param: service_id.');
         }
         $deregister->setUrl(sprintf($deregister->getUrl(), $deregister->getServiceID()));
         $deregister->setServiceID('');
-        return $this->putJSON($deregister);
+        return $this->putJson($deregister);
     }
 
     /**
      * Enable Maintenance Mode
      * @param Service\Maintenance $maintenance
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function serviceMaintenance(Service\Maintenance $maintenance)
+    public function serviceMaintenance(Service\Maintenance $maintenance): mixed
     {
         if (empty($maintenance->getServiceID())) {
-            throw new MissingRequiredParamsException('Missing the required param: service_id.');
+            throw new MissingRequiredParameterException('Missing the required param: service_id.');
         }
         if ($maintenance->getEnable() === '' || $maintenance->getEnable() === null) {
-            throw new MissingRequiredParamsException('Missing the required param: enable.');
+            throw new MissingRequiredParameterException('Missing the required param: enable.');
         }
         $maintenance->setUrl(sprintf($maintenance->getUrl(), $maintenance->getServiceID()));
         $maintenance->setServiceID('');
-        return $this->putJSON($maintenance);
+        return $this->putJson($maintenance);
     }
 
     /**
      * Authorize
      * @param Authorize $authorize
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function authorize(Authorize $authorize)
+    public function authorize(Authorize $authorize): mixed
     {
         if (empty($authorize->getTarget())) {
-            throw new MissingRequiredParamsException('Missing the required param: Target.');
+            throw new MissingRequiredParameterException('Missing the required param: Target.');
         }
         if (empty($authorize->getClientCertURI())) {
-            throw new MissingRequiredParamsException('Missing the required param: ClientCertURI.');
+            throw new MissingRequiredParameterException('Missing the required param: ClientCertURI.');
         }
         if (empty($authorize->getClientCertSerial())) {
-            throw new MissingRequiredParamsException('Missing the required param: ClientCertSerial.');
+            throw new MissingRequiredParameterException('Missing the required param: ClientCertSerial.');
         }
         return $this->postJson($authorize);
     }
@@ -434,7 +434,7 @@ class Agent extends BaseFunc implements AgentInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function roots(Roots $roots)
+    public function roots(Roots $roots): mixed
     {
         return $this->getJson($roots);
     }
@@ -443,13 +443,13 @@ class Agent extends BaseFunc implements AgentInterface
      * Service Leaf Certificate
      * @param Leaf $leaf
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function leaf(Leaf $leaf)
+    public function leaf(Leaf $leaf): mixed
     {
         if (empty($leaf->getService())) {
-            throw new MissingRequiredParamsException('Missing the required param: service.');
+            throw new MissingRequiredParameterException('Missing the required param: service.');
         }
         $leaf->setUrl(sprintf($leaf->getUrl(), $leaf->getService()));
         $leaf->setService('');

@@ -11,12 +11,12 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class License extends BaseCommand
 {
-    protected $url = 'operator/license';
+    protected string $url = 'operator/license';
 
     /**
      * @var string
      */
-    protected $dc;
+    protected ?string $dc = null;
 
     /**
      * @return null|string

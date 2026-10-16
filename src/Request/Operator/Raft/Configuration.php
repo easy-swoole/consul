@@ -11,16 +11,16 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Configuration extends BaseCommand
 {
-    protected $url = 'operator/raft/configuration';
+    protected string $url = 'operator/raft/configuration';
 
     /**
      * @var string
      */
-    protected $dc;
+    protected ?string $dc = null;
     /**
      * @var bool
      */
-    protected $stale;
+    protected ?bool $stale = null;
 
     /**
      * @return null|string

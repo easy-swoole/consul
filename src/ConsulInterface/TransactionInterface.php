@@ -11,5 +11,5 @@ use EasySwoole\Consul\Request\Txn;
 
 interface TransactionInterface
 {
-    public function create(Txn $txn);
+    public function create(Txn $txn): mixed;
 }

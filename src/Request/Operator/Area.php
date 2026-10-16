@@ -22,33 +22,33 @@ use EasySwoole\Consul\Request\BaseCommand;
  */
 class Area extends BaseCommand
 {
-    protected $url = 'operator/area/%s';
+    protected string $url = 'operator/area/%s';
 
     /**
      * @var string
      */
-    protected $dc;
+    protected ?string $dc = null;
     /**
      * @var string
      */
-    protected $peerDatacenter;
+    protected ?string $peerDatacenter = null;
     /**
      * @var array
      */
-    protected $retryJoin;
+    protected ?array $retryJoin = null;
     /**
      * @var bool
      */
-    protected $useTLS;
+    protected ?bool $useTLS = null;
     /**
      * @var string
      */
-    protected $uuid;
+    protected ?string $uuid = null;
 
     /**
      * @return string
      */
-    public function getDc()
+    public function getDc(): ?string
     {
         return $this->dc;
     }
@@ -56,7 +56,7 @@ class Area extends BaseCommand
     /**
      * @param string $dc
      */
-    public function setDc($dc)
+    public function setDc($dc): void
     {
         $this->dc = $dc;
     }
@@ -64,7 +64,7 @@ class Area extends BaseCommand
     /**
      * @return string
      */
-    public function getPeerDatacenter()
+    public function getPeerDatacenter(): ?string
     {
         return $this->peerDatacenter;
     }
@@ -72,7 +72,7 @@ class Area extends BaseCommand
     /**
      * @param string $peerDatacenter
      */
-    public function setPeerDatacenter($peerDatacenter)
+    public function setPeerDatacenter($peerDatacenter): void
     {
         $this->peerDatacenter = $peerDatacenter;
     }
@@ -80,7 +80,7 @@ class Area extends BaseCommand
     /**
      * @return array
      */
-    public function getRetryJoin()
+    public function getRetryJoin(): ?array
     {
         return $this->retryJoin;
     }
@@ -88,7 +88,7 @@ class Area extends BaseCommand
     /**
      * @param array $retryJoin
      */
-    public function setRetryJoin($retryJoin)
+    public function setRetryJoin($retryJoin): void
     {
         $this->retryJoin = $retryJoin;
     }
@@ -96,7 +96,7 @@ class Area extends BaseCommand
     /**
      * @return bool
      */
-    public function isUseTLS()
+    public function isUseTLS(): ?bool
     {
         return $this->useTLS;
     }
@@ -104,7 +104,7 @@ class Area extends BaseCommand
     /**
      * @param bool $useTLS
      */
-    public function setUseTLS($useTLS)
+    public function setUseTLS($useTLS): void
     {
         $this->useTLS = $useTLS;
     }
@@ -112,7 +112,7 @@ class Area extends BaseCommand
     /**
      * @return string
      */
-    public function getUuid()
+    public function getUuid(): ?string
     {
         return $this->uuid;
     }
@@ -120,7 +120,7 @@ class Area extends BaseCommand
     /**
      * @param string $uuid
      */
-    public function setUuid($uuid)
+    public function setUuid($uuid): void
     {
         $this->uuid = $uuid;
     }

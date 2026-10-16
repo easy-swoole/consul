@@ -11,5 +11,5 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Bootstrap extends BaseCommand
 {
-    protected $url = 'acl/bootstrap';
+    protected string $url = 'acl/bootstrap';
 }

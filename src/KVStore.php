@@ -1,77 +1,46 @@
 <?php
+declare(strict_types=1);
+
 namespace EasySwoole\Consul;
 
 use EasySwoole\Consul\ConsulInterface\KVStoreInterface;
-use EasySwoole\Consul\Exception\MissingRequiredParamsException;
+use EasySwoole\Consul\Exception\MissingRequiredParameterException;
 use EasySwoole\Consul\Request\Kv;
 
-class KVStore extends BaseFunc implements KVStoreInterface
+final class KVStore extends AbstractEndpoint implements KVStoreInterface
 {
-    /**
-     * Read Key
-     * @param Kv $kv
-     * @return mixed
-     * @throws MissingRequiredParamsException
-     * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     */
-    public function kv(Kv $kv)
+    public function read(Kv $request): mixed
     {
-        if (empty($kv->getKey())) {
-            throw new MissingRequiredParamsException('Missing the required param: key.');
-        }
-        $kv->setUrl(sprintf($kv->getUrl(), $kv->getKey()));
-        $kv->setKey('');
-        return $this->getJson($kv);
+        $this->resolveKeyPath($request);
+
+        return $this->getJson($request);
     }
 
-    /**
-     * Create Key
-     * @param Kv $kv
-     * @return mixed
-     * @throws MissingRequiredParamsException
-     * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     */
-    public function create(Kv $kv)
+    public function put(Kv $request, string $value): mixed
     {
-        if (empty($kv->getKey())) {
-            throw new MissingRequiredParamsException('Missing the required param: key.');
-        }
-        $kv->setUrl(sprintf($kv->getUrl(), $kv->getKey()));
-        $kv->setKey('');
-        return $this->putJSON($kv);
+        $this->resolveKeyPath($request);
+
+        // Consul KV 的 value 是原始请求体，不能按普通对象序列化为 JSON。
+        return $this->putRaw($request, $value);
     }
 
-    /**
-     * Update Key
-     * @param Kv $kv
-     * @return mixed
-     * @throws MissingRequiredParamsException
-     * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     */
-    public function update(Kv $kv)
+    public function delete(Kv $request): mixed
     {
-        if (empty($kv->getKey())) {
-            throw new MissingRequiredParamsException('Missing the required param: key.');
-        }
-        $kv->setUrl(sprintf($kv->getUrl(), $kv->getKey()));
-        $kv->setKey('');
-        return $this->putJSON($kv);
+        $this->resolveKeyPath($request);
+
+        return $this->deleteJson($request);
     }
 
-    /**
-     * Delete Key
-     * @param Kv $kv
-     * @return mixed
-     * @throws MissingRequiredParamsException
-     * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
-     */
-    public function delete(Kv $kv)
+    private function resolveKeyPath(Kv $request): void
     {
-        if (empty($kv->getKey())) {
-            throw new MissingRequiredParamsException('Missing the required param: key.');
+        $key = $request->getKey();
+        if ($key === null || $key === '') {
+            throw new MissingRequiredParameterException('Missing the required parameter: key.');
         }
-        $kv->setUrl(sprintf($kv->getUrl(), $kv->getKey()));
-        $kv->setKey('');
-        return $this->deleteJson($kv);
+
+        // key 属于 URL 路径而非查询参数，必须按路径段编码后再替换路由占位符。
+        $request->setUrl(sprintf($request->getUrl(), rawurlencode($key)));
+        // key 已写入路径，清空后可避免序列化器再次生成重复的 key 查询参数。
+        $request->setKey('');
     }
 }

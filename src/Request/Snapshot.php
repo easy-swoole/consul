@@ -9,16 +9,16 @@ namespace EasySwoole\Consul\Request;
 
 class Snapshot extends BaseCommand
 {
-    protected $url = 'snapshot';
+    protected string $url = 'snapshot';
 
     /**
      * @var string
      */
-    protected $dc;
+    protected ?string $dc = null;
     /**
      * @var bool
      */
-    protected $stale;
+    protected ?bool $stale = null;
 
     /**
      * @return null|string
@@ -45,9 +45,9 @@ class Snapshot extends BaseCommand
     }
 
     /**
-     * @param string $stale
+     * @param bool $stale
      */
-    public function setStale(string $stale): void
+    public function setStale(bool $stale): void
     {
         $this->stale = $stale;
     }

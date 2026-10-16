@@ -13,23 +13,23 @@ use EasySwoole\Consul\Request\Connect\Intentions;
 
 interface ConnectInterface
 {
-    public function roots(Roots $roots);
+    public function roots(Roots $roots): mixed;
 
-    public function configuration(Configuration $configuration);
+    public function configuration(Configuration $configuration): mixed;
 
-    public function updateConfiguration(Configuration $configuration);
+    public function updateConfiguration(Configuration $configuration): mixed;
 
-    public function intentions(Intentions $intentions);
+    public function intentions(Intentions $intentions): mixed;
 
-    public function readIntention(Intentions $intentions);
+    public function readIntention(Intentions $intentions): mixed;
 
-    public function listIntention(Intentions $intentions);
+    public function listIntention(Intentions $intentions): mixed;
 
-    public function updateIntention(Intentions $intentions);
+    public function updateIntention(Intentions $intentions): mixed;
 
-    public function deleteIntention(Intentions $intentions);
+    public function deleteIntention(Intentions $intentions): mixed;
 
-    public function check(Intentions\Check $check);
+    public function check(Intentions\Check $check): mixed;
 
-    public function match(Intentions\Match $match);
+    public function match(Intentions\IntentionMatch $match): mixed;
 }

@@ -5,12 +5,12 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class ForceLeave extends BaseCommand
 {
-    protected $url = 'agent/force-leave/%s';
+    protected string $url = 'agent/force-leave/%s';
 
     /**
      * @var string
      */
-    protected $node;
+    protected ?string $node = null;
 
     /**
      * @return string|null

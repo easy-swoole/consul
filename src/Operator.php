@@ -8,7 +8,7 @@
 namespace EasySwoole\Consul;
 
 use EasySwoole\Consul\ConsulInterface\OperatorInterface;
-use EasySwoole\Consul\Exception\MissingRequiredParamsException;
+use EasySwoole\Consul\Exception\MissingRequiredParameterException;
 use EasySwoole\Consul\Request\Operator\Area;
 use EasySwoole\Consul\Request\Operator\Autopilot\Configuration;
 use EasySwoole\Consul\Request\Operator\Autopilot\Health;
@@ -18,7 +18,7 @@ use EasySwoole\Consul\Request\Operator\Raft\Configuration as raftConfig;
 use EasySwoole\Consul\Request\Operator\Raft\Peer;
 use EasySwoole\Consul\Request\Operator\Segment;
 
-class Operator extends BaseFunc implements OperatorInterface
+class Operator extends AbstractEndpoint implements OperatorInterface
 {
     /**
      * Create Network Area
@@ -26,7 +26,7 @@ class Operator extends BaseFunc implements OperatorInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function area(Area $area)
+    public function area(Area $area): mixed
     {
         $area->setUrl(substr($area->getUrl(), 0, strlen($area->getUrl()) -3));
         return $this->postJson($area);
@@ -38,7 +38,7 @@ class Operator extends BaseFunc implements OperatorInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function areaList(Area $area)
+    public function areaList(Area $area): mixed
     {
         if (empty($area->getUuid())) {
             $area->setUrl(substr($area->getUrl(), 0, strlen($area->getUrl()) -3));
@@ -54,30 +54,30 @@ class Operator extends BaseFunc implements OperatorInterface
      * Update Network Area
      * @param Area $area
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function updateArea(Area $area)
+    public function updateArea(Area $area): mixed
     {
         if (empty($area->getUuid())) {
-            throw new MissingRequiredParamsException('Missing the required param: uuid.');
+            throw new MissingRequiredParameterException('Missing the required param: uuid.');
         }
         $area->setUrl(sprintf($area->getUrl(), $area->getUuid()));
         $area->setUuid('');
-        return $this->putJSON($area);
+        return $this->putJson($area);
     }
 
     /**
      * Delete Network Area
      * @param Area $area
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function deleteArea(Area $area)
+    public function deleteArea(Area $area): mixed
     {
         if (empty($area->getUuid())) {
-            throw new MissingRequiredParamsException('Missing the required param: uuid.');
+            throw new MissingRequiredParameterException('Missing the required param: uuid.');
         }
         $area->setUrl(sprintf($area->getUrl(), $area->getUuid()));
         $area->setUuid('');
@@ -88,13 +88,13 @@ class Operator extends BaseFunc implements OperatorInterface
      * Join Network Area
      * @param Area $area
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function joinArea(Area $area)
+    public function joinArea(Area $area): mixed
     {
         if (empty($area->getUuid())) {
-            throw new MissingRequiredParamsException('Missing the required param: uuid.');
+            throw new MissingRequiredParameterException('Missing the required param: uuid.');
         }
         $area->setUrl(sprintf($area->getUrl(), $area->getUuid() . '/join'));
         $area->setUuid('');
@@ -105,13 +105,13 @@ class Operator extends BaseFunc implements OperatorInterface
      * List Network Area Members
      * @param Area $area
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function membersArea(Area $area)
+    public function membersArea(Area $area): mixed
     {
         if (empty($area->getUuid())) {
-            throw new MissingRequiredParamsException('Missing the required param: uuid.');
+            throw new MissingRequiredParameterException('Missing the required param: uuid.');
         }
         $area->setUrl(sprintf($area->getUrl(), $area->getUuid() . '/members'));
         $area->setUuid('');
@@ -124,7 +124,7 @@ class Operator extends BaseFunc implements OperatorInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function getConfiguration(Configuration $configuration)
+    public function getConfiguration(Configuration $configuration): mixed
     {
         return $this->getJson($configuration);
     }
@@ -135,9 +135,9 @@ class Operator extends BaseFunc implements OperatorInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function updateConfiguration(Configuration $configuration)
+    public function updateConfiguration(Configuration $configuration): mixed
     {
-        return $this->putJSON($configuration);
+        return $this->putJson($configuration);
     }
 
     /**
@@ -146,7 +146,7 @@ class Operator extends BaseFunc implements OperatorInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function health(Health $health)
+    public function health(Health $health): mixed
     {
         return $this->getJson($health);
     }
@@ -157,7 +157,7 @@ class Operator extends BaseFunc implements OperatorInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function getKeyring(Keyring $keyring)
+    public function getKeyring(Keyring $keyring): mixed
     {
         return $this->getJson($keyring);
     }
@@ -166,13 +166,13 @@ class Operator extends BaseFunc implements OperatorInterface
      * Add New Gossip Encryption Key
      * @param Keyring $keyring
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function addKeyring(Keyring $keyring)
+    public function addKeyring(Keyring $keyring): mixed
     {
         if (empty($keyring->getKey())) {
-            throw new MissingRequiredParamsException('Missing the required param: key.');
+            throw new MissingRequiredParameterException('Missing the required param: key.');
         }
         return $this->postJson($keyring);
     }
@@ -181,28 +181,28 @@ class Operator extends BaseFunc implements OperatorInterface
      * Change Primary Gossip Encryption Key
      * @param Keyring $keyring
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function changeKeyring(Keyring $keyring)
+    public function changeKeyring(Keyring $keyring): mixed
     {
         if (empty($keyring->getKey())) {
-            throw new MissingRequiredParamsException('Missing the required param: key.');
+            throw new MissingRequiredParameterException('Missing the required param: key.');
         }
-        return $this->putJSON($keyring);
+        return $this->putJson($keyring);
     }
 
     /**
      * Delete Gossip Encryption Key
      * @param Keyring $keyring
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function deleteKeyring(Keyring $keyring)
+    public function deleteKeyring(Keyring $keyring): mixed
     {
         if (empty($keyring->getKey())) {
-            throw new MissingRequiredParamsException('Missing the required param: key.');
+            throw new MissingRequiredParameterException('Missing the required param: key.');
         }
         return $this->deleteJson($keyring);
     }
@@ -213,7 +213,7 @@ class Operator extends BaseFunc implements OperatorInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function getLicense(License $license)
+    public function getLicense(License $license): mixed
     {
         return $this->getJson($license);
     }
@@ -224,9 +224,9 @@ class Operator extends BaseFunc implements OperatorInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function updateLicense(License $license)
+    public function updateLicense(License $license): mixed
     {
-        return $this->putJSON($license);
+        return $this->putJson($license);
     }
 
     /**
@@ -235,7 +235,7 @@ class Operator extends BaseFunc implements OperatorInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function resetLicense(License $license)
+    public function resetLicense(License $license): mixed
     {
         return $this->deleteJson($license);
     }
@@ -246,7 +246,7 @@ class Operator extends BaseFunc implements OperatorInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function getRaftConfiguration(raftConfig $configuration)
+    public function getRaftConfiguration(raftConfig $configuration): mixed
     {
         return $this->getJson($configuration);
     }
@@ -255,15 +255,15 @@ class Operator extends BaseFunc implements OperatorInterface
      * Delete Raft Peer
      * @param Peer $peer
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function peer(Peer $peer)
+    public function peer(Peer $peer): mixed
     {
         if (! empty($peer->getId()) || ! empty($peer->getAddress())) {
             return $this->deleteJson($peer);
         } else {
-            throw new MissingRequiredParamsException('Missing the required param: id or address.');
+            throw new MissingRequiredParameterException('Missing the required param: id or address.');
         }
     }
 
@@ -273,7 +273,7 @@ class Operator extends BaseFunc implements OperatorInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function segment(Segment $segment)
+    public function segment(Segment $segment): mixed
     {
         return $this->getJson($segment);
     }

@@ -18,19 +18,19 @@ use EasySwoole\Consul\Request\Catalog\Services;
 
 interface CatalogInterface
 {
-    public function register(Register $register);
+    public function register(Register $register): mixed;
 
-    public function deRegister(DeRegister $deregister);
+    public function deRegister(DeRegister $deregister): mixed;
 
-    public function dataCenters(Datacenters $datacenters);
+    public function dataCenters(Datacenters $datacenters): mixed;
 
-    public function nodes(Nodes $nodes);
+    public function nodes(Nodes $nodes): mixed;
 
-    public function services(Services $services);
+    public function services(Services $services): mixed;
 
-    public function service(Service $service);
+    public function service(Service $service): mixed;
 
-    public function connect(Connect $connect);
+    public function connect(Connect $connect): mixed;
 
-    public function node(Node $node);
+    public function node(Node $node): mixed;
 }

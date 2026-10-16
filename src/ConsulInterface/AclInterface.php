@@ -31,81 +31,81 @@ use EasySwoole\Consul\Request\Acl\Update;
 
 interface AclInterface
 {
-    public function bootstrap(Bootstrap $bootstrap);
+    public function bootstrap(Bootstrap $bootstrap): mixed;
 
-    public function replication(Replication $replication);
+    public function replication(Replication $replication): mixed;
 
-    public function translate(Translate $translate);
+    public function translate(Translate $translate): mixed;
 
-    public function login(Login $login);
+    public function login(Login $login): mixed;
 
-    public function logout(Logout $logout);
+    public function logout(Logout $logout): mixed;
 
-    public function token(Token $token);
+    public function token(Token $token): mixed;
 
-    public function readToken(Token $token);
+    public function readToken(Token $token): mixed;
 
-    public function self(Token\GetSelf $getSelf);
+    public function self(Token\GetSelf $getSelf): mixed;
 
-    public function updateToken(Token $token);
+    public function updateToken(Token $token): mixed;
 
-    public function cloneToken(Token\CloneToken $token);
+    public function cloneToken(Token\CloneToken $token): mixed;
 
-    public function delete(Token $token);
+    public function delete(Token $token): mixed;
 
-    public function tokens(Tokens $tokens);
+    public function tokens(Tokens $tokens): mixed;
 
-    public function create(Create $create);
+    public function create(Create $create): mixed;
 
-    public function update(Update $update);
+    public function update(Update $update): mixed;
 
-    public function destroy(Destroy $destroy);
+    public function destroy(Destroy $destroy): mixed;
 
-    public function info(Info $info);
+    public function info(Info $info): mixed;
 
-    public function cloneAclToken(CloneACLToken $token);
+    public function cloneAclToken(CloneACLToken $token): mixed;
 
-    public function getList(Lists $lists);
+    public function getList(Lists $lists): mixed;
 
-    public function policy(Policy $policy);
+    public function policy(Policy $policy): mixed;
 
-    public function readPolicy(Policy $policy);
+    public function readPolicy(Policy $policy): mixed;
 
-    public function updatePolicy(Policy $policy);
+    public function updatePolicy(Policy $policy): mixed;
 
-    public function deletePolicy(Policy $policy);
+    public function deletePolicy(Policy $policy): mixed;
 
-    public function policies(Policies $policies);
+    public function policies(Policies $policies): mixed;
 
-    public function role(Role $role);
+    public function role(Role $role): mixed;
 
-    public function readRole(Role $role);
+    public function readRole(Role $role): mixed;
 
-    public function readRoleByName(Role $role);
+    public function readRoleByName(Role $role): mixed;
 
-    public function updateRole(Role $role);
+    public function updateRole(Role $role): mixed;
 
-    public function deleteRole(Role $role);
+    public function deleteRole(Role $role): mixed;
 
-    public function roles(Roles $roles);
+    public function roles(Roles $roles): mixed;
 
-    public function authMethod(AuthMethod $authMethod);
+    public function authMethod(AuthMethod $authMethod): mixed;
 
-    public function readAuthMethod(AuthMethod $authMethod);
+    public function readAuthMethod(AuthMethod $authMethod): mixed;
 
-    public function updateAuthMethod(AuthMethod $authMethod);
+    public function updateAuthMethod(AuthMethod $authMethod): mixed;
 
-    public function deleteAuthMethod(AuthMethod $authMethod);
+    public function deleteAuthMethod(AuthMethod $authMethod): mixed;
 
-    public function authMethods(AuthMethods $authMethods);
+    public function authMethods(AuthMethods $authMethods): mixed;
 
-    public function bindingRule(BindingRule $bindingRule);
+    public function bindingRule(BindingRule $bindingRule): mixed;
 
-    public function readBindingRule(BindingRule $bindingRule);
+    public function readBindingRule(BindingRule $bindingRule): mixed;
 
-    public function updateBindingRule(BindingRule $bindingRule);
+    public function updateBindingRule(BindingRule $bindingRule): mixed;
 
-    public function deleteBindingRule(BindingRule $bindingRule);
+    public function deleteBindingRule(BindingRule $bindingRule): mixed;
 
-    public function bindingRules(BindingRules $bindingRules);
+    public function bindingRules(BindingRules $bindingRules): mixed;
 }

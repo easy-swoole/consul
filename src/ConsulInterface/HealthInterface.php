@@ -15,13 +15,13 @@ use EasySwoole\Consul\Request\Health\State;
 
 interface HealthInterface
 {
-    public function node(Node $node);
+    public function node(Node $node): mixed;
 
-    public function checks(Checks $checks);
+    public function checks(Checks $checks): mixed;
 
-    public function service(Service $service);
+    public function service(Service $service): mixed;
 
-    public function connect(Connect $connect);
+    public function connect(Connect $connect): mixed;
 
-    public function state(State $state);
+    public function state(State $state): mixed;
 }

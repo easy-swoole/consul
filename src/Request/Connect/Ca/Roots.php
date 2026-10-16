@@ -11,5 +11,5 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Roots extends BaseCommand
 {
-    protected $url = 'connect/ca/roots';
+    protected string $url = 'connect/ca/roots';
 }

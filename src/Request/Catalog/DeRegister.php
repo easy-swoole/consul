@@ -5,29 +5,29 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class DeRegister extends BaseCommand
 {
-    public $url='catalog/deregister';
+    public string $url='catalog/deregister';
 
     /**
      * @var string
      */
-    protected $datacenter;
+    protected ?string $datacenter = null;
     /**
      * @var string
      */
-    protected $node;
+    protected ?string $node = null;
     /**
      * @var string
      */
-    protected $checkID;
+    protected ?string $checkID = null;
     /**
      * @var string
      */
-    protected $serviceID;
+    protected ?string $serviceID = null;
 
     /**
      * @return string
      */
-    public function getDatacenter()
+    public function getDatacenter(): ?string
     {
         return $this->datacenter;
     }
@@ -35,7 +35,7 @@ class DeRegister extends BaseCommand
     /**
      * @param string $datacenter
      */
-    public function setDatacenter($datacenter)
+    public function setDatacenter($datacenter): void
     {
         $this->datacenter = $datacenter;
     }
@@ -43,7 +43,7 @@ class DeRegister extends BaseCommand
     /**
      * @return string
      */
-    public function getNode()
+    public function getNode(): ?string
     {
         return $this->node;
     }
@@ -51,7 +51,7 @@ class DeRegister extends BaseCommand
     /**
      * @param string $node
      */
-    public function setNode($node)
+    public function setNode($node): void
     {
         $this->node = $node;
     }
@@ -59,7 +59,7 @@ class DeRegister extends BaseCommand
     /**
      * @return string
      */
-    public function getCheckID()
+    public function getCheckID(): ?string
     {
         return $this->checkID;
     }
@@ -67,7 +67,7 @@ class DeRegister extends BaseCommand
     /**
      * @param string $checkID
      */
-    public function setCheckID($checkID)
+    public function setCheckID($checkID): void
     {
         $this->checkID = $checkID;
     }
@@ -75,7 +75,7 @@ class DeRegister extends BaseCommand
     /**
      * @return string
      */
-    public function getServiceID()
+    public function getServiceID(): ?string
     {
         return $this->serviceID;
     }
@@ -83,7 +83,7 @@ class DeRegister extends BaseCommand
     /**
      * @param string $serviceID
      */
-    public function setServiceID($serviceID)
+    public function setServiceID($serviceID): void
     {
         $this->serviceID = $serviceID;
     }

@@ -11,12 +11,12 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Segment extends BaseCommand
 {
-    protected $url = 'operator/segment';
+    protected string $url = 'operator/segment';
 
     /**
      * @var string
      */
-    protected $dc;
+    protected ?string $dc = null;
 
     /**
      * @return null|string
@@ -29,7 +29,7 @@ class Segment extends BaseCommand
     /**
      * @param mixed $dc
      */
-    public function setDc($dc)
+    public function setDc($dc): void
     {
         $this->dc = $dc;
     }

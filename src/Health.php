@@ -2,26 +2,26 @@
 namespace EasySwoole\Consul;
 
 use EasySwoole\Consul\ConsulInterface\HealthInterface;
-use EasySwoole\Consul\Exception\MissingRequiredParamsException;
+use EasySwoole\Consul\Exception\MissingRequiredParameterException;
 use EasySwoole\Consul\Request\Health\Checks;
 use EasySwoole\Consul\Request\Health\Connect;
 use EasySwoole\Consul\Request\Health\Node;
 use EasySwoole\Consul\Request\Health\Service;
 use EasySwoole\Consul\Request\Health\State;
 
-class Health extends BaseFunc implements HealthInterface
+class Health extends AbstractEndpoint implements HealthInterface
 {
     /**
      * List Checks for Node
      * @param Node $node
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function node(Node $node)
+    public function node(Node $node): mixed
     {
         if (empty($node->getNode())) {
-            throw new MissingRequiredParamsException('Missing the required param: node.');
+            throw new MissingRequiredParameterException('Missing the required param: node.');
         }
         $node->setUrl(sprintf($node->getUrl(), $node->getNode()));
         $node->setNode('');
@@ -32,13 +32,13 @@ class Health extends BaseFunc implements HealthInterface
      * List Checks for Service
      * @param Checks $checks
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function checks(Checks $checks)
+    public function checks(Checks $checks): mixed
     {
         if (empty($checks->getService())) {
-            throw new MissingRequiredParamsException('Missing the required param: service.');
+            throw new MissingRequiredParameterException('Missing the required param: service.');
         }
         $checks->setUrl(sprintf($checks->getUrl(), $checks->getService()));
         $checks->setService('');
@@ -49,13 +49,13 @@ class Health extends BaseFunc implements HealthInterface
      * List Nodes for Service
      * @param Service $service
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function service(Service $service)
+    public function service(Service $service): mixed
     {
         if (empty($service->getService())) {
-            throw new MissingRequiredParamsException('Missing the required param: service.');
+            throw new MissingRequiredParameterException('Missing the required param: service.');
         }
         $service->setUrl(sprintf($service->getUrl(), $service->getService()));
         $service->setService('');
@@ -67,13 +67,13 @@ class Health extends BaseFunc implements HealthInterface
      * Parameters and response format are the same as Health/service
      * @param Connect $connect
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function connect(Connect $connect)
+    public function connect(Connect $connect): mixed
     {
         if (empty($connect->getService())) {
-            throw new MissingRequiredParamsException('Missing the required param: service.');
+            throw new MissingRequiredParameterException('Missing the required param: service.');
         }
         $connect->setUrl(sprintf($connect->getUrl(), $connect->getService()));
         $connect->setService('');
@@ -84,13 +84,13 @@ class Health extends BaseFunc implements HealthInterface
      * List Checks in State
      * @param State $state
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function state(State $state)
+    public function state(State $state): mixed
     {
         if (empty($state->getState())) {
-            throw new MissingRequiredParamsException('Missing the required param: state.');
+            throw new MissingRequiredParameterException('Missing the required param: state.');
         }
         $state->setUrl(sprintf($state->getUrl(), $state->getState()));
         $state->setState('');

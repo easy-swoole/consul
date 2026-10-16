@@ -11,25 +11,25 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Login extends BaseCommand
 {
-    protected $url = 'acl/login';
+    protected string $url = 'acl/login';
 
     /**
      * @var string
      */
-    protected $authMethod;
+    protected ?string $authMethod = null;
     /**
      * @var string
      */
-    protected $bearerToken;
+    protected ?string $bearerToken = null;
     /**
      * @var array
      */
-    protected $meta;
+    protected ?array $meta = null;
 
     /**
      * @return string
      */
-    public function getAuthMethod()
+    public function getAuthMethod(): ?string
     {
         return $this->authMethod;
     }
@@ -37,7 +37,7 @@ class Login extends BaseCommand
     /**
      * @param string $authMethod
      */
-    public function setAuthMethod($authMethod)
+    public function setAuthMethod($authMethod): void
     {
         $this->authMethod = $authMethod;
     }
@@ -45,7 +45,7 @@ class Login extends BaseCommand
     /**
      * @return string
      */
-    public function getBearerToken()
+    public function getBearerToken(): ?string
     {
         return $this->bearerToken;
     }
@@ -53,7 +53,7 @@ class Login extends BaseCommand
     /**
      * @param string $bearerToken
      */
-    public function setBearerToken($bearerToken)
+    public function setBearerToken($bearerToken): void
     {
         $this->bearerToken = $bearerToken;
     }
@@ -61,7 +61,7 @@ class Login extends BaseCommand
     /**
      * @return array
      */
-    public function getMeta()
+    public function getMeta(): ?array
     {
         return $this->meta;
     }
@@ -69,7 +69,7 @@ class Login extends BaseCommand
     /**
      * @param array $meta
      */
-    public function setMeta($meta)
+    public function setMeta($meta): void
     {
         $this->meta = $meta;
     }

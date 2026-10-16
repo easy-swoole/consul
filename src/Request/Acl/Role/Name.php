@@ -14,7 +14,7 @@ class Name extends SplBean
     /**
      * @var string
      */
-    protected $name;
+    protected ?string $name = null;
 
     /**
      * @return null|string

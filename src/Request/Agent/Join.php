@@ -5,16 +5,16 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Join extends BaseCommand
 {
-    protected $url = 'agent/join/%s';
+    protected string $url = 'agent/join/%s';
 
     /**
      * @var string
      */
-    protected $address;
+    protected ?string $address = null;
     /**
      * @var string
      */
-    protected $wan;
+    protected ?string $wan = null;
 
     /**
      * @return string|null

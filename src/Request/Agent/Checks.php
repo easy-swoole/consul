@@ -5,12 +5,12 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Checks extends BaseCommand
 {
-    protected $url = 'agent/checks';
+    protected string $url = 'agent/checks';
 
     /**
      * @var string
      */
-    protected $filter;
+    protected ?string $filter = null;
 
     /**
      * @return string|null

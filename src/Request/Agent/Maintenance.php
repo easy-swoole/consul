@@ -5,18 +5,18 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Maintenance extends BaseCommand
 {
-    protected $url = 'agent/maintenance';
+    protected string $url = 'agent/maintenance';
 
     /**
      * Specifies whether to enable or disable maintenance mode
      * @var bool
      */
-    protected $enable;
+    protected ?bool $enable = null;
     /**
      * Specifies a text string explaining the reason for placing the node into maintenance mode.
      * @var string
      */
-    protected $reason;
+    protected ?string $reason = null;
 
     /**
      * @return bool|null
@@ -27,10 +27,9 @@ class Maintenance extends BaseCommand
     }
 
     /**
-     * @param string $enable
-     * @return bool
+     * @param bool $enable
      */
-    public function setEnable(string $enable): bool
+    public function setEnable(bool $enable): void
     {
         $this->enable = $enable;
     }

@@ -11,12 +11,12 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class BindingRules extends BaseCommand
 {
-    protected $url = 'acl/binding-rules';
+    protected string $url = 'acl/binding-rules';
 
     /**
      * @var string
      */
-    protected $authMethod;
+    protected ?string $authMethod = null;
 
     /**
      * @return null|string

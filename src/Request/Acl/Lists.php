@@ -11,5 +11,5 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Lists extends BaseCommand
 {
-    protected $url = 'acl/list';
+    protected string $url = 'acl/list';
 }

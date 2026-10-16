@@ -11,22 +11,22 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Keyring extends BaseCommand
 {
-    protected $url = 'operator/keyring';
+    protected string $url = 'operator/keyring';
 
     /**
      * @var int
      */
-    protected $relayFactor;
+    protected ?int $relayFactor = null;
 
     /**
      * @var string
      */
-    protected $Key;
+    protected ?string $Key = null;
 
     /**
      * @var bool
      */
-    protected $localOnly;
+    protected ?bool $localOnly = null;
     /**
      * @return int|null
      */
@@ -62,7 +62,7 @@ class Keyring extends BaseCommand
     /**
      * @return bool
      */
-    public function isLocalOnly()
+    public function isLocalOnly(): ?bool
     {
         return $this->localOnly;
     }
@@ -70,7 +70,7 @@ class Keyring extends BaseCommand
     /**
      * @param bool $localOnly
      */
-    public function setLocalOnly($localOnly)
+    public function setLocalOnly($localOnly): void
     {
         $this->localOnly = $localOnly;
     }

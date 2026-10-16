@@ -5,17 +5,17 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Leaf extends BaseCommand
 {
-    protected $url = 'agent/connect/ca/leaf/%s';
+    protected string $url = 'agent/connect/ca/leaf/%s';
 
     /**
      * @var string
      */
-    protected $service;
+    protected ?string $service = null;
 
     /**
      * @return string
      */
-    public function getService()
+    public function getService(): ?string
     {
         return $this->service;
     }
@@ -23,7 +23,7 @@ class Leaf extends BaseCommand
     /**
      * @param string $service
      */
-    public function setService($service)
+    public function setService($service): void
     {
         $this->service = $service;
     }

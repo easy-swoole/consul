@@ -17,41 +17,41 @@ use EasySwoole\Consul\Request\Operator\Segment;
 
 interface OperatorInterface
 {
-    public function area(Area $area);
+    public function area(Area $area): mixed;
 
-    public function areaList(Area $area);
+    public function areaList(Area $area): mixed;
 
-    public function updateArea(Area $area);
+    public function updateArea(Area $area): mixed;
 
-    public function deleteArea(Area $area);
+    public function deleteArea(Area $area): mixed;
 
-    public function joinArea(Area $area);
+    public function joinArea(Area $area): mixed;
 
-    public function membersArea(Area $area);
+    public function membersArea(Area $area): mixed;
 
-    public function getConfiguration(Configuration $configuration);
+    public function getConfiguration(Configuration $configuration): mixed;
 
-    public function updateConfiguration(Configuration $configuration);
+    public function updateConfiguration(Configuration $configuration): mixed;
 
-    public function health(Health $health);
+    public function health(Health $health): mixed;
 
-    public function getKeyring(Keyring $keyring);
+    public function getKeyring(Keyring $keyring): mixed;
 
-    public function addKeyring(Keyring $keyring);
+    public function addKeyring(Keyring $keyring): mixed;
 
-    public function changeKeyring(Keyring $keyring);
+    public function changeKeyring(Keyring $keyring): mixed;
 
-    public function deleteKeyring(Keyring $keyring);
+    public function deleteKeyring(Keyring $keyring): mixed;
 
-    public function getLicense(License $license);
+    public function getLicense(License $license): mixed;
 
-    public function updateLicense(License $license);
+    public function updateLicense(License $license): mixed;
 
-    public function resetLicense(License $license);
+    public function resetLicense(License $license): mixed;
 
-    public function getRaftConfiguration(\EasySwoole\Consul\Request\Operator\Raft\Configuration $configuration);
+    public function getRaftConfiguration(\EasySwoole\Consul\Request\Operator\Raft\Configuration $configuration): mixed;
 
-    public function peer(Peer $peer);
+    public function peer(Peer $peer): mixed;
 
-    public function segment(Segment $segment);
+    public function segment(Segment $segment): mixed;
 }

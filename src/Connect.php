@@ -8,14 +8,14 @@
 namespace EasySwoole\Consul;
 
 use EasySwoole\Consul\ConsulInterface\ConnectInterface;
-use EasySwoole\Consul\Exception\MissingRequiredParamsException;
+use EasySwoole\Consul\Exception\MissingRequiredParameterException;
 use EasySwoole\Consul\Request\Connect\Ca\Configuration;
 use EasySwoole\Consul\Request\Connect\Ca\Roots;
 use EasySwoole\Consul\Request\Connect\Intentions;
 use EasySwoole\Consul\Request\Connect\Intentions\Check;
-use EasySwoole\Consul\Request\Connect\Intentions\Match;
+use EasySwoole\Consul\Request\Connect\Intentions\IntentionMatch;
 
-class Connect extends BaseFunc implements ConnectInterface
+class Connect extends AbstractEndpoint implements ConnectInterface
 {
     /**
      * List CA Root Certificates
@@ -23,7 +23,7 @@ class Connect extends BaseFunc implements ConnectInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function roots(Roots $roots)
+    public function roots(Roots $roots): mixed
     {
         return $this->getJson($roots);
     }
@@ -34,7 +34,7 @@ class Connect extends BaseFunc implements ConnectInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function configuration(Configuration $configuration)
+    public function configuration(Configuration $configuration): mixed
     {
         return $this->getJson($configuration);
     }
@@ -43,40 +43,40 @@ class Connect extends BaseFunc implements ConnectInterface
      * Update CA Configuration
      * @param Configuration $configuration
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function updateConfiguration(Configuration $configuration)
+    public function updateConfiguration(Configuration $configuration): mixed
     {
         if (empty($configuration->getProvider())) {
-            throw new MissingRequiredParamsException('Missing the required param: Provider.');
+            throw new MissingRequiredParameterException('Missing the required param: Provider.');
         }
         if (empty($configuration->getConfig())) {
-            throw new MissingRequiredParamsException('Missing the required param: Config.');
+            throw new MissingRequiredParameterException('Missing the required param: Config.');
         }
-        return $this->putJSON($configuration);
+        return $this->putJson($configuration);
     }
 
     /**
      * Create Intention
      * @param Intentions $intentions
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function intentions(Intentions $intentions)
+    public function intentions(Intentions $intentions): mixed
     {
         if (empty($intentions->getSourceName())) {
-            throw new MissingRequiredParamsException('Missing the required param: SourceName.');
+            throw new MissingRequiredParameterException('Missing the required param: SourceName.');
         }
         if (empty($intentions->getDestinationName())) {
-            throw new MissingRequiredParamsException('Missing the required param: DestinationName.');
+            throw new MissingRequiredParameterException('Missing the required param: DestinationName.');
         }
         if (empty($intentions->getSourceType())) {
-            throw new MissingRequiredParamsException('Missing the required param: SourceType.');
+            throw new MissingRequiredParameterException('Missing the required param: SourceType.');
         }
         if (empty($intentions->getAction())) {
-            throw new MissingRequiredParamsException('Missing the required param: Action.');
+            throw new MissingRequiredParameterException('Missing the required param: Action.');
         }
         $intentions->setUrl(substr($intentions->getUrl(), 0, strlen($intentions->getUrl()) -3));
         return $this->postJson($intentions);
@@ -86,13 +86,13 @@ class Connect extends BaseFunc implements ConnectInterface
      * Read Specific Intention
      * @param Intentions $intentions
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function readIntention(Intentions $intentions)
+    public function readIntention(Intentions $intentions): mixed
     {
         if (empty($intentions->getUuid())) {
-            throw new MissingRequiredParamsException('Missing the required param: uuid.');
+            throw new MissingRequiredParameterException('Missing the required param: uuid.');
         }
         $intentions->setUrl(sprintf($intentions->getUrl(), $intentions->getUuid()));
         $intentions->setUuid('');
@@ -105,7 +105,7 @@ class Connect extends BaseFunc implements ConnectInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function listIntention(Intentions $intentions)
+    public function listIntention(Intentions $intentions): mixed
     {
         $intentions->setUrl(substr($intentions->getUrl(), 0, strlen($intentions->getUrl()) -3));
         return $this->getJson($intentions);
@@ -115,30 +115,30 @@ class Connect extends BaseFunc implements ConnectInterface
      * Update Intention
      * @param Intentions $intentions
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function updateIntention(Intentions $intentions)
+    public function updateIntention(Intentions $intentions): mixed
     {
         if (empty($intentions->getUuid())) {
-            throw new MissingRequiredParamsException('Missing the required param: uuid.');
+            throw new MissingRequiredParameterException('Missing the required param: uuid.');
         }
         $intentions->setUrl(sprintf($intentions->getUrl(), $intentions->getUuid()));
         $intentions->setUuid('');
-        return $this->putJSON($intentions);
+        return $this->putJson($intentions);
     }
 
     /**
      * Delete Intention
      * @param Intentions $intentions
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function deleteIntention(Intentions $intentions)
+    public function deleteIntention(Intentions $intentions): mixed
     {
         if (empty($intentions->getUuid())) {
-            throw new MissingRequiredParamsException('Missing the required param: uuid.');
+            throw new MissingRequiredParameterException('Missing the required param: uuid.');
         }
         $intentions->setUrl(sprintf($intentions->getUrl(), $intentions->getUuid()));
         $intentions->setUuid('');
@@ -149,34 +149,34 @@ class Connect extends BaseFunc implements ConnectInterface
      * Check Intention Result
      * @param Check $check
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function check(Check $check)
+    public function check(Check $check): mixed
     {
         if (empty($check->getSource())) {
-            throw new MissingRequiredParamsException('Missing the required param: source.');
+            throw new MissingRequiredParameterException('Missing the required param: source.');
         }
         if (empty($check->getDestination())) {
-            throw new MissingRequiredParamsException('Missing the required param: destination.');
+            throw new MissingRequiredParameterException('Missing the required param: destination.');
         }
         return $this->getJson($check);
     }
 
     /**
      * List Matching Intentions
-     * @param Match $match
+     * @param IntentionMatch $match
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function match(Match $match)
+    public function match(IntentionMatch $match): mixed
     {
         if (empty($match->getBy())) {
-            throw new MissingRequiredParamsException('Missing the required param: by.');
+            throw new MissingRequiredParameterException('Missing the required param: by.');
         }
         if (empty($match->getName())) {
-            throw new MissingRequiredParamsException('Missing the required param: name.');
+            throw new MissingRequiredParameterException('Missing the required param: name.');
         }
         return $this->getJson($match);
     }

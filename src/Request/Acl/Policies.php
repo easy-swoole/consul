@@ -11,5 +11,5 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Policies extends BaseCommand
 {
-    protected $url = 'acl/policies';
+    protected string $url = 'acl/policies';
 }

@@ -11,14 +11,14 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class GetSelf extends BaseCommand
 {
-    protected $url = 'acl/token/self';
+    protected string $url = 'acl/token/self';
 
-    protected $token;
+    protected ?string $token = null;
 
     /**
      * @return mixed
      */
-    public function getToken()
+    public function getToken(): ?string
     {
         return $this->token;
     }
@@ -26,7 +26,7 @@ class GetSelf extends BaseCommand
     /**
      * @param mixed $token
      */
-    public function setToken($token)
+    public function setToken($token): void
     {
         $this->token = $token;
     }

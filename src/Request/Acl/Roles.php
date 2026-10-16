@@ -11,12 +11,12 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Roles extends BaseCommand
 {
-    protected $url = 'acl/roles';
+    protected string $url = 'acl/roles';
 
     /**
      * @var string
      */
-    protected $policy;
+    protected ?string $policy = null;
 
     /**
      * @return null|string

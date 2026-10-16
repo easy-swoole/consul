@@ -11,20 +11,20 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Tokens extends BaseCommand
 {
-    protected $url = 'acl/tokens';
+    protected string $url = 'acl/tokens';
 
     /**
      * @var string
      */
-    protected $policy;
+    protected ?string $policy = null;
     /**
      * @var string
      */
-    protected $role;
+    protected ?string $role = null;
     /**
      * @var string
      */
-    protected $authmethod;
+    protected ?string $authmethod = null;
 
     /**
      * @return null|strings

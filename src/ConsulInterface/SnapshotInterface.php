@@ -11,7 +11,7 @@ use EasySwoole\Consul\Request\Snapshot;
 
 interface SnapshotInterface
 {
-    public function generate(Snapshot $snapshot);
+    public function generate(Snapshot $snapshot): mixed;
 
-    public function restore(Snapshot $snapshot);
+    public function restore(Snapshot $request, string $snapshot): mixed;
 }

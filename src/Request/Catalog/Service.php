@@ -5,32 +5,32 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Service extends BaseCommand
 {
-    public $url='catalog/service/%s';
+    public string $url='catalog/service/%s';
 
     /**
      * @var
      */
-    protected $service;
+    protected ?string $service = null;
     /**
      * @var
      */
-    protected $dc;
+    protected ?string $dc = null;
     /**
      * @var
      */
-    protected $tag;
+    protected ?string $tag = null;
     /**
      * @var
      */
-    protected $near;
+    protected ?string $near = null;
     /**
      * @var
      */
-    protected $node_meta;
+    protected ?string $node_meta = null;
     /**
      * @var
      */
-    protected $filter;
+    protected ?string $filter = null;
 
     /**
      * @return string|null
@@ -104,6 +104,11 @@ class Service extends BaseCommand
      * @param string $nodeMeta
      */
     public function setNodeMeat(string $nodeMeta): void
+    {
+        $this->setNodeMeta($nodeMeta);
+    }
+
+    public function setNodeMeta(string $nodeMeta): void
     {
         $this->node_meta = $nodeMeta;
     }

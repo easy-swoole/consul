@@ -27,30 +27,30 @@ use EasySwoole\Spl\SplBean;
  */
 class Update extends BaseCommand
 {
-    protected $url = 'coordinate/update%s';
+    protected string $url = 'coordinate/update%s';
 
     /**
      * @var string
      */
-    protected $dc;
+    protected ?string $dc = null;
 
     /**
      * @var string
      */
-    protected $segment;
+    protected ?string $segment = null;
     /**
      * @var array
      */
-    protected $node;
+    protected ?array $node = null;
     /**
      * @var array
      */
-    protected $coord;
+    protected ?array $coord = null;
 
     /**
      * @return string
      */
-    public function getDc()
+    public function getDc(): ?string
     {
         return $this->dc;
     }
@@ -58,7 +58,7 @@ class Update extends BaseCommand
     /**
      * @param string $dc
      */
-    public function setDc($dc)
+    public function setDc($dc): void
     {
         $this->dc = $dc;
     }
@@ -66,7 +66,7 @@ class Update extends BaseCommand
     /**
      * @return string
      */
-    public function getSegment()
+    public function getSegment(): ?string
     {
         return $this->segment;
     }
@@ -74,7 +74,7 @@ class Update extends BaseCommand
     /**
      * @param string $segment
      */
-    public function setSegment($segment)
+    public function setSegment($segment): void
     {
         $this->segment = $segment;
     }
@@ -82,7 +82,7 @@ class Update extends BaseCommand
     /**
      * @return array
      */
-    public function getNode()
+    public function getNode(): ?array
     {
         return $this->node;
     }
@@ -90,7 +90,7 @@ class Update extends BaseCommand
     /**
      * @param array $node
      */
-    public function setNode($node)
+    public function setNode($node): void
     {
         $this->node = $node;
     }
@@ -98,7 +98,7 @@ class Update extends BaseCommand
     /**
      * @return array
      */
-    public function getCoord()
+    public function getCoord(): ?array
     {
         return $this->coord;
     }
@@ -106,9 +106,9 @@ class Update extends BaseCommand
     /**
      * @param array $coord
      */
-    public function setCoord($coord)
+    public function setCoord($coord): void
     {
-        $this->coord = json_encode($coord);
+        $this->coord = $coord;
     }
 
     protected function setKeyMapping(): array

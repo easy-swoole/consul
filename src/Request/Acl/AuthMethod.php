@@ -11,29 +11,29 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class AuthMethod extends BaseCommand
 {
-    protected $url = 'acl/auth-method/%s';
+    protected string $url = 'acl/auth-method/%s';
 
     /**
-     * @var string
+     * @var array
      */
-    protected $name;
+    protected ?array $name = null;
     /**
      * @var string
      */
-    protected $type;
+    protected ?string $type = null;
     /**
      * @var string
      */
-    protected $description;
+    protected ?string $description = null;
     /**
      * @var string
      */
-    protected $config;
+    protected ?string $config = null;
 
     /**
-     * @return string
+     * @return array
      */
-    public function getName()
+    public function getName(): ?array
     {
         return $this->name;
     }
@@ -41,7 +41,7 @@ class AuthMethod extends BaseCommand
     /**
      * @param string $name
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -49,7 +49,7 @@ class AuthMethod extends BaseCommand
     /**
      * @return string
      */
-    public function getType()
+    public function getType(): ?string
     {
         return $this->type;
     }
@@ -57,7 +57,7 @@ class AuthMethod extends BaseCommand
     /**
      * @param string $type
      */
-    public function setType($type)
+    public function setType($type): void
     {
         $this->type = $type;
     }
@@ -65,7 +65,7 @@ class AuthMethod extends BaseCommand
     /**
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -73,7 +73,7 @@ class AuthMethod extends BaseCommand
     /**
      * @param string $description
      */
-    public function setDescription($description)
+    public function setDescription($description): void
     {
         $this->description = $description;
     }
@@ -81,17 +81,17 @@ class AuthMethod extends BaseCommand
     /**
      * @return string
      */
-    public function getConfig()
+    public function getConfig(): ?string
     {
         return $this->config;
     }
 
     /**
-     * @param string $config
+     * @param array $config
      */
-    public function setConfig($config)
+    public function setConfig($config): void
     {
-        $this->config = json_encode($config);
+        $this->config = $config;
     }
 
     protected function setKeyMapping(): array

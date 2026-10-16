@@ -11,16 +11,16 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Explain extends BaseCommand
 {
-    protected $url = 'query/%s/explain';
+    protected string $url = 'query/%s/explain';
 
     /**
      * @var string
      */
-    protected $uuid;
+    protected ?string $uuid = null;
     /**
      * @var string
      */
-    protected $dc;
+    protected ?string $dc = null;
 
     /**
      * @return null|string

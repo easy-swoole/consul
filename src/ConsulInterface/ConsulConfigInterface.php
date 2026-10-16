@@ -11,11 +11,11 @@ use EasySwoole\Consul\Request\Config;
 
 interface ConsulConfigInterface
 {
-    public function config(Config $config);
+    public function config(Config $config): mixed;
 
-    public function getConfig(Config $config);
+    public function getConfig(Config $config): mixed;
 
-    public function listConfig(Config $config);
+    public function listConfig(Config $config): mixed;
 
-    public function deleteConfig(Config $config);
+    public function deleteConfig(Config $config): mixed;
 }

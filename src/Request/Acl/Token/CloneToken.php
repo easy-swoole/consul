@@ -11,21 +11,21 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class CloneToken extends BaseCommand
 {
-    protected $url = 'acl/token/%s/clone';
+    protected string $url = 'acl/token/%s/clone';
 
     /**
      * @var string
      */
-    protected $accessorID;
+    protected ?string $accessorID = null;
     /**
      * @var string
      */
-    protected $description;
+    protected ?string $description = null;
 
     /**
      * @return string
      */
-    public function getAccessorID()
+    public function getAccessorID(): ?string
     {
         return $this->accessorID;
     }
@@ -33,7 +33,7 @@ class CloneToken extends BaseCommand
     /**
      * @param string $accessorID
      */
-    public function setAccessorID($accessorID)
+    public function setAccessorID($accessorID): void
     {
         $this->accessorID = $accessorID;
     }
@@ -41,7 +41,7 @@ class CloneToken extends BaseCommand
     /**
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -49,7 +49,7 @@ class CloneToken extends BaseCommand
     /**
      * @param string $description
      */
-    public function setDescription($description)
+    public function setDescription($description): void
     {
         $this->description = $description;
     }

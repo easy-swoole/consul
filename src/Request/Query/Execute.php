@@ -11,28 +11,28 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Execute extends BaseCommand
 {
-    protected $url = 'query/%s/execute';
+    protected string $url = 'query/%s/execute';
 
     /**
      * @var string
      */
-    protected $uuid;
+    protected ?string $uuid = null;
     /**
      * @var string
      */
-    protected $dc;
+    protected ?string $dc = null;
     /**
      * @var string
      */
-    protected $near;
+    protected ?string $near = null;
     /**
      * @var int
      */
-    protected $limit;
+    protected ?int $limit = null;
     /**
      * @var bool
      */
-    protected $connect;
+    protected ?bool $connect = null;
 
     /**
      * @return null|string

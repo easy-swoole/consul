@@ -5,17 +5,17 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Members extends BaseCommand
 {
-    protected $url = 'agent/members';
+    protected string $url = 'agent/members';
 
     /**
      *  Specifies to list WAN members instead of the LAN members (which is the default)
      * @var bool
      */
-    protected $wan = false;
+    protected bool $wan = false;
     /**
      * @var string
      */
-    protected $segment;
+    protected ?string $segment = null;
 
     /**
      * @return bool|null

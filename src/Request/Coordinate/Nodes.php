@@ -11,16 +11,16 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Nodes extends BaseCommand
 {
-    protected $url = 'coordinate/nodes';
+    protected string $url = 'coordinate/nodes';
 
     /**
      * @var string
      */
-    protected $dc;
+    protected ?string $dc = null;
     /**
      * @var string
      */
-    protected $segment;
+    protected ?string $segment = null;
     /**
      * @return null|strings
      */

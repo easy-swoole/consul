@@ -7,49 +7,49 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Register extends BaseCommand
 {
-    public $url='catalog/register';
+    public string $url='catalog/register';
 
     /**
      * @var string
      */
-    protected $id;
+    protected ?string $id = null;
     /**
      * @var string
      */
-    protected $node;
+    protected ?string $node = null;
     /**
      * @var string
      */
-    protected $address;
+    protected ?string $address = null;
     /**
      * @var string
      */
-    protected $datacenter;
+    protected ?string $datacenter = null;
     /**
      * @var array
      */
-    protected $taggedAddresses;
+    protected ?array $taggedAddresses = null;
     /**
      * @var array
      */
-    protected $nodeMeta;
+    protected ?array $nodeMeta = null;
     /**
      * @var array
      */
-    protected $service;
+    protected ?array $service = null;
     /**
      * @var array
      */
-    protected $check;
+    protected ?array $check = null;
     /**
      * @var boolean
      */
-    protected $skipNodeUpdate;
+    protected ?bool $skipNodeUpdate = null;
 
     /**
      * @return string
      */
-    public function getId()
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -57,7 +57,7 @@ class Register extends BaseCommand
     /**
      * @param string $id
      */
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }
@@ -65,7 +65,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getNode()
+    public function getNode(): ?string
     {
         return $this->node;
     }
@@ -73,7 +73,7 @@ class Register extends BaseCommand
     /**
      * @param string $node
      */
-    public function setNode($node)
+    public function setNode($node): void
     {
         $this->node = $node;
     }
@@ -81,7 +81,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getAddress()
+    public function getAddress(): ?string
     {
         return $this->address;
     }
@@ -89,7 +89,7 @@ class Register extends BaseCommand
     /**
      * @param string $address
      */
-    public function setAddress($address)
+    public function setAddress($address): void
     {
         $this->address = $address;
     }
@@ -97,7 +97,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getDatacenter()
+    public function getDatacenter(): ?string
     {
         return $this->datacenter;
     }
@@ -105,7 +105,7 @@ class Register extends BaseCommand
     /**
      * @param string $datacenter
      */
-    public function setDatacenter($datacenter)
+    public function setDatacenter($datacenter): void
     {
         $this->datacenter = $datacenter;
     }
@@ -113,7 +113,7 @@ class Register extends BaseCommand
     /**
      * @return array
      */
-    public function getTaggedAddresses()
+    public function getTaggedAddresses(): ?array
     {
         return $this->taggedAddresses;
     }
@@ -121,15 +121,15 @@ class Register extends BaseCommand
     /**
      * @param array $taggedAddresses
      */
-    public function setTaggedAddresses($taggedAddresses)
+    public function setTaggedAddresses($taggedAddresses): void
     {
-        $this->taggedAddresses = json_encode($taggedAddresses);
+        $this->taggedAddresses = $taggedAddresses;
     }
 
     /**
      * @return array
      */
-    public function getNodeMeta()
+    public function getNodeMeta(): ?array
     {
         return $this->nodeMeta;
     }
@@ -137,15 +137,15 @@ class Register extends BaseCommand
     /**
      * @param array $nodeMeta
      */
-    public function setNodeMeta($nodeMeta)
+    public function setNodeMeta($nodeMeta): void
     {
-        $this->nodeMeta = json_encode($nodeMeta);
+        $this->nodeMeta = $nodeMeta;
     }
 
     /**
      * @return array
      */
-    public function getService()
+    public function getService(): ?array
     {
         return $this->service;
     }
@@ -153,15 +153,15 @@ class Register extends BaseCommand
     /**
      * @param array $service
      */
-    public function setService($service)
+    public function setService($service): void
     {
-        $this->service = json_encode($service);
+        $this->service = $service;
     }
 
     /**
      * @return array
      */
-    public function getCheck()
+    public function getCheck(): ?array
     {
         return $this->check;
     }
@@ -169,15 +169,15 @@ class Register extends BaseCommand
     /**
      * @param array $check
      */
-    public function setCheck($check)
+    public function setCheck($check): void
     {
-        $this->check = json_encode($check);
+        $this->check = $check;
     }
 
     /**
      * @return bool
      */
-    public function isSkipNodeUpdate()
+    public function isSkipNodeUpdate(): ?bool
     {
         return $this->skipNodeUpdate;
     }
@@ -185,7 +185,7 @@ class Register extends BaseCommand
     /**
      * @param bool $skipNodeUpdate
      */
-    public function setSkipNodeUpdate($skipNodeUpdate)
+    public function setSkipNodeUpdate($skipNodeUpdate): void
     {
         $this->skipNodeUpdate = $skipNodeUpdate;
     }

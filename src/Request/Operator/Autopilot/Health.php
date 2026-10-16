@@ -11,12 +11,12 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Health extends BaseCommand
 {
-    protected $url = 'operator/autopilot/health';
+    protected string $url = 'operator/autopilot/health';
 
     /**
      * @var string
      */
-    protected $dc;
+    protected ?string $dc = null;
 
     /**
      * @return null|string

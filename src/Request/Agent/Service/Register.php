@@ -34,73 +34,73 @@ use EasySwoole\Consul\Request\BaseCommand;
  */
 class Register extends BaseCommand
 {
-    protected $url = 'agent/service/register';
+    protected string $url = 'agent/service/register';
 
     /**
      * @var string
      */
-    protected $name;
+    protected ?string $name = null;
     /**
      * @var string
      */
-    protected $id;
+    protected ?string $id = null;
     /**
      * @var string
      */
-    protected $tags;
+    protected ?string $tags = null;
     /**
      * @var string
      */
-    protected $address;
+    protected ?string $address = null;
     /**
      * @var array
      */
-    protected $taggedAddresses;
+    protected ?array $taggedAddresses = null;
     /**
      * @var array
      */
-    protected $meta;
+    protected ?array $meta = null;
     /**
      * @var int
      */
-    protected $port;
+    protected ?int $port = null;
     /**
      * @var string
      */
-    protected $kind;
+    protected ?string $kind = null;
     /**
      * @var string
      */
-    protected $proxyDestination;
+    protected ?string $proxyDestination = null;
     /**
      * @var string
      */
-    protected $proxy;
+    protected ?string $proxy = null;
     /**
      * @var string
      */
-    protected $connect;
+    protected ?string $connect = null;
     /**
      * @var string
      */
-    protected $check;
+    protected ?string $check = null;
     /**
      * @var array<$Check>
      */
-    protected $checks;
+    protected ?array $checks = null;
     /**
      * @var bool
      */
-    protected $enableTagOverride;
+    protected ?bool $enableTagOverride = null;
     /**
      * @var string
      */
-    protected $weights;
+    protected ?string $weights = null;
 
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -108,7 +108,7 @@ class Register extends BaseCommand
     /**
      * @param string $name
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -116,7 +116,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getId()
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -124,7 +124,7 @@ class Register extends BaseCommand
     /**
      * @param string $id
      */
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }
@@ -132,7 +132,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getTags()
+    public function getTags(): ?string
     {
         return $this->tags;
     }
@@ -140,7 +140,7 @@ class Register extends BaseCommand
     /**
      * @param string $tags
      */
-    public function setTags($tags)
+    public function setTags($tags): void
     {
         $this->tags = $tags;
     }
@@ -148,7 +148,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getAddress()
+    public function getAddress(): ?string
     {
         return $this->address;
     }
@@ -156,7 +156,7 @@ class Register extends BaseCommand
     /**
      * @param string $address
      */
-    public function setAddress($address)
+    public function setAddress($address): void
     {
         $this->address = $address;
     }
@@ -164,7 +164,7 @@ class Register extends BaseCommand
     /**
      * @return array
      */
-    public function getTaggedAddresses()
+    public function getTaggedAddresses(): ?array
     {
         return $this->taggedAddresses;
     }
@@ -172,7 +172,7 @@ class Register extends BaseCommand
     /**
      * @param array $taggedAddresses
      */
-    public function setTaggedAddresses($taggedAddresses)
+    public function setTaggedAddresses($taggedAddresses): void
     {
         $this->taggedAddresses = $taggedAddresses;
     }
@@ -180,7 +180,7 @@ class Register extends BaseCommand
     /**
      * @return array
      */
-    public function getMeta()
+    public function getMeta(): ?array
     {
         return $this->meta;
     }
@@ -188,15 +188,15 @@ class Register extends BaseCommand
     /**
      * @param array $meta
      */
-    public function setMeta($meta)
+    public function setMeta($meta): void
     {
-        $this->meta = json_encode($meta);
+        $this->meta = $meta;
     }
 
     /**
      * @return int
      */
-    public function getPort()
+    public function getPort(): ?int
     {
         return $this->port;
     }
@@ -204,7 +204,7 @@ class Register extends BaseCommand
     /**
      * @param int $port
      */
-    public function setPort($port)
+    public function setPort($port): void
     {
         $this->port = $port;
     }
@@ -212,7 +212,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getKind()
+    public function getKind(): ?string
     {
         return $this->kind;
     }
@@ -220,7 +220,7 @@ class Register extends BaseCommand
     /**
      * @param string $kind
      */
-    public function setKind($kind)
+    public function setKind($kind): void
     {
         $this->kind = $kind;
     }
@@ -228,7 +228,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getProxyDestination()
+    public function getProxyDestination(): ?string
     {
         return $this->proxyDestination;
     }
@@ -236,7 +236,7 @@ class Register extends BaseCommand
     /**
      * @param string $proxyDestination
      */
-    public function setProxyDestination($proxyDestination)
+    public function setProxyDestination($proxyDestination): void
     {
         $this->proxyDestination = $proxyDestination;
     }
@@ -244,7 +244,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getProxy()
+    public function getProxy(): ?string
     {
         return $this->proxy;
     }
@@ -252,7 +252,7 @@ class Register extends BaseCommand
     /**
      * @param string $proxy
      */
-    public function setProxy($proxy)
+    public function setProxy($proxy): void
     {
         $this->proxy = $proxy;
     }
@@ -260,7 +260,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getConnect()
+    public function getConnect(): ?string
     {
         return $this->connect;
     }
@@ -268,7 +268,7 @@ class Register extends BaseCommand
     /**
      * @param string $connect
      */
-    public function setConnect($connect)
+    public function setConnect($connect): void
     {
         $this->connect = $connect;
     }
@@ -276,7 +276,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getCheck()
+    public function getCheck(): ?string
     {
         return $this->check;
     }
@@ -284,15 +284,15 @@ class Register extends BaseCommand
     /**
      * @param string $check
      */
-    public function setCheck($check)
+    public function setCheck($check): void
     {
-        $this->check = json_encode($check);
+        $this->check = $check;
     }
 
     /**
      * @return array
      */
-    public function getChecks()
+    public function getChecks(): ?array
     {
         return $this->checks;
     }
@@ -300,7 +300,7 @@ class Register extends BaseCommand
     /**
      * @param array $checks
      */
-    public function setChecks($checks)
+    public function setChecks($checks): void
     {
         $this->checks = $checks;
     }
@@ -308,7 +308,7 @@ class Register extends BaseCommand
     /**
      * @return bool
      */
-    public function isEnableTagOverride()
+    public function isEnableTagOverride(): ?bool
     {
         return $this->enableTagOverride;
     }
@@ -316,7 +316,7 @@ class Register extends BaseCommand
     /**
      * @param bool $enableTagOverride
      */
-    public function setEnableTagOverride($enableTagOverride)
+    public function setEnableTagOverride($enableTagOverride): void
     {
         $this->enableTagOverride = $enableTagOverride;
     }
@@ -324,7 +324,7 @@ class Register extends BaseCommand
     /**
      * @return string
      */
-    public function getWeights()
+    public function getWeights(): ?string
     {
         return $this->weights;
     }
@@ -332,9 +332,9 @@ class Register extends BaseCommand
     /**
      * @param string $weights
      */
-    public function setWeights($weights)
+    public function setWeights($weights): void
     {
-        $this->weights = json_encode($weights);
+        $this->weights = $weights;
     }
 
     protected function setKeyMapping(): array

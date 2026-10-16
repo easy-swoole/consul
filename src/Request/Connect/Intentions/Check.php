@@ -12,16 +12,16 @@ use EasySwoole\Spl\SplBean;
 
 class Check extends BaseCommand
 {
-    protected $url = 'connect/intentions/check';
+    protected string $url = 'connect/intentions/check';
 
     /**
      * @var string
      */
-    protected $source;
+    protected ?string $source = null;
     /**
      * @var string
      */
-    protected $destination;
+    protected ?string $destination = null;
 
     /**
      * @return null|string

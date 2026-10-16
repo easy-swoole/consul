@@ -11,16 +11,16 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Renew extends BaseCommand
 {
-    protected $url = 'session/renew/%s';
+    protected string $url = 'session/renew/%s';
 
     /**
      * @var string
      */
-    protected $uuid;
+    protected ?string $uuid = null;
     /**
      * @var string
      */
-    protected $dc;
+    protected ?string $dc = null;
 
     /**
      * @return null|string

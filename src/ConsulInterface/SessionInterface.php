@@ -16,15 +16,15 @@ use EasySwoole\Consul\Request\Session\SessionList;
 
 interface SessionInterface
 {
-    public function create(Create $create);
+    public function create(Create $create): mixed;
 
-    public function destroy(Destroy $destroy);
+    public function destroy(Destroy $destroy): mixed;
 
-    public function info(Info $info);
+    public function info(Info $info): mixed;
 
-    public function node(Node $node);
+    public function node(Node $node): mixed;
 
-    public function sessionList(SessionList $sessionList);
+    public function sessionList(SessionList $sessionList): mixed;
 
-    public function renew(Renew $renew);
+    public function renew(Renew $renew): mixed;
 }

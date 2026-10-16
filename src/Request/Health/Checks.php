@@ -5,28 +5,28 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Checks extends BaseCommand
 {
-    protected $url = 'health/checks/%s';
+    protected string $url = 'health/checks/%s';
 
     /**
      * @var
      */
-    protected $service;
+    protected ?string $service = null;
     /**
      * @var
      */
-    protected $dc;
+    protected ?string $dc = null;
     /**
      * @var
      */
-    protected $near;
+    protected ?string $near = null;
     /**
      * @var
      */
-    protected $node_meta;
+    protected ?string $node_meta = null;
     /**
      * @var
      */
-    protected $filter;
+    protected ?string $filter = null;
 
     /**
      * @return string|null

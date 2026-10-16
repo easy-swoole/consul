@@ -15,25 +15,25 @@ use EasySwoole\Consul\Request\BaseCommand;
  */
 class Authorize extends BaseCommand
 {
-    protected $url = 'agent/connect/authorize';
+    protected string $url = 'agent/connect/authorize';
 
     /**
      * @var string
      */
-    protected $target;
+    protected ?string $target = null;
     /**
      * @var string
      */
-    protected $clientCertURI;
+    protected ?string $clientCertURI = null;
     /**
      * @var string
      */
-    protected $clientCertSerial;
+    protected ?string $clientCertSerial = null;
 
     /**
      * @return string
      */
-    public function getTarget()
+    public function getTarget(): ?string
     {
         return $this->target;
     }
@@ -41,7 +41,7 @@ class Authorize extends BaseCommand
     /**
      * @param string $target
      */
-    public function setTarget($target)
+    public function setTarget($target): void
     {
         $this->target = $target;
     }
@@ -49,7 +49,7 @@ class Authorize extends BaseCommand
     /**
      * @return string
      */
-    public function getClientCertURI()
+    public function getClientCertURI(): ?string
     {
         return $this->clientCertURI;
     }
@@ -57,7 +57,7 @@ class Authorize extends BaseCommand
     /**
      * @param string $clientCertURI
      */
-    public function setClientCertURI($clientCertURI)
+    public function setClientCertURI($clientCertURI): void
     {
         $this->clientCertURI = $clientCertURI;
     }
@@ -65,7 +65,7 @@ class Authorize extends BaseCommand
     /**
      * @return string
      */
-    public function getClientCertSerial()
+    public function getClientCertSerial(): ?string
     {
         return $this->clientCertSerial;
     }
@@ -73,7 +73,7 @@ class Authorize extends BaseCommand
     /**
      * @param string $clientCertSerial
      */
-    public function setClientCertSerial($clientCertSerial)
+    public function setClientCertSerial($clientCertSerial): void
     {
         $this->clientCertSerial = $clientCertSerial;
     }

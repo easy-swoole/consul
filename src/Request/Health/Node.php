@@ -6,20 +6,20 @@ use EasySwoole\Spl\SplBean;
 
 class Node extends BaseCommand
 {
-    protected $url = 'health/node/%s';
+    protected string $url = 'health/node/%s';
 
     /**
      * @var
      */
-    protected $node;
+    protected ?string $node = null;
     /**
      * @var
      */
-    protected $dc;
+    protected ?string $dc = null;
     /**
      * @var
      */
-    protected $filter;
+    protected ?string $filter = null;
 
     /**
      * @return string|null

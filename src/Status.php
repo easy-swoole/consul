@@ -11,7 +11,7 @@ use EasySwoole\Consul\ConsulInterface\StatusInterface;
 use EasySwoole\Consul\Request\Status\Leader;
 use EasySwoole\Consul\Request\Status\Peers;
 
-class Status extends BaseFunc implements StatusInterface
+class Status extends AbstractEndpoint implements StatusInterface
 {
     /**
      * Get Raft Leader
@@ -19,7 +19,7 @@ class Status extends BaseFunc implements StatusInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function leader(Leader $leader)
+    public function leader(Leader $leader): mixed
     {
         return $this->getJson($leader);
     }
@@ -30,7 +30,7 @@ class Status extends BaseFunc implements StatusInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function peers(Peers $peers)
+    public function peers(Peers $peers): mixed
     {
         return $this->getJson($peers);
     }

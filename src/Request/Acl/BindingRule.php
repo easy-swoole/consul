@@ -23,37 +23,37 @@ use EasySwoole\Consul\Request\BaseCommand;
  */
 class BindingRule extends BaseCommand
 {
-    protected $url = 'acl/binding-rule/%s';
+    protected string $url = 'acl/binding-rule/%s';
 
     /**
      * @var string
      */
-    protected $id;
+    protected ?string $id = null;
     /**
      * @var string
      */
-    protected $description;
+    protected ?string $description = null;
     /**
      * @var string
      */
-    protected $authMethod;
+    protected ?string $authMethod = null;
     /**
      * @var string
      */
-    protected $selector;
+    protected ?string $selector = null;
     /**
      * @var string
      */
-    protected $bindType;
+    protected ?string $bindType = null;
     /**
      * @var string
      */
-    protected $bindName;
+    protected ?string $bindName = null;
 
     /**
      * @return string
      */
-    public function getId()
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -61,7 +61,7 @@ class BindingRule extends BaseCommand
     /**
      * @param string $id
      */
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }
@@ -69,7 +69,7 @@ class BindingRule extends BaseCommand
     /**
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -77,7 +77,7 @@ class BindingRule extends BaseCommand
     /**
      * @param string $description
      */
-    public function setDescription($description)
+    public function setDescription($description): void
     {
         $this->description = $description;
     }
@@ -85,7 +85,7 @@ class BindingRule extends BaseCommand
     /**
      * @return string
      */
-    public function getAuthMethod()
+    public function getAuthMethod(): ?string
     {
         return $this->authMethod;
     }
@@ -93,7 +93,7 @@ class BindingRule extends BaseCommand
     /**
      * @param string $authMethod
      */
-    public function setAuthMethod($authMethod)
+    public function setAuthMethod($authMethod): void
     {
         $this->authMethod = $authMethod;
     }
@@ -101,7 +101,7 @@ class BindingRule extends BaseCommand
     /**
      * @return string
      */
-    public function getSelector()
+    public function getSelector(): ?string
     {
         return $this->selector;
     }
@@ -109,7 +109,7 @@ class BindingRule extends BaseCommand
     /**
      * @param string $selector
      */
-    public function setSelector($selector)
+    public function setSelector($selector): void
     {
         $this->selector = $selector;
     }
@@ -117,7 +117,7 @@ class BindingRule extends BaseCommand
     /**
      * @return string
      */
-    public function getBindType()
+    public function getBindType(): ?string
     {
         return $this->bindType;
     }
@@ -125,7 +125,7 @@ class BindingRule extends BaseCommand
     /**
      * @param string $bindType
      */
-    public function setBindType($bindType)
+    public function setBindType($bindType): void
     {
         $this->bindType = $bindType;
     }
@@ -133,7 +133,7 @@ class BindingRule extends BaseCommand
     /**
      * @return string
      */
-    public function getBindName()
+    public function getBindName(): ?string
     {
         return $this->bindName;
     }
@@ -141,7 +141,7 @@ class BindingRule extends BaseCommand
     /**
      * @param string $bindName
      */
-    public function setBindName($bindName)
+    public function setBindName($bindName): void
     {
         $this->bindName = $bindName;
     }

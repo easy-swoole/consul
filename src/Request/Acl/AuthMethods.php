@@ -11,5 +11,5 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class AuthMethods extends BaseCommand
 {
-    protected $url = 'acl/auth-methods';
+    protected string $url = 'acl/auth-methods';
 }

@@ -5,5 +5,5 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Reload extends BaseCommand
 {
-    protected $url = 'agent/reload';
+    protected string $url = 'agent/reload';
 }

@@ -11,24 +11,24 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Nodes extends BaseCommand
 {
-    public $url='catalog/nodes';
+    public string $url='catalog/nodes';
 
     /**
      * @var
      */
-    protected $dc;
+    protected ?string $dc = null;
     /**
      * @var
      */
-    protected $near;
+    protected ?string $near = null;
     /**
      * @var
      */
-    protected $node_meta;
+    protected ?string $node_meta = null;
     /**
      * @var
      */
-    protected $filter;
+    protected ?string $filter = null;
 
     /**
      * @return null|string

@@ -11,14 +11,14 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Logout extends BaseCommand
 {
-    protected $url = 'acl/logout';
+    protected string $url = 'acl/logout';
 
-    protected $token;
+    protected ?string $token = null;
 
     /**
      * @return mixed
      */
-    public function getToken()
+    public function getToken(): ?string
     {
         return $this->token;
     }
@@ -26,7 +26,7 @@ class Logout extends BaseCommand
     /**
      * @param mixed $token
      */
-    public function setToken($token)
+    public function setToken($token): void
     {
         $this->token = $token;
     }

@@ -69,33 +69,33 @@ namespace EasySwoole\Consul\Request;
  */
 class Txn extends BaseCommand
 {
-    protected $url = 'txn';
+    protected string $url = 'txn';
 
     /**
      * @var string
      */
-    protected $dc;
+    protected ?string $dc = null;
     /**
      * @var array
      */
-    protected $kv;
+    protected ?array $kv = null;
     /**
      * @var array
      */
-    protected $node;
+    protected ?array $node = null;
     /**
      * @var array
      */
-    protected $service;
+    protected ?array $service = null;
     /**
      * @var array
      */
-    protected $check;
+    protected ?array $check = null;
 
     /**
      * @return string
      */
-    public function getDc()
+    public function getDc(): ?string
     {
         return $this->dc;
     }
@@ -103,7 +103,7 @@ class Txn extends BaseCommand
     /**
      * @param string $dc
      */
-    public function setDc($dc)
+    public function setDc($dc): void
     {
         $this->dc = $dc;
     }
@@ -111,7 +111,7 @@ class Txn extends BaseCommand
     /**
      * @return array
      */
-    public function getKv()
+    public function getKv(): ?array
     {
         return $this->kv;
     }
@@ -119,7 +119,7 @@ class Txn extends BaseCommand
     /**
      * @param array $kv
      */
-    public function setKv($kv)
+    public function setKv($kv): void
     {
         $this->kv = $kv;
     }
@@ -127,7 +127,7 @@ class Txn extends BaseCommand
     /**
      * @return array
      */
-    public function getNode()
+    public function getNode(): ?array
     {
         return $this->node;
     }
@@ -135,7 +135,7 @@ class Txn extends BaseCommand
     /**
      * @param array $node
      */
-    public function setNode($node)
+    public function setNode($node): void
     {
         $this->node = $node;
     }
@@ -143,7 +143,7 @@ class Txn extends BaseCommand
     /**
      * @return array
      */
-    public function getService()
+    public function getService(): ?array
     {
         return $this->service;
     }
@@ -151,7 +151,7 @@ class Txn extends BaseCommand
     /**
      * @param array $service
      */
-    public function setService($service)
+    public function setService($service): void
     {
         $this->service = $service;
     }
@@ -159,7 +159,7 @@ class Txn extends BaseCommand
     /**
      * @return array
      */
-    public function getCheck()
+    public function getCheck(): ?array
     {
         return $this->check;
     }
@@ -167,7 +167,7 @@ class Txn extends BaseCommand
     /**
      * @param array $check
      */
-    public function setCheck($check)
+    public function setCheck($check): void
     {
         $this->check = $check;
     }

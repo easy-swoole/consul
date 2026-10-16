@@ -8,10 +8,10 @@
 namespace EasySwoole\Consul;
 
 use EasySwoole\Consul\ConsulInterface\ConsulConfigInterface;
-use EasySwoole\Consul\Exception\MissingRequiredParamsException;
+use EasySwoole\Consul\Exception\MissingRequiredParameterException;
 use EasySwoole\Consul\Request\Config;
 
-class ConsulConfig extends BaseFunc implements ConsulConfigInterface
+class ConsulConfig extends AbstractEndpoint implements ConsulConfigInterface
 {
     /**
      * Apply Configuration
@@ -19,26 +19,26 @@ class ConsulConfig extends BaseFunc implements ConsulConfigInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function config(Config $config)
+    public function config(Config $config): mixed
     {
         $config->setUrl(substr($config->getUrl(), 0, strlen($config->getUrl()) -3));
-        return $this->putJSON($config);
+        return $this->putJson($config);
     }
 
     /**
      * Get Configuration
      * @param Config $config
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function getConfig(Config $config)
+    public function getConfig(Config $config): mixed
     {
         if (empty($config->getKind())) {
-            throw new MissingRequiredParamsException('Missing the required param: Kind.');
+            throw new MissingRequiredParameterException('Missing the required param: Kind.');
         }
         if (empty($config->getName())) {
-            throw new MissingRequiredParamsException('Missing the required param: Name.');
+            throw new MissingRequiredParameterException('Missing the required param: Name.');
         }
         $config->setUrl(sprintf($config->getUrl(), $config->getKind() . '/' . $config->getName()));
         $config->setKind('');
@@ -50,13 +50,13 @@ class ConsulConfig extends BaseFunc implements ConsulConfigInterface
      * List Configurations
      * @param Config $config
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function listConfig(Config $config)
+    public function listConfig(Config $config): mixed
     {
         if (empty($config->getKind())) {
-            throw new MissingRequiredParamsException('Missing the required param: Kind.');
+            throw new MissingRequiredParameterException('Missing the required param: Kind.');
         }
         $config->setUrl(sprintf($config->getUrl(), $config->getKind()));
         $config->setKind('');
@@ -67,16 +67,16 @@ class ConsulConfig extends BaseFunc implements ConsulConfigInterface
      * Delete Configuration
      * @param Config $config
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function deleteConfig(Config $config)
+    public function deleteConfig(Config $config): mixed
     {
         if (empty($config->getKind())) {
-            throw new MissingRequiredParamsException('Missing the required param: Kind.');
+            throw new MissingRequiredParameterException('Missing the required param: Kind.');
         }
         if (empty($config->getName())) {
-            throw new MissingRequiredParamsException('Missing the required param: Name.');
+            throw new MissingRequiredParameterException('Missing the required param: Name.');
         }
         $config->setUrl(sprintf($config->getUrl(), $config->getKind() . '/' . $config->getName()));
         $config->setKind('');

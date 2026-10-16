@@ -11,29 +11,29 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Update extends BaseCommand
 {
-    protected $url = 'acl/update';
+    protected string $url = 'acl/update';
 
     /**
      * @var string
      */
-    protected $id;
+    protected ?string $id = null;
     /**
      * @var string
      */
-    protected $name;
+    protected ?string $name = null;
     /**
      * @var string
      */
-    protected $type;
+    protected ?string $type = null;
     /**
      * @var string
      */
-    protected $rules;
+    protected ?string $rules = null;
 
     /**
      * @return string
      */
-    public function getId()
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -41,7 +41,7 @@ class Update extends BaseCommand
     /**
      * @param string $id
      */
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }
@@ -49,7 +49,7 @@ class Update extends BaseCommand
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -57,7 +57,7 @@ class Update extends BaseCommand
     /**
      * @param string $name
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -65,7 +65,7 @@ class Update extends BaseCommand
     /**
      * @return string
      */
-    public function getType()
+    public function getType(): ?string
     {
         return $this->type;
     }
@@ -73,7 +73,7 @@ class Update extends BaseCommand
     /**
      * @param string $type
      */
-    public function setType($type)
+    public function setType($type): void
     {
         $this->type = $type;
     }
@@ -81,7 +81,7 @@ class Update extends BaseCommand
     /**
      * @return string
      */
-    public function getRules()
+    public function getRules(): ?string
     {
         return $this->rules;
     }
@@ -89,7 +89,7 @@ class Update extends BaseCommand
     /**
      * @param string $rules
      */
-    public function setRules($rules)
+    public function setRules($rules): void
     {
         $this->rules = $rules;
     }

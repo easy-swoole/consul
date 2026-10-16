@@ -11,49 +11,49 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Configuration extends BaseCommand
 {
-    protected $url = 'operator/autopilot/configuration';
+    protected string $url = 'operator/autopilot/configuration';
 
     /**
      * @var string
      */
-    protected $dc;
+    protected ?string $dc = null;
     /**
      * @var bool
      */
-    protected $stale;
+    protected ?bool $stale = null;
     /**
      * @var int
      */
-    protected $cas;
+    protected ?int $cas = null;
     /**
      * @var bool
      */
-    protected $cleanupDeadServers;
+    protected ?bool $cleanupDeadServers = null;
 
     /**
      * @var string
      */
-    protected $lastContactThreshold;
+    protected ?string $lastContactThreshold = null;
     /**
      * @var int
      */
-    protected $maxTrailingLogs;
+    protected ?int $maxTrailingLogs = null;
     /**
      * @var string
      */
-    protected $serverStabilizationTime;
+    protected ?string $serverStabilizationTime = null;
     /**
      * @var string
      */
-    protected $redundancyZoneTag;
+    protected ?string $redundancyZoneTag = null;
     /**
      * @var bool
      */
-    protected $disableUpgradeMigration;
+    protected ?bool $disableUpgradeMigration = null;
     /**
      * @var string
      */
-    protected $upgradeVersionTag;
+    protected ?string $upgradeVersionTag = null;
     /**
      * @return null|string
      */
@@ -105,7 +105,7 @@ class Configuration extends BaseCommand
     /**
      * @return bool
      */
-    public function isCleanupDeadServers()
+    public function isCleanupDeadServers(): ?bool
     {
         return $this->cleanupDeadServers;
     }
@@ -113,7 +113,7 @@ class Configuration extends BaseCommand
     /**
      * @param bool $cleanupDeadServers
      */
-    public function setCleanupDeadServers($cleanupDeadServers)
+    public function setCleanupDeadServers($cleanupDeadServers): void
     {
         $this->cleanupDeadServers = $cleanupDeadServers;
     }
@@ -121,7 +121,7 @@ class Configuration extends BaseCommand
     /**
      * @return string
      */
-    public function getLastContactThreshold()
+    public function getLastContactThreshold(): ?string
     {
         return $this->lastContactThreshold;
     }
@@ -129,7 +129,7 @@ class Configuration extends BaseCommand
     /**
      * @param string $lastContactThreshold
      */
-    public function setLastContactThreshold($lastContactThreshold)
+    public function setLastContactThreshold($lastContactThreshold): void
     {
         $this->lastContactThreshold = $lastContactThreshold;
     }
@@ -137,7 +137,7 @@ class Configuration extends BaseCommand
     /**
      * @return int
      */
-    public function getMaxTrailingLogs()
+    public function getMaxTrailingLogs(): ?int
     {
         return $this->maxTrailingLogs;
     }
@@ -145,7 +145,7 @@ class Configuration extends BaseCommand
     /**
      * @param int $maxTrailingLogs
      */
-    public function setMaxTrailingLogs($maxTrailingLogs)
+    public function setMaxTrailingLogs($maxTrailingLogs): void
     {
         $this->maxTrailingLogs = $maxTrailingLogs;
     }
@@ -153,7 +153,7 @@ class Configuration extends BaseCommand
     /**
      * @return string
      */
-    public function getServerStabilizationTime()
+    public function getServerStabilizationTime(): ?string
     {
         return $this->serverStabilizationTime;
     }
@@ -161,7 +161,7 @@ class Configuration extends BaseCommand
     /**
      * @param string $serverStabilizationTime
      */
-    public function setServerStabilizationTime($serverStabilizationTime)
+    public function setServerStabilizationTime($serverStabilizationTime): void
     {
         $this->serverStabilizationTime = $serverStabilizationTime;
     }
@@ -169,7 +169,7 @@ class Configuration extends BaseCommand
     /**
      * @return string
      */
-    public function getRedundancyZoneTag()
+    public function getRedundancyZoneTag(): ?string
     {
         return $this->redundancyZoneTag;
     }
@@ -177,7 +177,7 @@ class Configuration extends BaseCommand
     /**
      * @param string $redundancyZoneTag
      */
-    public function setRedundancyZoneTag($redundancyZoneTag)
+    public function setRedundancyZoneTag($redundancyZoneTag): void
     {
         $this->redundancyZoneTag = $redundancyZoneTag;
     }
@@ -185,7 +185,7 @@ class Configuration extends BaseCommand
     /**
      * @return bool
      */
-    public function isDisableUpgradeMigration()
+    public function isDisableUpgradeMigration(): ?bool
     {
         return $this->disableUpgradeMigration;
     }
@@ -193,7 +193,7 @@ class Configuration extends BaseCommand
     /**
      * @param bool $disableUpgradeMigration
      */
-    public function setDisableUpgradeMigration($disableUpgradeMigration)
+    public function setDisableUpgradeMigration($disableUpgradeMigration): void
     {
         $this->disableUpgradeMigration = $disableUpgradeMigration;
     }
@@ -201,7 +201,7 @@ class Configuration extends BaseCommand
     /**
      * @return string
      */
-    public function getUpgradeVersionTag()
+    public function getUpgradeVersionTag(): ?string
     {
         return $this->upgradeVersionTag;
     }
@@ -209,7 +209,7 @@ class Configuration extends BaseCommand
     /**
      * @param string $upgradeVersionTag
      */
-    public function setUpgradeVersionTag($upgradeVersionTag)
+    public function setUpgradeVersionTag($upgradeVersionTag): void
     {
         $this->upgradeVersionTag = $upgradeVersionTag;
     }

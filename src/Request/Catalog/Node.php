@@ -5,20 +5,20 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Node extends BaseCommand
 {
-    public $url='catalog/node/%s';
+    public string $url='catalog/node/%s';
 
     /**
      * @var
      */
-    protected $node;
+    protected ?string $node = null;
     /**
      * @var
      */
-    protected $dc;
+    protected ?string $dc = null;
     /**
      * @var
      */
-    protected $filter;
+    protected ?string $filter = null;
 
     /**
      * @return string|null

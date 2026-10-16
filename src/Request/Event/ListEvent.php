@@ -11,24 +11,24 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class ListEvent extends BaseCommand
 {
-    protected $url = 'event/list';
+    protected string $url = 'event/list';
 
     /**
      * @var string
      */
-    protected $name;
+    protected ?string $name = null;
     /**
      * @var string
      */
-    protected $node;
+    protected ?string $node = null;
     /**
      * @var string
      */
-    protected $service;
+    protected ?string $service = null;
     /**
      * @var string
      */
-    protected $tag;
+    protected ?string $tag = null;
     /**
      * @return null|string
      */

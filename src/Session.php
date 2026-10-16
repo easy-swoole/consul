@@ -8,7 +8,7 @@
 namespace EasySwoole\Consul;
 
 use EasySwoole\Consul\ConsulInterface\SessionInterface;
-use EasySwoole\Consul\Exception\MissingRequiredParamsException;
+use EasySwoole\Consul\Exception\MissingRequiredParameterException;
 use EasySwoole\Consul\Request\Session\Create;
 use EasySwoole\Consul\Request\Session\Destroy;
 use EasySwoole\Consul\Request\Session\Info;
@@ -16,7 +16,7 @@ use EasySwoole\Consul\Request\Session\Node;
 use EasySwoole\Consul\Request\Session\Renew;
 use EasySwoole\Consul\Request\Session\SessionList;
 
-class Session extends BaseFunc implements SessionInterface
+class Session extends AbstractEndpoint implements SessionInterface
 {
     /**
      * Create Session
@@ -24,39 +24,39 @@ class Session extends BaseFunc implements SessionInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function create(Create $create)
+    public function create(Create $create): mixed
     {
-        return $this->putJSON($create);
+        return $this->putJson($create);
     }
 
     /**
      * Delete Session
      * @param Destroy $destroy
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function destroy(Destroy $destroy)
+    public function destroy(Destroy $destroy): mixed
     {
         if (empty($destroy->getUuid())) {
-            throw new MissingRequiredParamsException('Missing the required param: uuid.');
+            throw new MissingRequiredParameterException('Missing the required param: uuid.');
         }
         $destroy->setUrl(sprintf($destroy->getUrl(), $destroy->getUuid()));
         $destroy->setUuid('');
-        return $this->putJSON($destroy);
+        return $this->putJson($destroy);
     }
 
     /**
      * Read Session
      * @param Info $info
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function info(Info $info)
+    public function info(Info $info): mixed
     {
         if (empty($info->getUuid())) {
-            throw new MissingRequiredParamsException('Missing the required param: uuid.');
+            throw new MissingRequiredParameterException('Missing the required param: uuid.');
         }
         $info->setUrl(sprintf($info->getUrl(), $info->getUuid()));
         $info->setUuid('');
@@ -67,13 +67,13 @@ class Session extends BaseFunc implements SessionInterface
      * List Sessions for Node
      * @param Node $node
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function node(Node $node)
+    public function node(Node $node): mixed
     {
         if (empty($node->getNode())) {
-            throw new MissingRequiredParamsException('Missing the required param: node.');
+            throw new MissingRequiredParameterException('Missing the required param: node.');
         }
         $node->setUrl(sprintf($node->getUrl(), $node->getNode()));
         $node->setNode('');
@@ -86,7 +86,7 @@ class Session extends BaseFunc implements SessionInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function sessionList(SessionList $sessionList)
+    public function sessionList(SessionList $sessionList): mixed
     {
         return $this->getJson($sessionList);
     }
@@ -95,16 +95,16 @@ class Session extends BaseFunc implements SessionInterface
      * Renew Session
      * @param Renew $renew
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function renew(Renew $renew)
+    public function renew(Renew $renew): mixed
     {
         if (empty($renew->getUuid())) {
-            throw new MissingRequiredParamsException('Missing the required param: uuid.');
+            throw new MissingRequiredParameterException('Missing the required param: uuid.');
         }
         $renew->setUrl(sprintf($renew->getUrl(), $renew->getUuid()));
         $renew->setUuid('');
-        return $this->putJSON($renew);
+        return $this->putJson($renew);
     }
 }

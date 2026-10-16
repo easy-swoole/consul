@@ -5,13 +5,13 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Metrics extends BaseCommand
 {
-    protected $url = 'agent/metrics';
+    protected string $url = 'agent/metrics';
 
     /**
      * only can set prometheus
      * @var string
      */
-    protected $format;
+    protected ?string $format = null;
 
     /**
      * @return string

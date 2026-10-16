@@ -11,28 +11,28 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Fire extends BaseCommand
 {
-    protected $url = 'event/fire/%s';
+    protected string $url = 'event/fire/%s';
 
     /**
      * @var string
      */
-    protected $name;
+    protected ?string $name = null;
     /**
      * @var string
      */
-    protected $dc;
+    protected ?string $dc = null;
     /**
      * @var string
      */
-    protected $node;
+    protected ?string $node = null;
     /**
      * @var string
      */
-    protected $service;
+    protected ?string $service = null;
     /**
      * @var string
      */
-    protected $tag;
+    protected ?string $tag = null;
     /**
      * @return null|string
      */

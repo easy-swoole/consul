@@ -11,21 +11,21 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Update extends BaseCommand
 {
-    protected $url = 'agent/check/update/%s';
+    protected string $url = 'agent/check/update/%s';
 
     /**
      * @var string
      */
-    protected $check_id;
+    protected ?string $check_id = null;
     /**
      * Valid values are "passing", "warning", and "critical"
      * @var string
      */
-    protected $status;
+    protected ?string $status = null;
     /**
      * @var string
      */
-    protected $output;
+    protected ?string $output = null;
 
     /**
      * @return null|string
@@ -46,7 +46,7 @@ class Update extends BaseCommand
     /**
      * @return string
      */
-    public function getStatus()
+    public function getStatus(): ?string
     {
         return $this->status;
     }
@@ -54,7 +54,7 @@ class Update extends BaseCommand
     /**
      * @param string $status
      */
-    public function setStatus($status)
+    public function setStatus($status): void
     {
         $this->status = $status;
     }
@@ -62,7 +62,7 @@ class Update extends BaseCommand
     /**
      * @return string
      */
-    public function getOutput()
+    public function getOutput(): ?string
     {
         return $this->output;
     }
@@ -70,7 +70,7 @@ class Update extends BaseCommand
     /**
      * @param string $output
      */
-    public function setOutput($output)
+    public function setOutput($output): void
     {
         $this->output = $output;
     }

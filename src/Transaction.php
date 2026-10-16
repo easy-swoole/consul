@@ -10,7 +10,7 @@ namespace EasySwoole\Consul;
 use EasySwoole\Consul\ConsulInterface\TransactionInterface;
 use EasySwoole\Consul\Request\Txn;
 
-class Transaction extends BaseFunc implements TransactionInterface
+class Transaction extends AbstractEndpoint implements TransactionInterface
 {
     /**
      * Create Transaction
@@ -18,8 +18,8 @@ class Transaction extends BaseFunc implements TransactionInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function create(Txn $txn)
+    public function create(Txn $txn): mixed
     {
-        return $this->putJSON($txn);
+        return $this->putJson($txn);
     }
 }

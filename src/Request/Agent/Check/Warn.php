@@ -11,16 +11,16 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Warn extends BaseCommand
 {
-    protected $url = 'agent/check/warn/%s';
+    protected string $url = 'agent/check/warn/%s';
 
     /**
      * @var string
      */
-    protected $check_id;
+    protected ?string $check_id = null;
     /**
      * @var string
      */
-    protected $note;
+    protected ?string $note = null;
 
     /**
      * @return null|string

@@ -11,12 +11,12 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Peers extends BaseCommand
 {
-    protected $url = 'status/peers';
+    protected string $url = 'status/peers';
 
     /**
      * @var string
      */
-    protected $dc;
+    protected ?string $dc = null;
 
     /**
      * @return null|string

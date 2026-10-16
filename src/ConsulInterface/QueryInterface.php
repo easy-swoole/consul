@@ -13,15 +13,15 @@ use EasySwoole\Consul\Request\Query\Explain;
 
 interface QueryInterface
 {
-    public function query(Query $query);
+    public function query(Query $query): mixed;
 
-    public function readQuery(Query $query);
+    public function readQuery(Query $query): mixed;
 
-    public function updateQuery(Query $query);
+    public function updateQuery(Query $query): mixed;
 
-    public function deleteQuery(Query $query);
+    public function deleteQuery(Query $query): mixed;
 
-    public function execute(Execute $execute);
+    public function execute(Execute $execute): mixed;
 
-    public function explain(Explain $explain);
+    public function explain(Explain $explain): mixed;
 }

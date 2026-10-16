@@ -11,12 +11,12 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class SessionList extends BaseCommand
 {
-    protected $url = 'session/list';
+    protected string $url = 'session/list';
 
     /**
      * @var string
      */
-    protected $dc;
+    protected ?string $dc = null;
 
     /**
      * @return null|string

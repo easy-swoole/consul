@@ -12,12 +12,12 @@ use EasySwoole\Spl\SplBean;
 
 class Destroy extends BaseCommand
 {
-    protected $url = 'acl/destroy/%s';
+    protected string $url = 'acl/destroy/%s';
 
     /**
      * @var string
      */
-    protected $uuid;
+    protected ?string $uuid = null;
 
     /**
      * @return null|string

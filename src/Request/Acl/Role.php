@@ -41,33 +41,33 @@ use EasySwoole\Spl\SplBean;
  */
 class Role extends BaseCommand
 {
-    protected $url = 'acl/role/%s';
+    protected string $url = 'acl/role/%s';
 
     /**
      * @var string
      */
-    protected $id;
+    protected ?string $id = null;
     /**
      * @var string
      */
-    protected $name;
+    protected ?string $name = null;
     /**
      * @var string
      */
-    protected $description;
+    protected ?string $description = null;
     /**
      * @var array
      */
-    protected $policies;
+    protected ?array $policies = null;
     /**
      * @var array
      */
-    protected $serviceIdentities;
+    protected ?array $serviceIdentities = null;
 
     /**
      * @return string
      */
-    public function getId()
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -75,7 +75,7 @@ class Role extends BaseCommand
     /**
      * @param string $id
      */
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }
@@ -83,7 +83,7 @@ class Role extends BaseCommand
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -91,7 +91,7 @@ class Role extends BaseCommand
     /**
      * @param string $name
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -99,7 +99,7 @@ class Role extends BaseCommand
     /**
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -107,7 +107,7 @@ class Role extends BaseCommand
     /**
      * @param string $description
      */
-    public function setDescription($description)
+    public function setDescription($description): void
     {
         $this->description = $description;
     }
@@ -115,7 +115,7 @@ class Role extends BaseCommand
     /**
      * @return array
      */
-    public function getPolicies()
+    public function getPolicies(): ?array
     {
         return $this->policies;
     }
@@ -123,7 +123,7 @@ class Role extends BaseCommand
     /**
      * @param array $policies
      */
-    public function setPolicies($policies)
+    public function setPolicies($policies): void
     {
         $this->policies = $policies;
     }
@@ -131,7 +131,7 @@ class Role extends BaseCommand
     /**
      * @return array
      */
-    public function getServiceIdentities()
+    public function getServiceIdentities(): ?array
     {
         return $this->serviceIdentities;
     }
@@ -139,7 +139,7 @@ class Role extends BaseCommand
     /**
      * @param array $serviceIdentities
      */
-    public function setServiceIdentities($serviceIdentities)
+    public function setServiceIdentities($serviceIdentities): void
     {
         $this->serviceIdentities = $serviceIdentities;
     }

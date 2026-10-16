@@ -11,12 +11,12 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Leader extends BaseCommand
 {
-    protected $url = 'status/leader';
+    protected string $url = 'status/leader';
 
     /**
      * @var string
      */
-    protected $dc;
+    protected ?string $dc = null;
 
     /**
      * @return null|string

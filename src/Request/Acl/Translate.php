@@ -11,14 +11,14 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Translate extends BaseCommand
 {
-    protected $url = 'acl/rules/translate/%s';
+    protected string $url = 'acl/rules/translate/%s';
 
-    protected $accessor_id;
+    protected ?string $accessor_id = null;
 
     /**
      * @return mixed
      */
-    public function getAccessorId()
+    public function getAccessorId(): ?string
     {
         return $this->accessor_id;
     }
@@ -26,7 +26,7 @@ class Translate extends BaseCommand
     /**
      * @param mixed $accessor_id
      */
-    public function setAccessorId($accessor_id)
+    public function setAccessorId($accessor_id): void
     {
         $this->accessor_id = $accessor_id;
     }

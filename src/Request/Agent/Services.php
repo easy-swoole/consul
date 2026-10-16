@@ -11,12 +11,12 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Services extends BaseCommand
 {
-    protected $url = 'agent/services';
+    protected string $url = 'agent/services';
 
     /**
      * @var string
      */
-    protected $filter;
+    protected ?string $filter = null;
 
     /**
      * @return null|string

@@ -11,16 +11,16 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Destroy extends BaseCommand
 {
-    protected $url = 'session/destroy/%s';
+    protected string $url = 'session/destroy/%s';
 
     /**
      * @var string
      */
-    protected $uuid;
+    protected ?string $uuid = null;
     /**
      * @var string
      */
-    protected $dc;
+    protected ?string $dc = null;
 
     /**
      * @return null|string

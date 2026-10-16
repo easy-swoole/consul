@@ -11,12 +11,12 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class CloneACLToken extends BaseCommand
 {
-    protected $url = 'acl/clone/%s';
+    protected string $url = 'acl/clone/%s';
 
     /**
      * @var string
      */
-    protected $uuid;
+    protected ?string $uuid = null;
 
     /**
      * @return null|string

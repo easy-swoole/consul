@@ -11,5 +11,5 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class DataCenters extends BaseCommand
 {
-    protected $url = 'coordinate/datacenters';
+    protected string $url = 'coordinate/datacenters';
 }

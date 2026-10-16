@@ -14,11 +14,11 @@ use EasySwoole\Consul\Request\Coordinate\Update;
 
 interface CoordinatesInterface
 {
-    public function datacenters(Datacenters $datacenters);
+    public function datacenters(Datacenters $datacenters): mixed;
 
-    public function nodes(Nodes $nodes);
+    public function nodes(Nodes $nodes): mixed;
 
-    public function node(Node $node);
+    public function node(Node $node): mixed;
 
-    public function update(Update $update);
+    public function update(Update $update): mixed;
 }

@@ -5,12 +5,12 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class DeRegister extends BaseCommand
 {
-    protected $url = 'agent/service/deregister/%s';
+    protected string $url = 'agent/service/deregister/%s';
 
     /**
      * @var string
      */
-    protected $service_id;
+    protected ?string $service_id = null;
 
     /**
      * @return string|null

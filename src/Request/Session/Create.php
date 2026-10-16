@@ -26,41 +26,41 @@ use EasySwoole\Spl\SplBean;
  */
 class Create extends BaseCommand
 {
-    protected $url = 'session/create';
+    protected string $url = 'session/create';
 
     /**
      * @var string
      */
-    protected $dc;
+    protected ?string $dc = null;
     /**
      * @var string
      */
-    protected $lockDelay;
+    protected ?string $lockDelay = null;
     /**
      * @var string
      */
-    protected $node;
+    protected ?string $node = null;
     /**
      * @var string
      */
-    protected $name;
+    protected ?string $name = null;
     /**
      * @var array
      */
-    protected $checks;
+    protected ?array $checks = null;
     /**
      * @var string
      */
-    protected $behavior;
+    protected ?string $behavior = null;
     /**
      * @var string
      */
-    protected $TTL;
+    protected ?string $TTL = null;
 
     /**
      * @return string
      */
-    public function getDc()
+    public function getDc(): ?string
     {
         return $this->dc;
     }
@@ -68,7 +68,7 @@ class Create extends BaseCommand
     /**
      * @param string $dc
      */
-    public function setDc($dc)
+    public function setDc($dc): void
     {
         $this->dc = $dc;
     }
@@ -76,7 +76,7 @@ class Create extends BaseCommand
     /**
      * @return string
      */
-    public function getLockDelay()
+    public function getLockDelay(): ?string
     {
         return $this->lockDelay;
     }
@@ -84,7 +84,7 @@ class Create extends BaseCommand
     /**
      * @param string $lockDelay
      */
-    public function setLockDelay($lockDelay)
+    public function setLockDelay($lockDelay): void
     {
         $this->lockDelay = $lockDelay;
     }
@@ -92,7 +92,7 @@ class Create extends BaseCommand
     /**
      * @return string
      */
-    public function getNode()
+    public function getNode(): ?string
     {
         return $this->node;
     }
@@ -100,7 +100,7 @@ class Create extends BaseCommand
     /**
      * @param string $node
      */
-    public function setNode($node)
+    public function setNode($node): void
     {
         $this->node = $node;
     }
@@ -108,7 +108,7 @@ class Create extends BaseCommand
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -116,7 +116,7 @@ class Create extends BaseCommand
     /**
      * @param string $name
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -124,7 +124,7 @@ class Create extends BaseCommand
     /**
      * @return array
      */
-    public function getChecks()
+    public function getChecks(): ?array
     {
         return $this->checks;
     }
@@ -132,7 +132,7 @@ class Create extends BaseCommand
     /**
      * @param array $checks
      */
-    public function setChecks($checks)
+    public function setChecks($checks): void
     {
         $this->checks = $checks;
     }
@@ -140,7 +140,7 @@ class Create extends BaseCommand
     /**
      * @return string
      */
-    public function getBehavior()
+    public function getBehavior(): ?string
     {
         return $this->behavior;
     }
@@ -148,7 +148,7 @@ class Create extends BaseCommand
     /**
      * @param string $behavior
      */
-    public function setBehavior($behavior)
+    public function setBehavior($behavior): void
     {
         $this->behavior = $behavior;
     }
@@ -156,7 +156,7 @@ class Create extends BaseCommand
     /**
      * @return string
      */
-    public function getTTL()
+    public function getTTL(): ?string
     {
         return $this->TTL;
     }
@@ -164,7 +164,7 @@ class Create extends BaseCommand
     /**
      * @param string $TTL
      */
-    public function setTTL($TTL)
+    public function setTTL($TTL): void
     {
         $this->TTL = $TTL;
     }

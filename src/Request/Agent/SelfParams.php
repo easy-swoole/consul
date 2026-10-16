@@ -5,5 +5,5 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class SelfParams extends BaseCommand
 {
-    protected $url = 'agent/self';
+    protected string $url = 'agent/self';
 }

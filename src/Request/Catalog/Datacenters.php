@@ -11,5 +11,5 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class DataCenters extends BaseCommand
 {
-    public $url='catalog/datacenters';
+    public string $url='catalog/datacenters';
 }

@@ -5,5 +5,5 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Leave extends BaseCommand
 {
-    protected $url = 'agent/leave';
+    protected string $url = 'agent/leave';
 }

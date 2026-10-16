@@ -11,11 +11,9 @@ use EasySwoole\Consul\Request\Kv;
 
 interface KVStoreInterface
 {
-    public function kv(Kv $kv);
+    public function read(Kv $request): mixed;
 
-    public function create(Kv $kv);
+    public function put(Kv $request, string $value): mixed;
 
-    public function update(Kv $kv);
-
-    public function delete(Kv $kv);
+    public function delete(Kv $request): mixed;
 }

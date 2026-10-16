@@ -12,7 +12,7 @@ use EasySwoole\Consul\Request\Event\ListEvent;
 
 interface EventInterface
 {
-    public function fire(Fire $fire);
+    public function fire(Fire $fire): mixed;
 
-    public function listEvent(ListEvent $listEvent);
+    public function listEvent(ListEvent $listEvent): mixed;
 }

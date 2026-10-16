@@ -5,29 +5,29 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class State extends BaseCommand
 {
-    protected $url = 'health/state/%s';
+    protected string $url = 'health/state/%s';
 
     /**
      * allowance params: any,passing,warning,critical
      * @var
      */
-    protected $state;
+    protected ?string $state = null;
     /**
      * @var
      */
-    protected $dc;
+    protected ?string $dc = null;
     /**
      * @var
      */
-    protected $near;
+    protected ?string $near = null;
     /**
      * @var
      */
-    protected $node_meta;
+    protected ?string $node_meta = null;
     /**
      * @var
      */
-    protected $filter;
+    protected ?string $filter = null;
 
     /**
      * @return string|null

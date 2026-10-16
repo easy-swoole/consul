@@ -3,18 +3,26 @@
     "description": "",
     "type": "library",
     "license": "Apache-2.0",
+    "require": {
+        "php": ">=8.1",
+        "easyswoole/spl": "^2.1",
+        "easyswoole/http-client": "^1.6"
+    },
     "autoload": {
         "psr-4": {
-            "EasySwoole\\Consul\\": "src/",
-            "EasySwoole\\Consul\\Test\\":"tests/"
+            "EasySwoole\\Consul\\": "src/"
         }
     },
-    "require": {
-        "easyswoole/spl": "^1.1",
-        "easyswoole/http-client": "^1.2.5"
+    "autoload-dev": {
+        "psr-4": {
+            "EasySwoole\\Consul\\Tests\\": "tests/"
+        }
     },
     "require-dev": {
-        "easyswoole/phpunit": "^1.0",
-        "easyswoole/swoole-ide-helper": "^1.1"
+        "easyswoole/swoole-ide-helper": "^1.4",
+        "phpunit/phpunit": "^10.5 || ^11.5 || ^12.5 || ^13.0"
+    },
+    "scripts": {
+        "test": "phpunit"
     }
 }

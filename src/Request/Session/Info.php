@@ -11,16 +11,16 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Info extends BaseCommand
 {
-    protected $url = 'session/info/%s';
+    protected string $url = 'session/info/%s';
 
     /**
      * @var string
      */
-    protected $uuid;
+    protected ?string $uuid = null;
     /**
      * @var string
      */
-    protected $dc;
+    protected ?string $dc = null;
 
     /**
      * @return null|string

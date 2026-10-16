@@ -11,12 +11,12 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Info extends BaseCommand
 {
-    protected $url = 'acl/info/%s';
+    protected string $url = 'acl/info/%s';
 
     /**
      * @var string
      */
-    protected $uuid;
+    protected ?string $uuid = null;
 
     /**
      * @return null|string

@@ -5,20 +5,20 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Maintenance extends BaseCommand
 {
-    protected $url = 'agent/service/maintenance/%s';
+    protected string $url = 'agent/service/maintenance/%s';
 
     /**
      * @var string
      */
-    protected $service_id;
+    protected ?string $service_id = null;
     /**
      * @var bool
      */
-    protected $enable;
+    protected ?bool $enable = null;
     /**
      * @var string
      */
-    protected $reason;
+    protected ?string $reason = null;
 
     /**
      * @return string|null

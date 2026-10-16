@@ -10,7 +10,7 @@ namespace EasySwoole\Consul;
 use EasySwoole\Consul\ConsulInterface\SnapshotInterface;
 use EasySwoole\Consul\Request\Snapshot as snap;
 
-class Snapshot extends BaseFunc implements SnapshotInterface
+class Snapshot extends AbstractEndpoint implements SnapshotInterface
 {
     /**
      * Generate Snapshot
@@ -18,7 +18,7 @@ class Snapshot extends BaseFunc implements SnapshotInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function generate(snap $snapshot)
+    public function generate(snap $snapshot): mixed
     {
         return $this->getJson($snapshot);
     }
@@ -29,8 +29,9 @@ class Snapshot extends BaseFunc implements SnapshotInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function restore(snap $snapshot)
+    public function restore(snap $request, string $snapshot): mixed
     {
-        return $this->putJSON($snapshot);
+        // 快照可能是二进制内容，必须原样传输，不能经过 JSON 编码。
+        return $this->putRaw($request, $snapshot);
     }
 }

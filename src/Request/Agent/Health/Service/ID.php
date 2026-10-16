@@ -5,16 +5,16 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class ID extends BaseCommand
 {
-    protected $url = 'agent/health/service/id/%s';
+    protected string $url = 'agent/health/service/id/%s';
 
     /**
      * @var string
      */
-    protected $service_id;
+    protected ?string $service_id = null;
     /**
      * @var string
      */
-    protected $format;
+    protected ?string $format = null;
     /**
      * @return string|null
      */

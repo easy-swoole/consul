@@ -26,20 +26,20 @@ use EasySwoole\Consul\Request\BaseCommand;
  */
 class Configuration extends BaseCommand
 {
-    protected $url = 'connect/ca/configuration';
+    protected string $url = 'connect/ca/configuration';
     /**
      * @var string
      */
-    protected $provider;
+    protected ?string $provider = null;
     /**
      * @var array
      */
-    protected $config;
+    protected ?array $config = null;
 
     /**
      * @return string
      */
-    public function getProvider()
+    public function getProvider(): ?string
     {
         return $this->provider;
     }
@@ -47,7 +47,7 @@ class Configuration extends BaseCommand
     /**
      * @param string $provider
      */
-    public function setProvider($provider)
+    public function setProvider($provider): void
     {
         $this->provider = $provider;
     }
@@ -55,7 +55,7 @@ class Configuration extends BaseCommand
     /**
      * @return array
      */
-    public function getConfig()
+    public function getConfig(): ?array
     {
         return $this->config;
     }
@@ -63,7 +63,7 @@ class Configuration extends BaseCommand
     /**
      * @param array $config
      */
-    public function setConfig($config)
+    public function setConfig($config): void
     {
         $this->config = $config;
     }

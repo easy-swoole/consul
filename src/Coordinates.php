@@ -8,13 +8,13 @@
 namespace EasySwoole\Consul;
 
 use EasySwoole\Consul\ConsulInterface\CoordinatesInterface;
-use EasySwoole\Consul\Exception\MissingRequiredParamsException;
+use EasySwoole\Consul\Exception\MissingRequiredParameterException;
 use EasySwoole\Consul\Request\Coordinate\Datacenters;
 use EasySwoole\Consul\Request\Coordinate\Nodes;
 use EasySwoole\Consul\Request\Coordinate\Node;
 use EasySwoole\Consul\Request\Coordinate\Update;
 
-class Coordinates extends BaseFunc implements CoordinatesInterface
+class Coordinates extends AbstractEndpoint implements CoordinatesInterface
 {
     /**
      * Read WAN Coordinates
@@ -22,7 +22,7 @@ class Coordinates extends BaseFunc implements CoordinatesInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function dataCenters(DataCenters $datacenters)
+    public function dataCenters(DataCenters $datacenters): mixed
     {
         return $this->getJson($datacenters);
     }
@@ -33,7 +33,7 @@ class Coordinates extends BaseFunc implements CoordinatesInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function nodes(Nodes $nodes)
+    public function nodes(Nodes $nodes): mixed
     {
         return $this->getJson($nodes);
     }
@@ -42,13 +42,13 @@ class Coordinates extends BaseFunc implements CoordinatesInterface
      * Read LAN Coordinates for a node
      * @param Node $node
      * @return mixed
-     * @throws MissingRequiredParamsException
+     * @throws MissingRequiredParameterException
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function node(Node $node)
+    public function node(Node $node): mixed
     {
         if (empty($node->getNode())) {
-            throw new MissingRequiredParamsException('Missing the required param: uuid.');
+            throw new MissingRequiredParameterException('Missing the required param: uuid.');
         }
         $node->setUrl(sprintf($node->getUrl(), $node->getNode()));
         $node->setNode('');
@@ -61,15 +61,15 @@ class Coordinates extends BaseFunc implements CoordinatesInterface
      * @return mixed
      * @throws \EasySwoole\HttpClient\Exception\InvalidUrl
      */
-    public function update(Update $update)
+    public function update(Update $update): mixed
     {
         if (empty($update->getDc())) {
             $update->setUrl(substr($update->getUrl(), 0, strlen($update->getUrl()) -3));
-            return $this->putJSON($update);
+            return $this->putJson($update);
         } else {
             $update->setUrl(sprintf($update->getUrl(), '?dc=' . $update->getDc()));
             $update->setDc('');
-            return $this->putJSON($update);
+            return $this->putJson($update);
         }
     }
 }

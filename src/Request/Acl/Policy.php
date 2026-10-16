@@ -22,33 +22,33 @@ use EasySwoole\Consul\Request\BaseCommand;
  */
 class  Policy extends BaseCommand
 {
-    protected $url = 'acl/policy/%s';
+    protected string $url = 'acl/policy/%s';
 
     /**
      * @var string
      */
-    protected $id;
+    protected ?string $id = null;
     /**
      * @var string
      */
-    protected $name ;
+    protected ?string $name = null;
     /**
      * @var string
      */
-    protected $description;
+    protected ?string $description = null;
     /**
      * @var string
      */
-    protected $rules;
+    protected ?string $rules = null;
     /**
      * @var string
      */
-    protected $datacenters;
+    protected ?string $datacenters = null;
 
     /**
      * @return string
      */
-    public function getId()
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -56,7 +56,7 @@ class  Policy extends BaseCommand
     /**
      * @param string $id
      */
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }
@@ -64,7 +64,7 @@ class  Policy extends BaseCommand
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -72,7 +72,7 @@ class  Policy extends BaseCommand
     /**
      * @param string $name
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -80,7 +80,7 @@ class  Policy extends BaseCommand
     /**
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -88,7 +88,7 @@ class  Policy extends BaseCommand
     /**
      * @param string $description
      */
-    public function setDescription($description)
+    public function setDescription($description): void
     {
         $this->description = $description;
     }
@@ -96,7 +96,7 @@ class  Policy extends BaseCommand
     /**
      * @return string
      */
-    public function getRules()
+    public function getRules(): ?string
     {
         return $this->rules;
     }
@@ -104,7 +104,7 @@ class  Policy extends BaseCommand
     /**
      * @param string $rules
      */
-    public function setRules($rules)
+    public function setRules($rules): void
     {
         $this->rules = $rules;
     }
@@ -112,7 +112,7 @@ class  Policy extends BaseCommand
     /**
      * @return string
      */
-    public function getDataCenters()
+    public function getDataCenters(): ?string
     {
         return $this->datacenters;
     }
@@ -120,7 +120,7 @@ class  Policy extends BaseCommand
     /**
      * @param string $datacenters
      */
-    public function setDataCenters($datacenters)
+    public function setDataCenters($datacenters): void
     {
         $this->datacenters = $datacenters;
     }

@@ -22,41 +22,41 @@ use EasySwoole\Spl\SplBean;
  */
 class Intentions extends BaseCommand
 {
-    protected $url = 'connect/intentions/%s';
+    protected string $url = 'connect/intentions/%s';
 
     /**
      * @var string
      */
-    protected $uuid;
+    protected ?string $uuid = null;
     /**
      * @var string
      */
-    protected $sourceName;
+    protected ?string $sourceName = null;
     /**
      * @var string
      */
-    protected $destinationName;
+    protected ?string $destinationName = null;
     /**
      * @var string
      */
-    protected $sourceType;
+    protected ?string $sourceType = null;
     /**
      * @var string
      */
-    protected $action;
+    protected ?string $action = null;
     /**
      * @var string
      */
-    protected $description;
+    protected ?string $description = null;
     /**
      * @var string
      */
-    protected $meta;
+    protected ?string $meta = null;
 
     /**
      * @return string
      */
-    public function getUuid()
+    public function getUuid(): ?string
     {
         return $this->uuid;
     }
@@ -64,7 +64,7 @@ class Intentions extends BaseCommand
     /**
      * @param string $uuid
      */
-    public function setUuid($uuid)
+    public function setUuid($uuid): void
     {
         $this->uuid = $uuid;
     }
@@ -72,7 +72,7 @@ class Intentions extends BaseCommand
     /**
      * @return string
      */
-    public function getSourceName()
+    public function getSourceName(): ?string
     {
         return $this->sourceName;
     }
@@ -80,7 +80,7 @@ class Intentions extends BaseCommand
     /**
      * @param string $sourceName
      */
-    public function setSourceName($sourceName)
+    public function setSourceName($sourceName): void
     {
         $this->sourceName = $sourceName;
     }
@@ -88,7 +88,7 @@ class Intentions extends BaseCommand
     /**
      * @return string
      */
-    public function getDestinationName()
+    public function getDestinationName(): ?string
     {
         return $this->destinationName;
     }
@@ -96,7 +96,7 @@ class Intentions extends BaseCommand
     /**
      * @param string $destinationName
      */
-    public function setDestinationName($destinationName)
+    public function setDestinationName($destinationName): void
     {
         $this->destinationName = $destinationName;
     }
@@ -104,7 +104,7 @@ class Intentions extends BaseCommand
     /**
      * @return string
      */
-    public function getSourceType()
+    public function getSourceType(): ?string
     {
         return $this->sourceType;
     }
@@ -112,7 +112,7 @@ class Intentions extends BaseCommand
     /**
      * @param string $sourceType
      */
-    public function setSourceType($sourceType)
+    public function setSourceType($sourceType): void
     {
         $this->sourceType = $sourceType;
     }
@@ -120,7 +120,7 @@ class Intentions extends BaseCommand
     /**
      * @return string
      */
-    public function getAction()
+    public function getAction(): ?string
     {
         return $this->action;
     }
@@ -128,7 +128,7 @@ class Intentions extends BaseCommand
     /**
      * @param string $action
      */
-    public function setAction($action)
+    public function setAction($action): void
     {
         $this->action = $action;
     }
@@ -136,7 +136,7 @@ class Intentions extends BaseCommand
     /**
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -144,7 +144,7 @@ class Intentions extends BaseCommand
     /**
      * @param string $description
      */
-    public function setDescription($description)
+    public function setDescription($description): void
     {
         $this->description = $description;
     }
@@ -152,7 +152,7 @@ class Intentions extends BaseCommand
     /**
      * @return string
      */
-    public function getMeta()
+    public function getMeta(): ?string
     {
         return $this->meta;
     }
@@ -160,7 +160,7 @@ class Intentions extends BaseCommand
     /**
      * @param string $meta
      */
-    public function setMeta($meta)
+    public function setMeta($meta): void
     {
         $this->meta = $meta;
     }

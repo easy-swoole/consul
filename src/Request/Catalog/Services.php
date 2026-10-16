@@ -5,16 +5,16 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Services extends BaseCommand
 {
-    public $url='catalog/services';
+    public string $url='catalog/services';
 
     /**
      * @var string
      */
-    protected $dc;
+    protected ?string $dc = null;
     /**
      * @var string
      */
-    protected $node_meta;
+    protected ?string $node_meta = null;
 
     /**
      * @return string|null

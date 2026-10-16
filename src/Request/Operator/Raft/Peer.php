@@ -11,20 +11,20 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Peer extends BaseCommand
 {
-    protected $url = 'operator/raft/peer';
+    protected string $url = 'operator/raft/peer';
 
     /**
      * @var string
      */
-    protected $dc;
+    protected ?string $dc = null;
     /**
      * @var string
      */
-    protected $id;
+    protected ?string $id = null;
     /**
      * @var string
      */
-    protected $address;
+    protected ?string $address = null;
 
     /**
      * @return null|string

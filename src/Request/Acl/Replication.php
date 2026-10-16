@@ -11,12 +11,12 @@ use EasySwoole\Consul\Request\BaseCommand;
 
 class Replication extends BaseCommand
 {
-    protected $url = 'acl/replication';
+    protected string $url = 'acl/replication';
 
     /**
      * @var string
      */
-    protected $dc;
+    protected ?string $dc = null;
 
     /**
      * @return null|string

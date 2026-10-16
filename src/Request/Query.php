@@ -35,41 +35,41 @@ use EasySwoole\Spl\SplBean;
  */
 class Query extends BaseCommand
 {
-    protected $url = 'query/%s';
+    protected string $url = 'query/%s';
 
     /**
      * @var string
      */
-    protected $dc;
+    protected ?string $dc = null;
     /**
      * @var string
      */
-    protected $name;
+    protected ?string $name = null;
     /**
      * @var string
      */
-    protected $session;
+    protected ?string $session = null;
     /**
      * @var string
      */
-    protected $token;
+    protected ?string $token = null;
     /**
      * @var array
      */
-    protected $service;
+    protected ?array $service = null;
+    /**
+     * @var array
+     */
+    protected ?array $DNS = null;
     /**
      * @var string
      */
-    protected $DNS;
-    /**
-     * @var string
-     */
-    protected $uuid;
+    protected ?string $uuid = null;
 
     /**
      * @return string
      */
-    public function getDc()
+    public function getDc(): ?string
     {
         return $this->dc;
     }
@@ -77,7 +77,7 @@ class Query extends BaseCommand
     /**
      * @param string $dc
      */
-    public function setDc($dc)
+    public function setDc($dc): void
     {
         $this->dc = $dc;
     }
@@ -85,7 +85,7 @@ class Query extends BaseCommand
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -93,7 +93,7 @@ class Query extends BaseCommand
     /**
      * @param string $name
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -101,7 +101,7 @@ class Query extends BaseCommand
     /**
      * @return string
      */
-    public function getSession()
+    public function getSession(): ?string
     {
         return $this->session;
     }
@@ -109,7 +109,7 @@ class Query extends BaseCommand
     /**
      * @param string $session
      */
-    public function setSession($session)
+    public function setSession($session): void
     {
         $this->session = $session;
     }
@@ -117,7 +117,7 @@ class Query extends BaseCommand
     /**
      * @return string
      */
-    public function getToken()
+    public function getToken(): ?string
     {
         return $this->token;
     }
@@ -125,7 +125,7 @@ class Query extends BaseCommand
     /**
      * @param string $token
      */
-    public function setToken($token)
+    public function setToken($token): void
     {
         $this->token = $token;
     }
@@ -133,7 +133,7 @@ class Query extends BaseCommand
     /**
      * @return array
      */
-    public function getService()
+    public function getService(): ?array
     {
         return $this->service;
     }
@@ -141,31 +141,31 @@ class Query extends BaseCommand
     /**
      * @param array $service
      */
-    public function setService($service)
+    public function setService($service): void
     {
-        $this->service = json_encode($service);
+        $this->service = $service;
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getDNS()
+    public function getDNS(): ?array
     {
         return $this->DNS;
     }
 
     /**
-     * @param string $DNS
+     * @param array $DNS
      */
-    public function setDNS($DNS)
+    public function setDNS($DNS): void
     {
-        $this->DNS = json_encode($DNS);
+        $this->DNS = $DNS;
     }
 
     /**
      * @return string
      */
-    public function getUuid()
+    public function getUuid(): ?string
     {
         return $this->uuid;
     }
@@ -173,7 +173,7 @@ class Query extends BaseCommand
     /**
      * @param string $uuid
      */
-    public function setUuid($uuid)
+    public function setUuid($uuid): void
     {
         $this->uuid = $uuid;
     }
@@ -187,6 +187,7 @@ class Query extends BaseCommand
             'Session' => 'session',
             'Token' => 'token',
             'Service' => 'service',
+            'DNS' => 'DNS',
         ];
     }
 }

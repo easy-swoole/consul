@@ -9,29 +9,29 @@ namespace EasySwoole\Consul\Request;
 
 class Config extends BaseCommand
 {
-    protected $url = 'config/%s';
+    protected string $url = 'config/%s';
 
     /**
      * @var string
      */
-    protected $dc;
+    protected ?string $dc = null;
     /**
      * @var int
      */
-    protected $cas;
+    protected ?int $cas = null;
     /**
      * Config Entry Kind ： ['service-defaults', 'proxy-defaults']
      * @var string
      */
-    protected $kind;
+    protected ?string $kind = null;
     /**
      * @var string
      */
-    protected $name;
+    protected ?string $name = null;
     /**
      * @var string
      */
-    protected $protocol;
+    protected ?string $protocol = null;
 
     /**
      * @return null|string
@@ -68,7 +68,7 @@ class Config extends BaseCommand
     /**
      * @return string
      */
-    public function getKind()
+    public function getKind(): ?string
     {
         return $this->kind;
     }
@@ -76,7 +76,7 @@ class Config extends BaseCommand
     /**
      * @param string $kind
      */
-    public function setKind($kind)
+    public function setKind($kind): void
     {
         $this->kind = $kind;
     }
@@ -84,7 +84,7 @@ class Config extends BaseCommand
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -92,7 +92,7 @@ class Config extends BaseCommand
     /**
      * @param string $name
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -100,7 +100,7 @@ class Config extends BaseCommand
     /**
      * @return string
      */
-    public function getProtocol()
+    public function getProtocol(): ?string
     {
         return $this->protocol;
     }
@@ -108,7 +108,7 @@ class Config extends BaseCommand
     /**
      * @param string $protocol
      */
-    public function setProtocol($protocol)
+    public function setProtocol($protocol): void
     {
         $this->protocol = $protocol;
     }
