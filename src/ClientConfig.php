@@ -11,12 +11,14 @@ final class ClientConfig
     public readonly int $port;
     public readonly string $apiVersion;
     public readonly string $scheme;
+    public readonly ?TlsConfig $tls;
 
     public function __construct(
         string $host = '127.0.0.1',
         int $port = 8500,
         string $apiVersion = 'v1',
-        string $scheme = 'http'
+        string $scheme = 'http',
+        ?TlsConfig $tls = null
     ) {
         // 在配置对象创建时完成规范化和校验，让下游代码始终使用可信的不变量。
         $host = trim($host);
@@ -35,11 +37,16 @@ final class ClientConfig
         if (!in_array($scheme, ['http', 'https'], true)) {
             throw new InvalidArgumentException('Consul scheme must be http or https.');
         }
+        if ($tls !== null && $scheme !== 'https') {
+            throw new InvalidArgumentException('TLS configuration requires the https scheme.');
+        }
 
         $this->host = $host;
         $this->port = $port;
         $this->apiVersion = $apiVersion;
         $this->scheme = $scheme;
+        // HTTPS 默认启用严格证书校验；只有显式传入 TlsConfig 才会调整策略。
+        $this->tls = $scheme === 'https' ? ($tls ?? new TlsConfig()) : null;
     }
 
     public function baseUri(): string

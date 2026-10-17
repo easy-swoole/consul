@@ -11,15 +11,22 @@ use EasySwoole\HttpClient\HttpClient;
 
 abstract class AbstractEndpoint
 {
+    protected readonly ClientConfig $config;
+    protected readonly TransportInterface $transport;
+    protected readonly RequestSerializer $serializer;
+
     // 仅作用于下一次请求；消费后立即清空，防止 Token 等敏感请求头串到后续调用。
     /** @var array<string, string> */
     private array $nextRequestHeaders = [];
 
     public function __construct(
-        protected readonly ClientConfig $config,
-        protected readonly TransportInterface $transport = new EasySwooleTransport(),
-        protected readonly RequestSerializer $serializer = new RequestSerializer()
+        ClientConfig $config,
+        ?TransportInterface $transport = null,
+        ?RequestSerializer $serializer = null
     ) {
+        $this->config = $config;
+        $this->transport = $transport ?? new EasySwooleTransport($config->tls);
+        $this->serializer = $serializer ?? new RequestSerializer();
     }
 
     protected function putJson(BaseCommand $request): mixed

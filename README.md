@@ -44,6 +44,63 @@ Coroutine\run(function () use ($consul): void {
 
 `ClientConfig` 默认连接 `http://127.0.0.1:8500/v1/`。构造时会校验主机、端口、API 版本和协议，协议只允许 `http` 或 `https`。
 
+## TLS 与双向 TLS
+
+HTTPS 默认启用服务端证书校验：
+
+```php
+$consul = new ConsulClient(new ClientConfig(
+    host: 'consul.example.com',
+    port: 8501,
+    scheme: 'https',
+));
+```
+
+使用私有 CA：
+
+```php
+use EasySwoole\Consul\TlsConfig;
+
+$tls = new TlsConfig(
+    caFile: '/etc/consul/tls/consul-agent-ca.pem',
+    serverName: 'server.dc1.consul',
+);
+
+$consul = new ConsulClient(new ClientConfig(
+    host: '127.0.0.1',
+    port: 8501,
+    scheme: 'https',
+    tls: $tls,
+));
+```
+
+Consul HTTP API 开启客户端证书验证时，需要同时配置证书和私钥：
+
+```php
+$tls = new TlsConfig(
+    caFile: '/etc/consul/tls/consul-agent-ca.pem',
+    clientCertificate: '/etc/consul/tls/client.pem',
+    clientPrivateKey: '/etc/consul/tls/client-key.pem',
+    passphrase: getenv('CONSUL_TLS_KEY_PASSPHRASE') ?: null,
+    serverName: 'server.dc1.consul',
+);
+```
+
+可用配置项：
+
+| 配置 | 默认值 | 说明 |
+| --- | --- | --- |
+| `verifyPeer` | `true` | 验证服务端证书 |
+| `allowSelfSigned` | `false` | 是否允许自签名证书；仍建议通过 `caFile` 信任私有 CA |
+| `caFile` | `null` | CA 证书文件绝对路径 |
+| `caPath` | `null` | 已进行哈希处理的 CA 证书目录 |
+| `clientCertificate` | `null` | mTLS 客户端证书文件 |
+| `clientPrivateKey` | `null` | mTLS 客户端私钥文件，必须与证书同时配置 |
+| `passphrase` | `null` | 客户端私钥密码 |
+| `serverName` | `null` | TLS 主机名/SNI，例如 `server.dc1.consul` |
+
+`TlsConfig` 只能用于 `https`。生产环境不建议关闭 `verifyPeer`；使用私有或自签 CA 时，应优先配置 `caFile`。
+
 ## 客户端入口
 
 `ConsulClient` 按需创建端点对象，同一客户端内会复用已经创建的端点。

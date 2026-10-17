@@ -9,6 +9,10 @@ use EasySwoole\Consul\Request\RequestSerializer;
 
 final class ConsulClient
 {
+    private readonly ClientConfig $config;
+    private readonly TransportInterface $transport;
+    private readonly RequestSerializer $serializer;
+
     private ?KVStore $kv = null;
     private ?Health $health = null;
     private ?Catalog $catalog = null;
@@ -26,10 +30,13 @@ final class ConsulClient
     private ?Operator $operator = null;
 
     public function __construct(
-        private readonly ClientConfig $config = new ClientConfig(),
-        private readonly TransportInterface $transport = new EasySwooleTransport(),
-        private readonly RequestSerializer $serializer = new RequestSerializer()
+        ?ClientConfig $config = null,
+        ?TransportInterface $transport = null,
+        ?RequestSerializer $serializer = null
     ) {
+        $this->config = $config ?? new ClientConfig();
+        $this->transport = $transport ?? new EasySwooleTransport($this->config->tls);
+        $this->serializer = $serializer ?? new RequestSerializer();
     }
 
     public function kv(): KVStore
